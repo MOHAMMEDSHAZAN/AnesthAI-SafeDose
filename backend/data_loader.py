@@ -50,7 +50,7 @@ def find_matched_column(columns, targets):
                 return col
     return None
 
-def load_vitaldb_cases(datasets_dir, max_cases=10):
+def load_vitaldb_cases(datasets_dir, max_cases=None):
     """
     Loads case files from datasets/VitalDB, parses columns, cleans,
     interpolates, and returns a concatenated DataFrame.
@@ -69,12 +69,12 @@ def load_vitaldb_cases(datasets_dir, max_cases=10):
     loaded_count = 0
     
     for file_path in csv_files:
-        if loaded_count >= max_cases:
+        if max_cases is not None and loaded_count >= max_cases:
             break
         
         try:
             # Read CSV header and check size
-            df = pd.read_csv(file_path, nrows=5000) # Limit rows for fast training
+            df = pd.read_csv(file_path) # Load all rows without limits
             if df.empty:
                 continue
                 
@@ -174,7 +174,7 @@ def load_mimic_clinical_data(datasets_dir):
         df_admissions = pd.read_csv(os.path.join(hosp_dir, 'admissions.csv.gz'), compression='gzip')
         
         # Load labs and map hemoglobin, potassium, platelets, creatinine
-        df_labs = pd.read_csv(os.path.join(hosp_dir, 'labevents.csv.gz'), compression='gzip', nrows=10000)
+        df_labs = pd.read_csv(os.path.join(hosp_dir, 'labevents.csv.gz'), compression='gzip')
         df_labs_agg = df_labs.groupby('subject_id').agg({
             'valuenum': ['mean', 'min', 'max']
         }).reset_index()
@@ -184,7 +184,7 @@ def load_mimic_clinical_data(datasets_dir):
         df_icu = pd.read_csv(os.path.join(icu_dir, 'icustays.csv.gz'), compression='gzip') if os.path.exists(os.path.join(icu_dir, 'icustays.csv.gz')) else pd.DataFrame()
         
         # Load prescriptions and aggregate counts
-        df_presc = pd.read_csv(os.path.join(hosp_dir, 'prescriptions.csv.gz'), compression='gzip', nrows=10000)
+        df_presc = pd.read_csv(os.path.join(hosp_dir, 'prescriptions.csv.gz'), compression='gzip')
         df_presc_agg = df_presc.groupby('subject_id').size().reset_index(name='prescription_count')
         
         # Merge Hosp
@@ -198,7 +198,7 @@ def load_mimic_clinical_data(datasets_dir):
         print(f"Error loading MIMIC Clinical data: {e}")
         return pd.DataFrame(), pd.DataFrame()
 
-def load_mit_bih_ecg(datasets_dir, max_records=5):
+def load_mit_bih_ecg(datasets_dir, max_records=None):
     """
     Loads records from the MIT-BIH Arrhythmia Database.
     Parses QRS annotations if wfdb is available, else creates a fallback parser.

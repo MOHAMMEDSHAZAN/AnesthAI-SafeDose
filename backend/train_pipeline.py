@@ -158,7 +158,19 @@ def train_pytorch_model(model, X_train, y_train, epochs=5, lr=0.01):
     X_tensor = torch.tensor(X_train, dtype=torch.float32)
     y_tensor = torch.tensor(y_train, dtype=torch.long)
     dataset = TensorDataset(X_tensor, y_tensor)
-    loader = DataLoader(dataset, batch_size=32, shuffle=True)
+    
+    # Scale batch size and epochs dynamically to speed up CPU training
+    if len(X_train) > 100000:
+        batch_size = 4096
+        epochs = 1
+    elif len(X_train) > 10000:
+        batch_size = 1024
+        epochs = 2
+    else:
+        batch_size = 32
+        epochs = 5
+        
+    loader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
     
     optimizer = optim.Adam(model.parameters(), lr=lr)
     criterion = nn.CrossEntropyLoss()
@@ -239,26 +251,31 @@ class ClinicalTrainingPipeline:
         num_classes = len(np.unique(y_train))
         is_multiclass = (num_classes > 2)
         
-        # Define base models
+        # Optimize traditional ML algorithms dynamically based on dataset size for fast CPU convergence
+        lr_max_iter = 100 if len(X_train) > 100000 else 1000
+        gb_estimators = 15 if len(X_train) > 100000 else (30 if len(X_train) > 10000 else 50)
+        mlp_max_iter = 10 if len(X_train) > 100000 else (20 if len(X_train) > 10000 else 200)
+        mlp_batch_size = 4096 if len(X_train) > 100000 else 'auto'
+        
         algorithms = {
-            'Logistic Regression': LogisticRegression(max_iter=1000, class_weight='balanced'),
+            'Logistic Regression': LogisticRegression(max_iter=lr_max_iter, class_weight='balanced'),
             'Decision Tree': DecisionTreeClassifier(max_depth=5, class_weight='balanced'),
-            'Random Forest': RandomForestClassifier(n_estimators=50, max_depth=5, class_weight='balanced', random_state=42),
-            'Extra Trees': ExtraTreesClassifier(n_estimators=50, max_depth=5, class_weight='balanced', random_state=42),
-            'Gradient Boosting': GradientBoostingClassifier(n_estimators=50, max_depth=4, random_state=42),
-            'AdaBoost': AdaBoostClassifier(n_estimators=50, random_state=42),
-            'XGBoost': XGBClassifier(n_estimators=50, max_depth=4, eval_metric='logloss', random_state=42),
-            'SVM': SVC(probability=True, class_weight='balanced', random_state=42),
-            'KNN': KNeighborsClassifier(n_neighbors=5),
+            'Random Forest': RandomForestClassifier(n_estimators=50, max_depth=5, class_weight='balanced', n_jobs=-1, random_state=42),
+            'Extra Trees': ExtraTreesClassifier(n_estimators=50, max_depth=5, class_weight='balanced', n_jobs=-1, random_state=42),
+            'Gradient Boosting': GradientBoostingClassifier(n_estimators=gb_estimators, max_depth=4, random_state=42),
+            'AdaBoost': AdaBoostClassifier(n_estimators=gb_estimators, random_state=42),
+            'XGBoost': XGBClassifier(n_estimators=50, max_depth=4, eval_metric='logloss', n_jobs=-1, random_state=42),
+            'SVM': SVC(probability=True, class_weight='balanced', random_state=42, max_iter=2000),
+            'KNN': KNeighborsClassifier(n_neighbors=5, n_jobs=-1) if len(X_train) < 50000 else None,
             'Naive Bayes': GaussianNB(),
-            'Multi Layer Perceptron': MLPClassifier(hidden_layer_sizes=(32, 16), max_iter=200, random_state=42)
+            'Multi Layer Perceptron': MLPClassifier(hidden_layer_sizes=(32, 16), max_iter=mlp_max_iter, batch_size=mlp_batch_size, random_state=42)
         }
         
         # Add LightGBM & CatBoost if available
         if HAS_LGB:
-            algorithms['LightGBM'] = lgb.LGBMClassifier(n_estimators=50, max_depth=4, verbose=-1, random_state=42)
+            algorithms['LightGBM'] = lgb.LGBMClassifier(n_estimators=50, max_depth=4, n_jobs=-1, verbose=-1, random_state=42)
         if HAS_CB:
-            algorithms['CatBoost'] = cb.CatBoostClassifier(iterations=50, depth=4, verbose=0, random_state=42)
+            algorithms['CatBoost'] = cb.CatBoostClassifier(iterations=50, depth=4, thread_count=-1, verbose=0, random_state=42)
             
         # Add Deep Learning algorithms (trained via PyTorch wrapper)
         input_dim = X_train.shape[1]
@@ -275,8 +292,16 @@ class ClinicalTrainingPipeline:
         
         # 1. Train traditional ML classifiers
         for alg_name, clf in algorithms.items():
+            if clf is None:
+                continue
             try:
-                clf.fit(X_train, y_train)
+                if alg_name == 'SVM' and len(X_train) > 10000:
+                    indices = np.random.choice(len(X_train), 10000, replace=False)
+                    X_tr_svm = X_train[indices]
+                    y_tr_svm = y_train[indices]
+                    clf.fit(X_tr_svm, y_tr_svm)
+                else:
+                    clf.fit(X_train, y_train)
                 preds = clf.predict(X_test)
                 if hasattr(clf, 'predict_proba'):
                     probs = clf.predict_proba(X_test)
@@ -306,8 +331,10 @@ class ClinicalTrainingPipeline:
         # Handle TabNet if available
         if HAS_TABNET:
             try:
+                tb_batch_size = 4096 if len(X_train) > 100000 else 1024
+                tb_epochs = 1 if len(X_train) > 100000 else (2 if len(X_train) > 10000 else 5)
                 tabnet = TabNetClassifier(verbose=0)
-                tabnet.fit(X_train, y_train, max_epochs=5)
+                tabnet.fit(X_train, y_train, max_epochs=tb_epochs, batch_size=tb_batch_size)
                 preds = tabnet.predict(X_test)
                 probs = tabnet.predict_proba(X_test)
                 if num_classes == 2:
@@ -491,18 +518,18 @@ class ClinicalTrainingPipeline:
         print("\n--- Starting SafeDose AI Training Pipeline ---")
         
         # Load Raw Datasets
-        df_vital = data_loader.load_vitaldb_cases(self.datasets_dir, max_cases=5)
+        df_vital = data_loader.load_vitaldb_cases(self.datasets_dir, max_cases=None)
         df_preop = data_loader.load_preoperative_risk(self.datasets_dir)
         df_ed = data_loader.load_mimic_ed_data(self.datasets_dir)
         df_hosp, df_icu = data_loader.load_mimic_clinical_data(self.datasets_dir)
-        mit_ecg = data_loader.load_mit_bih_ecg(self.datasets_dir, max_records=2)
+        mit_ecg = data_loader.load_mit_bih_ecg(self.datasets_dir, max_records=None)
 
         # ----------------------------------------------------
         # MODEL 1-4: Hemodynamic & Pulse Forecasting (VitalDB)
         # ----------------------------------------------------
         if not df_vital.empty:
-            # Subsample to avoid long CPU SVM training times
-            df_vital = df_vital.sample(n=min(len(df_vital), 600), random_state=42).reset_index(drop=True)
+            # No subsampling
+            df_vital = df_vital.reset_index(drop=True)
             X_hemo, features_hemo = self.prepare_hemodynamic_features(df_vital)
             
             # Label 1: Hypotension Event (MAP < 60 mmHg)
@@ -526,8 +553,8 @@ class ClinicalTrainingPipeline:
                     # Patient-wise split: ensure patient groupings are kept intact
                     X_tr, X_te, y_tr, y_te = train_test_split(X_hemo.values, y_target.values, test_size=0.2, random_state=42)
                     
-                    # Imbalance handling (SMOTE fallback)
-                    if HAS_IMBLEARN and len(np.unique(y_tr)) > 1:
+                    # Imbalance handling (SMOTE fallback for small datasets)
+                    if HAS_IMBLEARN and len(np.unique(y_tr)) > 1 and len(X_tr) < 50000:
                         try:
                             X_tr, y_tr = SMOTE(random_state=42).fit_resample(X_tr, y_tr)
                         except:
@@ -559,11 +586,8 @@ class ClinicalTrainingPipeline:
                 X_beats = np.array(X_beats)
                 y_beats = np.array(y_beats)
                 
-                # Subsample beats
-                if len(X_beats) > 500:
-                    indices = np.random.choice(len(X_beats), 500, replace=False)
-                    X_beats = X_beats[indices]
-                    y_beats = y_beats[indices]
+                # No subsampling beats
+                pass
                 
                 # Check target diversity
                 if len(np.unique(y_beats)) > 1:
@@ -574,8 +598,8 @@ class ClinicalTrainingPipeline:
         # MODEL 6, 9, 10: Preop Risk, PONV, Difficult Airway
         # ----------------------------------------------------
         if not df_preop.empty:
-            # Subsample to keep preop runs snappy
-            df_preop = df_preop.sample(n=min(len(df_preop), 300), random_state=42, replace=True).reset_index(drop=True)
+            # No subsampling preop
+            df_preop = df_preop.reset_index(drop=True)
             # Preoperative technique recommendation
             le_tech = LabelEncoder()
             y_preop = le_tech.fit_transform(df_preop['Anesthesia_Technique'])
@@ -606,7 +630,7 @@ class ClinicalTrainingPipeline:
         # MODEL 7: Emergency Severity (MIMIC-IV ED)
         # ----------------------------------------------------
         if not df_ed.empty:
-            df_ed = df_ed.sample(n=min(len(df_ed), 400), random_state=42).reset_index(drop=True)
+            df_ed = df_ed.reset_index(drop=True)
             features_ed = ['temperature', 'heartrate', 'resprate', 'o2sat', 'sbp', 'dbp', 'acuity']
             for f in features_ed:
                 if f not in df_ed.columns:
@@ -624,7 +648,7 @@ class ClinicalTrainingPipeline:
         # MODEL 8: PACU Recovery Prediction (MIMIC ICU)
         # ----------------------------------------------------
         if not df_icu.empty:
-            df_icu = df_icu.sample(n=min(len(df_icu), 400), random_state=42).reset_index(drop=True)
+            df_icu = df_icu.reset_index(drop=True)
             # Predict recovery scores and ICU stays
             features_icu = ['los', 'subject_id']
             for f in features_icu:
@@ -642,7 +666,7 @@ class ClinicalTrainingPipeline:
         # MODEL 11-15: Clinical Risk & Drug Interactions
         # ----------------------------------------------------
         if not df_hosp.empty:
-            df_hosp = df_hosp.sample(n=min(len(df_hosp), 400), random_state=42).reset_index(drop=True)
+            df_hosp = df_hosp.reset_index(drop=True)
             features_hosp = ['lab_mean', 'lab_min', 'lab_max', 'prescription_count']
             for f in features_hosp:
                 if f not in df_hosp.columns:

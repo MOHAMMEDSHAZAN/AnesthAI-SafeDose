@@ -232,6 +232,12 @@ def predict(model_name: str, request: ClinicalPredictionRequest):
             feat_dict.get('rr', 14),
             feat_dict.get('etco2', 38)
         )
+    elif 'riskprediction' in model_name.lower():
+        techniques = ['General', 'MAC', 'Spinal']
+        predicted_tech = techniques[pred] if pred < len(techniques) else 'General'
+        risk_cat = "Calculated Technique"
+        action = f"Anesthesia Plan: Recommended technique is {predicted_tech}."
+        reasoning = f"Model predicts {predicted_tech} with probability {prob:.1%} based on preoperative parameters."
     elif 'airway' in model_name.lower() or 'risk' in model_name.lower():
         risk_cat, action, reasoning = get_airway_guidance(
             int(feat_dict.get('mallampati', 1)),

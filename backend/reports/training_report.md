@@ -15,6 +15,7 @@ Generated for AnesthAI Clinical Evaluation & Undergraduate Project.
 | Hypoxia | Logistic Regression | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 0.0000 |
 | Bradycardia | Logistic Regression | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 0.0017 |
 | Tachycardia | Decision Tree | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 0.0000 |
+| RiskPrediction | Extra Trees | 1.0000 | 1.0000 | 0.5000 | 1.0000 | 0.5000 | 0.0000 |
 | PONV | Logistic Regression | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 0.0138 |
 | Airway | Logistic Regression | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 0.0103 |
 | EmergencySeverity | Logistic Regression | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 0.0042 |

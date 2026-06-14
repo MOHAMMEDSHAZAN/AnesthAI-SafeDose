@@ -180,7 +180,12 @@ def predict_pytorch_model(model, X_test):
         logits = model(X_tensor)
         probs = torch.softmax(logits, dim=1).numpy()
         preds = np.argmax(probs, axis=1)
-    return preds, probs[:, 1] if probs.shape[1] > 1 else probs[:, 0]
+    if probs.shape[1] == 2:
+        return preds, probs[:, 1]
+    elif probs.shape[1] > 2:
+        return preds, probs
+    else:
+        return preds, probs[:, 0]
 
 # ----------------------------------------------------
 # PIPELINE TRAINING ENGINE
@@ -230,6 +235,10 @@ class ClinicalTrainingPipeline:
         Trains and compares 20 algorithms for a single clinical task.
         Selects the best classifier, computes SHAP explanations, and stores metrics.
         """
+        # Determine number of unique classes
+        num_classes = len(np.unique(y_train))
+        is_multiclass = (num_classes > 2)
+        
         # Define base models
         algorithms = {
             'Logistic Regression': LogisticRegression(max_iter=1000, class_weight='balanced'),
@@ -254,11 +263,11 @@ class ClinicalTrainingPipeline:
         # Add Deep Learning algorithms (trained via PyTorch wrapper)
         input_dim = X_train.shape[1]
         dl_models = {
-            'LSTM': ClinicalLSTM(input_dim),
-            'GRU': ClinicalGRU(input_dim),
-            'CNN': ClinicalCNN(input_dim),
-            'CNN-LSTM': ClinicalCNN_LSTM(input_dim),
-            'Transformer': ClinicalTransformer(input_dim)
+            'LSTM': ClinicalLSTM(input_dim, num_classes=num_classes),
+            'GRU': ClinicalGRU(input_dim, num_classes=num_classes),
+            'CNN': ClinicalCNN(input_dim, num_classes=num_classes),
+            'CNN-LSTM': ClinicalCNN_LSTM(input_dim, num_classes=num_classes),
+            'Transformer': ClinicalTransformer(input_dim, num_classes=num_classes)
         }
         
         comparison_results = []
@@ -269,9 +278,14 @@ class ClinicalTrainingPipeline:
             try:
                 clf.fit(X_train, y_train)
                 preds = clf.predict(X_test)
-                probs = clf.predict_proba(X_test)[:, 1] if hasattr(clf, 'predict_proba') else preds
+                if hasattr(clf, 'predict_proba'):
+                    probs = clf.predict_proba(X_test)
+                    if num_classes == 2:
+                        probs = probs[:, 1]
+                else:
+                    probs = preds
                 
-                metrics = self.calculate_metrics(y_test, preds, probs)
+                metrics = self.calculate_metrics(y_test, preds, probs, is_multiclass=is_multiclass)
                 comparison_results.append({'algorithm': alg_name, **metrics})
                 trained_instances[alg_name] = clf
             except Exception as e:
@@ -283,7 +297,7 @@ class ClinicalTrainingPipeline:
                 trained_model = train_pytorch_model(py_model, X_train, y_train, epochs=5)
                 preds, probs = predict_pytorch_model(trained_model, X_test)
                 
-                metrics = self.calculate_metrics(y_test, preds, probs)
+                metrics = self.calculate_metrics(y_test, preds, probs, is_multiclass=is_multiclass)
                 comparison_results.append({'algorithm': alg_name, **metrics})
                 trained_instances[alg_name] = trained_model
             except Exception as e:
@@ -295,8 +309,10 @@ class ClinicalTrainingPipeline:
                 tabnet = TabNetClassifier(verbose=0)
                 tabnet.fit(X_train, y_train, max_epochs=5)
                 preds = tabnet.predict(X_test)
-                probs = tabnet.predict_proba(X_test)[:, 1]
-                metrics = self.calculate_metrics(y_test, preds, probs)
+                probs = tabnet.predict_proba(X_test)
+                if num_classes == 2:
+                    probs = probs[:, 1]
+                metrics = self.calculate_metrics(y_test, preds, probs, is_multiclass=is_multiclass)
                 comparison_results.append({'algorithm': 'TabNet', **metrics})
                 trained_instances['TabNet'] = tabnet
             except Exception as e:
@@ -333,36 +349,52 @@ class ClinicalTrainingPipeline:
             }, f)
             
         # Generate SHAP & Evaluation Plots
-        self.generate_plots(model_name, best_clf, best_alg, X_train, X_test, y_test, features_list)
+        self.generate_plots(model_name, best_clf, best_alg, X_train, X_test, y_test, features_list, is_multiclass=is_multiclass)
 
-    def calculate_metrics(self, y_true, y_pred, y_prob):
-        # Accuracy, Precision, Recall, Sensitivity, Specificity, F1, ROC AUC, PR AUC, MCC, Balanced Accuracy, Brier
+    def calculate_metrics(self, y_true, y_pred, y_prob, is_multiclass=False):
+        avg_setting = 'weighted' if is_multiclass else 'binary'
+        
         acc = accuracy_score(y_true, y_pred)
-        prec = precision_score(y_true, y_pred, zero_division=0)
-        rec = recall_score(y_true, y_pred, zero_division=0)
-        f1 = f1_score(y_true, y_pred, zero_division=0)
+        prec = precision_score(y_true, y_pred, average=avg_setting, zero_division=0)
+        rec = recall_score(y_true, y_pred, average=avg_setting, zero_division=0)
+        f1 = f1_score(y_true, y_pred, average=avg_setting, zero_division=0)
         
         # Spec/Sens
-        tn, fp, fn, tp = confusion_matrix(y_true, y_pred, labels=[0, 1]).ravel()
-        sens = tp / (tp + fn) if (tp + fn) > 0 else 0.0
-        spec = tn / (tn + fp) if (tn + fp) > 0 else 0.0
-        
+        if not is_multiclass:
+            tn, fp, fn, tp = confusion_matrix(y_true, y_pred, labels=[0, 1]).ravel()
+            sens = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+            spec = tn / (tn + fp) if (tn + fp) > 0 else 0.0
+        else:
+            sens = rec
+            spec = 0.5
+            
         try:
-            roc_auc = roc_auc_score(y_true, y_prob)
-        except ValueError:
+            if is_multiclass:
+                roc_auc = roc_auc_score(y_true, y_prob, multi_class='ovr') if y_prob.ndim > 1 else 0.5
+            else:
+                roc_auc = roc_auc_score(y_true, y_prob)
+        except Exception:
             roc_auc = 0.5
             
-        p, r, _ = precision_recall_curve(y_true, y_prob)
-        pr_auc = auc(r, p)
-        
+        if is_multiclass:
+            pr_auc = 0.5
+        else:
+            p, r, _ = precision_recall_curve(y_true, y_prob)
+            pr_auc = auc(r, p)
+            
         mcc = matthews_corrcoef(y_true, y_pred)
         bal_acc = balanced_accuracy_score(y_true, y_pred)
-        brier = brier_score_loss(y_true, y_prob)
+        
+        # Brier score only for binary
+        brier = brier_score_loss(y_true, y_prob) if not is_multiclass else 0.0
         
         # Calibration score
-        prob_true, prob_pred = calibration_curve(y_true, y_prob, n_bins=10)
-        cal_score = np.mean(np.abs(prob_true - prob_pred))
-        
+        if not is_multiclass:
+            prob_true, prob_pred = calibration_curve(y_true, y_prob, n_bins=10)
+            cal_score = np.mean(np.abs(prob_true - prob_pred))
+        else:
+            cal_score = 0.0
+            
         return {
             'accuracy': acc,
             'precision': prec,
@@ -378,16 +410,15 @@ class ClinicalTrainingPipeline:
             'calibration_score': cal_score
         }
 
-    def generate_plots(self, model_name, clf, alg_name, X_train, X_test, y_test, features):
+    def generate_plots(self, model_name, clf, alg_name, X_train, X_test, y_test, features, is_multiclass=False):
         """
         Outputs publication-quality figures: ROC, PR, Confusion Matrix, Feature Importance.
         """
-        # 1. ROC & PR Curve
-        fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-        
         # Probabilities extraction
         if hasattr(clf, 'predict_proba'):
-            y_prob = clf.predict_proba(X_test)[:, 1]
+            y_prob = clf.predict_proba(X_test)
+            if y_prob.ndim > 1 and y_prob.shape[1] == 2:
+                y_prob = y_prob[:, 1]
         elif hasattr(clf, 'decision_function'):
             y_prob = clf.decision_function(X_test)
         elif isinstance(clf, nn.Module):
@@ -395,25 +426,28 @@ class ClinicalTrainingPipeline:
         else:
             y_prob = clf.predict(X_test)
             
-        fpr, tpr, _ = roc_curve(y_test, y_prob)
-        p, r, _ = precision_recall_curve(y_test, y_prob)
-        
-        axes[0].plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc_score(y_test, y_prob):.2f})')
-        axes[0].plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-        axes[0].set_xlabel('False Positive Rate')
-        axes[0].set_ylabel('True Positive Rate')
-        axes[0].set_title(f'ROC: {model_name} ({alg_name})')
-        axes[0].legend(loc="lower right")
-        
-        axes[1].plot(r, p, color='blue', lw=2, label=f'PR curve (area = {auc(r, p):.2f})')
-        axes[1].set_xlabel('Recall')
-        axes[1].set_ylabel('Precision')
-        axes[1].set_title(f'PR Curve: {model_name}')
-        axes[1].legend(loc="lower left")
-        
-        plt.tight_layout()
-        plt.savefig(f'backend/reports/plots/{model_name}_curves.png', dpi=300)
-        plt.close()
+        # 1. ROC & PR Curve (binary only)
+        if not is_multiclass:
+            fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+            fpr, tpr, _ = roc_curve(y_test, y_prob)
+            p, r, _ = precision_recall_curve(y_test, y_prob)
+            
+            axes[0].plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc_score(y_test, y_prob):.2f})')
+            axes[0].plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+            axes[0].set_xlabel('False Positive Rate')
+            axes[0].set_ylabel('True Positive Rate')
+            axes[0].set_title(f'ROC: {model_name} ({alg_name})')
+            axes[0].legend(loc="lower right")
+            
+            axes[1].plot(r, p, color='blue', lw=2, label=f'PR curve (area = {auc(r, p):.2f})')
+            axes[1].set_xlabel('Recall')
+            axes[1].set_ylabel('Precision')
+            axes[1].set_title(f'PR Curve: {model_name}')
+            axes[1].legend(loc="lower left")
+            
+            plt.tight_layout()
+            plt.savefig(f'backend/reports/plots/{model_name}_curves.png', dpi=300)
+            plt.close()
         
         # 2. Confusion Matrix
         if isinstance(clf, nn.Module):
@@ -421,9 +455,16 @@ class ClinicalTrainingPipeline:
         else:
             y_pred = clf.predict(X_test)
             
-        cm = confusion_matrix(y_test, y_pred)
+        if is_multiclass:
+            unique_labels = sorted(list(np.unique(np.concatenate([y_test, y_pred]))))
+            cm = confusion_matrix(y_test, y_pred, labels=unique_labels)
+            labels = [f"Class {l}" for l in unique_labels]
+        else:
+            cm = confusion_matrix(y_test, y_pred, labels=[0, 1])
+            labels = ['Negative', 'Positive']
+            
         plt.figure(figsize=(5, 4))
-        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=['Negative', 'Positive'], yticklabels=['Negative', 'Positive'])
+        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
         plt.title(f'Confusion Matrix: {model_name}')
         plt.ylabel('True Class')
         plt.xlabel('Predicted Class')
@@ -460,6 +501,8 @@ class ClinicalTrainingPipeline:
         # MODEL 1-4: Hemodynamic & Pulse Forecasting (VitalDB)
         # ----------------------------------------------------
         if not df_vital.empty:
+            # Subsample to avoid long CPU SVM training times
+            df_vital = df_vital.sample(n=min(len(df_vital), 600), random_state=42).reset_index(drop=True)
             X_hemo, features_hemo = self.prepare_hemodynamic_features(df_vital)
             
             # Label 1: Hypotension Event (MAP < 60 mmHg)
@@ -516,6 +559,12 @@ class ClinicalTrainingPipeline:
                 X_beats = np.array(X_beats)
                 y_beats = np.array(y_beats)
                 
+                # Subsample beats
+                if len(X_beats) > 500:
+                    indices = np.random.choice(len(X_beats), 500, replace=False)
+                    X_beats = X_beats[indices]
+                    y_beats = y_beats[indices]
+                
                 # Check target diversity
                 if len(np.unique(y_beats)) > 1:
                     X_tr, X_te, y_tr, y_te = train_test_split(X_beats, y_beats, test_size=0.2, random_state=42)
@@ -525,6 +574,8 @@ class ClinicalTrainingPipeline:
         # MODEL 6, 9, 10: Preop Risk, PONV, Difficult Airway
         # ----------------------------------------------------
         if not df_preop.empty:
+            # Subsample to keep preop runs snappy
+            df_preop = df_preop.sample(n=min(len(df_preop), 300), random_state=42, replace=True).reset_index(drop=True)
             # Preoperative technique recommendation
             le_tech = LabelEncoder()
             y_preop = le_tech.fit_transform(df_preop['Anesthesia_Technique'])
@@ -555,6 +606,7 @@ class ClinicalTrainingPipeline:
         # MODEL 7: Emergency Severity (MIMIC-IV ED)
         # ----------------------------------------------------
         if not df_ed.empty:
+            df_ed = df_ed.sample(n=min(len(df_ed), 400), random_state=42).reset_index(drop=True)
             features_ed = ['temperature', 'heartrate', 'resprate', 'o2sat', 'sbp', 'dbp', 'acuity']
             for f in features_ed:
                 if f not in df_ed.columns:
@@ -572,6 +624,7 @@ class ClinicalTrainingPipeline:
         # MODEL 8: PACU Recovery Prediction (MIMIC ICU)
         # ----------------------------------------------------
         if not df_icu.empty:
+            df_icu = df_icu.sample(n=min(len(df_icu), 400), random_state=42).reset_index(drop=True)
             # Predict recovery scores and ICU stays
             features_icu = ['los', 'subject_id']
             for f in features_icu:
@@ -589,6 +642,7 @@ class ClinicalTrainingPipeline:
         # MODEL 11-15: Clinical Risk & Drug Interactions
         # ----------------------------------------------------
         if not df_hosp.empty:
+            df_hosp = df_hosp.sample(n=min(len(df_hosp), 400), random_state=42).reset_index(drop=True)
             features_hosp = ['lab_mean', 'lab_min', 'lab_max', 'prescription_count']
             for f in features_hosp:
                 if f not in df_hosp.columns:

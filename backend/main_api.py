@@ -161,8 +161,14 @@ def predict(model_name: str, request: ClinicalPredictionRequest):
         clf = MODELS[model_name]
         try:
             if hasattr(clf, 'predict_proba'):
-                prob = float(clf.predict_proba(X_arr)[0, 1])
+                probs = clf.predict_proba(X_arr)
                 pred = int(clf.predict(X_arr)[0])
+                if probs.shape[1] > 2:
+                    prob = float(probs[0, pred])
+                elif probs.shape[1] == 2:
+                    prob = float(probs[0, 1])
+                else:
+                    prob = float(probs[0, 0])
             elif hasattr(clf, 'predict'):
                 pred = int(clf.predict(X_arr)[0])
                 prob = float(pred)
@@ -174,7 +180,12 @@ def predict(model_name: str, request: ClinicalPredictionRequest):
                     logits = clf(torch.tensor(X_arr, dtype=torch.float32))
                     probs = torch.softmax(logits, dim=1).numpy()
                     pred = int(np.argmax(probs, axis=1)[0])
-                    prob = float(probs[0, 1])
+                    if probs.shape[1] > 2:
+                        prob = float(probs[0, pred])
+                    elif probs.shape[1] == 2:
+                        prob = float(probs[0, 1])
+                    else:
+                        prob = float(probs[0, 0])
         except Exception as e:
             # Heuristic fallback if model execution fails
             print(f"Execution error on model {model_name}, executing fallback: {e}")

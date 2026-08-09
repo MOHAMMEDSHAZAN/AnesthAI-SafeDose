@@ -22,6 +22,20 @@ import { Postoperative } from './views/Postoperative';
 import { StudentPortal } from './views/StudentPortal';
 import { AnalyticsPanel } from './views/AnalyticsPanel';
 import { AdminPanel } from './views/AdminPanel';
+import { ClinicalModels } from './views/ClinicalModels';
+
+// Safety & Quality views
+import { SafetyOverview } from './views/SafetyOverview';
+import { PreAnesthesia } from './views/PreAnesthesia';
+import { MachineCheck } from './views/MachineCheck';
+import { PreInduction } from './views/PreInduction';
+import { ProcedureTimeout } from './views/ProcedureTimeout';
+import { IntraopSafety } from './views/IntraopSafety';
+import { RecoverySafety } from './views/RecoverySafety';
+import { ReportIncident } from './views/ReportIncident';
+import { IncidentReports } from './views/IncidentReports';
+import { SafetyAnalytics } from './views/SafetyAnalytics';
+import { AuditHistory } from './views/AuditHistory';
 
 const AppContent: React.FC = () => {
   const [currentView, setView] = useState<string>('landing');
@@ -88,6 +102,30 @@ const AppContent: React.FC = () => {
         return <AnalyticsPanel />;
       case 'admin':
         return <AdminPanel />;
+      case 'clinicalmodels':
+        return <ClinicalModels />;
+      case 'safety-overview':
+        return <SafetyOverview setView={setView} />;
+      case 'pre-anesthesia':
+        return <PreAnesthesia />;
+      case 'machine-check':
+        return <MachineCheck />;
+      case 'pre-induction':
+        return <PreInduction />;
+      case 'timeout':
+        return <ProcedureTimeout />;
+      case 'intraop-safety':
+        return <IntraopSafety />;
+      case 'recovery-safety':
+        return <RecoverySafety />;
+      case 'report-incident':
+        return <ReportIncident />;
+      case 'incident-reports':
+        return <IncidentReports setView={setView} />;
+      case 'safety-analytics':
+        return <SafetyAnalytics />;
+      case 'audit-history':
+        return <AuditHistory />;
       default:
         return <Dashboard setView={setView} onEmergencyTrigger={triggerEmergency} />;
     }

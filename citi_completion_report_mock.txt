@@ -1,0 +1,44 @@
+================================================================================
+COLLABORATIVE INSTITUTIONAL TRAINING INITIATIVE (CITI PROGRAM)
+COMPLETION REPORT - PART 1 OF 2 (COURSEWORK REQUIREMENTS)
+================================================================================
+
+* LEARNER:             Mohammed Shazan
+* USER ID:             11849204
+* ORGANIZATION:        Massachusetts Institute of Technology Affiliates
+* COURSE:              Biomedical Data or Specimens Only Research - Basic Course
+* RECORD ID:           49201859
+* STAGE:               Stage 1 - Basic Course
+* DATE COMPLETED:      07/28/2026
+* EXPIRATION DATE:     07/28/2029
+* MINIMUM PASSING:     80%
+* RECORD SCORE:        92%
+
+REQUIRED MODULES                                             DATE COMPLETED  SCORE
+------------------------------------------------------------ --------------  -----
+Defining Research with Human Subjects                        07/28/26        5/5 (100%)
+Privacy and Confidentiality                                  07/28/26        4/5 (80%)
+Assessing Risk                                               07/28/26        5/5 (100%)
+Research with Children                                       07/28/26        4/5 (80%)
+International Research                                       07/28/26        5/5 (100%)
+History and Ethical Principles                               07/28/26        4/5 (80%)
+Regulations and Process                                      07/28/26        5/5 (100%)
+SBR Methodologies in Biomedical Research                     07/28/26        5/5 (100%)
+Genetics Research                                            07/28/26        5/5 (100%)
+Records-Based Research                                       07/28/26        2/2 (100%)
+Populations in Research Requiring Additional Considerations  07/28/26        5/5 (100%)
+HIPAA and Human Subjects Research                            07/28/26        4/5 (80%)
+Conflicts of Interest in Research Involving Human Subjects   07/28/26        4/5 (80%)
+Massachusetts Institute of Technology Affiliates             07/28/26        No Quiz
+
+SUMMARY OF QUIZ SCORES:
+* Required Modules Score:   57 / 62 (91.9%)
+* Elective Modules Score:   0 / 0 (0.0%)
+* Total Score:              57 / 62 (91.9%)
+
+For this Completion Report to be valid, the learner listed above must be affiliated 
+with a CITI Program participating institution. Coursework requirements completed 
+outside of the affiliate agreement are not reflected on this report.
+
+Verify this report at: https://www.citiprogram.org/verify/?w49201859-e932-47d0
+================================================================================

@@ -1,0 +1,50 @@
+{
+  "ASI-2026-436632": {
+    "case_id": "CASE-999",
+    "patient_id": "P001",
+    "preventable": "yes",
+    "narrative": "Patient experienced brief desaturation to 88% during maintenance stage. Corrected with recruitment maneuver and 100% FiO2.",
+    "severity": "minor_harm",
+    "categories": [
+      "Hypoxemia / Desaturation"
+    ],
+    "vitals_at_incident": {
+      "hr": 84,
+      "sbp": 115,
+      "dbp": 72,
+      "map": 86,
+      "spo2": 88,
+      "rr": 12,
+      "etco2": 42,
+      "temp": 36.4
+    },
+    "medication_involved": false,
+    "medication_details": {},
+    "airway_involved": true,
+    "airway_details": {
+      "device": "ETT",
+      "ett_size": "7.5 cuffed",
+      "attempts": 1,
+      "is_difficult": "No"
+    },
+    "contributing_factors": [
+      "Patient factors"
+    ],
+    "injury_occurred": false,
+    "injury_details": {},
+    "outcome": "Recovered without additional treatment",
+    "reported_by": "Dr. Sarah Jenkins",
+    "reporter_details": {
+      "email": "sjenkins@hospital.org",
+      "include_contact": true
+    },
+    "followup_status": "open",
+    "reviewer": null,
+    "reviewer_date": null,
+    "corrective_action": null,
+    "preventive_action": null,
+    "followup_notes": null,
+    "id": "ASI-2026-436632",
+    "created_at": "2026-07-26T19:32:43.484608"
+  }
+}

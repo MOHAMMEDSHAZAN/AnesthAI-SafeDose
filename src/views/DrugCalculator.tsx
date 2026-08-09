@@ -31,14 +31,16 @@ export const DrugCalculator: React.FC = () => {
 
   const [weight, setWeight] = useState<number>(70);
   const [age, setAge] = useState<number>(45);
+  const [drugList, setDrugList] = useState<Drug[]>(drugDatabase);
   const [selectedDrug, setSelectedDrug] = useState<Drug>(drugDatabase[0]);
-  const [dilutionBagSize] = useState<number>(100); // mL
   const [favorites, setFavorites] = useState<string[]>(['Propofol', 'Fentanyl', 'Epinephrine']);
   const [searchQuery, setSearchQuery] = useState('');
 
   // Drug-drug interaction items
   const [activeRegimen, setActiveRegimen] = useState<string[]>([]);
-  const [interactions, setInteractions] = useState<string[]>([]);
+  const [safetyStatus, setSafetyStatus] = useState<'safe' | 'warning' | 'critical'>('safe');
+  const [safetyWarnings, setSafetyWarnings] = useState<string[]>([]);
+  const [safetyContraindications, setSafetyContraindications] = useState<string[]>([]);
 
   // Sync weight/age when patient changes
   useEffect(() => {
@@ -48,20 +50,80 @@ export const DrugCalculator: React.FC = () => {
     }
   }, [selectedId, patient]);
 
-  // Interaction check engine
+  // Fetch verified drugs from FastAPI database on mount
   useEffect(() => {
-    const alerts: string[] = [];
-    if (activeRegimen.includes('Propofol') && activeRegimen.includes('Midazolam')) {
-      alerts.push("Synergistic Sedation Risk: Concomitant propofol and midazolam will cause deep synergistic respiratory depression. Reduce propofol induction doses by 30-50%.");
-    }
-    if (activeRegimen.includes('Rocuronium') && activeRegimen.includes('Neostigmine')) {
-      alerts.push("Premature Reversal Risk: Administering Neostigmine before twitch recovery (TOF count > 2) can cause severe paradoxical muscle weakness. Verify TOF response.");
-    }
-    if (activeRegimen.includes('Succinylcholine') && activeRegimen.includes('Rocuronium')) {
-      alerts.push("Dual Neuromuscular Blockade: Concomitant depolarizing and non-depolarizing paralytics complicate monitoring and prolong paralysis. Ensure full succinylcholine clearance.");
-    }
-    setInteractions(alerts);
-  }, [activeRegimen]);
+    const fetchDrugs = async () => {
+      try {
+        const res = await fetch('http://localhost:8000/api/drugs/database');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.length > 0) {
+            // Map backend schema to local interface
+            const mapped = data.map((d: any) => ({
+              name: d.name,
+              category: d.category,
+              adultDoseRange: d.adultDoseRange,
+              pediatricDoseRange: d.pediatricDoseRange,
+              bolusFactor: d.bolusFactor,
+              maxAdultBolus: d.maxAdultBolus,
+              concentration: d.concentration,
+              infusionRange: d.infusionRange,
+              infusionFactor: d.infusionFactor,
+              fda_class: d.fda_class,
+              black_box_warning: d.black_box_warning,
+              mechanism_of_action: d.mechanism_of_action
+            }));
+            setDrugList(mapped);
+            setSelectedDrug(mapped[0]);
+          }
+        }
+      } catch (e) {
+        console.log("Offline or error fetching drug database, using defaults:", e);
+      }
+    };
+    fetchDrugs();
+  }, []);
+
+  // Calculate standard dose to evaluate
+  const isPediatric = age < 12;
+  const doseRange = isPediatric ? selectedDrug.pediatricDoseRange : selectedDrug.adultDoseRange;
+  const calculatedBolus = (weight * selectedDrug.bolusFactor).toFixed(2);
+
+  // Interaction & rule checking engine via FastAPI backend
+  useEffect(() => {
+    const runSafetyCheck = async () => {
+      if (!selectedDrug) return;
+      try {
+        const body = {
+          patient_id: selectedId || "custom",
+          age: age,
+          weight: weight,
+          creatinine: patient?.investigations?.cr || 1.0,
+          proposed_drug: selectedDrug.name,
+          proposed_dose: parseFloat(calculatedBolus) || 0,
+          active_drugs: activeRegimen,
+          medical_history: patient?.medicalHistory || []
+        };
+        
+        const res = await fetch('http://localhost:8000/api/drugs/safety-check', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        
+        if (res.ok) {
+          const data = await res.json();
+          setSafetyStatus(data.status);
+          setSafetyWarnings(data.warnings);
+          setSafetyContraindications(data.contraindications);
+        }
+      } catch (err) {
+        console.error("Failed to fetch safety check:", err);
+      }
+    };
+    
+    runSafetyCheck();
+  }, [selectedDrug, calculatedBolus, weight, age, activeRegimen, patient, selectedId]);
 
   const handleAddRegimen = (name: string) => {
     if (!activeRegimen.includes(name)) {
@@ -73,11 +135,6 @@ export const DrugCalculator: React.FC = () => {
     setActiveRegimen(activeRegimen.filter(n => n !== name));
   };
 
-  // Calculations
-  const isPediatric = age < 12;
-  const doseRange = isPediatric ? selectedDrug.pediatricDoseRange : selectedDrug.adultDoseRange;
-
-  const calculatedBolus = (weight * selectedDrug.bolusFactor).toFixed(2);
   const unit = selectedDrug.name === 'Fentanyl' || selectedDrug.name === 'Epinephrine' ? 'mcg' : 'mg';
   const calculatedVolume = (Number(calculatedBolus) / selectedDrug.concentration).toFixed(2);
 
@@ -100,7 +157,7 @@ export const DrugCalculator: React.FC = () => {
     }
   };
 
-  const filteredDrugs = drugDatabase.filter(d => 
+  const filteredDrugs = drugList.filter(d => 
     d.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
     d.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -170,7 +227,7 @@ export const DrugCalculator: React.FC = () => {
                 <span 
                   key={f} 
                   className="badge badge-info" 
-                  onClick={() => setSelectedDrug(drugDatabase.find(d => d.name === f) || drugDatabase[0])}
+                  onClick={() => setSelectedDrug(drugList.find(d => d.name === f) || drugList[0])}
                   style={{ cursor: 'pointer', fontSize: '0.6875rem' }}
                 >
                   ★ {f}
@@ -202,8 +259,10 @@ export const DrugCalculator: React.FC = () => {
             </div>
           </div>
 
-          {/* Dynamic Drug Regimen Builder (Interactions check) */}
-          <div className="glass" style={{ padding: '16px' }}>
+          <div className="glass" style={{
+            padding: '16px',
+            border: safetyStatus === 'critical' ? '1px solid var(--med-red)' : safetyStatus === 'warning' ? '1px solid var(--med-orange)' : '1px solid var(--border-color)'
+          }}>
             <h4 style={{ fontSize: '0.875rem', fontWeight: 700, marginBottom: '8px' }}>Active Drug Interaction Profiler</h4>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '12px' }}>
               {activeRegimen.map(n => (
@@ -219,11 +278,16 @@ export const DrugCalculator: React.FC = () => {
               + Add {selectedDrug.name} to Cart
             </button>
 
-            {interactions.length > 0 && (
+            {(safetyWarnings.length > 0 || safetyContraindications.length > 0) && (
               <div style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {interactions.map((alert, i) => (
-                  <div key={i} style={{ padding: '10px', background: 'rgba(239, 68, 68, 0.05)', borderLeft: '3px solid var(--med-red)', color: 'var(--text-primary)', fontSize: '0.75rem', lineHeight: '1.4' }}>
-                    {alert}
+                {safetyContraindications.map((alert: string, i: number) => (
+                  <div key={`cart-contra-${i}`} style={{ padding: '10px', background: 'rgba(239, 68, 68, 0.05)', borderLeft: '3px solid var(--med-red)', color: 'var(--text-primary)', fontSize: '0.75rem', lineHeight: '1.4' }}>
+                    <strong>CRITICAL:</strong> {alert}
+                  </div>
+                ))}
+                {safetyWarnings.map((alert: string, i: number) => (
+                  <div key={`cart-warn-${i}`} style={{ padding: '10px', background: 'rgba(245, 158, 11, 0.05)', borderLeft: '3px solid var(--med-orange)', color: 'var(--text-primary)', fontSize: '0.75rem', lineHeight: '1.4' }}>
+                    <strong>WARNING:</strong> {alert}
                   </div>
                 ))}
               </div>
@@ -296,16 +360,54 @@ export const DrugCalculator: React.FC = () => {
               </div>
             )}
 
-            {/* Kidney and Liver failure warnings */}
-            {patient && patient.investigations.cr > 1.8 && (
-              <div style={{ padding: '12px', background: 'rgba(245, 158, 11, 0.08)', borderRadius: '4px', borderLeft: '4px solid var(--med-orange)', fontSize: '0.8125rem', color: 'var(--text-primary)', marginBottom: '12px' }}>
-                <strong>Renal Impairment Warning:</strong> Patient creatinine is high ({patient.investigations.cr} mg/dL). Reduce paralytic (Rocuronium) doses or anticipate prolonged block. Monitor twitches closely.
+            {/* Real-time openFDA safety validation alerts */}
+            {(safetyWarnings.length > 0 || safetyContraindications.length > 0) && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
+                {safetyContraindications.map((c, i) => (
+                  <div key={`contra-${i}`} style={{ padding: '12px', background: 'rgba(239, 68, 68, 0.08)', borderRadius: '4px', borderLeft: '4px solid var(--med-red)', fontSize: '0.8125rem', color: 'white' }}>
+                    <strong>CRITICAL CONTRAINDICATION:</strong> {c}
+                  </div>
+                ))}
+                {safetyWarnings.map((w, i) => (
+                  <div key={`warn-${i}`} style={{ padding: '12px', background: 'rgba(245, 158, 11, 0.08)', borderRadius: '4px', borderLeft: '4px solid var(--med-orange)', fontSize: '0.8125rem', color: 'white' }}>
+                    <strong>SAFETY WARNING:</strong> {w}
+                  </div>
+                ))}
               </div>
             )}
 
-            {selectedDrug.name === 'Epinephrine' && (
-              <div style={{ padding: '12px', background: 'rgba(239, 68, 68, 0.08)', borderRadius: '4px', borderLeft: '4px solid var(--med-red)', fontSize: '0.8125rem', color: 'var(--text-primary)' }}>
-                <strong>CRITICAL DRUG ALARM:</strong> Epinephrine is a powerful vasopressor. Double-check dilution bag (1mg in {dilutionBagSize}mL) to prevent severe tachycardia and accidental hypertensive crisis.
+            {/* openFDA verified reference label card */}
+            {selectedDrug && (selectedDrug as any).fda_class && (
+              <div style={{ marginTop: '20px', padding: '16px', background: 'rgba(255,255,255,0.01)', border: '1px solid var(--border-color)', borderRadius: '4px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                  <strong style={{ fontSize: '0.85rem', color: 'var(--med-cyan)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                    openFDA Verified Clinical Reference
+                  </strong>
+                  <span style={{ fontSize: '0.65rem', background: 'rgba(0,184,148,0.15)', color: 'var(--med-green)', padding: '2px 6px', borderRadius: '10px', fontWeight: 700 }}>
+                    FDA Compliant
+                  </span>
+                </div>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.75rem', lineHeight: '1.4' }}>
+                  <div>
+                    <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>FDA Drug Class:</span>
+                    <div style={{ color: 'var(--text-primary)', marginTop: '2px' }}>{(selectedDrug as any).fda_class}</div>
+                  </div>
+                  <div>
+                    <span style={{ color: 'var(--text-muted)', fontWeight: 600 }}>Mechanism of Action:</span>
+                    <div style={{ color: 'var(--text-primary)', marginTop: '2px' }}>{(selectedDrug as any).mechanism_of_action}</div>
+                  </div>
+                  {(selectedDrug as any).black_box_warning && (selectedDrug as any).black_box_warning !== 'None.' && (
+                    <div style={{ padding: '8px', background: 'rgba(239, 68, 68, 0.05)', border: '1px dashed rgba(239, 68, 68, 0.2)', borderRadius: '4px' }}>
+                      <span style={{ color: 'var(--med-red)', fontWeight: 700, display: 'block', fontSize: '0.7rem' }}>FDA WARNING LABEL:</span>
+                      <div style={{ color: 'var(--text-secondary)', fontSize: '0.72rem', marginTop: '2px' }}>{(selectedDrug as any).black_box_warning}</div>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </div>

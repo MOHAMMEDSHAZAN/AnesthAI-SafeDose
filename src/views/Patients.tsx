@@ -39,6 +39,23 @@ export const Patients: React.FC = () => {
   const [historyInput, setHistoryInput] = useState('');
   const [drugInput, setDrugInput] = useState('');
 
+  // Form Template states
+  const [templateName, setTemplateName] = useState('');
+  const [templateGender, setTemplateGender] = useState('Male');
+  const [templateMobile, setTemplateMobile] = useState('');
+  const [templateDay, setTemplateDay] = useState('1');
+  const [templateMonth, setTemplateMonth] = useState('January');
+  const [templateYear, setTemplateYear] = useState('1980');
+  const [templateStreet, setTemplateStreet] = useState('');
+  const [templateStreet2, setTemplateStreet2] = useState('');
+  const [templateCity, setTemplateCity] = useState('');
+  const [templateState, setTemplateState] = useState('');
+  const [templateZip, setTemplateZip] = useState('');
+  const [templateCountry, setTemplateCountry] = useState('');
+  const [templateEmail, setTemplateEmail] = useState('');
+  const [templatePrevious, setTemplatePrevious] = useState('');
+  const [templateAppointments, setTemplateAppointments] = useState<string[]>([]);
+
   const selectedPatient = patients.find(p => p.id === selectedPatientId) || patients[0];
 
   const handleOpenAdd = () => {
@@ -70,6 +87,22 @@ export const Patients: React.FC = () => {
     setAllergyInput('');
     setHistoryInput('');
     setDrugInput('');
+    // Reset templates
+    setTemplateName('');
+    setTemplateGender('Male');
+    setTemplateMobile('');
+    setTemplateDay('1');
+    setTemplateMonth('January');
+    setTemplateYear('1980');
+    setTemplateStreet('');
+    setTemplateStreet2('');
+    setTemplateCity('');
+    setTemplateState('');
+    setTemplateZip('');
+    setTemplateCountry('');
+    setTemplateEmail('');
+    setTemplatePrevious('');
+    setTemplateAppointments([]);
     setIsModalOpen(true);
   };
 
@@ -98,8 +131,29 @@ export const Patients: React.FC = () => {
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     if (modalType === 'add') {
+      const birthYear = parseInt(templateYear) || 1980;
+      const computedAge = new Date().getFullYear() - birthYear;
+      const addressString = `${templateStreet}${templateStreet2 ? ', ' + templateStreet2 : ''}, ${templateCity}, ${templateState} ${templateZip}, ${templateCountry}`;
+      
       const newPatient: Patient = {
-        ...formState,
+        name: templateName,
+        age: computedAge,
+        gender: templateGender as any,
+        weight: formState.weight || 70,
+        height: formState.height || 170,
+        allergies: formState.allergies,
+        medicalHistory: [
+          ...formState.medicalHistory,
+          `Address: ${addressString}`,
+          `Mobile: ${templateMobile}`,
+          `Email: ${templateEmail}`,
+          templatePrevious.trim() ? `Previous Consulting: ${templatePrevious.trim()}` : ''
+        ].filter(x => x !== ''),
+        drugHistory: formState.drugHistory,
+        asaScore: formState.asaScore,
+        mallampati: formState.mallampati,
+        comorbidities: [...formState.comorbidities, ...templateAppointments],
+        investigations: formState.investigations,
         id: `P${Math.floor(100 + Math.random() * 900)}`,
         vitals: { hr: 75, bpSys: 120, bpDia: 80, spo2: 98, temp: 36.8 }
       };
@@ -362,219 +416,501 @@ export const Patients: React.FC = () => {
 
       {/* CRUD Add/Edit Overlay Modal */}
       {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content glass" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color-glow)' }}>
-            <button className="modal-close-btn" onClick={() => setIsModalOpen(false)}>&times;</button>
-            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '20px' }}>
-              {modalType === 'add' ? 'Register Patient Record' : 'Edit Patient Chart'}
-            </h2>
-            
-            <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div className="form-group">
-                <label className="form-label">Patient Full Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={formState.name}
-                  onChange={(e) => setFormState(prev => ({ ...prev, name: e.target.value }))}
-                  required
-                />
+        <div className="modal-overlay" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.65)',
+          backdropFilter: 'blur(8px)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1000
+        }}>
+          {modalType === 'add' ? (
+            /* Register Patient Form Template (matching the uploaded image) */
+            <div className="glass" style={{
+              width: '650px',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              padding: '40px',
+              borderRadius: '12px',
+              border: '1px solid rgba(255,255,255,0.1)',
+              backgroundColor: 'rgba(26,28,35,0.85)',
+              boxShadow: '0 8px 32px 0 rgba(0,0,0,0.4)',
+              color: '#f3f4f6',
+              position: 'relative'
+            }}>
+              <button 
+                className="modal-close-btn" 
+                style={{ 
+                  position: 'absolute', 
+                  right: '20px', 
+                  top: '20px', 
+                  background: 'none', 
+                  border: 'none', 
+                  color: '#9ca3af', 
+                  fontSize: '1.75rem', 
+                  cursor: 'pointer',
+                  lineHeight: '1'
+                }} 
+                onClick={() => setIsModalOpen(false)}
+              >
+                &times;
+              </button>
+              
+              <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+                <h2 style={{ fontSize: '1.6rem', fontWeight: 700, color: 'white', letterSpacing: '0.5px', fontFamily: 'var(--font-heading)' }}>
+                  Please Enter Patients Details
+                </h2>
+                <p style={{ fontSize: '0.8rem', color: '#9ca3af', marginTop: '6px' }}>
+                  Fill the form below and submit your query we will contact you as soon as possible.
+                </p>
               </div>
 
-              <div className="form-row">
-                <div className="form-group">
-                  <label className="form-label">Age</label>
+              <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {/* Full Name */}
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <label style={{ width: '150px', fontSize: '0.85rem', fontWeight: 600 }}>Full Name <span style={{ color: 'var(--med-red)' }}>*</span></label>
                   <input
-                    type="number"
+                    type="text"
                     className="form-control"
-                    value={formState.age}
-                    onChange={(e) => setFormState(prev => ({ ...prev, age: Number(e.target.value) }))}
+                    placeholder="Enter Patients Name"
+                    style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', color: 'white' }}
+                    value={templateName}
+                    onChange={(e) => setTemplateName(e.target.value)}
                     required
                   />
                 </div>
-                <div className="form-group">
-                  <label className="form-label">Gender</label>
+
+                {/* Gender */}
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <label style={{ width: '150px', fontSize: '0.85rem', fontWeight: 600 }}>Gender <span style={{ color: 'var(--med-red)' }}>*</span></label>
                   <select
                     className="form-control"
-                    value={formState.gender}
-                    onChange={(e) => setFormState(prev => ({ ...prev, gender: e.target.value as any }))}
+                    style={{ flex: 1, backgroundColor: 'rgba(26,28,35,0.95)', border: '1px solid rgba(255,255,255,0.1)', color: 'white' }}
+                    value={templateGender}
+                    onChange={(e) => setTemplateGender(e.target.value)}
+                    required
                   >
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
                   </select>
                 </div>
-              </div>
 
-              <div className="form-row">
-                <div className="form-group">
-                  <label className="form-label">Weight (kg)</label>
+                {/* Mobile Number */}
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <label style={{ width: '150px', fontSize: '0.85rem', fontWeight: 600 }}>Mobile Number <span style={{ color: 'var(--med-red)' }}>*</span></label>
                   <input
-                    type="number"
+                    type="tel"
                     className="form-control"
-                    value={formState.weight}
-                    onChange={(e) => setFormState(prev => ({ ...prev, weight: Number(e.target.value) }))}
+                    placeholder="Mobile Number"
+                    style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', color: 'white' }}
+                    value={templateMobile}
+                    onChange={(e) => setTemplateMobile(e.target.value)}
                     required
                   />
                 </div>
-                <div className="form-group">
-                  <label className="form-label">Height (cm)</label>
+
+                {/* Date of Birth */}
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <label style={{ width: '150px', fontSize: '0.85rem', fontWeight: 600 }}>Date of Birth <span style={{ color: 'var(--med-red)' }}>*</span></label>
+                  <div style={{ flex: 1, display: 'flex', gap: '10px' }}>
+                    {/* Day Dropdown */}
+                    <select
+                      className="form-control"
+                      style={{ flex: 1, backgroundColor: 'rgba(26,28,35,0.95)', border: '1px solid rgba(255,255,255,0.1)', color: 'white' }}
+                      value={templateDay}
+                      onChange={(e) => setTemplateDay(e.target.value)}
+                      required
+                    >
+                      {Array.from({ length: 31 }, (_, i) => i + 1).map(d => (
+                        <option key={d} value={d}>{d}</option>
+                      ))}
+                    </select>
+                    {/* Month Dropdown */}
+                    <select
+                      className="form-control"
+                      style={{ flex: 1, backgroundColor: 'rgba(26,28,35,0.95)', border: '1px solid rgba(255,255,255,0.1)', color: 'white' }}
+                      value={templateMonth}
+                      onChange={(e) => setTemplateMonth(e.target.value)}
+                      required
+                    >
+                      {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map(m => (
+                        <option key={m} value={m}>{m}</option>
+                      ))}
+                    </select>
+                    {/* Year Input */}
+                    <input
+                      type="number"
+                      className="form-control"
+                      placeholder="Enter Year"
+                      style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', color: 'white' }}
+                      value={templateYear}
+                      onChange={(e) => setTemplateYear(e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+
+                {/* Address Section */}
+                <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+                  <label style={{ width: '150px', fontSize: '0.85rem', fontWeight: 600, marginTop: '8px' }}>Address <span style={{ color: 'var(--med-red)' }}>*</span></label>
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                      <div style={{ flex: 1 }}>
+                        <input type="text" className="form-control" placeholder="Street Address" style={{ backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', fontSize: '0.8rem' }} value={templateStreet} onChange={(e) => setTemplateStreet(e.target.value)} required />
+                        <span style={{ fontSize: '0.65rem', color: '#9ca3af', marginTop: '2px', display: 'block' }}>Street Address</span>
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <input type="text" className="form-control" placeholder="Street Line 2" style={{ backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', fontSize: '0.8rem' }} value={templateStreet2} onChange={(e) => setTemplateStreet2(e.target.value)} />
+                        <span style={{ fontSize: '0.65rem', color: '#9ca3af', marginTop: '2px', display: 'block' }}>Street Line 2</span>
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                      <div style={{ flex: 1 }}>
+                        <input type="text" className="form-control" placeholder="City" style={{ backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', fontSize: '0.8rem' }} value={templateCity} onChange={(e) => setTemplateCity(e.target.value)} required />
+                        <span style={{ fontSize: '0.65rem', color: '#9ca3af', marginTop: '2px', display: 'block' }}>City</span>
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <input type="text" className="form-control" placeholder="State / Province" style={{ backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', fontSize: '0.8rem' }} value={templateState} onChange={(e) => setTemplateState(e.target.value)} required />
+                        <span style={{ fontSize: '0.65rem', color: '#9ca3af', marginTop: '2px', display: 'block' }}>State / Province</span>
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                      <div style={{ flex: 1 }}>
+                        <input type="text" className="form-control" placeholder="Postal / Zip Code" style={{ backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', fontSize: '0.8rem' }} value={templateZip} onChange={(e) => setTemplateZip(e.target.value)} required />
+                        <span style={{ fontSize: '0.65rem', color: '#9ca3af', marginTop: '2px', display: 'block' }}>Postal / Zip Code</span>
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <input type="text" className="form-control" placeholder="Country" style={{ backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', fontSize: '0.8rem' }} value={templateCountry} onChange={(e) => setTemplateCountry(e.target.value)} required />
+                        <span style={{ fontSize: '0.65rem', color: '#9ca3af', marginTop: '2px', display: 'block' }}>Country</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* E-Mail Address */}
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <label style={{ width: '150px', fontSize: '0.85rem', fontWeight: 600 }}>E-Mail Address <span style={{ color: 'var(--med-red)' }}>*</span></label>
                   <input
-                    type="number"
+                    type="email"
                     className="form-control"
-                    value={formState.height}
-                    onChange={(e) => setFormState(prev => ({ ...prev, height: Number(e.target.value) }))}
+                    placeholder="myname@example.com"
+                    style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', color: 'white' }}
+                    value={templateEmail}
+                    onChange={(e) => setTemplateEmail(e.target.value)}
                     required
                   />
                 </div>
-              </div>
 
-              <div className="form-row">
+                {/* Previous consultings details */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600 }}>Mention the details of previous consultings with us.</label>
+                  <textarea
+                    className="form-control"
+                    rows={3}
+                    placeholder="Provide notes or clinical history summary here..."
+                    style={{ backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', width: '100%', resize: 'none' }}
+                    value={templatePrevious}
+                    onChange={(e) => setTemplatePrevious(e.target.value)}
+                  />
+                </div>
+
+                {/* Appointment type checkboxes */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'white' }}>Select which types of appointment you require. <span style={{ color: '#ef4444' }}>*</span></label>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+                    {[
+                      'Heart Checkup', 'Eye Checkup', 'Hearing Test',
+                      'Blood Test', 'Normal Consulting', 'Skin Care'
+                    ].map(appt => {
+                      const isChecked = templateAppointments.includes(appt);
+                      return (
+                        <label key={appt} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', cursor: 'pointer', margin: 0 }}>
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={(e) => {
+                              if (e.target.checked) {
+                                setTemplateAppointments(prev => [...prev, appt]);
+                              } else {
+                                setTemplateAppointments(prev => prev.filter(x => x !== appt));
+                              }
+                            }}
+                          />
+                          <span>{appt}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Collapsible Anesthesia-Specific Details (to satisfy the data-loading needs of the ML models) */}
+                <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', marginTop: '10px', paddingTop: '10px' }}>
+                  <details style={{ fontSize: '0.8rem', cursor: 'pointer' }}>
+                    <summary style={{ fontWeight: 700, color: 'var(--med-cyan)', marginBottom: '8px' }}>Clinical Anesthesia Metrics (Default Fallbacks)</summary>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', padding: '10px 0' }}>
+                      <div className="form-group">
+                        <label className="form-label" style={{ fontSize: '0.75rem' }}>Weight (kg)</label>
+                        <input type="number" className="form-control" style={{ fontSize: '0.8rem' }} value={formState.weight} onChange={(e) => setFormState(p => ({ ...p, weight: Number(e.target.value) }))} />
+                      </div>
+                      <div className="form-group">
+                        <label className="form-label" style={{ fontSize: '0.75rem' }}>Height (cm)</label>
+                        <input type="number" className="form-control" style={{ fontSize: '0.8rem' }} value={formState.height} onChange={(e) => setFormState(p => ({ ...p, height: Number(e.target.value) }))} />
+                      </div>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                      <div className="form-group">
+                        <label className="form-label" style={{ fontSize: '0.75rem' }}>ASA Score</label>
+                        <select className="form-control" style={{ fontSize: '0.8rem' }} value={formState.asaScore} onChange={(e) => setFormState(p => ({ ...p, asaScore: Number(e.target.value) }))}>
+                          <option value={1}>ASA I</option>
+                          <option value={2}>ASA II</option>
+                          <option value={3}>ASA III</option>
+                          <option value={4}>ASA IV</option>
+                        </select>
+                      </div>
+                      <div className="form-group">
+                        <label className="form-label" style={{ fontSize: '0.75rem' }}>Mallampati</label>
+                        <select className="form-control" style={{ fontSize: '0.8rem' }} value={formState.mallampati} onChange={(e) => setFormState(p => ({ ...p, mallampati: Number(e.target.value) as any }))}>
+                          <option value={1}>Class I</option>
+                          <option value={2}>Class II</option>
+                          <option value={3}>Class III</option>
+                          <option value={4}>Class IV</option>
+                        </select>
+                      </div>
+                    </div>
+                  </details>
+                </div>
+
+                {/* Submission button */}
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  style={{ width: '100%', padding: '12px', fontWeight: 800, fontSize: '0.95rem', marginTop: '12px', textTransform: 'uppercase', letterSpacing: '0.5px' }}
+                >
+                  Save Patient Record & Submit Query
+                </button>
+              </form>
+            </div>
+          ) : (
+            /* Original Edit Modal Content */
+            <div className="modal-content glass" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color-glow)' }}>
+              <button className="modal-close-btn" onClick={() => setIsModalOpen(false)}>&times;</button>
+              <h2 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '20px' }}>
+                Edit Patient Chart
+              </h2>
+              
+              <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div className="form-group">
-                  <label className="form-label">ASA Score (1-4)</label>
-                  <select
-                    className="form-control"
-                    value={formState.asaScore}
-                    onChange={(e) => setFormState(prev => ({ ...prev, asaScore: Number(e.target.value) }))}
-                  >
-                    <option value={1}>ASA I (Normal Healthy)</option>
-                    <option value={2}>ASA II (Mild Systemic)</option>
-                    <option value={3}>ASA III (Severe Systemic)</option>
-                    <option value={4}>ASA IV (Threat to Life)</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label className="form-label">Mallampati (1-4)</label>
-                  <select
-                    className="form-control"
-                    value={formState.mallampati}
-                    onChange={(e) => setFormState(prev => ({ ...prev, mallampati: Number(e.target.value) as any }))}
-                  >
-                    <option value={1}>Class I</option>
-                    <option value={2}>Class II</option>
-                    <option value={3}>Class III</option>
-                    <option value={4}>Class IV</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Dynamic Lists */}
-              <div className="form-group">
-                <label className="form-label">Allergies</label>
-                <div style={{ display: 'flex', gap: '8px' }}>
+                  <label className="form-label">Patient Full Name</label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="e.g. Latex"
-                    value={allergyInput}
-                    onChange={(e) => setAllergyInput(e.target.value)}
+                    value={formState.name}
+                    onChange={(e) => setFormState(prev => ({ ...prev, name: e.target.value }))}
+                    required
                   />
-                  <button type="button" className="btn btn-secondary" onClick={handleAddAllergy}>Add</button>
                 </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginTop: '6px' }}>
-                  {formState.allergies.map(a => (
-                    <span key={a} style={{ fontSize: '0.75rem', background: 'rgba(239,68,68,0.1)', color: 'var(--med-red)', padding: '2px 8px', borderRadius: '4px' }}>
-                      {a} <span style={{ cursor: 'pointer', marginLeft: '6px' }} onClick={() => setFormState(prev => ({ ...prev, allergies: prev.allergies.filter(x => x !== a) }))}>&times;</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
 
-              <div className="form-group">
-                <label className="form-label">Comorbidities / History</label>
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="e.g. Asthma"
-                    value={historyInput}
-                    onChange={(e) => setHistoryInput(e.target.value)}
-                  />
-                  <button type="button" className="btn btn-secondary" onClick={handleAddHistory}>Add</button>
-                </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginTop: '6px' }}>
-                  {formState.medicalHistory.map(h => (
-                    <span key={h} style={{ fontSize: '0.75rem', background: 'rgba(255,255,255,0.08)', padding: '2px 8px', borderRadius: '4px' }}>
-                      {h} <span style={{ cursor: 'pointer', marginLeft: '6px' }} onClick={() => setFormState(prev => ({ ...prev, medicalHistory: prev.medicalHistory.filter(x => x !== h) }))}>&times;</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">Home Medications</label>
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  <input
-                    type="text"
-                    placeholder="e.g. Lisinopril"
-                    className="form-control"
-                    value={drugInput}
-                    onChange={(e) => setDrugInput(e.target.value)}
-                  />
-                  <button type="button" className="btn btn-secondary" onClick={handleAddDrug}>Add</button>
-                </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginTop: '6px' }}>
-                  {formState.drugHistory.map(d => (
-                    <span key={d} style={{ fontSize: '0.75rem', background: 'rgba(255,255,255,0.08)', padding: '2px 8px', borderRadius: '4px' }}>
-                      {d} <span style={{ cursor: 'pointer', marginLeft: '6px' }} onClick={() => setFormState(prev => ({ ...prev, drugHistory: prev.drugHistory.filter(x => x !== d) }))}>&times;</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Lab Values form block */}
-              <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '12px' }}>
-                <label className="form-label" style={{ marginBottom: '8px', display: 'block' }}>Laboratory Values</label>
                 <div className="form-row">
                   <div className="form-group">
-                    <label className="form-label">Hemoglobin</label>
+                    <label className="form-label">Age</label>
                     <input
                       type="number"
-                      step="0.1"
                       className="form-control"
-                      value={formState.investigations.hb}
-                      onChange={(e) => setFormState(prev => ({ ...prev, investigations: { ...prev.investigations, hb: Number(e.target.value) } }))}
+                      value={formState.age}
+                      onChange={(e) => setFormState(prev => ({ ...prev, age: Number(e.target.value) }))}
+                      required
                     />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Platelets</label>
-                    <input
-                      type="number"
+                    <label className="form-label">Gender</label>
+                    <select
                       className="form-control"
-                      value={formState.investigations.plt}
-                      onChange={(e) => setFormState(prev => ({ ...prev, investigations: { ...prev.investigations, plt: Number(e.target.value) } }))}
-                    />
+                      value={formState.gender}
+                      onChange={(e) => setFormState(prev => ({ ...prev, gender: e.target.value as any }))}
+                    >
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                    </select>
                   </div>
                 </div>
+
                 <div className="form-row">
                   <div className="form-group">
-                    <label className="form-label">Creatinine</label>
+                    <label className="form-label">Weight (kg)</label>
                     <input
                       type="number"
-                      step="0.1"
                       className="form-control"
-                      value={formState.investigations.cr}
-                      onChange={(e) => setFormState(prev => ({ ...prev, investigations: { ...prev.investigations, cr: Number(e.target.value) } }))}
+                      value={formState.weight}
+                      onChange={(e) => setFormState(prev => ({ ...prev, weight: Number(e.target.value) }))}
+                      required
                     />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Potassium</label>
+                    <label className="form-label">Height (cm)</label>
                     <input
                       type="number"
-                      step="0.1"
                       className="form-control"
-                      value={formState.investigations.k}
-                      onChange={(e) => setFormState(prev => ({ ...prev, investigations: { ...prev.investigations, k: Number(e.target.value) } }))}
+                      value={formState.height}
+                      onChange={(e) => setFormState(prev => ({ ...prev, height: Number(e.target.value) }))}
+                      required
                     />
                   </div>
                 </div>
-              </div>
 
-              <button type="submit" className="btn btn-primary" style={{ marginTop: '10px' }}>
-                Save Patient Record
-              </button>
-            </form>
-          </div>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label className="form-label">ASA Score (1-4)</label>
+                    <select
+                      className="form-control"
+                      value={formState.asaScore}
+                      onChange={(e) => setFormState(prev => ({ ...prev, asaScore: Number(e.target.value) }))}
+                    >
+                      <option value={1}>ASA I (Normal Healthy)</option>
+                      <option value={2}>ASA II (Mild Systemic)</option>
+                      <option value={3}>ASA III (Severe Systemic)</option>
+                      <option value={4}>ASA IV (Threat to Life)</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">Mallampati (1-4)</label>
+                    <select
+                      className="form-control"
+                      value={formState.mallampati}
+                      onChange={(e) => setFormState(prev => ({ ...prev, mallampati: Number(e.target.value) as any }))}
+                    >
+                      <option value={1}>Class I</option>
+                      <option value={2}>Class II</option>
+                      <option value={3}>Class III</option>
+                      <option value={4}>Class IV</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Dynamic Lists */}
+                <div className="form-group">
+                  <label className="form-label">Allergies</label>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="e.g. Latex"
+                      value={allergyInput}
+                      onChange={(e) => setAllergyInput(e.target.value)}
+                    />
+                    <button type="button" className="btn btn-secondary" onClick={handleAddAllergy}>Add</button>
+                  </div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginTop: '6px' }}>
+                    {formState.allergies.map(a => (
+                      <span key={a} style={{ fontSize: '0.75rem', background: 'rgba(239,68,68,0.1)', color: 'var(--med-red)', padding: '2px 8px', borderRadius: '4px' }}>
+                        {a} <span style={{ cursor: 'pointer', marginLeft: '6px' }} onClick={() => setFormState(prev => ({ ...prev, allergies: prev.allergies.filter(x => x !== a) }))}>&times;</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Comorbidities / History</label>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="e.g. Asthma"
+                      value={historyInput}
+                      onChange={(e) => setHistoryInput(e.target.value)}
+                    />
+                    <button type="button" className="btn btn-secondary" onClick={handleAddHistory}>Add</button>
+                  </div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginTop: '6px' }}>
+                    {formState.medicalHistory.map(h => (
+                      <span key={h} style={{ fontSize: '0.75rem', background: 'rgba(255,255,255,0.08)', padding: '2px 8px', borderRadius: '4px' }}>
+                        {h} <span style={{ cursor: 'pointer', marginLeft: '6px' }} onClick={() => setFormState(prev => ({ ...prev, medicalHistory: prev.medicalHistory.filter(x => x !== h) }))}>&times;</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Home Medications</label>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <input
+                      type="text"
+                      placeholder="e.g. Lisinopril"
+                      className="form-control"
+                      value={drugInput}
+                      onChange={(e) => setDrugInput(e.target.value)}
+                    />
+                    <button type="button" className="btn btn-secondary" onClick={handleAddDrug}>Add</button>
+                  </div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginTop: '6px' }}>
+                    {formState.drugHistory.map(d => (
+                      <span key={d} style={{ fontSize: '0.75rem', background: 'rgba(255,255,255,0.08)', padding: '2px 8px', borderRadius: '4px' }}>
+                        {d} <span style={{ cursor: 'pointer', marginLeft: '6px' }} onClick={() => setFormState(prev => ({ ...prev, drugHistory: prev.drugHistory.filter(x => x !== d) }))}>&times;</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Lab Values form block */}
+                <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '12px' }}>
+                  <label className="form-label" style={{ marginBottom: '8px', display: 'block' }}>Laboratory Values</label>
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label className="form-label">Hemoglobin</label>
+                      <input
+                        type="number"
+                        step="0.1"
+                        className="form-control"
+                        value={formState.investigations.hb}
+                        onChange={(e) => setFormState(prev => ({ ...prev, investigations: { ...prev.investigations, hb: Number(e.target.value) } }))}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label className="form-label">Platelets</label>
+                      <input
+                        type="number"
+                        className="form-control"
+                        value={formState.investigations.plt}
+                        onChange={(e) => setFormState(prev => ({ ...prev, investigations: { ...prev.investigations, plt: Number(e.target.value) } }))}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label className="form-label">Creatinine</label>
+                      <input
+                        type="number"
+                        step="0.1"
+                        className="form-control"
+                        value={formState.investigations.cr}
+                        onChange={(e) => setFormState(prev => ({ ...prev, investigations: { ...prev.investigations, cr: Number(e.target.value) } }))}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label className="form-label">Potassium</label>
+                      <input
+                        type="number"
+                        step="0.1"
+                        className="form-control"
+                        value={formState.investigations.k}
+                        onChange={(e) => setFormState(prev => ({ ...prev, investigations: { ...prev.investigations, k: Number(e.target.value) } }))}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <button type="submit" className="btn btn-primary" style={{ marginTop: '10px' }}>
+                  Save Changes
+                </button>
+              </form>
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { supabase, isSupabaseConfigured } from '../supabaseClient';
 
 // ==========================================
 // SCHEMAS AND TYPES
@@ -84,6 +85,58 @@ export type UserRole =
   | 'Researcher' 
   | 'Student';
 
+export interface SafetyChecklist {
+  caseId: string;
+  patientId: string;
+  preAnesthesiaStatus: 'not_started' | 'in_progress' | 'completed';
+  machineCheckStatus: 'not_started' | 'in_progress' | 'completed';
+  preInductionStatus: 'not_started' | 'in_progress' | 'completed';
+  timeoutStatus: 'not_started' | 'in_progress' | 'completed';
+  intraopStatus: 'not_started' | 'in_progress' | 'completed';
+  recoveryStatus: 'not_started' | 'in_progress' | 'completed';
+  completedChecks: number;
+  totalChecks: number;
+  data: Record<string, any>;
+  updatedAt?: string;
+}
+
+export interface AnesthesiaIncident {
+  id?: string;
+  caseId: string;
+  patientId: string;
+  preventable: 'yes' | 'no' | 'uncertain';
+  narrative: string;
+  severity: 'near_miss' | 'no_harm' | 'minor_harm' | 'moderate_harm' | 'severe_harm' | 'death';
+  categories: string[];
+  vitalsAtIncident: Record<string, any>;
+  medicationInvolved: boolean;
+  medicationDetails: Record<string, any>;
+  airwayInvolved: boolean;
+  airwayDetails: Record<string, any>;
+  contributingFactors: string[];
+  injuryOccurred: boolean;
+  injuryDetails: Record<string, any>;
+  outcome: string;
+  reportedBy?: string;
+  reporterDetails: Record<string, any>;
+  followupStatus?: 'open' | 'review' | 'resolved' | 'closed';
+  reviewer?: string;
+  reviewerDate?: string;
+  correctiveAction?: string;
+  preventiveAction?: string;
+  followupNotes?: string;
+  createdAt?: string;
+}
+
+export interface AuditLogEntry {
+  userId: string;
+  role: string;
+  action: string;
+  entity: string;
+  reason?: string;
+  timestamp?: string;
+}
+
 export interface AppContextType {
   patients: Patient[];
   addPatient: (patient: Patient) => void;
@@ -108,6 +161,19 @@ export interface AppContextType {
   // Student portal scores
   studentScore: number;
   addStudentPoints: (pts: number) => void;
+
+  // Safety & Quality additions
+  checklists: SafetyChecklist[];
+  incidents: AnesthesiaIncident[];
+  auditLogs: AuditLogEntry[];
+  saveSafetyChecklist: (checklist: SafetyChecklist) => Promise<void>;
+  submitIncidentReport: (report: AnesthesiaIncident) => Promise<string>;
+  updateIncidentStatus: (incidentId: string, updates: Partial<AnesthesiaIncident>) => Promise<void>;
+  logSafetyAudit: (action: string, entity: string, reason?: string) => Promise<void>;
+  activeCaseId: string;
+  setActiveCaseId: (id: string) => void;
+  activePatientId: string;
+  setActivePatientId: (id: string) => void;
 }
 
 // ==========================================
@@ -307,6 +373,284 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [simulatedState, setSimulatedState] = useState<'normal' | 'bradycardia' | 'hypoxia' | 'hypotension' | 'tachycardia' | 'hyperthermia'>('normal');
   const [studentScore, setStudentScore] = useState<number>(180);
 
+  const [checklists, setChecklists] = useState<SafetyChecklist[]>([]);
+  const [incidents, setIncidents] = useState<AnesthesiaIncident[]>([]);
+  const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>([]);
+  const [activeCaseId, setActiveCaseId] = useState<string>('OR-01');
+  const [activePatientId, setActivePatientId] = useState<string>('P001');
+
+  // Local storage caching helpers to keep the app operational offline
+  const saveLocalPatients = (newPatients: Patient[]) => {
+    localStorage.setItem('anesthai_patients', JSON.stringify(newPatients));
+  };
+  const saveLocalORs = (newORs: OperatingRoom[]) => {
+    localStorage.setItem('anesthai_operating_rooms', JSON.stringify(newORs));
+  };
+  const saveLocalNotifs = (newNotifs: ClinicalNotification[]) => {
+    localStorage.setItem('anesthai_notifications', JSON.stringify(newNotifs));
+  };
+  const saveLocalChecklists = (items: SafetyChecklist[]) => {
+    localStorage.setItem('anesthai_checklists', JSON.stringify(items));
+  };
+  const saveLocalIncidents = (items: AnesthesiaIncident[]) => {
+    localStorage.setItem('anesthai_incidents', JSON.stringify(items));
+  };
+  const saveLocalAuditLogs = (items: AuditLogEntry[]) => {
+    localStorage.setItem('anesthai_audit_logs', JSON.stringify(items));
+  };
+
+  // Sync with Supabase on mount
+  useEffect(() => {
+    const loadData = async () => {
+      // Fallback: If Supabase credentials are not filled, use localStorage or default mock data
+      if (!isSupabaseConfigured || !supabase) {
+        const storedPatients = localStorage.getItem('anesthai_patients');
+        if (storedPatients) {
+          try { setPatients(JSON.parse(storedPatients)); } catch (e) { console.error('Error parsing local patients:', e); }
+        } else {
+          saveLocalPatients(defaultPatients);
+        }
+        
+        const storedORs = localStorage.getItem('anesthai_operating_rooms');
+        if (storedORs) {
+          try { setOperatingRooms(JSON.parse(storedORs)); } catch (e) { console.error('Error parsing local ORs:', e); }
+        } else {
+          saveLocalORs(defaultORs);
+        }
+
+        const storedNotifs = localStorage.getItem('anesthai_notifications');
+        if (storedNotifs) {
+          try { setNotifications(JSON.parse(storedNotifs)); } catch (e) { console.error('Error parsing local notifications:', e); }
+        } else {
+          saveLocalNotifs(defaultNotifications);
+        }
+        return;
+      }
+
+      try {
+        console.log('Supabase: Fetching patients...');
+        const { data: dbPatients, error: pError } = await supabase.from('patients').select('*');
+        if (pError) throw pError;
+
+        if (dbPatients && dbPatients.length > 0) {
+          const mappedPatients: Patient[] = dbPatients.map((p: any) => ({
+            id: p.id,
+            name: p.name,
+            age: p.age,
+            gender: p.gender,
+            weight: Number(p.weight),
+            height: Number(p.height),
+            allergies: p.allergies || [],
+            medicalHistory: p.medical_history || [],
+            drugHistory: p.drug_history || [],
+            asaScore: p.asa_score,
+            mallampati: p.mallampati,
+            comorbidities: p.comorbidities || [],
+            investigations: p.investigations || {},
+            vitals: p.vitals || {},
+            anesthesiaPlan: p.anesthesia_plan || undefined
+          }));
+          setPatients(mappedPatients);
+          saveLocalPatients(mappedPatients);
+        } else {
+          console.log('Supabase: Seeding empty patients table...');
+          for (const p of defaultPatients) {
+            await supabase.from('patients').insert({
+              id: p.id,
+              name: p.name,
+              age: p.age,
+              gender: p.gender,
+              weight: p.weight,
+              height: p.height,
+              allergies: p.allergies,
+              medical_history: p.medicalHistory,
+              drug_history: p.drugHistory,
+              asa_score: p.asaScore,
+              mallampati: p.mallampati,
+              comorbidities: p.comorbidities,
+              investigations: p.investigations,
+              vitals: p.vitals,
+              anesthesia_plan: p.anesthesiaPlan
+            });
+          }
+        }
+
+        console.log('Supabase: Fetching operating rooms...');
+        const { data: dbORs, error: orError } = await supabase.from('operating_rooms').select('*');
+        if (orError) throw orError;
+
+        if (dbORs && dbORs.length > 0) {
+          const mappedORs: OperatingRoom[] = dbORs.map((or: any) => ({
+            id: or.id,
+            name: or.name,
+            status: or.status,
+            patientId: or.patient_id || undefined,
+            anesthesiologist: or.anesthesiologist || 'N/A',
+            surgeryName: or.surgery_name || 'N/A',
+            elapsedTime: or.elapsed_time || 0,
+            currentVitals: or.current_vitals || undefined,
+            alertMessage: or.alert_message || undefined
+          }));
+          setOperatingRooms(mappedORs);
+          saveLocalORs(mappedORs);
+        } else {
+          console.log('Supabase: Seeding empty operating rooms table...');
+          for (const or of defaultORs) {
+            await supabase.from('operating_rooms').insert({
+              id: or.id,
+              name: or.name,
+              status: or.status,
+              patient_id: or.patientId || null,
+              anesthesiologist: or.anesthesiologist,
+              surgery_name: or.surgeryName,
+              elapsed_time: or.elapsedTime,
+              current_vitals: or.currentVitals || {}
+            });
+          }
+        }
+
+        console.log('Supabase: Fetching notifications...');
+        const { data: dbNotifs, error: nError } = await supabase
+          .from('notifications')
+          .select('*')
+          .order('created_at', { ascending: false });
+        if (nError) throw nError;
+
+        if (dbNotifs && dbNotifs.length > 0) {
+          const mappedNotifs: ClinicalNotification[] = dbNotifs.map((n: any) => ({
+            id: n.id,
+            type: n.type,
+            title: n.title,
+            message: n.message || '',
+            timestamp: n.timestamp || '',
+            patientId: n.patient_id || undefined,
+            dismissed: n.dismissed || false
+          }));
+          setNotifications(mappedNotifs);
+          saveLocalNotifs(mappedNotifs);
+        } else {
+          console.log('Supabase: Seeding empty notifications table...');
+          for (const n of defaultNotifications) {
+            await supabase.from('notifications').insert({
+              id: n.id,
+              type: n.type,
+              title: n.title,
+              message: n.message,
+              timestamp: n.timestamp,
+              patient_id: n.patientId || null,
+              dismissed: n.dismissed
+            });
+          }
+        }
+
+      } catch (err) {
+        console.error('Supabase load failed, falling back to local database values:', err);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  // Load safety checklist and incident data on mount
+  useEffect(() => {
+    const loadSafetyData = async () => {
+      // 1. Try checklists
+      try {
+        const res = await fetch('http://localhost:8000/api/safety/checklists');
+        if (res.ok) {
+          const data = await res.json();
+          const mapped = data.map((c: any) => ({
+            caseId: c.case_id,
+            patientId: c.patient_id,
+            preAnesthesiaStatus: c.pre_anesthesia_status,
+            machineCheckStatus: c.machine_check_status,
+            preInductionStatus: c.pre_induction_status,
+            timeoutStatus: c.timeout_status,
+            intraopStatus: c.intraop_status,
+            recoveryStatus: c.recovery_status,
+            completedChecks: c.completed_checks,
+            totalChecks: c.total_checks,
+            data: c.data || {}
+          }));
+          setChecklists(mapped);
+          saveLocalChecklists(mapped);
+        }
+      } catch (e) {
+        const local = localStorage.getItem('anesthai_checklists');
+        if (local) {
+          try { setChecklists(JSON.parse(local)); } catch (err) { console.error(err); }
+        }
+      }
+
+      // 2. Try incidents
+      try {
+        const res = await fetch('http://localhost:8000/api/safety/incidents');
+        if (res.ok) {
+          const data = await res.json();
+          const mapped = data.map((i: any) => ({
+            id: i.id,
+            caseId: i.case_id,
+            patientId: i.patient_id,
+            preventable: i.preventable,
+            narrative: i.narrative,
+            severity: i.severity,
+            categories: i.categories || [],
+            vitalsAtIncident: i.vitals_at_incident || {},
+            medicationInvolved: i.medication_involved || false,
+            medicationDetails: i.medication_details || {},
+            airwayInvolved: i.airway_involved || false,
+            airwayDetails: i.airway_details || {},
+            contributingFactors: i.contributing_factors || [],
+            injuryOccurred: i.injury_occurred || false,
+            injuryDetails: i.injury_details || {},
+            outcome: i.outcome,
+            reportedBy: i.reported_by,
+            reporterDetails: i.reporter_details || {},
+            followupStatus: i.followup_status || 'open',
+            reviewer: i.reviewer,
+            reviewerDate: i.reviewer_date,
+            correctiveAction: i.corrective_action,
+            preventiveAction: i.preventive_action,
+            followupNotes: i.followup_notes,
+            createdAt: i.created_at
+          }));
+          setIncidents(mapped);
+          saveLocalIncidents(mapped);
+        }
+      } catch (e) {
+        const local = localStorage.getItem('anesthai_incidents');
+        if (local) {
+          try { setIncidents(JSON.parse(local)); } catch (err) { console.error(err); }
+        }
+      }
+
+      // 3. Try audit logs
+      try {
+        const res = await fetch('http://localhost:8000/api/safety/audit-logs');
+        if (res.ok) {
+          const data = await res.json();
+          const mapped = data.map((a: any) => ({
+            userId: a.user_id,
+            role: a.role,
+            action: a.action,
+            entity: a.entity,
+            reason: a.reason,
+            timestamp: a.timestamp
+          }));
+          setAuditLogs(mapped);
+          saveLocalAuditLogs(mapped);
+        }
+      } catch (e) {
+        const local = localStorage.getItem('anesthai_audit_logs');
+        if (local) {
+          try { setAuditLogs(JSON.parse(local)); } catch (err) { console.error(err); }
+        }
+      }
+    };
+
+    loadSafetyData();
+  }, []);
+
   // Sync index.css theme class on body
   useEffect(() => {
     const body = document.body;
@@ -350,41 +694,165 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     });
   }, [simulatedState]);
 
-  // CRUD for Patients
-  const addPatient = (patient: Patient) => {
-    setPatients((prev) => [...prev, patient]);
+  // CRUD for Patients with live database sync
+  const addPatient = async (patient: Patient) => {
+    setPatients((prev) => {
+      const updated = [...prev, patient];
+      saveLocalPatients(updated);
+      return updated;
+    });
+
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from('patients').insert({
+          id: patient.id,
+          name: patient.name,
+          age: patient.age,
+          gender: patient.gender,
+          weight: patient.weight,
+          height: patient.height,
+          allergies: patient.allergies,
+          medical_history: patient.medicalHistory,
+          drug_history: patient.drugHistory,
+          asa_score: patient.asaScore,
+          mallampati: patient.mallampati,
+          comorbidities: patient.comorbidities,
+          investigations: patient.investigations,
+          vitals: patient.vitals,
+          anesthesia_plan: patient.anesthesiaPlan
+        });
+      } catch (err) {
+        console.error('Failed to sync added patient to Supabase:', err);
+      }
+    }
   };
 
-  const updatePatient = (updated: Patient) => {
-    setPatients((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
+  const updatePatient = async (updated: Patient) => {
+    setPatients((prev) => {
+      const next = prev.map((p) => (p.id === updated.id ? updated : p));
+      saveLocalPatients(next);
+      return next;
+    });
+
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase
+          .from('patients')
+          .update({
+            name: updated.name,
+            age: updated.age,
+            gender: updated.gender,
+            weight: updated.weight,
+            height: updated.height,
+            allergies: updated.allergies,
+            medical_history: updated.medicalHistory,
+            drug_history: updated.drugHistory,
+            asa_score: updated.asaScore,
+            mallampati: updated.mallampati,
+            comorbidities: updated.comorbidities,
+            investigations: updated.investigations,
+            vitals: updated.vitals,
+            anesthesia_plan: updated.anesthesiaPlan
+          })
+          .eq('id', updated.id);
+      } catch (err) {
+        console.error('Failed to sync updated patient to Supabase:', err);
+      }
+    }
   };
 
-  const deletePatient = (id: string) => {
-    setPatients((prev) => prev.filter((p) => p.id !== id));
+  const deletePatient = async (id: string) => {
+    setPatients((prev) => {
+      const next = prev.filter((p) => p.id !== id);
+      saveLocalPatients(next);
+      return next;
+    });
+
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from('patients').delete().eq('id', id);
+      } catch (err) {
+        console.error('Failed to sync deleted patient to Supabase:', err);
+      }
+    }
   };
 
-  // OR Management
-  const updateORStatus = (id: string, updates: Partial<OperatingRoom>) => {
-    setOperatingRooms((prev) =>
-      prev.map((or) => (or.id === id ? { ...or, ...updates } : or))
-    );
+  // OR Management with live database sync
+  const updateORStatus = async (id: string, updates: Partial<OperatingRoom>) => {
+    setOperatingRooms((prev) => {
+      const next = prev.map((or) => (or.id === id ? { ...or, ...updates } : or));
+      saveLocalORs(next);
+      return next;
+    });
+
+    if (isSupabaseConfigured && supabase) {
+      try {
+        const dbUpdates: any = {};
+        if (updates.name !== undefined) dbUpdates.name = updates.name;
+        if (updates.status !== undefined) dbUpdates.status = updates.status;
+        if (updates.patientId !== undefined) dbUpdates.patient_id = updates.patientId;
+        if (updates.anesthesiologist !== undefined) dbUpdates.anesthesiologist = updates.anesthesiologist;
+        if (updates.surgeryName !== undefined) dbUpdates.surgery_name = updates.surgeryName;
+        if (updates.elapsedTime !== undefined) dbUpdates.elapsed_time = updates.elapsedTime;
+        if (updates.currentVitals !== undefined) dbUpdates.current_vitals = updates.currentVitals;
+        if (updates.alertMessage !== undefined) dbUpdates.alert_message = updates.alertMessage;
+
+        await supabase.from('operating_rooms').update(dbUpdates).eq('id', id);
+      } catch (err) {
+        console.error('Failed to sync OR status updates to Supabase:', err);
+      }
+    }
   };
 
-  // Notification Feed
-  const addNotification = (n: Omit<ClinicalNotification, 'id' | 'timestamp' | 'dismissed'>) => {
+  // Notification Feed with live database sync
+  const addNotification = async (n: Omit<ClinicalNotification, 'id' | 'timestamp' | 'dismissed'>) => {
     const newNotif: ClinicalNotification = {
       ...n,
       id: Math.random().toString(36).substring(2, 9),
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       dismissed: false,
     };
-    setNotifications((prev) => [newNotif, ...prev]);
+
+    setNotifications((prev) => {
+      const next = [newNotif, ...prev];
+      saveLocalNotifs(next);
+      return next;
+    });
+
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from('notifications').insert({
+          id: newNotif.id,
+          type: newNotif.type,
+          title: newNotif.title,
+          message: newNotif.message,
+          timestamp: newNotif.timestamp,
+          patient_id: newNotif.patientId || null,
+          dismissed: newNotif.dismissed
+        });
+      } catch (err) {
+        console.error('Failed to sync notification to Supabase:', err);
+      }
+    }
   };
 
-  const dismissNotification = (id: string) => {
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, dismissed: true } : n))
-    );
+  const dismissNotification = async (id: string) => {
+    setNotifications((prev) => {
+      const next = prev.map((n) => (n.id === id ? { ...n, dismissed: true } : n));
+      saveLocalNotifs(next);
+      return next;
+    });
+
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase
+          .from('notifications')
+          .update({ dismissed: true })
+          .eq('id', id);
+      } catch (err) {
+        console.error('Failed to sync dismissed notification to Supabase:', err);
+      }
+    }
   };
 
   const toggleTheme = () => {
@@ -393,6 +861,188 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const addStudentPoints = (pts: number) => {
     setStudentScore((prev) => prev + pts);
+  };
+
+  const saveSafetyChecklist = async (checklist: SafetyChecklist) => {
+    // Update local state
+    setChecklists((prev) => {
+      const exists = prev.find((c) => c.caseId === checklist.caseId);
+      let next;
+      if (exists) {
+        next = prev.map((c) => (c.caseId === checklist.caseId ? { ...c, ...checklist, updatedAt: new Date().toISOString() } : c));
+      } else {
+        next = [...prev, { ...checklist, updatedAt: new Date().toISOString() }];
+      }
+      saveLocalChecklists(next);
+      return next;
+    });
+
+    // Send to backend
+    try {
+      await fetch('http://localhost:8000/api/safety/checklists', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(checklist),
+      });
+    } catch (e) {
+      console.warn('FastAPI offline, checklist stored locally');
+    }
+
+    // Sync to Supabase if configured
+    if (isSupabaseConfigured && supabase) {
+      try {
+        const dbRow = {
+          case_id: checklist.caseId,
+          patient_id: checklist.patientId,
+          pre_anesthesia_status: checklist.preAnesthesiaStatus,
+          machine_check_status: checklist.machineCheckStatus,
+          pre_induction_status: checklist.preInductionStatus,
+          timeout_status: checklist.timeoutStatus,
+          intraop_status: checklist.intraopStatus,
+          recovery_status: checklist.recoveryStatus,
+          completed_checks: checklist.completedChecks,
+          total_checks: checklist.totalChecks,
+          updated_at: new Date().toISOString(),
+        };
+        const { error } = await supabase.from('safety_checklists').upsert(dbRow, { onConflict: 'case_id' });
+        if (error) console.error('Supabase checklist sync error:', error);
+      } catch (err) {
+        console.error('Supabase checklist sync error:', err);
+      }
+    }
+  };
+
+  const submitIncidentReport = async (report: AnesthesiaIncident): Promise<string> => {
+    let newIncidentId = report.id || `ASI-2026-${Math.floor(100000 + Math.random() * 900000)}`;
+    const fullReport = {
+      ...report,
+      id: newIncidentId,
+      followupStatus: report.followupStatus || 'open',
+      createdAt: report.createdAt || new Date().toISOString(),
+    };
+
+    setIncidents((prev) => {
+      const next = [fullReport, ...prev.filter((i) => i.id !== newIncidentId)];
+      saveLocalIncidents(next);
+      return next;
+    });
+
+    try {
+      const res = await fetch('http://localhost:8000/api/safety/incidents', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(fullReport),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        newIncidentId = data.incident_id;
+      }
+    } catch (e) {
+      console.warn('FastAPI offline, incident report stored locally');
+    }
+
+    if (isSupabaseConfigured && supabase) {
+      try {
+        const dbRow = {
+          id: newIncidentId,
+          case_id: fullReport.caseId,
+          patient_id: fullReport.patientId,
+          preventable: fullReport.preventable,
+          narrative: fullReport.narrative,
+          severity: fullReport.severity,
+          categories: fullReport.categories,
+          vitals_at_incident: fullReport.vitalsAtIncident,
+          medication_involved: fullReport.medicationInvolved,
+          medication_details: fullReport.medicationDetails,
+          airway_involved: fullReport.airwayInvolved,
+          airway_details: fullReport.airwayDetails,
+          contributing_factors: fullReport.contributingFactors,
+          injury_occurred: fullReport.injuryOccurred,
+          injury_details: fullReport.injuryDetails,
+          outcome: fullReport.outcome,
+          followup_status: fullReport.followupStatus,
+        };
+        await supabase.from('anesthesia_incidents').upsert(dbRow, { onConflict: 'id' });
+      } catch (err) {
+        console.error('Supabase incident sync error:', err);
+      }
+    }
+
+    return newIncidentId;
+  };
+
+  const updateIncidentStatus = async (incidentId: string, updates: Partial<AnesthesiaIncident>) => {
+    setIncidents((prev) => {
+      const next = prev.map((inc) => (inc.id === incidentId ? { ...inc, ...updates } : inc));
+      saveLocalIncidents(next);
+      return next;
+    });
+
+    try {
+      await fetch(`http://localhost:8000/api/safety/incidents/${incidentId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates),
+      });
+    } catch (e) {
+      console.warn('FastAPI offline, update incident stored locally');
+    }
+
+    if (isSupabaseConfigured && supabase) {
+      try {
+        const dbUpdates: any = {};
+        if (updates.followupStatus !== undefined) dbUpdates.followup_status = updates.followupStatus;
+        if (updates.reviewer !== undefined) dbUpdates.reviewer = updates.reviewer;
+        if (updates.correctiveAction !== undefined) dbUpdates.corrective_action = updates.correctiveAction;
+        if (updates.preventiveAction !== undefined) dbUpdates.preventive_action = updates.preventiveAction;
+        if (updates.followupNotes !== undefined) dbUpdates.followup_notes = updates.followupNotes;
+
+        await supabase.from('anesthesia_incidents').update(dbUpdates).eq('id', incidentId);
+      } catch (err) {
+        console.error('Supabase update incident error:', err);
+      }
+    }
+  };
+
+  const logSafetyAudit = async (action: string, entity: string, reason?: string) => {
+    const newEntry: AuditLogEntry = {
+      userId: 'Staff ID #4289',
+      role: userRole,
+      action,
+      entity,
+      reason,
+      timestamp: new Date().toISOString(),
+    };
+
+    setAuditLogs((prev) => {
+      const next = [newEntry, ...prev];
+      saveLocalAuditLogs(next);
+      return next;
+    });
+
+    try {
+      await fetch('http://localhost:8000/api/safety/audit-logs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newEntry),
+      });
+    } catch (e) {
+      console.warn('FastAPI offline, audit log stored locally');
+    }
+
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from('safety_audit_logs').insert({
+          user_id: newEntry.userId,
+          role: newEntry.role,
+          action: newEntry.action,
+          entity: newEntry.entity,
+          reason: newEntry.reason || null,
+        });
+      } catch (err) {
+        console.error('Supabase audit log error:', err);
+      }
+    }
   };
 
   return (
@@ -417,12 +1067,24 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setSimulatedState,
         studentScore,
         addStudentPoints,
+        checklists,
+        incidents,
+        auditLogs,
+        saveSafetyChecklist,
+        submitIncidentReport,
+        updateIncidentStatus,
+        logSafetyAudit,
+        activeCaseId,
+        setActiveCaseId,
+        activePatientId,
+        setActivePatientId,
       }}
     >
       {children}
     </AppContext.Provider>
   );
 };
+
 
 export const useApp = () => {
   const context = useContext(AppContext);

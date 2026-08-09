@@ -1,0 +1,18 @@
+{
+  "CASE-999": {
+    "case_id": "CASE-999",
+    "patient_id": "P001",
+    "pre_anesthesia_status": "in_progress",
+    "machine_check_status": "not_started",
+    "pre_induction_status": "not_started",
+    "timeout_status": "not_started",
+    "intraop_status": "not_started",
+    "recovery_status": "not_started",
+    "completed_checks": 4,
+    "total_checks": 16,
+    "data": {
+      "history_reviewed": true,
+      "exam_reviewed": true
+    }
+  }
+}

@@ -14,5 +14,45 @@
       "history_reviewed": true,
       "exam_reviewed": true
     }
+  },
+  "OR-01": {
+    "case_id": "OR-01",
+    "patient_id": "P003",
+    "pre_anesthesia_status": "in_progress",
+    "machine_check_status": "not_started",
+    "pre_induction_status": "not_started",
+    "timeout_status": "not_started",
+    "intraop_status": "not_started",
+    "recovery_status": "not_started",
+    "completed_checks": 2,
+    "total_checks": 16,
+    "data": {
+      "history_reviewed": true,
+      "exam_reviewed": false,
+      "abnormalities_flagged": true,
+      "investigations_reviewed": false,
+      "correctable_addressed": false,
+      "complications_documented": false,
+      "strategy_documented": false,
+      "premed_reviewed": false,
+      "analgesia_reviewed": false,
+      "technique_planned": false,
+      "monitoring_established": false,
+      "temperature_planned": false,
+      "recovery_established": false,
+      "personnel_available": false,
+      "equipment_available": false,
+      "medications_available": false,
+      "findings": "",
+      "abnormal_investigations": "",
+      "complications": "",
+      "mitigation_plan": "",
+      "anesthesia_plan": "",
+      "analgesia_plan": "",
+      "monitoring_plan": "",
+      "temp_plan": "",
+      "recovery_plan": "",
+      "notes": ""
+    }
   }
 }

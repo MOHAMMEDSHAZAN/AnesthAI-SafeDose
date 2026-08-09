@@ -28,3 +28,7 @@ dist-ssr
 .env.*
 catboost_info/
 
+# Python cache
+__pycache__/
+*.py[cod]
+

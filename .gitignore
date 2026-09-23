@@ -23,12 +23,44 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment & Temp logs
+# Environment & Secrets
 .env
 .env.*
+!.env.example
+kaggle.json
+*.pem
+*.key
+*.cert
+*.crt
+credentials.json
+secrets.json
+
+# Backups & Archives
+backups/
+cleanup_backup/
+*.zip
+*.tar.gz
+safedose_training_bundle.zip
+
+# Python & ML artifacts cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+venv/
+.venv/
+env/
 catboost_info/
 
-# Python cache
-__pycache__/
-*.py[cod]
+# Clinical Datasets (MIMIC-IV & large data files)
+datasets/mimiciv/
+*.csv.gz
+*.parquet
+*.h5
+*.npy
+*.npz
+models/*.pth
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
+import { API_BASE_URL } from '../config/api';
 
 export const Airway: React.FC = () => {
   const { patients } = useApp();
@@ -76,11 +77,12 @@ export const Airway: React.FC = () => {
     reasoning: string;
     prob: number;
   } | null>(null);
+  const [predictionError, setPredictionError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPrediction = async () => {
       try {
-        const response = await fetch('http://localhost:8000/predict/Airway', {
+        const response = await fetch(`${API_BASE_URL}/predict/Airway`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -101,21 +103,30 @@ export const Airway: React.FC = () => {
             reasoning: data.clinical_reasoning,
             prob: data.probability
           });
+        } else {
+          setPrediction(null);
+          setPredictionError('Prediction unavailable — backend model inference failed.');
         }
       } catch (err) {
-        console.warn("Failed fetching airway prediction, using local heuristic fallback.");
+        setPrediction(null);
+        setPredictionError('Prediction unavailable — backend model inference failed.');
       }
     };
     fetchPrediction();
   }, [mallampati, weight, age]);
 
-  const isDifficultAirway = prediction ? prediction.riskCategory === 'High Risk' : (mallampati >= 3 || cormackGrade >= 3);
+  const isDifficultAirway = prediction?.riskCategory === 'High Risk';
 
   return (
     <div className="page-container">
       <div className="page-header">
         <div>
-          <h1 className="page-title">Airway Assessment & Tube Sizing</h1>
+          <h1 className="page-title">
+            Airway Assessment & Tube Sizing
+            <span className="badge badge-warning" style={{ fontSize: '0.75rem', verticalAlign: 'middle', marginLeft: '10px' }}>
+              Demo / Non-validated
+            </span>
+          </h1>
           <p className="page-subtitle">Sizing calculations for intubation devices and difficult airway safety checklists</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -129,6 +140,7 @@ export const Airway: React.FC = () => {
           </select>
         </div>
       </div>
+      {predictionError && <div className="alert alert-danger">{predictionError}</div>}
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
         {/* Left Side: Calculations and Assessments */}

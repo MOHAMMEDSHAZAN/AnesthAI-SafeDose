@@ -5,12 +5,14 @@ interface HeaderProps {
   sidebarCollapsed: boolean;
   setSidebarCollapsed: (c: boolean) => void;
   onEmergencyTrigger: () => void;
+  onLogout?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ sidebarCollapsed, setSidebarCollapsed, onEmergencyTrigger }) => {
+export const Header: React.FC<HeaderProps> = ({ sidebarCollapsed, setSidebarCollapsed, onEmergencyTrigger, onLogout }) => {
   const { 
     userRole, 
     setUserRole, 
+    currentUser,
     theme, 
     toggleTheme, 
     setIsSearchOpen, 
@@ -26,8 +28,8 @@ export const Header: React.FC<HeaderProps> = ({ sidebarCollapsed, setSidebarColl
       {/* Topbar layout matching Clinic-1.0.0 */}
       <div className="header-topbar" style={{
         height: '36px',
-        backgroundColor: 'var(--med-blue)',
-        color: 'white',
+        backgroundColor: theme === 'dark' ? '#0a1120' : 'var(--bg-tertiary)',
+        color: 'var(--text-primary)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -35,7 +37,7 @@ export const Header: React.FC<HeaderProps> = ({ sidebarCollapsed, setSidebarColl
         fontSize: '0.75rem',
         fontWeight: 500,
         fontFamily: 'var(--font-nav)',
-        boxShadow: 'inset 0 -1px 0 rgba(255, 255, 255, 0.1)'
+        borderBottom: '1px solid var(--border-color)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -43,20 +45,82 @@ export const Header: React.FC<HeaderProps> = ({ sidebarCollapsed, setSidebarColl
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
             </svg>
-            <a href="mailto:safedose-support@anesthai.org" style={{ color: 'white', textDecoration: 'none' }}>safedose-support@anesthai.org</a>
+            <span style={{ color: 'var(--text-secondary)' }}>{currentUser?.hospital || 'St. Jude General Hospital'}</span>
           </span>
           <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-            <span>SECURE WARD SYNC</span>
+            <span style={{ width: '6px', height: '6px', backgroundColor: currentUser?.authMethod === 'trauma_break_glass' ? '#ef4444' : '#10b981', borderRadius: '50%', display: 'inline-block' }}></span>
+            <span style={{ 
+              color: currentUser?.authMethod === 'trauma_break_glass' ? '#f87171' : '#10b981', 
+              fontWeight: 700 
+            }}>
+              {currentUser?.authMethod === 'retina_scan' ? '👁 RETINA BIOMETRIC AUTHORIZED (SHA-256)' :
+               currentUser?.authMethod === 'webauthn_fido2' ? '🔑 FIDO2 / WEBAUTHN HARDWARE VERIFIED' :
+               currentUser?.authMethod === 'smartcard_nfc' ? '💳 SMARTCARD / NFC BADGE CERTIFIED' :
+               currentUser?.authMethod === 'trauma_break_glass' ? '🚨 LEVEL-4 EMERGENCY TRAUMA OVERRIDE' :
+               '🔐 SAML 2.0 / TOTP VERIFIED'}
+            </span>
+          </span>
+          <span style={{ 
+            backgroundColor: 'rgba(56,189,248,0.15)', 
+            color: '#0284c7', 
+            padding: '2px 8px', 
+            borderRadius: '4px', 
+            fontWeight: 800, 
+            fontSize: '0.68rem',
+            border: '1px solid rgba(56,189,248,0.3)'
+          }}>
+            {currentUser?.clearanceLevel ? currentUser.clearanceLevel.split(' - ')[0] : 'LEVEL 4'}
           </span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#ffd5d5', fontWeight: 700 }}>
-            <span style={{ width: '6px', height: '6px', backgroundColor: '#df1529', borderRadius: '50%', display: 'inline-block', animation: 'heart-pulse 1s infinite' }}></span>
-            CRISIS DIRECT: +1 (555) 911-2468
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--text-muted)', fontSize: '0.6875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            <span style={{ width: '6px', height: '6px', backgroundColor: '#ef4444', borderRadius: '50%', display: 'inline-block', animation: 'heart-pulse 1s infinite' }}></span>
+            INDIA EMERGENCY:
           </span>
+          <a
+            href="tel:112"
+            className="header-emergency-link"
+            aria-label="Call India National Emergency Number 112"
+            title="India National Emergency Number — 112 (Click to call on supported devices)"
+            style={{
+              color: '#fca5a5',
+              backgroundColor: 'rgba(239, 68, 68, 0.2)',
+              border: '1px solid rgba(239, 68, 68, 0.4)',
+              padding: '2px 8px',
+              borderRadius: '4px',
+              textDecoration: 'none',
+              fontWeight: 800,
+              fontSize: '0.72rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            <span aria-hidden="true">📞</span> 112 <span style={{ color: '#f87171', fontWeight: 500, fontSize: '0.65rem' }}>National</span>
+          </a>
+          <a
+            href="tel:108"
+            className="header-emergency-link"
+            aria-label="Call Ambulance / Emergency Medical Services 108"
+            title="Ambulance / Emergency Medical Services — 108 where available"
+            style={{
+              color: '#7dd3fc',
+              backgroundColor: 'rgba(56, 189, 248, 0.15)',
+              border: '1px solid rgba(56, 189, 248, 0.35)',
+              padding: '2px 8px',
+              borderRadius: '4px',
+              textDecoration: 'none',
+              fontWeight: 800,
+              fontSize: '0.72rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            <span aria-hidden="true">🚑</span> 108 <span style={{ color: '#38bdf8', fontWeight: 500, fontSize: '0.65rem' }}>Ambulance/EMS*</span>
+          </a>
         </div>
       </div>
 
@@ -79,16 +143,44 @@ export const Header: React.FC<HeaderProps> = ({ sidebarCollapsed, setSidebarColl
               <circle cx="11" cy="11" r="8" />
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
-            <span>Search patients, drugs...</span>
+            <span>Search patients, drugs, algorithms...</span>
             <span className="search-shortcut">Ctrl+K</span>
           </div>
         </div>
 
-        <div className="header-right">
-          {/* Ward Status Indicator */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginRight: '8px' }}>
-            <span style={{ width: '8px', height: '8px', backgroundColor: 'var(--med-green)', borderRadius: '50%', display: 'inline-block', animation: 'heart-pulse 1.5s infinite' }}></span>
-            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>OT-B SECURE</span>
+        <div className="header-right" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          {/* Active Clinician Profile Chip */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            backgroundColor: 'rgba(59,130,246,0.08)',
+            border: '1px solid rgba(59,130,246,0.25)',
+            padding: '4px 12px 4px 6px',
+            borderRadius: '24px'
+          }}>
+            <div style={{
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              backgroundColor: 'var(--med-blue)',
+              color: 'white',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 800,
+              fontSize: '0.75rem'
+            }}>
+              {userRole.substring(0, 2).toUpperCase()}
+            </div>
+            <div>
+              <div style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.2 }}>
+                {currentUser?.name || 'Dr. Sarah Chen, MD'}
+              </div>
+              <div style={{ fontSize: '0.6875rem', color: '#38bdf8', fontWeight: 600 }}>
+                {userRole} • {currentUser?.badgeId || 'ID #AN-9402'}
+              </div>
+            </div>
           </div>
 
           {/* Emergency Portal HUD Button */}
@@ -101,7 +193,7 @@ export const Header: React.FC<HeaderProps> = ({ sidebarCollapsed, setSidebarColl
             CRISIS MODE
           </button>
 
-          {/* Role Selector */}
+          {/* Role Switcher */}
           <select 
             className="role-selector" 
             value={userRole} 
@@ -138,6 +230,27 @@ export const Header: React.FC<HeaderProps> = ({ sidebarCollapsed, setSidebarColl
               </svg>
             )}
           </button>
+
+          {/* Sign Out / Lock Console Button */}
+          {onLogout && (
+            <button 
+              className="btn btn-secondary"
+              onClick={onLogout}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '6px 12px',
+                fontSize: '0.75rem',
+                fontWeight: 700,
+                borderColor: 'rgba(239,68,68,0.4)',
+                color: '#f87171'
+              }}
+              title="Lock Console & Sign Out"
+            >
+              <span>🔒</span> Lock Console
+            </button>
+          )}
 
           {/* Notifications Icon and Dropdown */}
           <div style={{ position: 'relative' }}>

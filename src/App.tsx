@@ -36,12 +36,36 @@ import { ReportIncident } from './views/ReportIncident';
 import { IncidentReports } from './views/IncidentReports';
 import { SafetyAnalytics } from './views/SafetyAnalytics';
 import { AuditHistory } from './views/AuditHistory';
+import { ModelValidation } from './views/ModelValidation';
+import { DatasetGovernance } from './views/DatasetGovernance';
+import { LimitationsSafety } from './views/LimitationsSafety';
+import { ClinicalReferences } from './views/ClinicalReferences';
 
 const AppContent: React.FC = () => {
-  const [currentView, setView] = useState<string>('landing');
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const getInitialState = () => {
+    try {
+      const searchParams = new URLSearchParams(window.location.search);
+      const viewParam = searchParams.get('view') || window.location.hash.replace('#', '');
+      const authParam = searchParams.get('auth');
+      const emergencyParam = searchParams.get('emergency') === 'true' || viewParam === 'emergency';
+      if (viewParam) {
+        return {
+          view: viewParam === 'emergency' ? 'dashboard' : viewParam,
+          auth: authParam === 'true' || (viewParam !== 'landing' && viewParam !== 'auth'),
+          emergency: emergencyParam
+        };
+      }
+    } catch {
+      // fallback to defaults
+    }
+    return { view: 'landing', auth: false, emergency: false };
+  };
+
+  const initial = getInitialState();
+  const [currentView, setView] = useState<string>(initial.view);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initial.auth);
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
-  const [isEmergencyActive, setIsEmergencyActive] = useState<boolean>(false);
+  const [isEmergencyActive, setIsEmergencyActive] = useState<boolean>(initial.emergency || false);
 
   // Authentication gate redirect
   const handleGetStarted = () => {
@@ -57,6 +81,11 @@ const AppContent: React.FC = () => {
     setView('dashboard');
   };
 
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setView('auth');
+  };
+
   const triggerEmergency = () => {
     setIsEmergencyActive(true);
   };
@@ -65,9 +94,12 @@ const AppContent: React.FC = () => {
     setIsEmergencyActive(false);
   };
 
-  // Render view based on navigation state
+  // Render view based on navigation state (Strictly gated)
   const renderActiveView = () => {
-    if (!isAuthenticated && currentView !== 'landing' && currentView !== 'auth') {
+    if (!isAuthenticated) {
+      if (currentView === 'landing') {
+        return <Landing onGetStarted={handleGetStarted} />;
+      }
       return <Auth onLoginSuccess={handleLoginSuccess} />;
     }
 
@@ -126,18 +158,26 @@ const AppContent: React.FC = () => {
         return <SafetyAnalytics />;
       case 'audit-history':
         return <AuditHistory />;
+      case 'model-validation':
+        return <ModelValidation />;
+      case 'dataset-governance':
+        return <DatasetGovernance />;
+      case 'limitations-safety':
+        return <LimitationsSafety />;
+      case 'clinical-references':
+        return <ClinicalReferences />;
       default:
         return <Dashboard setView={setView} onEmergencyTrigger={triggerEmergency} />;
     }
   };
 
-  // Full-screen layout for Landing and Auth pages
-  const isFullscreenView = ['landing', 'auth'].includes(currentView);
+  // Full-screen layout for Landing and Auth pages, or whenever user is unauthenticated
+  const isFullscreenView = !isAuthenticated || ['landing', 'auth'].includes(currentView);
 
   if (isFullscreenView) {
     return (
-      <div className="app-container">
-        <main className="main-wrapper" style={{ minHeight: '100vh' }}>
+      <div className="app-container fullscreen-layout">
+        <main className="main-wrapper fullscreen-scroll">
           {renderActiveView()}
         </main>
         {/* Render Floating AI assistant on Landing to showcase capabilities */}
@@ -147,7 +187,7 @@ const AppContent: React.FC = () => {
   }
 
   return (
-    <div className="app-container">
+    <div className="app-container authenticated-layout">
       {/* Sidebar Navigation */}
       <Sidebar 
         currentView={currentView} 
@@ -162,9 +202,11 @@ const AppContent: React.FC = () => {
           sidebarCollapsed={sidebarCollapsed} 
           setSidebarCollapsed={setSidebarCollapsed} 
           onEmergencyTrigger={triggerEmergency}
+          onLogout={handleLogout}
         />
         
-        <div style={{ flex: 1 }}>
+        {/* Primary Vertical Scroll Region */}
+        <div className="content-scroll-area">
           {renderActiveView()}
         </div>
       </main>
@@ -177,7 +219,7 @@ const AppContent: React.FC = () => {
 
       {/* Screen-covering Emergency ACLS HUD */}
       {isEmergencyActive && (
-        <EmergencyPortal onClose={closeEmergency} />
+        <EmergencyPortal onClose={closeEmergency} setView={setView} />
       )}
     </div>
   );

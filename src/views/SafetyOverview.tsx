@@ -24,7 +24,7 @@ export const SafetyOverview: React.FC<SafetyOverviewProps> = ({ setView }) => {
   // Active check item lists
   const currentChecklist = checklists.find(c => c.caseId === activeCaseId) || {
     caseId: activeCaseId,
-    patientId: 'P001',
+    patientId: 'SD-2026-0001',
     preAnesthesiaStatus: 'completed',
     machineCheckStatus: 'in_progress',
     preInductionStatus: 'not_started',
@@ -65,13 +65,60 @@ export const SafetyOverview: React.FC<SafetyOverviewProps> = ({ setView }) => {
         </div>
       </div>
 
+      {/* Official India Emergency Contacts Banner */}
+      <div className="glass" style={{
+        padding: '14px 20px',
+        marginBottom: '20px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '12px',
+        borderLeft: '4px solid #ef4444',
+        background: 'rgba(239, 68, 68, 0.05)'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span style={{ fontSize: '1.25rem' }}>🚨</span>
+          <div>
+            <div style={{ fontSize: '0.875rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+              Emergency Contacts
+            </div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+              Use emergency services immediately for life-threatening situations. Clinical decision-support prototype disclaimer applies.
+            </div>
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <a
+            href="tel:112"
+            className="btn btn-danger"
+            aria-label="Call India National Emergency Number 112"
+            title="India National Emergency Number — 112"
+            style={{ padding: '6px 14px', fontSize: '0.8125rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+          >
+            <span>📞 112</span>
+            <span style={{ fontSize: '0.7rem', opacity: 0.9 }}>India National Emergency</span>
+          </a>
+          <a
+            href="tel:108"
+            className="btn btn-secondary"
+            aria-label="Call Ambulance / Emergency Medical Services 108"
+            title="Ambulance / Emergency Medical Services — 108 where available"
+            style={{ padding: '6px 14px', fontSize: '0.8125rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px', borderColor: 'rgba(56, 189, 248, 0.4)', color: '#38bdf8' }}
+          >
+            <span>🚑 108</span>
+            <span style={{ fontSize: '0.7rem', opacity: 0.9 }}>Ambulance / EMS (where available)</span>
+          </a>
+        </div>
+      </div>
+
       {/* Unified Workflow Stepper Timeline */}
       <div className="glass" style={{ padding: '24px', marginBottom: '24px' }}>
         <h3 className="card-title">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--med-cyan)" strokeWidth="2.5" style={{ marginRight: '6px' }}>
             <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
           </svg>
-          Active Safety Workflow: Patient Robert Miller (Case {activeCaseId})
+          Active Safety Workflow: Patient {patients[0]?.name || 'Aarav Mehta'} ({patients[0]?.id || 'SD-2026-0001'}, Case {activeCaseId})
         </h3>
         
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginTop: '20px', position: 'relative' }}>
@@ -255,13 +302,13 @@ export const SafetyOverview: React.FC<SafetyOverviewProps> = ({ setView }) => {
       {/* Cases Requiring Attention Table */}
       <div className="glass" style={{ padding: '24px' }}>
         <h3 className="card-title">Cases Requiring Attention</h3>
-        <div className="table-responsive" style={{ marginTop: '12px' }}>
+        <div className="table-container" style={{ marginTop: '12px' }}>
           <table className="table">
             <thead>
               <tr>
-                <th>Patient ID</th>
+                <th>Patient (Synthetic)</th>
                 <th>Procedure</th>
-                <th>OT Room</th>
+                <th>Operating Suite</th>
                 <th>Current Stage</th>
                 <th>Checklist Status</th>
                 <th>Outstanding Items</th>
@@ -271,8 +318,8 @@ export const SafetyOverview: React.FC<SafetyOverviewProps> = ({ setView }) => {
             </thead>
             <tbody>
               <tr>
-                <td><strong>P001</strong> (Robert Miller)</td>
-                <td>Laparoscopic Prostatectomy</td>
+                <td><strong>{patients[0]?.id || 'SD-2026-0001'}</strong> ({patients[0]?.name || 'Aarav Mehta'})</td>
+                <td>Laparoscopic Cholecystectomy</td>
                 <td>OR-01</td>
                 <td><span className="badge badge-info">Machine Check</span></td>
                 <td>
@@ -281,7 +328,7 @@ export const SafetyOverview: React.FC<SafetyOverviewProps> = ({ setView }) => {
                   </div>
                 </td>
                 <td><span style={{ color: 'var(--med-orange)', fontWeight: 600 }}>⚠ 1 required item</span></td>
-                <td>Dr. Sarah Jenkins</td>
+                <td>Dr. Arjun Malhotra (DEMO-LIC-2048)</td>
                 <td>
                   <button className="btn btn-primary" style={{ padding: '4px 10px', fontSize: '0.75rem' }} onClick={() => setView('machine-check')}>
                     Resolve

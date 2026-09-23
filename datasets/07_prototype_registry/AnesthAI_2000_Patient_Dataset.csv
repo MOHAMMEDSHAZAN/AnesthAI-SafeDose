@@ -1,0 +1,2001 @@
+Patient_ID,Age,Gender,Weight_kg,Height_cm,BMI,ASA_Score,Heart_Rate_bpm,Systolic_BP,Diastolic_BP,SpO2_Percent,Respiratory_Rate,ECG_Status,Medical_History,Surgery_Type,Anesthesia_Drug,Recommended_Dose_mg,Risk_Level
+P0001,76,F,60,150,26.67,III,82,137,89,95,22,Normal,None,Gynecology,Etomidate,107,High
+P0002,77,F,52,174,17.18,III,94,152,67,100,14,Normal,Hypertension,Neurosurgery,Etomidate,149,High
+P0003,49,F,82,176,26.47,II,93,159,60,96,24,Abnormal,None,Urology,Propofol,137,Medium
+P0004,80,F,99,172,33.46,I,63,100,75,100,21,Normal,Hypertension,Cardiac,Sevoflurane,98,Low
+P0005,31,F,84,179,26.22,II,78,138,72,100,15,Normal,Diabetes,ENT,Etomidate,133,Medium
+P0006,22,M,51,158,20.43,II,62,140,81,99,19,Normal,Diabetes,Orthopedic,Propofol,107,Medium
+P0007,77,M,51,181,15.57,III,64,145,98,99,21,Normal,Heart Disease,Urology,Etomidate,85,High
+P0008,53,F,66,162,25.15,II,64,151,94,94,22,Normal,Asthma,ENT,Propofol,103,Medium
+P0009,30,F,63,172,21.3,III,91,107,100,100,21,Normal,None,Neurosurgery,Propofol,137,High
+P0010,50,F,74,175,24.16,II,63,100,82,97,13,Normal,None,Neurosurgery,Etomidate,136,Medium
+P0011,34,F,90,155,37.46,II,83,135,85,98,14,Normal,Asthma,Neurosurgery,Propofol,167,Medium
+P0012,72,M,57,187,16.3,I,71,159,60,99,15,Normal,Diabetes,ENT,Sevoflurane,106,Low
+P0013,28,M,62,168,21.97,III,83,121,69,98,12,Normal,Hypertension,ENT,Sevoflurane,160,High
+P0014,74,M,59,150,26.22,I,64,140,90,98,18,Normal,Hypertension,Cardiac,Propofol,175,Low
+P0015,27,M,79,183,23.59,III,77,153,91,100,15,Normal,None,Cardiac,Etomidate,139,High
+P0016,24,M,62,174,20.48,III,89,127,93,94,13,Normal,None,Gynecology,Sevoflurane,99,High
+P0017,52,M,81,189,22.68,II,92,150,97,100,24,Abnormal,Asthma,ENT,Etomidate,146,Medium
+P0018,70,M,67,173,22.39,III,64,110,87,95,24,Normal,None,Orthopedic,Etomidate,142,High
+P0019,33,M,48,180,14.81,I,66,158,70,97,19,Normal,Diabetes,Neurosurgery,Etomidate,82,Low
+P0020,79,F,46,152,19.91,II,84,119,88,100,21,Normal,Diabetes,Gynecology,Propofol,109,Medium
+P0021,76,F,66,174,21.8,II,98,143,70,96,22,Abnormal,Heart Disease,Urology,Sevoflurane,83,Medium
+P0022,19,F,98,176,31.64,II,67,139,92,100,23,Normal,Heart Disease,Gynecology,Propofol,165,Medium
+P0023,64,M,66,189,18.48,III,93,143,74,94,20,Normal,Asthma,Neurosurgery,Propofol,115,High
+P0024,21,F,80,160,31.25,I,73,111,75,94,22,Normal,Diabetes,Orthopedic,Sevoflurane,80,Low
+P0025,70,M,85,168,30.12,III,92,122,67,95,20,Normal,None,Cardiac,Propofol,117,High
+P0026,49,M,56,156,23.01,II,64,118,86,100,23,Normal,Hypertension,Neurosurgery,Etomidate,117,Medium
+P0027,57,F,95,151,41.66,I,60,158,80,95,22,Normal,Asthma,ENT,Propofol,80,Low
+P0028,55,F,77,154,32.47,II,87,160,85,97,22,Normal,Hypertension,Neurosurgery,Propofol,174,Medium
+P0029,21,M,74,167,26.53,I,66,128,77,98,23,Normal,None,Orthopedic,Sevoflurane,160,Low
+P0030,24,M,78,177,24.9,II,81,151,100,97,18,Normal,Hypertension,ENT,Propofol,159,Medium
+P0031,44,F,77,159,30.46,I,97,137,86,100,24,Normal,Asthma,General,Etomidate,158,Low
+P0032,62,F,94,158,37.65,III,96,149,76,98,22,Normal,Diabetes,Neurosurgery,Propofol,99,High
+P0033,72,F,58,175,18.94,I,78,114,77,95,15,Normal,Heart Disease,Cardiac,Sevoflurane,88,Low
+P0034,21,F,68,161,26.23,II,80,116,63,96,19,Normal,Diabetes,General,Sevoflurane,80,Medium
+P0035,54,M,85,186,24.57,I,96,128,80,94,19,Abnormal,Hypertension,Urology,Etomidate,99,Low
+P0036,23,F,77,153,32.89,I,62,121,81,95,13,Normal,None,Gynecology,Etomidate,150,Low
+P0037,52,M,90,172,30.42,II,95,107,75,96,13,Abnormal,Asthma,Urology,Sevoflurane,83,Medium
+P0038,66,F,75,152,32.46,I,86,141,60,98,12,Normal,None,Urology,Propofol,152,Low
+P0039,58,M,70,178,22.09,I,86,158,60,94,15,Normal,Hypertension,Cardiac,Propofol,145,Low
+P0040,51,M,60,186,17.34,III,73,118,95,95,16,Normal,None,General,Etomidate,138,High
+P0041,72,M,71,158,28.44,I,86,142,80,96,24,Normal,None,General,Etomidate,147,Low
+P0042,24,M,94,159,37.18,II,68,158,92,95,20,Abnormal,Asthma,Neurosurgery,Propofol,142,Medium
+P0043,57,F,98,176,31.64,I,92,136,65,99,18,Normal,Asthma,Gynecology,Etomidate,159,Low
+P0044,34,M,62,164,23.05,II,76,148,84,99,18,Normal,Hypertension,Cardiac,Propofol,110,Medium
+P0045,68,M,65,184,19.2,III,99,145,86,97,15,Normal,Diabetes,Orthopedic,Etomidate,169,High
+P0046,43,F,75,161,28.93,II,92,136,88,99,19,Normal,Diabetes,Cardiac,Sevoflurane,127,Medium
+P0047,54,M,51,162,19.43,II,61,139,61,100,18,Abnormal,Diabetes,Urology,Etomidate,175,Medium
+P0048,26,M,74,163,27.85,I,75,120,66,94,17,Normal,Diabetes,Cardiac,Propofol,94,Low
+P0049,53,M,66,153,28.19,I,62,120,69,94,14,Normal,Hypertension,Neurosurgery,Sevoflurane,156,Low
+P0050,41,F,50,167,17.93,I,63,127,88,98,12,Normal,Heart Disease,ENT,Etomidate,90,Low
+P0051,42,F,70,173,23.39,II,82,160,75,97,22,Normal,Asthma,ENT,Propofol,87,Medium
+P0052,75,M,100,164,37.18,II,63,131,94,98,23,Normal,Heart Disease,ENT,Propofol,136,Medium
+P0053,27,F,79,171,27.02,III,69,150,76,98,14,Normal,Diabetes,Urology,Etomidate,86,High
+P0054,32,F,100,160,39.06,III,69,101,100,98,19,Normal,None,Orthopedic,Etomidate,129,High
+P0055,70,M,67,154,28.25,I,67,152,68,100,23,Normal,Asthma,ENT,Sevoflurane,99,Low
+P0056,65,M,51,184,15.06,II,92,110,60,100,24,Normal,Hypertension,Urology,Sevoflurane,120,Medium
+P0057,41,M,74,175,24.16,III,62,112,71,94,19,Normal,Asthma,Orthopedic,Propofol,102,High
+P0058,73,M,91,181,27.78,III,100,116,89,95,19,Normal,None,General,Propofol,118,High
+P0059,53,F,80,165,29.38,I,93,106,90,95,22,Normal,Heart Disease,ENT,Etomidate,120,Low
+P0060,22,M,93,153,39.73,II,62,121,89,94,23,Normal,Heart Disease,Orthopedic,Propofol,104,Medium
+P0061,25,F,58,173,19.38,I,61,113,94,97,21,Normal,Hypertension,Urology,Etomidate,99,Low
+P0062,75,F,65,184,19.2,II,81,115,84,96,17,Normal,Hypertension,General,Etomidate,169,Medium
+P0063,34,F,59,163,22.21,I,99,153,65,98,18,Abnormal,Heart Disease,Orthopedic,Propofol,122,Low
+P0064,60,F,72,178,22.72,II,61,119,68,94,23,Normal,Heart Disease,Cardiac,Etomidate,96,Medium
+P0065,43,M,47,172,15.89,I,72,104,79,95,19,Abnormal,Diabetes,Orthopedic,Etomidate,84,Low
+P0066,39,F,64,185,18.7,II,94,125,60,96,23,Normal,Heart Disease,Gynecology,Sevoflurane,146,Medium
+P0067,22,M,96,171,32.83,III,87,105,68,99,19,Normal,Heart Disease,ENT,Etomidate,140,High
+P0068,71,M,49,174,16.18,I,68,118,100,100,14,Normal,Diabetes,Gynecology,Etomidate,170,Low
+P0069,23,F,79,185,23.08,I,68,119,70,96,17,Normal,Diabetes,Orthopedic,Etomidate,85,Low
+P0070,53,F,45,182,13.59,I,88,160,92,100,13,Normal,Diabetes,ENT,Propofol,124,Low
+P0071,41,F,53,168,18.78,II,93,138,77,96,20,Normal,Asthma,Orthopedic,Etomidate,155,Medium
+P0072,21,F,91,154,38.37,II,75,115,76,95,23,Normal,Asthma,Orthopedic,Propofol,138,Medium
+P0073,40,F,66,189,18.48,I,78,151,94,98,12,Normal,Hypertension,Orthopedic,Sevoflurane,120,Low
+P0074,50,F,67,163,25.22,I,100,154,84,99,17,Normal,Diabetes,Neurosurgery,Etomidate,99,Low
+P0075,70,F,56,184,16.54,II,64,107,60,95,18,Normal,Asthma,Cardiac,Propofol,83,Medium
+P0076,59,F,82,151,35.96,III,63,132,100,96,12,Normal,Asthma,General,Etomidate,160,High
+P0077,53,M,50,165,18.37,II,60,137,88,98,21,Normal,Diabetes,ENT,Sevoflurane,126,Medium
+P0078,75,M,48,154,20.24,I,75,157,67,98,23,Abnormal,Asthma,Gynecology,Etomidate,117,Low
+P0079,66,M,84,157,34.08,III,82,126,93,97,19,Abnormal,Asthma,Cardiac,Propofol,150,High
+P0080,38,M,50,170,17.3,II,88,130,73,94,14,Normal,Asthma,General,Etomidate,90,Medium
+P0081,61,M,87,163,32.74,I,97,150,61,96,14,Normal,None,Cardiac,Etomidate,90,Low
+P0082,38,M,49,155,20.4,III,71,104,81,100,21,Normal,Hypertension,Neurosurgery,Propofol,81,High
+P0083,19,F,50,190,13.85,I,83,141,88,95,24,Normal,None,Orthopedic,Sevoflurane,107,Low
+P0084,65,M,51,168,18.07,III,81,119,83,100,23,Normal,Diabetes,Orthopedic,Propofol,178,High
+P0085,45,M,80,182,24.15,II,69,142,62,99,21,Normal,None,Gynecology,Propofol,91,Medium
+P0086,49,F,86,153,36.74,II,93,157,89,94,23,Normal,Hypertension,Urology,Etomidate,149,Medium
+P0087,26,M,49,170,16.96,II,75,154,83,94,21,Normal,Diabetes,Orthopedic,Etomidate,132,Medium
+P0088,38,F,100,152,43.28,I,86,128,95,95,12,Normal,Heart Disease,General,Sevoflurane,163,Low
+P0089,61,F,93,181,28.39,I,90,109,81,94,23,Normal,Asthma,Urology,Propofol,105,Low
+P0090,63,M,82,159,32.44,I,85,127,90,97,13,Normal,Heart Disease,General,Sevoflurane,155,Low
+P0091,44,M,46,188,13.01,II,100,119,90,94,21,Normal,Asthma,Orthopedic,Propofol,137,Medium
+P0092,56,M,50,154,21.08,III,75,139,97,97,16,Normal,None,ENT,Propofol,81,High
+P0093,65,F,67,188,18.96,III,64,130,80,99,12,Normal,None,Gynecology,Sevoflurane,161,High
+P0094,78,M,88,168,31.18,I,99,139,81,95,20,Normal,Diabetes,Orthopedic,Etomidate,144,Low
+P0095,25,M,71,181,21.67,II,71,155,75,99,14,Abnormal,None,Gynecology,Propofol,164,Medium
+P0096,42,F,68,174,22.46,II,64,141,92,95,13,Normal,Hypertension,ENT,Sevoflurane,113,Medium
+P0097,48,M,80,169,28.01,II,70,134,65,95,16,Normal,Asthma,Gynecology,Sevoflurane,130,Medium
+P0098,69,M,66,178,20.83,I,76,146,93,99,19,Normal,Diabetes,Gynecology,Etomidate,163,Low
+P0099,41,F,50,166,18.14,III,95,135,78,100,16,Normal,Diabetes,Gynecology,Sevoflurane,139,High
+P0100,20,F,100,164,37.18,III,71,160,90,96,14,Normal,None,Gynecology,Etomidate,152,High
+P0101,74,M,80,154,33.73,I,84,150,85,99,16,Abnormal,Heart Disease,Cardiac,Etomidate,176,Low
+P0102,70,M,65,167,23.31,I,65,112,74,94,20,Normal,Asthma,General,Sevoflurane,99,Low
+P0103,77,M,97,181,29.61,I,94,110,89,94,21,Normal,Hypertension,General,Sevoflurane,81,Low
+P0104,47,M,69,181,21.06,II,80,117,85,99,12,Normal,None,General,Sevoflurane,86,Medium
+P0105,75,F,96,179,29.96,II,63,103,83,94,14,Normal,Heart Disease,Neurosurgery,Propofol,109,Medium
+P0106,78,F,80,188,22.63,III,84,112,61,97,14,Normal,None,Gynecology,Etomidate,83,High
+P0107,50,M,65,172,21.97,III,80,121,96,94,15,Normal,Hypertension,Orthopedic,Sevoflurane,140,High
+P0108,48,M,66,177,21.07,II,90,156,71,98,19,Normal,Hypertension,Gynecology,Propofol,88,Medium
+P0109,62,F,76,165,27.92,I,88,119,97,99,17,Abnormal,Diabetes,Cardiac,Etomidate,106,Low
+P0110,63,F,82,156,33.69,III,93,104,66,94,14,Normal,None,General,Propofol,120,High
+P0111,75,F,84,151,36.84,II,73,147,73,95,17,Normal,Asthma,General,Propofol,117,Medium
+P0112,40,F,83,168,29.41,I,70,109,80,100,22,Normal,Hypertension,ENT,Propofol,85,Low
+P0113,54,M,60,188,16.98,III,83,140,95,100,17,Abnormal,Hypertension,Gynecology,Propofol,120,High
+P0114,27,M,87,172,29.41,I,88,112,87,94,17,Normal,None,ENT,Sevoflurane,153,Low
+P0115,52,M,91,174,30.06,II,72,144,68,97,15,Normal,Heart Disease,Gynecology,Propofol,81,Medium
+P0116,47,F,73,159,28.88,II,77,112,84,95,13,Normal,Diabetes,Gynecology,Propofol,126,Medium
+P0117,25,F,87,151,38.16,I,60,128,93,100,13,Normal,Hypertension,Neurosurgery,Sevoflurane,135,Low
+P0118,31,M,72,178,22.72,II,73,158,98,100,14,Normal,Diabetes,Gynecology,Propofol,111,Medium
+P0119,75,F,58,174,19.16,III,77,139,69,95,21,Normal,None,Neurosurgery,Propofol,90,High
+P0120,32,M,88,181,26.86,II,83,151,70,96,19,Normal,None,Urology,Sevoflurane,125,Medium
+P0121,39,M,77,166,27.94,III,91,143,76,95,12,Normal,Hypertension,Neurosurgery,Propofol,105,High
+P0122,31,M,93,167,33.35,III,62,146,76,100,14,Normal,Diabetes,Urology,Etomidate,122,High
+P0123,44,M,76,163,28.6,II,88,123,89,96,24,Normal,Diabetes,General,Propofol,167,Medium
+P0124,62,M,65,167,23.31,II,94,123,62,98,24,Normal,Diabetes,Cardiac,Etomidate,90,Medium
+P0125,79,F,81,162,30.86,I,94,138,61,100,24,Abnormal,Heart Disease,Cardiac,Etomidate,144,Low
+P0126,24,F,88,160,34.37,III,89,141,66,97,14,Abnormal,Diabetes,Neurosurgery,Etomidate,134,High
+P0127,46,M,82,183,24.49,III,84,135,76,95,15,Normal,Diabetes,Gynecology,Etomidate,133,High
+P0128,23,M,98,164,36.44,II,75,143,97,98,20,Normal,Hypertension,Urology,Propofol,122,Medium
+P0129,23,F,54,175,17.63,II,71,150,69,98,17,Normal,Hypertension,Gynecology,Sevoflurane,84,Medium
+P0130,28,M,60,183,17.92,III,62,149,79,97,16,Normal,Diabetes,ENT,Etomidate,116,High
+P0131,79,F,75,181,22.89,I,67,116,100,94,23,Normal,Heart Disease,Orthopedic,Propofol,178,Low
+P0132,24,F,94,176,30.35,I,63,117,96,98,15,Normal,Hypertension,Urology,Etomidate,151,Low
+P0133,45,M,79,182,23.85,II,95,107,63,100,22,Normal,Heart Disease,Cardiac,Sevoflurane,176,Medium
+P0134,36,M,46,185,13.44,I,85,106,88,95,12,Normal,Diabetes,Cardiac,Propofol,103,Low
+P0135,36,M,88,158,35.25,I,70,112,78,98,12,Normal,Hypertension,Urology,Etomidate,126,Low
+P0136,72,F,74,186,21.39,II,72,114,98,95,18,Normal,Asthma,Orthopedic,Etomidate,171,Medium
+P0137,52,F,86,187,24.59,III,95,154,82,98,23,Normal,None,Orthopedic,Sevoflurane,166,High
+P0138,39,M,58,179,18.1,II,92,146,63,94,14,Normal,Diabetes,Neurosurgery,Propofol,96,Medium
+P0139,28,F,86,167,30.84,III,78,144,60,100,17,Normal,Asthma,Neurosurgery,Etomidate,168,High
+P0140,72,F,93,155,38.71,III,77,132,62,98,14,Normal,Asthma,Neurosurgery,Etomidate,138,High
+P0141,41,M,86,188,24.33,I,89,105,99,96,14,Normal,Heart Disease,General,Propofol,114,Low
+P0142,44,F,75,181,22.89,II,73,107,73,97,16,Normal,None,ENT,Propofol,103,Medium
+P0143,35,F,50,151,21.93,II,89,107,62,95,20,Normal,Heart Disease,Orthopedic,Sevoflurane,132,Medium
+P0144,21,M,74,189,20.72,III,77,146,71,98,24,Normal,None,Gynecology,Sevoflurane,151,High
+P0145,26,M,99,181,30.22,I,73,117,98,95,24,Abnormal,Asthma,Gynecology,Sevoflurane,153,Low
+P0146,42,M,91,156,37.39,II,76,147,71,96,14,Normal,Heart Disease,ENT,Etomidate,129,Medium
+P0147,40,F,94,164,34.95,I,60,151,63,98,23,Normal,Hypertension,Gynecology,Sevoflurane,161,Low
+P0148,71,M,93,161,35.88,I,99,142,89,99,12,Normal,None,ENT,Propofol,169,Low
+P0149,68,M,51,174,16.85,I,73,129,69,97,15,Normal,Asthma,General,Etomidate,164,Low
+P0150,79,M,83,150,36.89,I,78,109,64,96,14,Normal,None,Orthopedic,Propofol,106,Low
+P0151,70,F,55,166,19.96,II,84,104,98,96,15,Normal,Heart Disease,Orthopedic,Propofol,119,Medium
+P0152,34,F,56,155,23.31,III,91,141,75,96,20,Normal,Diabetes,General,Etomidate,174,High
+P0153,20,M,86,160,33.59,I,64,111,95,100,24,Abnormal,None,Neurosurgery,Etomidate,171,Low
+P0154,49,M,48,153,20.5,II,65,141,71,97,16,Normal,None,Gynecology,Sevoflurane,128,Medium
+P0155,77,F,96,186,27.75,II,91,138,97,97,14,Normal,Asthma,Neurosurgery,Sevoflurane,92,Medium
+P0156,24,M,79,152,34.19,II,77,143,90,94,16,Normal,Diabetes,Cardiac,Etomidate,164,Medium
+P0157,57,F,77,160,30.08,III,100,141,84,96,16,Abnormal,None,Gynecology,Propofol,170,High
+P0158,75,M,52,181,15.87,II,81,126,78,96,12,Normal,Hypertension,Urology,Etomidate,121,Medium
+P0159,27,M,85,164,31.6,I,84,149,87,97,17,Abnormal,Diabetes,ENT,Etomidate,85,Low
+P0160,65,M,79,157,32.05,II,66,107,75,95,20,Abnormal,Asthma,ENT,Propofol,115,Medium
+P0161,72,F,91,185,26.59,II,91,137,76,97,13,Normal,Asthma,ENT,Etomidate,89,Medium
+P0162,19,F,95,156,39.04,I,65,133,81,96,17,Normal,Heart Disease,General,Etomidate,128,Low
+P0163,77,M,57,179,17.79,I,85,152,87,97,15,Normal,Hypertension,Neurosurgery,Etomidate,106,Low
+P0164,27,M,84,186,24.28,I,96,149,95,94,13,Normal,Diabetes,Urology,Propofol,138,Low
+P0165,54,F,76,188,21.5,III,96,136,61,95,22,Normal,None,Orthopedic,Sevoflurane,113,High
+P0166,24,M,79,153,33.75,I,80,108,71,96,14,Normal,Asthma,Orthopedic,Propofol,144,Low
+P0167,61,F,53,160,20.7,II,82,104,100,94,14,Normal,Asthma,Gynecology,Sevoflurane,125,Medium
+P0168,52,M,82,160,32.03,III,78,136,93,95,21,Normal,Hypertension,General,Etomidate,158,High
+P0169,48,M,62,168,21.97,III,62,119,88,94,19,Normal,None,ENT,Etomidate,122,High
+P0170,75,F,84,161,32.41,III,74,100,61,96,15,Normal,Hypertension,Neurosurgery,Propofol,102,High
+P0171,65,M,75,150,33.33,III,77,160,78,94,20,Normal,None,Cardiac,Etomidate,170,High
+P0172,48,F,77,169,26.96,III,77,160,80,97,18,Normal,Hypertension,Cardiac,Propofol,105,High
+P0173,63,M,98,183,29.26,II,93,153,92,99,21,Normal,Asthma,General,Propofol,179,Medium
+P0174,71,F,46,173,15.37,III,94,128,70,99,21,Normal,None,ENT,Propofol,135,High
+P0175,63,M,51,155,21.23,III,80,116,82,95,21,Normal,Diabetes,General,Propofol,120,High
+P0176,61,F,61,190,16.9,III,61,157,69,98,18,Normal,Hypertension,Gynecology,Propofol,124,High
+P0177,53,M,83,170,28.72,II,96,139,62,95,19,Normal,Heart Disease,Gynecology,Sevoflurane,117,Medium
+P0178,51,M,62,183,18.51,I,87,102,92,96,18,Normal,Diabetes,General,Etomidate,86,Low
+P0179,21,M,91,150,40.44,I,85,131,65,100,19,Normal,Diabetes,Cardiac,Etomidate,165,Low
+P0180,79,M,80,167,28.69,III,71,133,60,97,18,Normal,None,Gynecology,Sevoflurane,128,High
+P0181,78,F,58,175,18.94,I,78,126,70,100,19,Normal,None,General,Etomidate,89,Low
+P0182,52,F,94,169,32.91,II,76,120,81,99,21,Normal,None,Cardiac,Propofol,136,Medium
+P0183,49,F,61,154,25.72,II,92,160,72,99,22,Normal,Diabetes,Orthopedic,Etomidate,121,Medium
+P0184,29,F,76,187,21.73,II,63,144,62,99,13,Normal,None,Cardiac,Etomidate,155,Medium
+P0185,63,F,53,151,23.24,I,80,101,80,100,22,Normal,None,ENT,Etomidate,86,Low
+P0186,20,F,63,190,17.45,II,98,145,90,97,19,Abnormal,Heart Disease,Cardiac,Etomidate,158,Medium
+P0187,51,F,73,178,23.04,I,69,119,93,97,18,Normal,Diabetes,Urology,Sevoflurane,110,Low
+P0188,34,M,47,163,17.69,II,88,123,83,98,18,Normal,Hypertension,ENT,Sevoflurane,122,Medium
+P0189,25,M,95,168,33.66,I,78,128,96,98,17,Abnormal,Hypertension,Cardiac,Etomidate,166,Low
+P0190,29,M,49,168,17.36,III,77,114,95,94,23,Normal,Heart Disease,Orthopedic,Etomidate,136,High
+P0191,31,F,50,173,16.71,III,100,102,84,96,23,Normal,Asthma,General,Etomidate,120,High
+P0192,58,F,73,152,31.6,I,79,109,70,94,18,Normal,Asthma,Neurosurgery,Etomidate,164,Low
+P0193,20,M,87,188,24.62,III,89,122,76,99,23,Normal,Hypertension,ENT,Etomidate,159,High
+P0194,35,M,46,159,18.2,II,100,160,61,99,15,Abnormal,Diabetes,Urology,Etomidate,172,Medium
+P0195,48,M,69,187,19.73,II,67,149,96,94,20,Abnormal,Heart Disease,Neurosurgery,Sevoflurane,111,Medium
+P0196,46,M,51,154,21.5,III,64,121,63,94,24,Normal,Hypertension,Orthopedic,Propofol,153,High
+P0197,30,M,51,156,20.96,I,83,112,70,98,19,Normal,Hypertension,Cardiac,Propofol,160,Low
+P0198,40,F,76,167,27.25,III,67,144,78,94,13,Abnormal,Asthma,Urology,Sevoflurane,144,High
+P0199,74,M,87,159,34.41,II,61,128,95,95,20,Normal,None,Urology,Propofol,82,Medium
+P0200,22,M,77,179,24.03,I,79,142,60,94,22,Normal,Diabetes,ENT,Propofol,158,Low
+P0201,23,M,99,190,27.42,III,71,144,99,99,15,Normal,Heart Disease,Orthopedic,Etomidate,80,High
+P0202,61,M,56,188,15.84,III,74,148,89,95,14,Normal,Hypertension,Neurosurgery,Etomidate,149,High
+P0203,55,M,96,171,32.83,III,91,139,63,98,21,Normal,Hypertension,Orthopedic,Sevoflurane,124,High
+P0204,35,M,72,158,28.84,I,80,102,72,97,14,Normal,None,ENT,Sevoflurane,140,Low
+P0205,53,F,73,183,21.8,I,95,154,81,94,21,Abnormal,Hypertension,Orthopedic,Propofol,95,Low
+P0206,35,F,47,155,19.56,I,69,111,73,99,12,Normal,Hypertension,ENT,Sevoflurane,134,Low
+P0207,69,M,46,165,16.9,II,67,115,97,98,20,Abnormal,Heart Disease,Neurosurgery,Sevoflurane,139,Medium
+P0208,39,M,59,159,23.34,III,87,142,61,98,12,Normal,Hypertension,Neurosurgery,Etomidate,119,High
+P0209,80,F,70,159,27.69,III,82,156,75,97,15,Normal,Diabetes,Urology,Etomidate,113,High
+P0210,56,F,69,167,24.74,III,100,145,76,100,16,Normal,Diabetes,ENT,Propofol,106,High
+P0211,69,F,51,178,16.1,I,67,100,73,100,14,Normal,Heart Disease,General,Propofol,149,Low
+P0212,37,F,48,164,17.85,III,61,134,70,94,18,Normal,Heart Disease,Cardiac,Etomidate,161,High
+P0213,32,M,77,157,31.24,III,66,132,68,97,18,Normal,Asthma,ENT,Etomidate,86,High
+P0214,69,M,59,151,25.88,I,85,139,87,96,21,Abnormal,Asthma,Gynecology,Propofol,170,Low
+P0215,39,F,88,167,31.55,II,85,130,65,96,14,Normal,Hypertension,Cardiac,Etomidate,146,Medium
+P0216,21,M,87,171,29.75,II,79,105,78,96,23,Normal,Heart Disease,Cardiac,Etomidate,172,Medium
+P0217,67,F,95,153,40.58,I,91,134,84,94,22,Abnormal,Heart Disease,Urology,Propofol,153,Low
+P0218,28,F,92,164,34.21,III,71,122,81,99,17,Abnormal,Asthma,Urology,Sevoflurane,140,High
+P0219,49,M,59,158,23.63,II,98,105,86,96,22,Normal,Asthma,Gynecology,Propofol,86,Medium
+P0220,21,M,71,164,26.4,II,82,160,87,94,24,Abnormal,Asthma,Orthopedic,Sevoflurane,171,Medium
+P0221,43,M,46,190,12.74,II,79,121,96,96,23,Normal,Asthma,Orthopedic,Etomidate,141,Medium
+P0222,47,F,100,186,28.91,II,62,153,90,97,23,Normal,Hypertension,Gynecology,Etomidate,123,Medium
+P0223,18,M,88,159,34.81,III,90,110,100,95,20,Normal,Heart Disease,ENT,Sevoflurane,116,High
+P0224,25,M,48,155,19.98,I,82,123,84,99,23,Normal,None,General,Sevoflurane,160,Low
+P0225,30,M,94,173,31.41,II,94,106,75,100,19,Normal,Diabetes,Urology,Sevoflurane,164,Medium
+P0226,51,F,67,166,24.31,II,86,100,66,94,18,Abnormal,Hypertension,Neurosurgery,Propofol,172,Medium
+P0227,38,M,63,182,19.02,III,71,129,64,98,17,Normal,None,General,Etomidate,127,High
+P0228,32,F,62,181,18.92,III,73,138,74,94,21,Normal,Heart Disease,Neurosurgery,Sevoflurane,180,High
+P0229,29,M,60,170,20.76,III,81,119,96,98,16,Normal,Hypertension,Neurosurgery,Propofol,88,High
+P0230,45,F,96,161,37.04,II,69,118,68,99,20,Normal,Asthma,Urology,Etomidate,142,Medium
+P0231,19,F,82,157,33.27,II,83,138,85,97,14,Abnormal,Diabetes,Orthopedic,Propofol,147,Medium
+P0232,40,M,56,176,18.08,I,66,154,91,94,22,Normal,None,Neurosurgery,Etomidate,110,Low
+P0233,29,F,68,176,21.95,III,76,112,96,97,19,Normal,Heart Disease,Neurosurgery,Propofol,128,High
+P0234,29,F,98,173,32.74,II,81,114,64,95,23,Normal,Hypertension,ENT,Sevoflurane,138,Medium
+P0235,47,F,78,151,34.21,I,71,119,78,94,13,Normal,Diabetes,Urology,Sevoflurane,176,Low
+P0236,60,M,58,188,16.41,I,78,130,80,99,14,Normal,Asthma,Urology,Etomidate,152,Low
+P0237,64,F,45,186,13.01,I,80,124,65,99,13,Normal,Diabetes,ENT,Etomidate,175,Low
+P0238,55,F,56,182,16.91,II,76,101,91,100,18,Normal,Heart Disease,Orthopedic,Propofol,95,Medium
+P0239,28,M,84,167,30.12,I,74,122,75,98,19,Normal,Asthma,General,Etomidate,114,Low
+P0240,67,M,88,173,29.4,I,75,157,99,94,15,Abnormal,Asthma,Orthopedic,Propofol,119,Low
+P0241,76,M,85,186,24.57,III,98,128,98,96,12,Normal,Asthma,Orthopedic,Etomidate,157,High
+P0242,38,M,90,150,40.0,I,93,118,72,94,17,Abnormal,None,Gynecology,Etomidate,108,Low
+P0243,33,M,80,160,31.25,III,67,136,82,99,19,Normal,Hypertension,Gynecology,Propofol,103,High
+P0244,80,F,64,183,19.11,III,69,111,80,100,20,Normal,None,Gynecology,Sevoflurane,95,High
+P0245,43,M,74,176,23.89,I,87,133,92,100,22,Normal,Diabetes,Gynecology,Sevoflurane,108,Low
+P0246,18,F,63,152,27.27,III,73,123,98,100,24,Normal,Heart Disease,Orthopedic,Propofol,92,High
+P0247,47,M,68,167,24.38,I,93,100,70,94,15,Abnormal,Hypertension,General,Propofol,126,Low
+P0248,78,M,82,168,29.05,II,78,137,69,98,21,Normal,Heart Disease,Orthopedic,Etomidate,158,Medium
+P0249,18,M,91,172,30.76,I,95,128,61,98,15,Normal,Heart Disease,General,Propofol,137,Low
+P0250,26,M,99,173,33.08,I,95,146,85,94,23,Abnormal,Diabetes,Urology,Etomidate,98,Low
+P0251,41,F,53,183,15.83,III,96,106,71,98,23,Normal,Asthma,Orthopedic,Etomidate,116,High
+P0252,23,M,61,167,21.87,II,98,129,60,98,23,Normal,Asthma,Orthopedic,Sevoflurane,120,Medium
+P0253,38,M,75,183,22.4,II,74,102,83,94,14,Normal,None,Orthopedic,Etomidate,152,Medium
+P0254,35,F,59,165,21.67,II,92,101,73,94,14,Normal,Asthma,Gynecology,Sevoflurane,111,Medium
+P0255,66,M,53,168,18.78,I,73,158,71,97,18,Normal,Heart Disease,General,Propofol,82,Low
+P0256,52,F,61,187,17.44,III,69,136,70,97,20,Abnormal,Hypertension,General,Sevoflurane,161,High
+P0257,31,F,84,170,29.07,II,81,141,95,96,16,Abnormal,Hypertension,Gynecology,Propofol,127,Medium
+P0258,19,F,95,166,34.48,III,81,137,96,97,14,Normal,None,Gynecology,Propofol,105,High
+P0259,26,M,65,150,28.89,II,60,129,81,94,14,Normal,Diabetes,Cardiac,Etomidate,95,Medium
+P0260,79,F,77,151,33.77,III,77,127,86,96,12,Normal,None,Orthopedic,Etomidate,178,High
+P0261,48,M,53,168,18.78,II,93,100,93,95,18,Normal,Hypertension,Cardiac,Sevoflurane,163,Medium
+P0262,48,F,56,162,21.34,II,71,156,70,100,21,Normal,None,Neurosurgery,Sevoflurane,138,Medium
+P0263,21,M,78,159,30.85,III,79,156,93,94,18,Normal,Asthma,Cardiac,Propofol,136,High
+P0264,21,F,90,171,30.78,III,60,139,85,95,16,Normal,Hypertension,Cardiac,Propofol,85,High
+P0265,40,F,81,151,35.52,II,73,126,88,98,18,Normal,None,Gynecology,Propofol,133,Medium
+P0266,46,M,99,179,30.9,III,82,107,100,97,20,Abnormal,Heart Disease,ENT,Etomidate,180,High
+P0267,47,F,82,162,31.25,I,74,130,88,98,12,Normal,Asthma,General,Sevoflurane,165,Low
+P0268,18,M,45,182,13.59,II,67,110,77,95,21,Normal,Heart Disease,Gynecology,Etomidate,96,Medium
+P0269,71,M,60,158,24.03,II,80,127,93,96,21,Abnormal,Heart Disease,Neurosurgery,Sevoflurane,153,Medium
+P0270,62,M,81,168,28.7,III,83,128,82,98,20,Normal,None,ENT,Propofol,148,High
+P0271,37,F,75,164,27.89,I,78,105,98,95,23,Normal,Diabetes,Orthopedic,Etomidate,92,Low
+P0272,66,F,99,189,27.71,III,90,119,76,94,18,Abnormal,Heart Disease,Gynecology,Etomidate,125,High
+P0273,79,F,68,161,26.23,I,79,105,83,100,12,Normal,Asthma,Urology,Propofol,154,Low
+P0274,68,F,86,169,30.11,I,98,128,77,99,13,Abnormal,Diabetes,Neurosurgery,Propofol,101,Low
+P0275,79,F,89,187,25.45,III,91,104,79,94,17,Normal,Diabetes,Cardiac,Propofol,100,High
+P0276,38,F,52,170,17.99,II,61,101,87,100,23,Normal,Asthma,Neurosurgery,Etomidate,88,Medium
+P0277,66,F,63,154,26.56,II,81,139,74,97,13,Normal,Diabetes,Cardiac,Etomidate,180,Medium
+P0278,21,F,45,155,18.73,I,78,152,61,100,15,Normal,Heart Disease,Neurosurgery,Sevoflurane,155,Low
+P0279,18,F,53,150,23.56,I,65,121,100,97,21,Abnormal,Diabetes,Gynecology,Etomidate,141,Low
+P0280,25,F,89,159,35.2,II,77,132,62,95,13,Normal,Heart Disease,Urology,Propofol,129,Medium
+P0281,33,F,99,174,32.7,I,91,116,60,97,18,Normal,Hypertension,Orthopedic,Sevoflurane,147,Low
+P0282,18,F,76,177,24.26,I,79,126,66,94,23,Normal,Hypertension,Urology,Sevoflurane,135,Low
+P0283,51,F,91,177,29.05,III,79,106,64,95,14,Normal,Heart Disease,ENT,Etomidate,162,High
+P0284,73,F,49,177,15.64,III,87,157,94,96,14,Normal,Hypertension,Cardiac,Propofol,90,High
+P0285,76,F,74,186,21.39,III,75,107,82,100,13,Normal,Diabetes,Gynecology,Sevoflurane,131,High
+P0286,36,M,65,169,22.76,III,93,108,88,99,18,Normal,Heart Disease,General,Propofol,95,High
+P0287,29,F,80,188,22.63,II,95,128,74,99,24,Abnormal,Diabetes,Neurosurgery,Propofol,104,Medium
+P0288,67,M,60,183,17.92,I,69,121,76,99,13,Normal,Diabetes,Cardiac,Etomidate,121,Low
+P0289,36,M,54,162,20.58,II,79,144,93,98,17,Normal,Heart Disease,General,Propofol,106,Medium
+P0290,57,M,74,189,20.72,II,91,126,70,97,14,Normal,Asthma,Urology,Sevoflurane,136,Medium
+P0291,57,M,80,184,23.63,I,87,150,75,94,14,Normal,None,Cardiac,Sevoflurane,170,Low
+P0292,30,F,88,160,34.37,I,87,117,76,100,24,Normal,None,Neurosurgery,Etomidate,178,Low
+P0293,43,M,51,175,16.65,III,65,150,70,94,16,Normal,None,Cardiac,Propofol,180,High
+P0294,57,F,65,153,27.77,III,95,143,99,94,16,Normal,Hypertension,ENT,Propofol,178,High
+P0295,48,M,53,185,15.49,II,94,129,65,95,15,Normal,Asthma,Neurosurgery,Etomidate,98,Medium
+P0296,30,F,70,155,29.14,III,81,117,99,99,12,Normal,Diabetes,Neurosurgery,Sevoflurane,139,High
+P0297,74,F,53,152,22.94,II,95,111,100,97,22,Normal,Heart Disease,Gynecology,Etomidate,133,Medium
+P0298,20,M,73,183,21.8,III,83,108,73,94,15,Normal,Asthma,General,Propofol,171,High
+P0299,76,M,65,180,20.06,III,70,125,77,100,23,Abnormal,Asthma,Gynecology,Propofol,134,High
+P0300,78,F,86,157,34.89,II,97,139,98,95,16,Abnormal,Heart Disease,Urology,Etomidate,130,Medium
+P0301,48,F,80,180,24.69,I,63,122,74,96,23,Normal,Diabetes,Cardiac,Etomidate,87,Low
+P0302,23,F,72,181,21.98,II,62,148,89,96,16,Normal,Asthma,Neurosurgery,Sevoflurane,114,Medium
+P0303,24,M,89,165,32.69,I,96,130,80,100,14,Abnormal,Diabetes,General,Sevoflurane,130,Low
+P0304,80,F,93,186,26.88,III,96,111,94,99,18,Normal,Heart Disease,Gynecology,Propofol,150,High
+P0305,47,M,76,181,23.2,III,70,133,93,97,18,Abnormal,Asthma,Gynecology,Sevoflurane,132,High
+P0306,27,M,59,183,17.62,II,87,101,80,99,17,Normal,Diabetes,ENT,Propofol,179,Medium
+P0307,67,M,87,183,25.98,I,60,113,78,97,13,Normal,Heart Disease,Orthopedic,Etomidate,148,Low
+P0308,32,F,50,160,19.53,III,100,147,84,98,24,Normal,Asthma,Neurosurgery,Propofol,167,High
+P0309,44,M,53,189,14.84,III,76,157,91,98,19,Normal,Diabetes,Urology,Etomidate,171,High
+P0310,25,F,91,173,30.41,III,60,133,64,99,17,Normal,None,ENT,Sevoflurane,173,High
+P0311,47,F,48,186,13.87,II,61,141,72,100,20,Abnormal,Hypertension,Neurosurgery,Sevoflurane,134,Medium
+P0312,42,M,68,152,29.43,II,70,155,69,99,21,Normal,Asthma,General,Propofol,104,Medium
+P0313,56,F,65,157,26.37,II,82,147,86,97,18,Normal,Heart Disease,Orthopedic,Propofol,110,Medium
+P0314,36,M,86,157,34.89,II,67,112,78,96,15,Normal,Heart Disease,Neurosurgery,Propofol,130,Medium
+P0315,60,F,69,162,26.29,I,69,146,87,97,19,Normal,None,General,Etomidate,139,Low
+P0316,58,F,91,157,36.92,III,77,143,100,96,15,Normal,Heart Disease,General,Etomidate,125,High
+P0317,65,F,55,178,17.36,I,98,116,100,99,23,Normal,None,Orthopedic,Etomidate,117,Low
+P0318,65,M,86,180,26.54,III,75,120,99,94,14,Normal,Diabetes,Neurosurgery,Sevoflurane,168,High
+P0319,45,F,68,150,30.22,I,71,108,84,95,19,Normal,Heart Disease,Urology,Etomidate,89,Low
+P0320,53,M,96,188,27.16,III,91,146,63,97,19,Normal,Asthma,ENT,Propofol,148,High
+P0321,41,M,52,172,17.58,II,70,126,92,98,18,Normal,None,Orthopedic,Propofol,154,Medium
+P0322,58,F,74,153,31.61,I,62,131,94,99,21,Normal,Heart Disease,Orthopedic,Sevoflurane,175,Low
+P0323,58,F,65,174,21.47,I,93,145,84,94,19,Normal,Heart Disease,Neurosurgery,Sevoflurane,98,Low
+P0324,62,F,79,155,32.88,I,65,153,66,100,14,Normal,Heart Disease,Orthopedic,Propofol,128,Low
+P0325,62,M,88,162,33.53,I,87,118,67,94,24,Normal,None,Gynecology,Etomidate,82,Low
+P0326,54,F,93,150,41.33,I,63,125,86,98,12,Normal,Heart Disease,Orthopedic,Sevoflurane,163,Low
+P0327,18,M,100,177,31.92,I,84,116,75,98,20,Normal,Heart Disease,Gynecology,Propofol,142,Low
+P0328,24,M,98,170,33.91,I,84,146,72,95,17,Normal,Diabetes,Urology,Sevoflurane,161,Low
+P0329,64,F,67,189,18.76,III,68,105,85,97,14,Normal,Heart Disease,Cardiac,Sevoflurane,160,High
+P0330,38,M,45,181,13.74,III,99,109,61,94,18,Normal,None,Gynecology,Propofol,127,High
+P0331,32,M,95,158,38.05,II,87,107,95,97,17,Normal,Asthma,General,Etomidate,103,Medium
+P0332,30,M,98,187,28.02,I,83,102,87,97,15,Normal,Asthma,Neurosurgery,Sevoflurane,124,Low
+P0333,19,M,96,178,30.3,I,100,123,60,94,19,Normal,Heart Disease,General,Propofol,93,Low
+P0334,75,F,49,184,14.47,II,99,155,83,98,24,Normal,Diabetes,Cardiac,Sevoflurane,129,Medium
+P0335,24,F,62,188,17.54,II,81,109,97,94,23,Abnormal,None,General,Sevoflurane,84,Medium
+P0336,45,F,74,177,23.62,III,79,144,94,97,15,Normal,Heart Disease,General,Sevoflurane,148,High
+P0337,29,F,49,155,20.4,II,82,122,62,100,19,Normal,Heart Disease,ENT,Etomidate,170,Medium
+P0338,40,F,84,152,36.36,I,92,152,78,99,22,Abnormal,Diabetes,General,Etomidate,80,Low
+P0339,62,M,78,170,26.99,I,97,149,89,94,24,Normal,Asthma,Orthopedic,Sevoflurane,158,Low
+P0340,33,F,91,171,31.12,I,72,145,83,95,24,Normal,None,Gynecology,Propofol,96,Low
+P0341,41,M,97,186,28.04,III,70,138,60,96,24,Normal,Hypertension,Urology,Etomidate,109,High
+P0342,77,F,90,153,38.45,III,65,112,84,97,14,Normal,Heart Disease,Gynecology,Sevoflurane,151,High
+P0343,65,F,47,184,13.88,II,70,151,64,99,17,Normal,Diabetes,Cardiac,Propofol,120,Medium
+P0344,70,M,56,187,16.01,I,86,139,65,97,15,Normal,Heart Disease,Neurosurgery,Propofol,115,Low
+P0345,61,M,67,163,25.22,II,98,147,90,96,24,Abnormal,Hypertension,ENT,Sevoflurane,102,Medium
+P0346,18,M,69,189,19.32,II,79,102,98,100,24,Normal,Heart Disease,Orthopedic,Etomidate,133,Medium
+P0347,65,M,60,165,22.04,I,94,153,87,96,24,Normal,Asthma,ENT,Etomidate,118,Low
+P0348,37,F,98,179,30.59,III,70,158,96,95,18,Normal,Heart Disease,Urology,Propofol,80,High
+P0349,68,M,63,180,19.44,III,91,148,90,94,23,Normal,None,Urology,Etomidate,103,High
+P0350,77,F,97,182,29.28,II,80,109,88,95,17,Abnormal,Asthma,Orthopedic,Propofol,163,Medium
+P0351,79,M,99,155,41.21,II,87,128,68,94,24,Normal,None,Gynecology,Propofol,163,Medium
+P0352,18,F,55,176,17.76,III,75,160,69,94,24,Normal,Hypertension,Gynecology,Propofol,138,High
+P0353,52,F,95,171,32.49,I,90,110,83,100,23,Normal,Asthma,Neurosurgery,Sevoflurane,152,Low
+P0354,75,F,58,172,19.61,II,77,130,96,100,14,Normal,None,Urology,Sevoflurane,120,Medium
+P0355,48,M,75,179,23.41,I,100,144,94,94,14,Normal,Heart Disease,Urology,Sevoflurane,166,Low
+P0356,34,F,87,150,38.67,II,98,130,77,96,12,Abnormal,Hypertension,Urology,Etomidate,138,Medium
+P0357,41,F,86,167,30.84,I,79,137,86,99,12,Normal,None,ENT,Propofol,100,Low
+P0358,38,M,59,164,21.94,II,85,146,72,96,20,Normal,Diabetes,Gynecology,Sevoflurane,104,Medium
+P0359,23,M,88,152,38.09,II,65,126,90,97,16,Normal,Asthma,Cardiac,Propofol,180,Medium
+P0360,60,M,100,179,31.21,I,89,112,66,98,19,Normal,Hypertension,Neurosurgery,Sevoflurane,103,Low
+P0361,38,M,66,157,26.78,III,71,106,70,94,13,Normal,Asthma,Cardiac,Etomidate,155,High
+P0362,54,F,83,160,32.42,III,86,128,60,97,22,Normal,Asthma,Orthopedic,Propofol,174,High
+P0363,72,M,74,188,20.94,III,62,105,74,95,16,Normal,None,Cardiac,Etomidate,125,High
+P0364,35,M,70,166,25.4,II,76,110,75,96,19,Normal,Asthma,Gynecology,Sevoflurane,97,Medium
+P0365,70,F,94,171,32.15,I,67,127,76,99,23,Normal,Asthma,General,Sevoflurane,111,Low
+P0366,39,M,63,157,25.56,III,94,140,64,96,24,Normal,None,Gynecology,Etomidate,125,High
+P0367,33,M,66,176,21.31,I,84,157,81,99,15,Abnormal,Diabetes,General,Sevoflurane,113,Low
+P0368,34,M,99,168,35.08,II,73,101,85,95,12,Normal,Asthma,Cardiac,Etomidate,173,Medium
+P0369,62,M,71,150,31.56,III,81,104,86,95,19,Normal,Diabetes,ENT,Etomidate,158,High
+P0370,26,M,73,190,20.22,III,68,121,80,100,19,Normal,Heart Disease,Neurosurgery,Sevoflurane,172,High
+P0371,37,M,86,181,26.25,I,92,147,97,97,14,Normal,None,ENT,Propofol,91,Low
+P0372,59,F,79,163,29.73,III,65,100,87,100,23,Normal,Asthma,Orthopedic,Sevoflurane,99,High
+P0373,52,F,47,175,15.35,III,60,134,97,98,16,Normal,Asthma,Cardiac,Etomidate,81,High
+P0374,52,F,95,185,27.76,II,63,134,70,97,13,Normal,Heart Disease,General,Propofol,123,Medium
+P0375,62,F,94,175,30.69,II,88,155,100,98,24,Normal,Hypertension,Orthopedic,Propofol,153,Medium
+P0376,64,F,48,159,18.99,III,63,136,94,95,19,Normal,Heart Disease,Neurosurgery,Propofol,143,High
+P0377,76,F,98,173,32.74,I,89,133,79,94,22,Normal,None,General,Propofol,146,Low
+P0378,80,M,64,173,21.38,III,69,129,85,94,21,Abnormal,Diabetes,Gynecology,Etomidate,125,High
+P0379,63,M,88,167,31.55,I,77,102,77,100,12,Normal,Diabetes,ENT,Sevoflurane,127,Low
+P0380,64,M,100,187,28.6,III,98,121,99,94,16,Normal,Asthma,Orthopedic,Propofol,142,High
+P0381,41,F,82,174,27.08,II,96,119,83,95,20,Normal,Heart Disease,Gynecology,Propofol,90,Medium
+P0382,60,M,63,180,19.44,III,66,134,83,94,23,Normal,Hypertension,Gynecology,Etomidate,121,High
+P0383,32,M,96,160,37.5,III,61,143,81,98,22,Abnormal,Heart Disease,Orthopedic,Propofol,122,High
+P0384,39,F,59,188,16.69,III,93,112,93,97,22,Normal,Diabetes,Urology,Propofol,110,High
+P0385,40,F,73,157,29.62,I,90,117,67,98,23,Normal,None,Neurosurgery,Propofol,153,Low
+P0386,26,F,53,160,20.7,III,85,101,73,100,19,Normal,Asthma,Gynecology,Etomidate,126,High
+P0387,23,F,97,155,40.37,II,62,127,68,97,24,Normal,Hypertension,Orthopedic,Propofol,93,Medium
+P0388,65,M,90,152,38.95,II,63,147,75,95,19,Normal,None,General,Propofol,153,Medium
+P0389,55,M,87,153,37.17,II,94,112,68,100,23,Normal,None,Cardiac,Propofol,103,Medium
+P0390,53,M,74,172,25.01,II,86,148,79,95,17,Normal,Asthma,Orthopedic,Etomidate,113,Medium
+P0391,59,F,76,179,23.72,I,70,109,96,94,24,Normal,Diabetes,ENT,Etomidate,105,Low
+P0392,22,M,89,158,35.65,I,77,114,60,96,18,Normal,Heart Disease,General,Propofol,179,Low
+P0393,61,M,81,153,34.6,III,79,160,71,99,22,Normal,Heart Disease,Cardiac,Sevoflurane,177,High
+P0394,67,F,56,174,18.5,I,90,127,61,95,17,Normal,Heart Disease,Orthopedic,Sevoflurane,122,Low
+P0395,53,F,54,182,16.3,II,84,103,85,99,15,Normal,Hypertension,Urology,Etomidate,139,Medium
+P0396,20,M,61,154,25.72,I,80,148,62,99,22,Normal,None,Urology,Propofol,154,Low
+P0397,32,M,59,168,20.9,III,65,123,69,97,23,Normal,Asthma,Neurosurgery,Etomidate,147,High
+P0398,32,F,76,181,23.2,I,87,101,88,96,14,Normal,Heart Disease,Urology,Etomidate,127,Low
+P0399,38,M,93,152,40.25,II,65,123,64,98,19,Normal,Diabetes,ENT,Propofol,106,Medium
+P0400,36,F,76,177,24.26,I,79,118,65,97,17,Normal,Hypertension,Gynecology,Propofol,175,Low
+P0401,49,M,75,168,26.57,I,75,154,65,97,15,Normal,Diabetes,Neurosurgery,Propofol,82,Low
+P0402,47,F,96,175,31.35,I,97,103,78,99,24,Normal,None,Orthopedic,Sevoflurane,100,Low
+P0403,28,F,80,163,30.11,I,64,130,75,99,17,Normal,Asthma,Urology,Propofol,135,Low
+P0404,43,M,72,153,30.76,III,76,146,77,98,13,Normal,Asthma,General,Sevoflurane,108,High
+P0405,27,M,61,183,18.21,II,83,110,92,99,18,Normal,Heart Disease,Gynecology,Etomidate,85,Medium
+P0406,38,F,59,150,26.22,III,70,137,63,97,15,Normal,Diabetes,Gynecology,Etomidate,162,High
+P0407,38,M,52,163,19.57,II,86,119,92,99,19,Normal,Diabetes,Orthopedic,Propofol,85,Medium
+P0408,24,M,68,169,23.81,III,63,145,93,95,22,Abnormal,None,Gynecology,Etomidate,154,High
+P0409,22,M,94,152,40.69,II,89,145,78,96,23,Normal,None,Urology,Sevoflurane,171,Medium
+P0410,54,F,91,173,30.41,II,86,118,98,94,23,Normal,Diabetes,ENT,Sevoflurane,156,Medium
+P0411,22,F,55,165,20.2,II,61,110,85,96,22,Normal,Heart Disease,Urology,Propofol,116,Medium
+P0412,43,F,89,171,30.44,III,77,143,80,99,16,Normal,Asthma,Neurosurgery,Etomidate,134,High
+P0413,73,F,88,170,30.45,III,62,156,60,95,21,Normal,None,ENT,Sevoflurane,120,High
+P0414,69,F,91,180,28.09,III,84,132,67,96,24,Normal,Asthma,Orthopedic,Propofol,128,High
+P0415,19,F,49,184,14.47,II,75,154,88,100,18,Normal,Heart Disease,Urology,Etomidate,177,Medium
+P0416,61,F,59,150,26.22,II,88,133,90,100,15,Normal,Heart Disease,ENT,Propofol,150,Medium
+P0417,65,F,56,166,20.32,II,64,119,97,99,19,Normal,Hypertension,Urology,Propofol,117,Medium
+P0418,68,F,63,160,24.61,I,96,129,75,96,17,Normal,Asthma,Urology,Sevoflurane,140,Low
+P0419,79,F,52,183,15.53,I,83,146,86,97,23,Normal,Heart Disease,Orthopedic,Etomidate,88,Low
+P0420,78,M,67,174,22.13,I,61,132,71,100,15,Normal,Diabetes,Neurosurgery,Sevoflurane,126,Low
+P0421,48,F,92,181,28.08,II,81,139,72,97,20,Abnormal,Heart Disease,General,Etomidate,143,Medium
+P0422,45,F,95,176,30.67,III,73,157,86,100,16,Normal,Diabetes,Orthopedic,Etomidate,129,High
+P0423,78,M,64,158,25.64,I,71,157,80,97,19,Normal,Hypertension,Neurosurgery,Propofol,154,Low
+P0424,33,M,72,168,25.51,II,89,125,64,100,12,Normal,Hypertension,Neurosurgery,Propofol,117,Medium
+P0425,19,M,67,180,20.68,III,85,130,86,100,17,Normal,Heart Disease,ENT,Etomidate,165,High
+P0426,28,M,89,179,27.78,I,79,111,68,98,21,Normal,Asthma,Orthopedic,Etomidate,140,Low
+P0427,48,F,93,159,36.79,I,92,113,76,94,24,Normal,Hypertension,Neurosurgery,Sevoflurane,123,Low
+P0428,34,M,93,160,36.33,II,72,145,99,96,23,Normal,Heart Disease,General,Etomidate,176,Medium
+P0429,48,F,77,160,30.08,III,72,123,90,94,17,Normal,Diabetes,Gynecology,Propofol,128,High
+P0430,46,M,97,159,38.37,III,75,103,63,96,18,Abnormal,Diabetes,Neurosurgery,Propofol,134,High
+P0431,30,F,98,178,30.93,I,95,154,90,94,20,Normal,Hypertension,Orthopedic,Propofol,116,Low
+P0432,46,F,45,181,13.74,I,79,152,65,96,12,Normal,Asthma,General,Etomidate,85,Low
+P0433,40,F,74,167,26.53,III,98,134,100,100,24,Normal,Asthma,Orthopedic,Sevoflurane,167,High
+P0434,30,M,88,178,27.77,II,64,103,92,98,19,Abnormal,Hypertension,Cardiac,Etomidate,130,Medium
+P0435,27,F,57,184,16.84,II,79,119,77,96,20,Normal,Heart Disease,Neurosurgery,Sevoflurane,96,Medium
+P0436,47,M,67,188,18.96,II,66,103,74,96,12,Normal,Heart Disease,Orthopedic,Propofol,152,Medium
+P0437,58,M,94,177,30.0,I,81,109,66,95,22,Abnormal,Diabetes,ENT,Propofol,170,Low
+P0438,48,F,50,189,14.0,I,80,133,97,96,14,Abnormal,Heart Disease,Cardiac,Sevoflurane,144,Low
+P0439,42,F,67,150,29.78,I,100,152,88,96,16,Normal,Hypertension,Neurosurgery,Etomidate,95,Low
+P0440,20,F,100,157,40.57,II,74,157,67,95,19,Normal,Hypertension,Neurosurgery,Etomidate,86,Medium
+P0441,43,F,48,152,20.78,III,93,105,61,100,22,Normal,Asthma,ENT,Propofol,156,High
+P0442,26,F,74,163,27.85,I,85,119,80,100,13,Normal,Hypertension,Urology,Sevoflurane,137,Low
+P0443,21,F,45,177,14.36,I,72,142,86,99,20,Normal,Asthma,General,Etomidate,124,Low
+P0444,63,M,100,172,33.8,I,64,147,76,94,12,Normal,Asthma,General,Sevoflurane,143,Low
+P0445,57,M,69,165,25.34,III,80,104,74,95,16,Normal,Hypertension,Neurosurgery,Propofol,174,High
+P0446,47,F,55,181,16.79,I,91,137,77,94,17,Normal,None,Cardiac,Etomidate,178,Low
+P0447,72,F,98,169,34.31,II,82,117,93,99,18,Normal,Hypertension,ENT,Propofol,116,Medium
+P0448,68,M,56,177,17.87,I,63,138,98,94,15,Abnormal,Heart Disease,Orthopedic,Etomidate,121,Low
+P0449,53,F,98,179,30.59,II,95,101,67,96,21,Normal,Hypertension,Cardiac,Propofol,103,Medium
+P0450,74,F,50,173,16.71,I,71,142,65,98,21,Normal,Hypertension,Orthopedic,Propofol,174,Low
+P0451,30,F,75,187,21.45,II,88,102,77,96,12,Normal,Asthma,Gynecology,Etomidate,142,Medium
+P0452,80,F,51,154,21.5,I,90,127,61,95,17,Normal,None,Neurosurgery,Sevoflurane,92,Low
+P0453,65,M,71,178,22.41,III,69,155,83,98,22,Normal,Asthma,Orthopedic,Sevoflurane,126,High
+P0454,50,M,70,179,21.85,I,70,120,65,99,13,Normal,Heart Disease,General,Etomidate,170,Low
+P0455,31,F,86,154,36.26,III,95,110,90,96,15,Normal,None,General,Etomidate,159,High
+P0456,25,M,89,172,30.08,I,75,144,88,98,12,Normal,Hypertension,Gynecology,Propofol,162,Low
+P0457,57,M,92,182,27.77,I,99,127,86,95,24,Normal,Asthma,Cardiac,Etomidate,134,Low
+P0458,73,F,68,164,25.28,II,65,149,69,96,21,Normal,Heart Disease,ENT,Sevoflurane,165,Medium
+P0459,51,F,73,188,20.65,II,84,143,60,99,18,Normal,Diabetes,Orthopedic,Propofol,147,Medium
+P0460,36,F,76,168,26.93,I,65,106,77,99,23,Normal,Diabetes,Urology,Etomidate,98,Low
+P0461,76,F,75,174,24.77,III,79,103,90,95,12,Normal,Diabetes,Gynecology,Propofol,132,High
+P0462,45,M,93,170,32.18,II,60,144,99,94,15,Normal,None,Gynecology,Etomidate,100,Medium
+P0463,26,F,78,164,29.0,I,98,139,68,99,21,Abnormal,Heart Disease,Urology,Propofol,146,Low
+P0464,57,F,51,185,14.9,I,85,143,79,95,20,Normal,None,Cardiac,Sevoflurane,169,Low
+P0465,60,F,60,161,23.15,III,90,128,61,95,21,Normal,Hypertension,Gynecology,Sevoflurane,150,High
+P0466,19,M,83,161,32.02,III,78,125,61,99,13,Normal,Hypertension,Cardiac,Sevoflurane,145,High
+P0467,41,M,79,177,25.22,III,96,147,99,94,18,Normal,Heart Disease,Gynecology,Sevoflurane,161,High
+P0468,72,M,81,171,27.7,II,66,119,66,96,23,Normal,None,Urology,Etomidate,110,Medium
+P0469,45,M,47,153,20.08,I,82,104,75,97,16,Normal,Asthma,ENT,Sevoflurane,156,Low
+P0470,27,M,48,166,17.42,I,60,133,84,99,24,Abnormal,Asthma,Cardiac,Etomidate,95,Low
+P0471,72,M,56,184,16.54,II,80,159,63,94,16,Normal,Heart Disease,Neurosurgery,Etomidate,152,Medium
+P0472,57,M,71,153,30.33,III,62,160,60,99,13,Normal,Hypertension,ENT,Sevoflurane,122,High
+P0473,68,M,56,170,19.38,II,67,111,87,98,18,Normal,Diabetes,Cardiac,Propofol,87,Medium
+P0474,34,M,67,179,20.91,II,71,143,84,100,20,Abnormal,Hypertension,General,Etomidate,165,Medium
+P0475,78,M,84,151,36.84,III,94,156,93,95,15,Normal,Diabetes,General,Sevoflurane,116,High
+P0476,22,M,50,155,20.81,II,84,133,74,96,24,Abnormal,Asthma,Cardiac,Sevoflurane,144,Medium
+P0477,28,F,82,151,35.96,I,72,112,88,100,15,Normal,None,Neurosurgery,Propofol,113,Low
+P0478,72,F,48,159,18.99,I,85,130,92,97,16,Normal,Heart Disease,Neurosurgery,Sevoflurane,120,Low
+P0479,77,M,55,163,20.7,III,90,134,92,94,19,Normal,Heart Disease,Cardiac,Etomidate,175,High
+P0480,46,M,80,188,22.63,I,93,110,86,98,14,Normal,Diabetes,ENT,Sevoflurane,150,Low
+P0481,57,F,57,154,24.03,III,74,119,92,95,13,Normal,Heart Disease,Urology,Etomidate,116,High
+P0482,51,F,80,153,34.17,III,98,148,100,94,19,Abnormal,None,General,Etomidate,140,High
+P0483,58,F,93,185,27.17,II,78,157,95,99,13,Normal,Diabetes,Neurosurgery,Sevoflurane,83,Medium
+P0484,46,M,66,165,24.24,III,76,117,100,94,23,Normal,Hypertension,Cardiac,Etomidate,116,High
+P0485,30,M,46,171,15.73,III,88,141,71,100,19,Normal,Diabetes,Cardiac,Propofol,85,High
+P0486,80,F,69,165,25.34,III,83,102,69,96,23,Normal,Hypertension,General,Etomidate,117,High
+P0487,51,F,61,156,25.07,III,64,145,99,94,15,Normal,Hypertension,ENT,Sevoflurane,176,High
+P0488,69,M,49,164,18.22,I,80,114,61,96,22,Normal,Hypertension,General,Propofol,123,Low
+P0489,78,F,73,172,24.68,III,98,139,67,98,13,Normal,None,ENT,Propofol,112,High
+P0490,70,M,100,155,41.62,II,67,134,72,95,16,Abnormal,Diabetes,Cardiac,Sevoflurane,141,Medium
+P0491,59,F,78,160,30.47,III,65,107,82,99,13,Normal,Asthma,Orthopedic,Propofol,144,High
+P0492,65,M,95,178,29.98,I,66,128,85,100,23,Abnormal,Heart Disease,General,Propofol,139,Low
+P0493,74,F,63,189,17.64,I,64,102,97,94,21,Normal,Heart Disease,Gynecology,Etomidate,170,Low
+P0494,70,M,58,171,19.84,II,81,148,82,99,19,Normal,Diabetes,Urology,Sevoflurane,174,Medium
+P0495,43,M,98,172,33.13,II,67,138,79,100,18,Normal,Asthma,ENT,Sevoflurane,117,Medium
+P0496,49,F,49,172,16.56,III,61,128,94,98,19,Normal,None,Urology,Sevoflurane,111,High
+P0497,18,F,98,172,33.13,I,72,155,98,98,13,Normal,Asthma,Gynecology,Sevoflurane,154,Low
+P0498,36,F,89,161,34.34,II,87,140,98,95,21,Normal,None,Cardiac,Propofol,88,Medium
+P0499,46,F,77,180,23.77,I,82,151,82,95,23,Normal,Heart Disease,ENT,Propofol,160,Low
+P0500,47,M,52,166,18.87,I,85,121,70,97,17,Normal,Hypertension,Gynecology,Sevoflurane,135,Low
+P0501,60,M,100,189,27.99,III,84,152,82,95,17,Normal,None,Neurosurgery,Sevoflurane,121,High
+P0502,60,F,70,156,28.76,II,95,142,100,99,18,Normal,Hypertension,Cardiac,Propofol,109,Medium
+P0503,77,M,59,151,25.88,II,100,138,92,97,16,Normal,Hypertension,General,Propofol,97,Medium
+P0504,18,M,92,170,31.83,II,89,117,76,98,18,Normal,None,Neurosurgery,Etomidate,88,Medium
+P0505,39,F,52,161,20.06,III,87,140,74,96,20,Normal,Hypertension,Gynecology,Etomidate,85,High
+P0506,30,F,66,157,26.78,II,86,104,79,98,19,Normal,Heart Disease,Cardiac,Sevoflurane,149,Medium
+P0507,71,M,49,150,21.78,I,89,131,74,96,15,Normal,Diabetes,Urology,Sevoflurane,162,Low
+P0508,22,M,55,156,22.6,I,79,155,88,97,19,Normal,None,Neurosurgery,Sevoflurane,115,Low
+P0509,80,M,62,156,25.48,II,78,144,99,94,14,Normal,Diabetes,General,Sevoflurane,146,Medium
+P0510,34,M,95,168,33.66,III,97,118,74,94,12,Normal,None,ENT,Propofol,171,High
+P0511,22,M,85,164,31.6,III,65,135,87,97,22,Normal,None,ENT,Propofol,122,High
+P0512,32,F,45,184,13.29,III,66,160,67,96,22,Normal,Hypertension,General,Propofol,92,High
+P0513,48,F,66,178,20.83,III,65,118,86,98,21,Normal,Hypertension,Orthopedic,Sevoflurane,106,High
+P0514,44,F,99,174,32.7,II,77,135,76,96,20,Normal,Heart Disease,Neurosurgery,Etomidate,103,Medium
+P0515,57,F,96,150,42.67,II,94,100,95,99,20,Normal,Diabetes,Urology,Etomidate,143,Medium
+P0516,23,F,91,166,33.02,II,61,122,90,100,12,Normal,None,General,Etomidate,178,Medium
+P0517,41,M,69,164,25.65,I,75,122,85,99,19,Normal,None,ENT,Etomidate,94,Low
+P0518,18,M,52,183,15.53,I,94,126,82,99,17,Normal,Hypertension,Neurosurgery,Propofol,101,Low
+P0519,23,F,65,186,18.79,I,79,155,82,97,14,Normal,None,Orthopedic,Sevoflurane,148,Low
+P0520,34,F,81,177,25.85,II,83,133,60,100,16,Abnormal,Diabetes,Cardiac,Propofol,80,Medium
+P0521,20,F,83,159,32.83,II,74,101,81,98,17,Normal,Asthma,Gynecology,Etomidate,147,Medium
+P0522,47,M,58,160,22.66,I,88,136,72,96,20,Normal,None,ENT,Etomidate,92,Low
+P0523,25,M,56,183,16.72,I,82,153,93,99,21,Normal,Asthma,ENT,Sevoflurane,169,Low
+P0524,60,F,51,152,22.07,III,90,124,82,97,14,Normal,Asthma,Gynecology,Propofol,136,High
+P0525,55,F,64,159,25.32,I,63,145,62,96,20,Normal,None,Urology,Propofol,84,Low
+P0526,18,M,61,189,17.08,I,88,137,77,100,12,Normal,Asthma,Neurosurgery,Etomidate,93,Low
+P0527,59,F,46,180,14.2,II,76,152,68,99,14,Normal,None,Cardiac,Etomidate,114,Medium
+P0528,26,F,88,153,37.59,III,95,152,67,97,23,Normal,Asthma,General,Etomidate,146,High
+P0529,76,F,53,170,18.34,II,63,134,75,94,15,Normal,Heart Disease,Cardiac,Propofol,180,Medium
+P0530,18,M,51,164,18.96,I,89,153,75,94,13,Normal,Heart Disease,Orthopedic,Etomidate,124,Low
+P0531,78,F,87,153,37.17,III,82,100,95,99,24,Normal,Heart Disease,Urology,Sevoflurane,146,High
+P0532,21,M,95,152,41.12,I,95,133,74,98,12,Normal,Heart Disease,General,Sevoflurane,178,Low
+P0533,37,F,65,182,19.62,III,96,134,78,100,22,Normal,None,Neurosurgery,Propofol,99,High
+P0534,46,F,89,165,32.69,II,84,140,85,95,15,Normal,Asthma,Orthopedic,Etomidate,138,Medium
+P0535,28,F,85,164,31.6,III,94,153,68,96,22,Normal,None,Orthopedic,Sevoflurane,158,High
+P0536,38,M,81,166,29.39,II,75,148,67,94,24,Normal,Hypertension,Gynecology,Propofol,139,Medium
+P0537,38,F,82,178,25.88,I,83,101,76,98,18,Normal,Heart Disease,Urology,Etomidate,131,Low
+P0538,20,F,77,176,24.86,II,99,146,81,99,12,Abnormal,Hypertension,Cardiac,Sevoflurane,94,Medium
+P0539,18,M,90,176,29.05,III,61,121,99,97,19,Abnormal,Diabetes,Neurosurgery,Sevoflurane,156,High
+P0540,51,F,90,187,25.74,III,66,133,85,94,13,Normal,None,Urology,Sevoflurane,118,High
+P0541,50,F,91,184,26.88,I,66,125,88,100,24,Normal,Hypertension,Urology,Propofol,139,Low
+P0542,18,M,92,160,35.94,II,94,139,75,96,24,Normal,None,Urology,Etomidate,103,Medium
+P0543,69,F,50,157,20.28,II,82,102,71,95,15,Normal,Diabetes,Orthopedic,Sevoflurane,166,Medium
+P0544,42,M,68,169,23.81,III,93,131,88,97,20,Normal,Hypertension,Urology,Propofol,176,High
+P0545,63,F,76,178,23.99,II,61,105,80,98,24,Normal,Hypertension,Urology,Etomidate,170,Medium
+P0546,19,F,100,173,33.41,II,68,113,68,95,23,Normal,None,Neurosurgery,Etomidate,101,Medium
+P0547,40,F,76,174,25.1,III,68,139,75,97,24,Normal,Asthma,Urology,Etomidate,166,High
+P0548,67,F,74,164,27.51,II,82,152,61,98,15,Normal,Diabetes,Urology,Sevoflurane,104,Medium
+P0549,70,M,52,175,16.98,I,67,120,96,100,15,Normal,Diabetes,Urology,Sevoflurane,175,Low
+P0550,73,M,72,151,31.58,I,93,112,99,96,20,Abnormal,Asthma,Cardiac,Sevoflurane,170,Low
+P0551,63,M,85,163,31.99,II,61,121,80,99,24,Abnormal,Diabetes,Orthopedic,Propofol,119,Medium
+P0552,24,M,79,151,34.65,I,84,146,80,97,12,Normal,Diabetes,Orthopedic,Propofol,154,Low
+P0553,33,F,45,187,12.87,II,85,102,98,97,18,Normal,None,Cardiac,Etomidate,123,Medium
+P0554,56,M,55,158,22.03,III,62,139,96,96,23,Normal,Diabetes,Gynecology,Sevoflurane,111,High
+P0555,41,M,68,170,23.53,II,69,149,60,98,16,Normal,Diabetes,General,Propofol,139,Medium
+P0556,32,M,67,150,29.78,III,89,137,79,97,16,Abnormal,Asthma,Orthopedic,Propofol,100,High
+P0557,54,F,49,178,15.47,III,67,155,92,95,21,Normal,Hypertension,Cardiac,Sevoflurane,133,High
+P0558,62,F,58,158,23.23,I,81,134,61,100,20,Normal,Heart Disease,General,Propofol,92,Low
+P0559,55,F,91,185,26.59,I,61,128,74,97,16,Normal,Heart Disease,ENT,Propofol,163,Low
+P0560,22,M,60,153,25.63,III,92,149,78,98,17,Normal,Heart Disease,Neurosurgery,Etomidate,159,High
+P0561,62,M,75,152,32.46,I,96,155,78,100,21,Normal,None,ENT,Sevoflurane,145,Low
+P0562,19,F,88,189,24.64,III,71,109,76,97,14,Normal,None,Neurosurgery,Sevoflurane,119,High
+P0563,78,M,71,159,28.08,II,99,115,65,99,18,Abnormal,Heart Disease,Neurosurgery,Etomidate,180,Medium
+P0564,35,F,82,179,25.59,I,89,130,66,100,16,Normal,None,Neurosurgery,Etomidate,109,Low
+P0565,49,M,98,157,39.76,II,71,113,69,98,15,Normal,Hypertension,ENT,Propofol,160,Medium
+P0566,80,F,86,190,23.82,I,98,156,99,97,18,Normal,None,Urology,Propofol,97,Low
+P0567,80,M,59,161,22.76,II,70,146,87,99,14,Normal,Asthma,Urology,Etomidate,169,Medium
+P0568,48,M,47,188,13.3,III,80,110,69,99,24,Normal,None,General,Etomidate,103,High
+P0569,28,M,51,167,18.29,I,60,128,88,98,16,Normal,None,General,Sevoflurane,122,Low
+P0570,69,M,80,152,34.63,III,86,128,99,98,21,Normal,Diabetes,Urology,Propofol,114,High
+P0571,18,F,72,181,21.98,II,100,102,86,97,24,Normal,Hypertension,ENT,Sevoflurane,136,Medium
+P0572,69,M,68,175,22.2,II,98,100,62,96,14,Abnormal,Asthma,Cardiac,Propofol,169,Medium
+P0573,35,F,54,174,17.84,III,88,135,63,98,23,Normal,Diabetes,Gynecology,Sevoflurane,92,High
+P0574,78,F,92,166,33.39,I,75,111,75,94,12,Normal,None,General,Sevoflurane,178,Low
+P0575,41,M,70,164,26.03,II,70,111,67,94,18,Abnormal,None,Orthopedic,Propofol,112,Medium
+P0576,48,F,49,183,14.63,III,85,145,60,98,23,Normal,Asthma,Cardiac,Propofol,139,High
+P0577,58,M,96,180,29.63,I,73,114,83,94,21,Normal,Hypertension,ENT,Etomidate,126,Low
+P0578,74,F,88,189,24.64,I,95,150,99,98,13,Normal,None,General,Sevoflurane,91,Low
+P0579,44,F,56,166,20.32,I,62,102,78,94,12,Normal,Hypertension,Urology,Propofol,177,Low
+P0580,60,M,79,162,30.1,II,74,155,72,95,22,Normal,Heart Disease,Orthopedic,Propofol,168,Medium
+P0581,59,F,52,179,16.23,II,87,160,69,100,14,Normal,Diabetes,Cardiac,Sevoflurane,180,Medium
+P0582,69,F,61,178,19.25,I,85,135,86,98,18,Normal,None,General,Propofol,86,Low
+P0583,51,M,66,162,25.15,I,62,141,75,96,16,Normal,None,General,Propofol,170,Low
+P0584,78,M,74,166,26.85,I,80,127,71,100,20,Abnormal,None,Cardiac,Etomidate,137,Low
+P0585,39,F,88,185,25.71,III,88,158,92,100,14,Normal,Asthma,Orthopedic,Sevoflurane,176,High
+P0586,35,M,91,178,28.72,III,70,134,75,98,13,Normal,Diabetes,Neurosurgery,Sevoflurane,179,High
+P0587,42,M,87,167,31.2,II,69,149,100,94,24,Abnormal,None,General,Sevoflurane,142,Medium
+P0588,30,F,52,177,16.6,II,68,158,81,95,22,Abnormal,Heart Disease,Neurosurgery,Etomidate,87,Medium
+P0589,41,M,96,162,36.58,I,69,112,76,98,20,Normal,None,Urology,Sevoflurane,105,Low
+P0590,70,M,56,161,21.6,II,86,121,74,95,17,Abnormal,Asthma,Neurosurgery,Etomidate,120,Medium
+P0591,36,M,78,189,21.84,II,67,154,71,99,12,Normal,Diabetes,Urology,Sevoflurane,100,Medium
+P0592,80,M,76,188,21.5,III,73,128,79,97,12,Normal,Hypertension,Gynecology,Propofol,99,High
+P0593,60,M,61,187,17.44,III,63,158,66,98,13,Abnormal,Asthma,Orthopedic,Etomidate,142,High
+P0594,66,M,46,176,14.85,III,83,122,69,97,20,Normal,Heart Disease,Urology,Sevoflurane,172,High
+P0595,51,F,57,157,23.12,I,78,139,66,98,15,Normal,Asthma,ENT,Propofol,147,Low
+P0596,27,M,81,187,23.16,III,91,159,98,95,17,Normal,Asthma,Orthopedic,Propofol,125,High
+P0597,64,M,98,150,43.56,II,93,108,91,99,21,Normal,None,General,Propofol,172,Medium
+P0598,71,M,56,184,16.54,II,63,131,81,100,22,Normal,None,Neurosurgery,Sevoflurane,135,Medium
+P0599,79,F,45,150,20.0,II,78,152,85,100,20,Normal,Heart Disease,ENT,Propofol,90,Medium
+P0600,63,M,48,177,15.32,III,89,142,76,99,12,Normal,Heart Disease,Neurosurgery,Etomidate,142,High
+P0601,49,M,84,178,26.51,III,97,158,87,97,17,Normal,Diabetes,Cardiac,Sevoflurane,136,High
+P0602,56,M,85,161,32.79,I,94,157,71,94,24,Abnormal,Hypertension,Cardiac,Etomidate,135,Low
+P0603,67,M,85,172,28.73,III,98,158,70,95,23,Normal,Diabetes,Urology,Propofol,129,High
+P0604,68,F,93,158,37.25,II,95,100,85,94,14,Normal,None,Urology,Etomidate,136,Medium
+P0605,68,F,46,165,16.9,I,66,151,95,95,21,Normal,None,Gynecology,Propofol,173,Low
+P0606,75,M,83,167,29.76,III,61,125,87,100,22,Abnormal,None,ENT,Etomidate,169,High
+P0607,25,M,46,189,12.88,II,96,101,97,98,12,Normal,Diabetes,General,Etomidate,149,Medium
+P0608,66,F,50,185,14.61,I,93,118,64,99,23,Normal,Heart Disease,General,Sevoflurane,160,Low
+P0609,39,M,72,168,25.51,I,63,118,98,95,18,Normal,Diabetes,Neurosurgery,Etomidate,178,Low
+P0610,51,M,69,177,22.02,I,81,136,77,98,22,Normal,Diabetes,Neurosurgery,Propofol,113,Low
+P0611,59,M,65,184,19.2,I,82,125,71,98,23,Abnormal,Heart Disease,Cardiac,Sevoflurane,162,Low
+P0612,78,M,80,190,22.16,III,97,103,77,99,17,Normal,Diabetes,Urology,Etomidate,100,High
+P0613,50,M,80,184,23.63,II,79,124,77,98,21,Normal,Asthma,Neurosurgery,Propofol,96,Medium
+P0614,54,F,89,151,39.03,II,60,146,65,99,18,Normal,Hypertension,Urology,Sevoflurane,146,Medium
+P0615,60,F,54,154,22.77,II,87,138,97,99,24,Normal,None,General,Sevoflurane,169,Medium
+P0616,30,M,91,180,28.09,I,82,110,99,95,17,Abnormal,Heart Disease,Neurosurgery,Propofol,123,Low
+P0617,43,M,90,161,34.72,I,76,118,88,96,19,Abnormal,Hypertension,Gynecology,Etomidate,83,Low
+P0618,70,F,100,166,36.29,I,71,115,83,98,12,Normal,Diabetes,Orthopedic,Etomidate,142,Low
+P0619,44,F,88,170,30.45,III,72,128,66,99,16,Normal,Hypertension,General,Sevoflurane,125,High
+P0620,35,M,96,169,33.61,I,91,158,97,100,13,Normal,Heart Disease,Neurosurgery,Propofol,88,Low
+P0621,71,F,88,161,33.95,III,96,110,76,98,15,Normal,None,Cardiac,Etomidate,90,High
+P0622,53,F,45,171,15.39,III,79,116,62,97,17,Normal,Hypertension,Cardiac,Etomidate,83,High
+P0623,22,F,92,165,33.79,II,89,113,72,98,15,Abnormal,None,General,Etomidate,83,Medium
+P0624,71,M,64,172,21.63,III,74,108,85,96,12,Normal,Diabetes,Neurosurgery,Etomidate,139,High
+P0625,45,F,78,173,26.06,I,72,144,71,99,18,Normal,Diabetes,Cardiac,Sevoflurane,141,Low
+P0626,40,M,80,190,22.16,I,80,114,66,100,16,Normal,Heart Disease,Cardiac,Etomidate,87,Low
+P0627,68,F,61,155,25.39,I,80,157,61,96,24,Normal,Hypertension,Orthopedic,Etomidate,106,Low
+P0628,39,F,56,154,23.61,II,84,159,91,97,21,Normal,None,Orthopedic,Sevoflurane,120,Medium
+P0629,32,F,61,174,20.15,I,67,112,89,95,15,Normal,Heart Disease,Gynecology,Sevoflurane,126,Low
+P0630,27,F,86,166,31.21,II,81,156,93,98,18,Normal,Asthma,Neurosurgery,Etomidate,95,Medium
+P0631,30,F,57,189,15.96,I,91,144,68,99,24,Normal,Diabetes,Orthopedic,Etomidate,85,Low
+P0632,46,F,93,165,34.16,I,74,128,66,99,13,Abnormal,Heart Disease,Urology,Propofol,131,Low
+P0633,58,M,63,173,21.05,III,85,144,75,100,12,Normal,None,Neurosurgery,Propofol,152,High
+P0634,25,F,96,175,31.35,III,64,159,70,95,12,Normal,Heart Disease,General,Sevoflurane,114,High
+P0635,51,F,54,171,18.47,II,84,129,91,98,12,Normal,Hypertension,Neurosurgery,Propofol,88,Medium
+P0636,28,M,97,161,37.42,II,80,122,76,95,20,Normal,Asthma,General,Propofol,172,Medium
+P0637,62,F,88,168,31.18,I,93,147,68,95,21,Normal,Heart Disease,Cardiac,Sevoflurane,168,Low
+P0638,78,F,91,161,35.11,III,60,127,79,94,22,Normal,Hypertension,Urology,Etomidate,163,High
+P0639,66,F,54,166,19.6,I,87,150,90,99,21,Abnormal,Diabetes,Neurosurgery,Sevoflurane,110,Low
+P0640,63,M,47,186,13.59,III,85,103,77,96,17,Normal,Diabetes,Urology,Propofol,129,High
+P0641,42,M,46,158,18.43,III,66,136,96,96,17,Normal,Diabetes,Orthopedic,Etomidate,142,High
+P0642,26,F,87,159,34.41,II,87,129,88,99,12,Normal,Diabetes,Neurosurgery,Etomidate,85,Medium
+P0643,53,M,47,175,15.35,II,98,140,65,96,22,Normal,None,ENT,Sevoflurane,97,Medium
+P0644,57,F,83,162,31.63,III,89,113,89,94,24,Normal,None,Neurosurgery,Sevoflurane,90,High
+P0645,47,M,94,151,41.23,II,84,119,79,99,16,Normal,Hypertension,General,Etomidate,129,Medium
+P0646,76,M,59,179,18.41,III,100,111,69,98,13,Normal,Diabetes,ENT,Propofol,173,High
+P0647,54,M,59,186,17.05,II,79,153,68,95,20,Normal,Heart Disease,Orthopedic,Etomidate,160,Medium
+P0648,63,M,81,172,27.38,III,85,115,96,99,17,Abnormal,Heart Disease,Neurosurgery,Etomidate,179,High
+P0649,70,F,67,150,29.78,I,68,160,95,98,20,Normal,Diabetes,Neurosurgery,Sevoflurane,105,Low
+P0650,31,F,79,178,24.93,II,61,143,84,98,15,Normal,Diabetes,ENT,Sevoflurane,87,Medium
+P0651,57,F,80,156,32.87,II,97,126,87,95,14,Normal,None,Cardiac,Etomidate,167,Medium
+P0652,41,F,93,152,40.25,I,60,104,61,100,24,Normal,Asthma,General,Sevoflurane,111,Low
+P0653,31,F,70,151,30.7,II,61,109,63,98,17,Normal,Heart Disease,Cardiac,Propofol,132,Medium
+P0654,48,M,79,173,26.4,I,71,110,93,95,20,Normal,Hypertension,Cardiac,Propofol,166,Low
+P0655,39,F,85,160,33.2,III,78,132,66,95,19,Normal,Asthma,General,Etomidate,104,High
+P0656,57,M,79,169,27.66,III,71,157,63,96,12,Normal,None,Urology,Propofol,106,High
+P0657,44,M,95,187,27.17,III,64,104,65,97,14,Normal,Diabetes,Neurosurgery,Etomidate,148,High
+P0658,24,F,49,178,15.47,III,97,148,91,95,16,Normal,Asthma,Cardiac,Etomidate,95,High
+P0659,76,M,47,179,14.67,III,63,125,99,96,13,Normal,Asthma,Orthopedic,Sevoflurane,135,High
+P0660,65,F,100,190,27.7,II,82,149,63,100,12,Normal,None,Neurosurgery,Sevoflurane,96,Medium
+P0661,74,M,58,179,18.1,II,91,109,71,97,17,Normal,Asthma,ENT,Sevoflurane,149,Medium
+P0662,53,F,87,181,26.56,III,80,157,78,97,17,Normal,Asthma,Neurosurgery,Sevoflurane,151,High
+P0663,43,M,70,164,26.03,II,71,150,61,100,19,Normal,Hypertension,General,Etomidate,94,Medium
+P0664,47,M,72,165,26.45,I,65,116,62,97,15,Normal,Diabetes,General,Propofol,143,Low
+P0665,59,F,55,185,16.07,III,84,144,97,97,23,Normal,None,General,Etomidate,175,High
+P0666,80,M,82,150,36.44,II,93,144,90,100,12,Normal,Asthma,Gynecology,Etomidate,89,Medium
+P0667,69,F,51,185,14.9,I,63,105,61,98,24,Normal,Heart Disease,Gynecology,Sevoflurane,90,Low
+P0668,36,M,79,184,23.33,II,83,105,76,94,13,Normal,Heart Disease,Neurosurgery,Etomidate,105,Medium
+P0669,79,F,89,169,31.16,III,68,141,63,97,21,Abnormal,Asthma,Cardiac,Sevoflurane,142,High
+P0670,63,M,94,155,39.13,II,99,110,60,96,15,Normal,Hypertension,Orthopedic,Etomidate,105,Medium
+P0671,61,F,62,176,20.02,I,78,153,69,100,22,Normal,None,General,Sevoflurane,155,Low
+P0672,54,F,78,173,26.06,III,93,106,61,97,16,Normal,Asthma,Urology,Propofol,100,High
+P0673,66,F,59,175,19.27,III,89,153,89,96,12,Normal,Heart Disease,Orthopedic,Sevoflurane,109,High
+P0674,30,F,97,157,39.35,III,79,152,77,94,16,Normal,Hypertension,Neurosurgery,Sevoflurane,153,High
+P0675,60,M,69,184,20.38,II,61,123,78,94,15,Normal,Asthma,Neurosurgery,Propofol,113,Medium
+P0676,22,F,66,171,22.57,II,77,127,61,97,13,Normal,Heart Disease,ENT,Etomidate,142,Medium
+P0677,21,F,57,158,22.83,III,84,123,97,95,24,Normal,Asthma,Urology,Etomidate,124,High
+P0678,47,M,81,168,28.7,III,67,106,76,98,15,Abnormal,None,General,Sevoflurane,122,High
+P0679,78,M,74,168,26.22,I,71,113,69,96,24,Normal,Heart Disease,Cardiac,Sevoflurane,112,Low
+P0680,65,M,85,189,23.8,II,83,144,96,95,22,Normal,None,Orthopedic,Sevoflurane,121,Medium
+P0681,60,F,46,168,16.3,III,67,159,94,94,13,Normal,Heart Disease,Orthopedic,Etomidate,91,High
+P0682,48,M,50,154,21.08,II,60,121,78,95,15,Normal,Hypertension,General,Etomidate,80,Medium
+P0683,21,F,97,176,31.31,II,94,154,93,95,13,Normal,Hypertension,ENT,Sevoflurane,117,Medium
+P0684,66,M,75,176,24.21,I,75,136,64,98,15,Normal,Hypertension,Cardiac,Propofol,171,Low
+P0685,66,F,94,185,27.47,III,91,151,92,97,19,Normal,Heart Disease,Urology,Etomidate,160,High
+P0686,25,F,71,159,28.08,II,61,154,96,96,12,Normal,Diabetes,Cardiac,Sevoflurane,176,Medium
+P0687,21,F,59,176,19.05,II,85,138,64,94,17,Normal,None,Cardiac,Propofol,142,Medium
+P0688,23,M,88,189,24.64,II,65,138,83,97,17,Normal,Heart Disease,Cardiac,Sevoflurane,83,Medium
+P0689,33,F,53,162,20.2,II,76,146,71,97,21,Normal,Diabetes,Orthopedic,Propofol,140,Medium
+P0690,66,F,81,151,35.52,II,85,157,82,97,17,Normal,Diabetes,ENT,Propofol,112,Medium
+P0691,59,M,88,187,25.17,III,86,139,74,95,16,Abnormal,None,Urology,Sevoflurane,128,High
+P0692,48,M,65,157,26.37,II,95,113,67,100,17,Normal,Asthma,Urology,Propofol,156,Medium
+P0693,65,M,95,159,37.58,III,95,149,75,96,21,Normal,None,General,Propofol,92,High
+P0694,54,M,65,154,27.41,II,60,108,68,99,14,Normal,None,Gynecology,Sevoflurane,137,Medium
+P0695,43,F,73,186,21.1,II,98,129,65,94,13,Abnormal,Diabetes,Neurosurgery,Propofol,150,Medium
+P0696,74,M,86,190,23.82,I,93,154,67,98,21,Normal,None,Orthopedic,Propofol,149,Low
+P0697,37,M,48,168,17.01,II,90,131,93,94,19,Normal,Diabetes,Orthopedic,Propofol,178,Medium
+P0698,67,F,57,187,16.3,II,68,103,94,94,17,Normal,Hypertension,Cardiac,Sevoflurane,96,Medium
+P0699,20,M,84,161,32.41,II,94,102,65,100,22,Normal,Diabetes,Neurosurgery,Propofol,149,Medium
+P0700,51,M,76,155,31.63,I,67,126,68,96,16,Normal,None,Orthopedic,Propofol,108,Low
+P0701,51,M,94,158,37.65,II,87,114,76,97,15,Normal,Heart Disease,Orthopedic,Propofol,122,Medium
+P0702,37,M,72,163,27.1,I,79,135,77,99,15,Normal,Heart Disease,Neurosurgery,Sevoflurane,130,Low
+P0703,45,M,62,173,20.72,III,96,131,81,98,20,Normal,None,General,Sevoflurane,83,High
+P0704,62,M,60,158,24.03,I,90,152,77,94,17,Normal,Asthma,Cardiac,Propofol,114,Low
+P0705,31,F,57,166,20.69,III,89,101,93,100,12,Abnormal,None,Orthopedic,Propofol,169,High
+P0706,38,M,67,163,25.22,I,92,113,93,98,21,Abnormal,Heart Disease,Urology,Propofol,124,Low
+P0707,52,M,82,187,23.45,II,74,122,92,97,16,Abnormal,Hypertension,Cardiac,Sevoflurane,88,Medium
+P0708,46,F,72,171,24.62,II,84,102,88,96,22,Normal,Asthma,Cardiac,Sevoflurane,105,Medium
+P0709,21,F,86,187,24.59,II,73,101,86,99,21,Normal,Diabetes,Neurosurgery,Sevoflurane,117,Medium
+P0710,57,F,100,172,33.8,II,72,103,75,99,22,Abnormal,Hypertension,Urology,Propofol,132,Medium
+P0711,44,M,59,152,25.54,III,62,137,67,96,16,Normal,Diabetes,General,Propofol,178,High
+P0712,49,M,75,185,21.91,III,63,133,99,94,24,Normal,Heart Disease,Cardiac,Propofol,125,High
+P0713,80,M,96,190,26.59,II,95,113,70,94,13,Abnormal,Hypertension,General,Sevoflurane,119,Medium
+P0714,37,M,63,174,20.81,I,96,160,93,97,21,Normal,Hypertension,Neurosurgery,Etomidate,124,Low
+P0715,20,M,63,178,19.88,III,70,133,94,96,24,Normal,Diabetes,Orthopedic,Etomidate,131,High
+P0716,61,F,82,171,28.04,I,99,128,94,99,22,Normal,Diabetes,Cardiac,Sevoflurane,159,Low
+P0717,49,M,86,188,24.33,I,74,117,87,100,18,Normal,Asthma,Cardiac,Sevoflurane,166,Low
+P0718,73,M,74,162,28.2,I,95,139,89,99,21,Normal,Hypertension,General,Sevoflurane,94,Low
+P0719,40,F,66,180,20.37,I,99,142,96,99,16,Normal,Diabetes,Urology,Sevoflurane,125,Low
+P0720,65,F,57,183,17.02,II,74,154,98,99,16,Normal,None,General,Sevoflurane,177,Medium
+P0721,47,M,61,189,17.08,III,88,132,67,95,18,Normal,Diabetes,Neurosurgery,Etomidate,89,High
+P0722,27,F,99,186,28.62,I,69,127,71,98,14,Normal,Hypertension,General,Propofol,170,Low
+P0723,62,M,54,185,15.78,III,86,155,96,99,12,Abnormal,Heart Disease,Urology,Propofol,179,High
+P0724,34,M,100,180,30.86,I,87,127,65,97,23,Abnormal,Asthma,Gynecology,Propofol,178,Low
+P0725,54,M,69,153,29.48,I,62,139,84,100,14,Normal,Hypertension,Urology,Propofol,166,Low
+P0726,25,F,63,153,26.91,II,73,110,63,99,19,Normal,Heart Disease,Urology,Propofol,109,Medium
+P0727,80,M,80,186,23.12,II,73,112,67,94,13,Normal,None,Cardiac,Propofol,87,Medium
+P0728,37,M,59,167,21.16,II,74,129,70,100,12,Normal,Diabetes,Neurosurgery,Sevoflurane,111,Medium
+P0729,24,M,67,152,29.0,II,84,104,85,100,22,Normal,None,ENT,Sevoflurane,159,Medium
+P0730,32,F,82,165,30.12,II,97,126,87,100,14,Normal,None,Neurosurgery,Etomidate,156,Medium
+P0731,68,M,66,180,20.37,II,76,109,66,97,23,Normal,Diabetes,Cardiac,Sevoflurane,162,Medium
+P0732,59,F,45,165,16.53,I,77,121,99,96,12,Normal,Asthma,General,Etomidate,86,Low
+P0733,44,M,47,153,20.08,I,77,120,63,100,17,Normal,Heart Disease,ENT,Etomidate,96,Low
+P0734,78,F,85,188,24.05,III,97,130,94,96,12,Normal,Asthma,General,Etomidate,153,High
+P0735,28,F,52,181,15.87,I,70,150,88,94,22,Normal,Hypertension,Cardiac,Sevoflurane,152,Low
+P0736,18,F,56,173,18.71,III,86,149,82,100,18,Normal,Hypertension,Gynecology,Sevoflurane,167,High
+P0737,60,M,53,172,17.92,III,68,127,61,97,21,Normal,Hypertension,Urology,Etomidate,108,High
+P0738,75,M,74,160,28.91,II,90,124,72,94,13,Normal,Diabetes,Gynecology,Sevoflurane,112,Medium
+P0739,64,F,69,152,29.86,II,93,143,86,100,13,Abnormal,Asthma,Neurosurgery,Sevoflurane,98,Medium
+P0740,48,F,87,154,36.68,III,85,126,90,100,17,Normal,Diabetes,Urology,Etomidate,122,High
+P0741,77,F,45,185,13.15,III,62,115,78,95,22,Normal,Diabetes,Orthopedic,Etomidate,136,High
+P0742,47,F,80,171,27.36,I,66,150,63,95,14,Normal,Asthma,Cardiac,Propofol,120,Low
+P0743,47,M,81,154,34.15,II,70,149,84,96,19,Normal,Heart Disease,General,Etomidate,101,Medium
+P0744,42,F,50,162,19.05,I,73,133,95,96,24,Normal,Diabetes,ENT,Sevoflurane,128,Low
+P0745,53,M,100,167,35.86,I,78,112,68,96,18,Normal,Heart Disease,Cardiac,Etomidate,133,Low
+P0746,60,F,83,178,26.2,III,98,125,86,97,20,Normal,Heart Disease,Gynecology,Sevoflurane,169,High
+P0747,19,M,87,168,30.82,I,65,102,100,100,18,Normal,Hypertension,Urology,Etomidate,127,Low
+P0748,70,F,49,165,18.0,I,82,152,94,100,14,Normal,Hypertension,General,Sevoflurane,81,Low
+P0749,24,M,86,178,27.14,I,64,145,65,98,24,Normal,None,Urology,Etomidate,103,Low
+P0750,28,M,92,183,27.47,I,69,123,76,100,20,Normal,Heart Disease,General,Etomidate,115,Low
+P0751,44,F,54,170,18.69,II,96,118,89,97,19,Normal,Asthma,Orthopedic,Etomidate,177,Medium
+P0752,25,F,58,178,18.31,I,75,128,84,98,16,Normal,None,Urology,Propofol,126,Low
+P0753,64,F,49,154,20.66,I,67,120,79,98,19,Abnormal,Asthma,Urology,Propofol,85,Low
+P0754,22,F,97,183,28.96,I,68,146,75,96,13,Normal,Hypertension,Urology,Etomidate,148,Low
+P0755,80,F,66,172,22.31,II,98,137,77,99,24,Normal,Asthma,ENT,Sevoflurane,100,Medium
+P0756,39,F,100,166,36.29,III,85,129,77,94,19,Normal,Asthma,Cardiac,Sevoflurane,122,High
+P0757,46,M,59,187,16.87,III,94,114,97,94,24,Normal,Asthma,Neurosurgery,Propofol,136,High
+P0758,45,F,51,183,15.23,II,77,160,95,96,21,Normal,Hypertension,Cardiac,Etomidate,104,Medium
+P0759,43,M,69,174,22.79,III,74,134,78,95,18,Abnormal,Hypertension,Cardiac,Etomidate,157,High
+P0760,55,F,81,151,35.52,II,71,107,91,94,16,Normal,Hypertension,Orthopedic,Etomidate,145,Medium
+P0761,50,F,75,162,28.58,II,88,129,76,100,13,Normal,Diabetes,ENT,Etomidate,108,Medium
+P0762,42,F,78,186,22.55,II,86,103,93,94,24,Abnormal,Diabetes,Urology,Propofol,124,Medium
+P0763,53,F,73,153,31.18,II,91,138,71,100,20,Abnormal,Heart Disease,ENT,Sevoflurane,142,Medium
+P0764,49,F,58,156,23.83,I,85,141,89,100,15,Normal,Diabetes,Orthopedic,Sevoflurane,119,Low
+P0765,59,F,97,152,41.98,III,99,132,80,97,23,Normal,Diabetes,Gynecology,Sevoflurane,170,High
+P0766,67,M,90,177,28.73,II,96,145,71,98,14,Abnormal,Hypertension,Neurosurgery,Sevoflurane,129,Medium
+P0767,46,M,66,158,26.44,III,61,109,63,94,21,Normal,Diabetes,Cardiac,Propofol,118,High
+P0768,56,M,99,190,27.42,I,92,156,78,96,22,Normal,Heart Disease,ENT,Sevoflurane,123,Low
+P0769,55,M,76,182,22.94,III,66,130,72,98,14,Normal,Asthma,Neurosurgery,Etomidate,169,High
+P0770,47,M,87,154,36.68,I,97,119,67,94,13,Normal,Asthma,Urology,Propofol,138,Low
+P0771,21,M,76,186,21.97,III,82,152,70,94,20,Normal,None,General,Sevoflurane,98,High
+P0772,35,F,67,185,19.58,I,67,158,69,98,16,Normal,Hypertension,Gynecology,Sevoflurane,157,Low
+P0773,41,F,99,166,35.93,I,86,116,70,99,19,Normal,Hypertension,Cardiac,Etomidate,130,Low
+P0774,78,M,62,158,24.84,II,100,112,75,96,20,Abnormal,Hypertension,Urology,Propofol,138,Medium
+P0775,21,F,78,151,34.21,I,87,122,86,94,19,Normal,Heart Disease,Orthopedic,Etomidate,98,Low
+P0776,64,F,52,152,22.51,I,85,127,78,98,14,Normal,Asthma,Neurosurgery,Etomidate,135,Low
+P0777,67,M,59,175,19.27,I,68,149,75,96,19,Normal,None,Gynecology,Etomidate,158,Low
+P0778,26,F,68,157,27.59,II,99,144,69,99,24,Normal,Asthma,Urology,Sevoflurane,120,Medium
+P0779,55,F,88,177,28.09,II,70,110,62,95,16,Normal,Asthma,General,Sevoflurane,106,Medium
+P0780,60,M,99,164,36.81,II,72,121,60,100,12,Normal,None,Neurosurgery,Propofol,114,Medium
+P0781,31,F,45,173,15.04,II,66,128,97,96,16,Abnormal,Asthma,Urology,Propofol,176,Medium
+P0782,47,F,87,175,28.41,I,96,114,90,99,21,Normal,None,ENT,Etomidate,120,Low
+P0783,72,M,77,170,26.64,III,80,113,84,95,17,Normal,Asthma,ENT,Sevoflurane,149,High
+P0784,50,F,91,166,33.02,II,61,121,71,95,19,Normal,Asthma,Cardiac,Etomidate,117,Medium
+P0785,18,F,53,155,22.06,I,61,120,79,94,14,Normal,None,General,Propofol,90,Low
+P0786,57,M,93,167,33.35,I,76,102,79,100,12,Normal,Heart Disease,Neurosurgery,Sevoflurane,162,Low
+P0787,52,M,89,166,32.3,II,91,155,81,94,21,Normal,Diabetes,General,Sevoflurane,122,Medium
+P0788,33,F,77,187,22.02,I,69,126,75,98,19,Normal,Hypertension,Neurosurgery,Etomidate,93,Low
+P0789,72,M,47,180,14.51,III,84,135,84,100,22,Normal,Heart Disease,ENT,Sevoflurane,153,High
+P0790,37,M,61,170,21.11,II,80,128,81,95,16,Normal,Hypertension,General,Propofol,119,Medium
+P0791,54,M,88,166,31.93,I,60,101,66,94,18,Normal,Diabetes,ENT,Sevoflurane,177,Low
+P0792,79,M,98,175,32.0,II,82,146,68,95,15,Abnormal,Hypertension,General,Etomidate,150,Medium
+P0793,54,F,100,153,42.72,III,88,138,86,95,23,Normal,Diabetes,Orthopedic,Etomidate,130,High
+P0794,53,F,95,150,42.22,II,68,112,73,95,13,Normal,Asthma,Gynecology,Sevoflurane,180,Medium
+P0795,48,M,60,151,26.31,III,66,139,67,99,22,Normal,None,ENT,Etomidate,129,High
+P0796,49,M,100,174,33.03,III,78,142,90,100,23,Normal,Heart Disease,Neurosurgery,Sevoflurane,80,High
+P0797,29,F,60,152,25.97,I,67,120,81,94,24,Normal,Hypertension,Gynecology,Propofol,170,Low
+P0798,75,M,53,181,16.18,III,97,152,92,94,17,Normal,Heart Disease,ENT,Propofol,169,High
+P0799,59,F,91,166,33.02,I,72,141,69,95,17,Abnormal,Asthma,Urology,Sevoflurane,127,Low
+P0800,59,M,52,156,21.37,III,74,114,62,94,23,Normal,Hypertension,Neurosurgery,Etomidate,127,High
+P0801,53,F,87,185,25.42,II,65,141,79,98,12,Normal,Heart Disease,ENT,Sevoflurane,139,Medium
+P0802,53,M,45,170,15.57,III,83,140,93,96,20,Normal,Hypertension,General,Etomidate,134,High
+P0803,23,F,64,187,18.3,II,74,102,62,100,20,Abnormal,Asthma,ENT,Sevoflurane,133,Medium
+P0804,69,F,55,181,16.79,I,75,109,72,100,24,Normal,None,Gynecology,Sevoflurane,123,Low
+P0805,65,M,63,160,24.61,I,73,133,66,95,15,Normal,Hypertension,Neurosurgery,Etomidate,84,Low
+P0806,40,F,90,186,26.01,III,87,109,95,94,18,Abnormal,Heart Disease,Neurosurgery,Sevoflurane,137,High
+P0807,64,F,62,154,26.14,III,99,112,72,96,20,Normal,Hypertension,ENT,Propofol,173,High
+P0808,67,F,65,179,20.29,I,78,155,93,96,12,Abnormal,Heart Disease,Neurosurgery,Sevoflurane,90,Low
+P0809,41,M,66,181,20.15,I,98,138,74,97,23,Normal,Hypertension,Gynecology,Sevoflurane,129,Low
+P0810,62,F,61,157,24.75,III,69,109,71,99,16,Normal,Hypertension,ENT,Sevoflurane,88,High
+P0811,35,M,52,164,19.33,III,75,148,97,94,22,Abnormal,Diabetes,Cardiac,Propofol,176,High
+P0812,20,M,98,185,28.63,III,78,124,99,97,24,Normal,Diabetes,Neurosurgery,Etomidate,112,High
+P0813,72,F,57,173,19.05,I,97,158,94,98,16,Normal,Heart Disease,Gynecology,Propofol,165,Low
+P0814,35,M,89,150,39.56,III,86,135,88,94,19,Normal,Heart Disease,Cardiac,Sevoflurane,156,High
+P0815,74,F,86,184,25.4,II,79,115,68,100,21,Normal,None,ENT,Etomidate,153,Medium
+P0816,80,F,94,154,39.64,II,80,120,78,94,23,Normal,Heart Disease,Orthopedic,Etomidate,150,Medium
+P0817,63,M,84,174,27.74,I,84,153,74,95,23,Normal,Asthma,General,Propofol,173,Low
+P0818,60,M,98,185,28.63,III,81,108,78,97,20,Normal,None,Neurosurgery,Etomidate,120,High
+P0819,29,M,89,189,24.92,I,99,123,96,96,21,Normal,Diabetes,Neurosurgery,Sevoflurane,164,Low
+P0820,21,M,92,188,26.03,II,79,142,87,97,23,Normal,Hypertension,Orthopedic,Propofol,152,Medium
+P0821,36,M,87,159,34.41,III,66,149,91,94,15,Abnormal,Asthma,Cardiac,Propofol,150,High
+P0822,37,F,83,174,27.41,I,94,105,71,96,14,Abnormal,None,Urology,Etomidate,159,Low
+P0823,68,F,62,169,21.71,I,87,143,99,97,21,Normal,Asthma,General,Sevoflurane,140,Low
+P0824,31,M,49,189,13.72,II,77,119,63,98,24,Abnormal,Heart Disease,Urology,Sevoflurane,152,Medium
+P0825,70,F,88,151,38.59,III,76,142,90,94,20,Normal,Heart Disease,General,Propofol,124,High
+P0826,38,F,98,181,29.91,III,91,136,90,98,22,Normal,Heart Disease,General,Etomidate,120,High
+P0827,55,F,69,168,24.45,II,95,140,61,98,22,Normal,Asthma,Orthopedic,Sevoflurane,80,Medium
+P0828,19,F,71,176,22.92,III,80,111,88,96,17,Normal,Diabetes,General,Sevoflurane,140,High
+P0829,74,M,54,164,20.08,III,75,119,97,100,18,Normal,Hypertension,Gynecology,Sevoflurane,165,High
+P0830,62,F,94,178,29.67,I,63,133,64,97,12,Normal,None,Urology,Sevoflurane,171,Low
+P0831,70,M,53,178,16.73,II,96,122,96,100,22,Normal,Heart Disease,Urology,Sevoflurane,94,Medium
+P0832,59,F,67,174,22.13,I,62,160,70,94,20,Normal,Asthma,Urology,Propofol,104,Low
+P0833,57,M,90,161,34.72,II,90,107,65,95,15,Normal,Asthma,ENT,Sevoflurane,171,Medium
+P0834,63,M,66,173,22.05,I,87,127,88,100,13,Normal,None,General,Sevoflurane,111,Low
+P0835,75,M,80,169,28.01,III,92,153,61,98,20,Normal,Diabetes,Gynecology,Sevoflurane,169,High
+P0836,25,M,70,158,28.04,III,81,114,99,94,19,Normal,None,Gynecology,Etomidate,129,High
+P0837,44,F,62,152,26.84,II,70,133,94,94,16,Abnormal,None,Urology,Sevoflurane,158,Medium
+P0838,62,F,96,179,29.96,III,98,135,99,99,16,Normal,Heart Disease,Gynecology,Propofol,100,High
+P0839,71,F,89,166,32.3,II,99,143,85,95,19,Normal,Hypertension,Neurosurgery,Propofol,133,Medium
+P0840,68,F,76,161,29.32,I,83,138,91,99,19,Normal,Diabetes,Cardiac,Etomidate,95,Low
+P0841,28,M,45,167,16.14,III,82,105,67,100,20,Normal,None,Orthopedic,Etomidate,88,High
+P0842,24,M,84,179,26.22,I,75,119,81,100,23,Normal,None,Neurosurgery,Etomidate,136,Low
+P0843,49,F,95,189,26.6,III,71,152,91,95,21,Abnormal,None,Neurosurgery,Sevoflurane,107,High
+P0844,44,M,78,178,24.62,II,79,159,95,95,16,Normal,Asthma,Neurosurgery,Propofol,93,Medium
+P0845,25,M,80,164,29.74,III,67,142,63,100,13,Normal,Heart Disease,ENT,Etomidate,95,High
+P0846,33,M,47,171,16.07,I,87,148,80,99,14,Normal,None,Gynecology,Etomidate,178,Low
+P0847,69,F,90,167,32.27,III,93,119,83,97,23,Normal,Hypertension,Gynecology,Sevoflurane,115,High
+P0848,69,M,77,166,27.94,II,99,114,96,97,16,Normal,Hypertension,Orthopedic,Etomidate,88,Medium
+P0849,24,M,65,186,18.79,II,100,133,61,94,17,Normal,Asthma,Cardiac,Sevoflurane,90,Medium
+P0850,40,M,84,177,26.81,III,66,105,87,98,23,Normal,Heart Disease,Gynecology,Etomidate,87,High
+P0851,76,M,82,152,35.49,III,97,131,69,95,15,Normal,None,ENT,Sevoflurane,118,High
+P0852,36,M,54,167,19.36,I,99,159,78,99,24,Normal,Heart Disease,ENT,Propofol,178,Low
+P0853,49,M,45,154,18.97,I,70,116,100,94,24,Normal,Diabetes,Cardiac,Etomidate,111,Low
+P0854,73,F,69,176,22.28,I,85,141,77,97,24,Normal,Heart Disease,Neurosurgery,Propofol,103,Low
+P0855,33,M,72,155,29.97,I,74,147,84,97,16,Normal,Hypertension,Cardiac,Etomidate,122,Low
+P0856,62,F,74,159,29.27,II,91,101,72,97,12,Abnormal,None,General,Propofol,81,Medium
+P0857,27,M,84,188,23.77,III,79,136,78,98,20,Normal,Heart Disease,General,Sevoflurane,108,High
+P0858,41,M,80,152,34.63,III,83,139,91,98,14,Abnormal,Hypertension,Orthopedic,Propofol,163,High
+P0859,60,M,76,155,31.63,I,81,121,96,97,14,Normal,Heart Disease,ENT,Propofol,93,Low
+P0860,37,F,73,175,23.84,I,60,133,83,95,21,Normal,Heart Disease,Cardiac,Propofol,151,Low
+P0861,48,M,88,159,34.81,III,88,148,85,95,17,Normal,None,Orthopedic,Etomidate,121,High
+P0862,66,F,55,163,20.7,III,61,130,82,97,15,Normal,Asthma,Neurosurgery,Sevoflurane,143,High
+P0863,68,F,81,153,34.6,II,68,130,100,99,13,Normal,Hypertension,Orthopedic,Sevoflurane,106,Medium
+P0864,73,F,62,155,25.81,II,63,130,66,100,22,Normal,Heart Disease,ENT,Sevoflurane,153,Medium
+P0865,23,M,56,189,15.68,I,74,141,68,97,12,Normal,Heart Disease,Neurosurgery,Sevoflurane,96,Low
+P0866,25,M,69,158,27.64,I,64,133,66,98,21,Normal,None,ENT,Etomidate,166,Low
+P0867,23,M,78,167,27.97,I,61,118,64,98,18,Normal,Heart Disease,Gynecology,Etomidate,90,Low
+P0868,48,M,87,179,27.15,II,95,110,98,95,15,Abnormal,Heart Disease,Urology,Propofol,115,Medium
+P0869,34,M,48,177,15.32,I,98,115,89,94,21,Abnormal,Heart Disease,Gynecology,Etomidate,122,Low
+P0870,44,M,78,184,23.04,II,73,139,74,98,14,Normal,None,ENT,Sevoflurane,118,Medium
+P0871,31,M,84,174,27.74,III,73,132,87,97,24,Normal,Hypertension,Cardiac,Propofol,120,High
+P0872,19,M,76,188,21.5,I,65,108,73,97,20,Normal,Asthma,ENT,Etomidate,146,Low
+P0873,66,F,58,164,21.56,III,68,123,78,99,17,Normal,None,Urology,Sevoflurane,105,High
+P0874,76,M,89,152,38.52,III,90,151,84,94,20,Normal,Asthma,Urology,Propofol,172,High
+P0875,55,F,66,176,21.31,II,90,122,86,96,20,Normal,Hypertension,Cardiac,Sevoflurane,133,Medium
+P0876,26,M,68,169,23.81,II,94,159,81,95,14,Normal,None,Neurosurgery,Sevoflurane,103,Medium
+P0877,25,F,74,184,21.86,II,67,135,65,95,17,Abnormal,Diabetes,General,Etomidate,102,Medium
+P0878,26,F,50,175,16.33,III,62,124,63,97,13,Normal,None,Cardiac,Sevoflurane,117,High
+P0879,33,M,68,175,22.2,I,99,117,69,96,22,Normal,Heart Disease,Cardiac,Sevoflurane,124,Low
+P0880,36,M,70,154,29.52,I,75,154,74,98,12,Normal,Asthma,General,Propofol,175,Low
+P0881,41,F,85,182,25.66,II,75,142,75,98,22,Normal,Diabetes,Urology,Sevoflurane,120,Medium
+P0882,33,F,86,164,31.98,I,99,112,71,98,12,Normal,Asthma,Gynecology,Propofol,123,Low
+P0883,20,F,60,178,18.94,I,96,140,83,99,16,Normal,Hypertension,Cardiac,Etomidate,138,Low
+P0884,65,F,48,164,17.85,I,88,116,97,98,14,Normal,Hypertension,Urology,Etomidate,95,Low
+P0885,19,M,55,162,20.96,I,66,150,62,94,22,Normal,None,ENT,Etomidate,155,Low
+P0886,62,F,66,175,21.55,II,83,104,72,99,14,Normal,Diabetes,Cardiac,Sevoflurane,158,Medium
+P0887,28,M,53,174,17.51,I,90,152,70,94,18,Normal,Heart Disease,Cardiac,Propofol,106,Low
+P0888,39,F,52,163,19.57,I,64,157,67,99,15,Normal,Asthma,Cardiac,Sevoflurane,141,Low
+P0889,60,M,71,168,25.16,III,72,117,99,94,14,Normal,Hypertension,Neurosurgery,Sevoflurane,82,High
+P0890,70,M,64,158,25.64,II,85,156,79,99,18,Normal,Asthma,Cardiac,Propofol,113,Medium
+P0891,25,M,68,177,21.71,III,67,128,66,96,13,Normal,Hypertension,Urology,Etomidate,89,High
+P0892,27,F,57,160,22.27,II,88,131,61,99,22,Normal,Asthma,ENT,Propofol,173,Medium
+P0893,64,M,94,184,27.76,I,85,133,100,96,21,Normal,Heart Disease,General,Sevoflurane,125,Low
+P0894,62,F,69,176,22.28,III,69,122,82,96,24,Normal,None,Cardiac,Sevoflurane,144,High
+P0895,62,M,97,166,35.2,III,66,135,64,97,19,Normal,Asthma,Urology,Propofol,144,High
+P0896,23,M,70,178,22.09,I,89,114,79,97,15,Normal,Asthma,Orthopedic,Etomidate,152,Low
+P0897,62,F,58,163,21.83,III,78,139,69,100,24,Abnormal,Hypertension,Urology,Etomidate,85,High
+P0898,68,M,75,165,27.55,II,96,127,86,100,15,Normal,Diabetes,Urology,Propofol,127,Medium
+P0899,48,M,98,172,33.13,III,97,147,67,94,19,Normal,None,Urology,Propofol,121,High
+P0900,26,F,92,175,30.04,I,76,104,71,96,23,Normal,Diabetes,General,Sevoflurane,153,Low
+P0901,66,M,55,159,21.76,II,97,130,82,94,16,Normal,Hypertension,Urology,Propofol,117,Medium
+P0902,48,M,98,151,42.98,III,97,111,68,98,22,Normal,None,Urology,Propofol,90,High
+P0903,43,F,90,173,30.07,I,77,107,87,100,24,Normal,None,ENT,Propofol,150,Low
+P0904,52,M,68,163,25.59,III,76,136,71,96,19,Normal,None,Gynecology,Sevoflurane,163,High
+P0905,33,F,58,181,17.7,II,73,106,78,100,19,Normal,None,Orthopedic,Propofol,169,Medium
+P0906,31,M,72,153,30.76,I,94,104,100,100,21,Normal,None,Orthopedic,Etomidate,160,Low
+P0907,45,F,100,164,37.18,II,63,142,73,98,19,Normal,Heart Disease,Urology,Etomidate,126,Medium
+P0908,60,M,86,187,24.59,I,78,130,65,94,13,Normal,Heart Disease,Gynecology,Sevoflurane,162,Low
+P0909,34,M,90,183,26.87,III,62,123,90,95,21,Normal,None,Orthopedic,Sevoflurane,91,High
+P0910,59,M,71,158,28.44,III,91,100,67,94,23,Normal,None,Orthopedic,Etomidate,150,High
+P0911,38,M,60,178,18.94,II,97,156,71,100,14,Normal,Hypertension,Neurosurgery,Propofol,115,Medium
+P0912,19,M,79,186,22.84,I,67,138,98,98,24,Normal,Diabetes,Gynecology,Sevoflurane,135,Low
+P0913,34,M,77,181,23.5,II,86,148,92,100,24,Normal,Asthma,Neurosurgery,Propofol,165,Medium
+P0914,67,M,56,155,23.31,III,91,127,92,97,17,Normal,Diabetes,Cardiac,Propofol,160,High
+P0915,24,F,86,162,32.77,I,82,103,73,95,16,Normal,Diabetes,ENT,Etomidate,81,Low
+P0916,21,F,100,168,35.43,II,97,142,61,95,17,Normal,Diabetes,Neurosurgery,Etomidate,123,Medium
+P0917,57,F,46,160,17.97,I,100,126,63,97,23,Normal,Asthma,Urology,Etomidate,99,Low
+P0918,49,M,88,150,39.11,I,63,148,96,94,12,Normal,Hypertension,General,Etomidate,80,Low
+P0919,68,M,69,182,20.83,I,77,139,89,100,23,Normal,None,Gynecology,Etomidate,132,Low
+P0920,65,M,53,180,16.36,III,100,127,60,94,19,Normal,Diabetes,General,Etomidate,123,High
+P0921,29,F,97,176,31.31,I,80,118,72,94,20,Normal,Asthma,Urology,Sevoflurane,129,Low
+P0922,27,F,51,164,18.96,II,80,116,74,99,20,Abnormal,None,Neurosurgery,Etomidate,118,Medium
+P0923,54,F,63,171,21.55,I,63,107,95,96,15,Normal,Heart Disease,ENT,Sevoflurane,135,Low
+P0924,63,F,60,177,19.15,II,64,110,66,97,24,Normal,Diabetes,Urology,Etomidate,123,Medium
+P0925,62,M,79,187,22.59,I,69,140,69,96,13,Normal,Asthma,Orthopedic,Sevoflurane,137,Low
+P0926,23,M,87,186,25.15,I,71,149,65,98,18,Normal,Asthma,ENT,Etomidate,87,Low
+P0927,37,F,96,151,42.1,II,65,100,62,95,23,Normal,Asthma,Cardiac,Etomidate,83,Medium
+P0928,46,F,65,156,26.71,I,93,103,90,98,17,Abnormal,None,General,Etomidate,151,Low
+P0929,64,F,55,160,21.48,II,97,109,96,100,13,Normal,Heart Disease,Cardiac,Propofol,133,Medium
+P0930,75,F,78,184,23.04,II,69,135,65,97,21,Normal,Diabetes,Orthopedic,Sevoflurane,128,Medium
+P0931,53,M,89,161,34.34,I,70,104,91,96,22,Normal,None,Cardiac,Sevoflurane,102,Low
+P0932,73,M,78,188,22.07,I,60,154,93,97,21,Normal,Diabetes,Gynecology,Etomidate,107,Low
+P0933,32,M,62,167,22.23,III,66,101,61,97,24,Normal,Heart Disease,ENT,Etomidate,172,High
+P0934,57,F,77,181,23.5,III,77,121,76,98,21,Normal,Heart Disease,Gynecology,Propofol,98,High
+P0935,21,F,66,179,20.6,I,80,107,99,94,13,Normal,None,ENT,Etomidate,118,Low
+P0936,71,F,88,183,26.28,I,85,108,70,99,15,Abnormal,Heart Disease,Neurosurgery,Propofol,141,Low
+P0937,66,F,93,188,26.31,III,63,155,78,98,13,Normal,Asthma,Gynecology,Propofol,128,High
+P0938,59,F,79,178,24.93,II,78,158,75,95,18,Normal,None,Cardiac,Sevoflurane,107,Medium
+P0939,57,F,79,188,22.35,I,72,132,70,95,22,Normal,Diabetes,Neurosurgery,Etomidate,172,Low
+P0940,73,M,85,150,37.78,II,75,113,91,95,13,Normal,Asthma,General,Sevoflurane,156,Medium
+P0941,22,M,52,181,15.87,I,98,141,62,96,19,Normal,Hypertension,ENT,Sevoflurane,136,Low
+P0942,76,M,71,167,25.46,II,81,144,64,98,22,Abnormal,Asthma,Cardiac,Propofol,142,Medium
+P0943,37,F,90,165,33.06,I,99,144,70,96,14,Abnormal,Diabetes,Cardiac,Propofol,86,Low
+P0944,52,F,71,176,22.92,I,61,119,84,95,14,Normal,Hypertension,General,Propofol,118,Low
+P0945,54,F,83,155,34.55,II,68,157,94,98,20,Normal,Hypertension,Gynecology,Propofol,148,Medium
+P0946,76,F,87,185,25.42,III,92,150,92,95,13,Normal,Asthma,Cardiac,Propofol,124,High
+P0947,66,F,53,162,20.2,I,67,136,68,99,23,Normal,Heart Disease,Gynecology,Sevoflurane,159,Low
+P0948,23,F,55,153,23.5,I,71,149,99,95,17,Abnormal,Diabetes,Orthopedic,Etomidate,140,Low
+P0949,56,F,87,161,33.56,III,78,145,76,95,18,Abnormal,Asthma,Urology,Etomidate,134,High
+P0950,67,M,65,168,23.03,III,84,145,98,94,16,Normal,Hypertension,Neurosurgery,Etomidate,83,High
+P0951,46,F,53,178,16.73,III,65,149,98,96,21,Normal,Heart Disease,Orthopedic,Propofol,142,High
+P0952,33,F,92,159,36.39,II,95,118,61,97,15,Normal,None,General,Sevoflurane,144,Medium
+P0953,65,M,59,177,18.83,III,96,145,77,97,16,Abnormal,None,Urology,Propofol,161,High
+P0954,59,F,60,188,16.98,I,65,157,82,96,24,Normal,None,Urology,Propofol,125,Low
+P0955,49,M,55,188,15.56,III,98,109,92,100,21,Normal,Hypertension,Gynecology,Propofol,118,High
+P0956,64,F,94,169,32.91,III,69,135,70,100,17,Normal,None,Gynecology,Etomidate,140,High
+P0957,51,F,64,155,26.64,III,90,135,62,100,17,Normal,Asthma,ENT,Propofol,163,High
+P0958,80,M,72,188,20.37,I,72,127,62,95,12,Normal,Asthma,Orthopedic,Etomidate,130,Low
+P0959,75,M,48,158,19.23,III,84,127,88,98,16,Normal,None,Orthopedic,Sevoflurane,156,High
+P0960,49,F,80,151,35.09,I,73,125,65,95,22,Normal,Heart Disease,Gynecology,Etomidate,122,Low
+P0961,74,F,76,168,26.93,II,65,133,78,98,12,Normal,Hypertension,Neurosurgery,Sevoflurane,121,Medium
+P0962,35,F,99,180,30.56,III,69,148,75,96,14,Normal,None,ENT,Propofol,96,High
+P0963,56,M,90,172,30.42,I,69,103,84,96,21,Normal,None,ENT,Propofol,174,Low
+P0964,41,F,72,171,24.62,II,85,155,71,94,21,Abnormal,None,Orthopedic,Etomidate,120,Medium
+P0965,70,F,98,160,38.28,I,66,119,69,95,21,Normal,None,Neurosurgery,Etomidate,110,Low
+P0966,41,M,100,174,33.03,III,91,100,80,98,12,Abnormal,None,Orthopedic,Etomidate,157,High
+P0967,46,F,94,162,35.82,I,97,136,67,98,13,Normal,None,Urology,Propofol,150,Low
+P0968,43,M,65,190,18.01,I,81,139,71,96,14,Normal,Hypertension,Cardiac,Sevoflurane,109,Low
+P0969,73,M,87,159,34.41,III,79,151,73,100,16,Normal,None,General,Propofol,100,High
+P0970,74,M,84,165,30.85,I,95,125,84,95,16,Normal,Asthma,Orthopedic,Sevoflurane,120,Low
+P0971,35,M,86,157,34.89,II,67,140,78,98,15,Normal,Asthma,ENT,Etomidate,87,Medium
+P0972,53,M,49,176,15.82,I,79,148,61,98,12,Normal,None,Neurosurgery,Propofol,130,Low
+P0973,23,M,86,158,34.45,II,60,132,69,99,19,Normal,Hypertension,Neurosurgery,Etomidate,83,Medium
+P0974,66,M,74,168,26.22,III,80,146,83,97,21,Normal,Heart Disease,Gynecology,Propofol,90,High
+P0975,26,F,80,158,32.05,I,63,112,69,99,24,Normal,Asthma,General,Etomidate,155,Low
+P0976,35,M,46,165,16.9,II,82,115,92,98,19,Normal,Asthma,ENT,Propofol,109,Medium
+P0977,27,F,75,188,21.22,III,89,112,91,95,18,Normal,Heart Disease,Urology,Sevoflurane,103,High
+P0978,61,M,50,165,18.37,III,72,158,76,95,17,Normal,Asthma,Orthopedic,Propofol,87,High
+P0979,61,F,50,152,21.64,II,88,152,71,99,18,Normal,Heart Disease,General,Etomidate,94,Medium
+P0980,39,M,89,151,39.03,III,69,126,96,95,16,Normal,Hypertension,Gynecology,Etomidate,118,High
+P0981,69,F,52,154,21.93,I,90,115,73,94,17,Normal,Asthma,Urology,Sevoflurane,103,Low
+P0982,71,M,53,184,15.65,I,75,147,61,94,17,Normal,Heart Disease,Orthopedic,Sevoflurane,179,Low
+P0983,36,F,90,167,32.27,II,82,136,100,99,15,Normal,None,ENT,Etomidate,128,Medium
+P0984,42,F,85,165,31.22,III,89,120,78,96,20,Normal,Asthma,Cardiac,Sevoflurane,89,High
+P0985,30,F,72,180,22.22,II,74,117,61,97,14,Normal,Diabetes,Gynecology,Propofol,169,Medium
+P0986,72,M,52,182,15.7,III,98,129,92,97,20,Normal,Asthma,Orthopedic,Sevoflurane,131,High
+P0987,30,F,90,174,29.73,I,82,156,76,94,21,Normal,Diabetes,Urology,Sevoflurane,173,Low
+P0988,61,M,53,150,23.56,III,95,119,62,99,21,Abnormal,Diabetes,General,Sevoflurane,167,High
+P0989,29,M,73,169,25.56,III,66,158,74,95,19,Normal,Heart Disease,ENT,Propofol,139,High
+P0990,35,M,47,172,15.89,III,66,130,71,95,23,Normal,Hypertension,Cardiac,Etomidate,99,High
+P0991,20,F,55,163,20.7,III,75,103,63,98,12,Normal,Hypertension,Urology,Propofol,108,High
+P0992,66,M,54,183,16.12,II,89,119,83,97,19,Normal,Hypertension,General,Propofol,178,Medium
+P0993,47,F,77,174,25.43,I,75,122,71,97,17,Normal,Hypertension,ENT,Etomidate,120,Low
+P0994,28,F,80,178,25.25,II,76,158,97,98,13,Abnormal,None,Neurosurgery,Propofol,137,Medium
+P0995,48,M,75,177,23.94,I,86,158,70,98,16,Normal,Hypertension,Gynecology,Propofol,137,Low
+P0996,46,M,82,150,36.44,II,93,149,75,96,16,Normal,None,ENT,Sevoflurane,115,Medium
+P0997,74,M,48,181,14.65,II,70,159,60,99,24,Normal,Diabetes,Cardiac,Propofol,153,Medium
+P0998,36,F,68,179,21.22,II,80,141,64,98,22,Normal,Asthma,Neurosurgery,Propofol,124,Medium
+P0999,79,F,70,161,27.01,III,73,155,81,98,23,Abnormal,Asthma,Gynecology,Propofol,115,High
+P1000,57,M,52,181,15.87,II,84,158,76,100,12,Normal,Diabetes,ENT,Propofol,165,Medium
+P1001,19,M,91,169,31.86,I,99,101,64,96,23,Normal,Hypertension,General,Etomidate,168,Low
+P1002,34,F,63,154,26.56,II,96,128,76,98,20,Normal,Heart Disease,Gynecology,Sevoflurane,144,Medium
+P1003,72,F,59,183,17.62,III,65,152,72,96,22,Abnormal,None,General,Propofol,139,High
+P1004,44,M,75,163,28.23,I,88,133,86,96,13,Normal,Heart Disease,Gynecology,Sevoflurane,98,Low
+P1005,40,M,86,165,31.59,III,93,111,97,99,21,Normal,Diabetes,ENT,Propofol,156,High
+P1006,57,F,89,176,28.73,I,79,124,71,98,21,Normal,Hypertension,Neurosurgery,Sevoflurane,109,Low
+P1007,49,F,62,184,18.31,III,65,117,65,95,12,Normal,Asthma,Orthopedic,Propofol,162,High
+P1008,48,M,53,180,16.36,I,95,107,69,100,18,Normal,Hypertension,General,Etomidate,102,Low
+P1009,33,F,100,164,37.18,III,99,160,96,95,23,Normal,Asthma,General,Etomidate,141,High
+P1010,64,M,47,176,15.17,III,87,160,65,99,14,Normal,Asthma,Urology,Sevoflurane,84,High
+P1011,65,M,50,163,18.82,I,99,115,64,97,15,Normal,Asthma,ENT,Propofol,101,Low
+P1012,23,F,63,152,27.27,II,64,108,67,94,13,Normal,None,Orthopedic,Etomidate,121,Medium
+P1013,23,M,60,186,17.34,I,84,125,98,95,24,Normal,Diabetes,Orthopedic,Sevoflurane,156,Low
+P1014,70,F,70,183,20.9,I,64,144,75,100,19,Normal,Heart Disease,Gynecology,Propofol,118,Low
+P1015,71,F,78,167,27.97,III,100,123,82,99,17,Normal,Asthma,ENT,Etomidate,135,High
+P1016,70,M,62,152,26.84,II,74,152,85,99,14,Normal,Asthma,Neurosurgery,Propofol,149,Medium
+P1017,19,F,72,156,29.59,I,69,129,88,96,21,Normal,Diabetes,Cardiac,Sevoflurane,95,Low
+P1018,48,M,58,153,24.78,I,69,118,94,100,17,Abnormal,None,Neurosurgery,Sevoflurane,109,Low
+P1019,24,F,56,173,18.71,III,70,149,91,100,18,Normal,Heart Disease,Urology,Etomidate,92,High
+P1020,38,M,90,165,33.06,I,92,160,75,100,12,Normal,Diabetes,Urology,Etomidate,93,Low
+P1021,55,M,83,154,35.0,III,97,118,87,100,19,Normal,Diabetes,General,Propofol,129,High
+P1022,51,M,65,165,23.88,III,97,157,81,94,17,Normal,Heart Disease,Neurosurgery,Propofol,101,High
+P1023,76,F,58,164,21.56,I,85,127,69,96,15,Normal,Hypertension,Neurosurgery,Sevoflurane,179,Low
+P1024,56,M,51,185,14.9,III,70,115,67,94,14,Normal,Heart Disease,Urology,Propofol,104,High
+P1025,24,F,87,184,25.7,I,61,154,69,95,23,Normal,None,Orthopedic,Propofol,180,Low
+P1026,62,F,45,189,12.6,I,88,144,83,100,24,Normal,Heart Disease,Cardiac,Sevoflurane,102,Low
+P1027,36,F,55,187,15.73,II,65,103,90,95,17,Abnormal,Asthma,Gynecology,Propofol,109,Medium
+P1028,66,F,73,175,23.84,II,72,103,85,94,17,Abnormal,Asthma,Urology,Sevoflurane,103,Medium
+P1029,30,F,71,155,29.55,III,62,100,74,97,24,Normal,Asthma,Gynecology,Etomidate,102,High
+P1030,31,M,84,187,24.02,I,63,144,62,97,18,Normal,None,Gynecology,Propofol,138,Low
+P1031,58,M,67,168,23.74,II,67,122,70,97,23,Normal,Hypertension,Urology,Propofol,92,Medium
+P1032,76,M,94,179,29.34,II,95,104,73,98,23,Normal,Diabetes,Gynecology,Sevoflurane,172,Medium
+P1033,41,F,51,166,18.51,III,80,160,64,99,24,Normal,Hypertension,Orthopedic,Propofol,156,High
+P1034,66,M,65,177,20.75,II,85,103,64,100,18,Normal,Asthma,Urology,Etomidate,143,Medium
+P1035,67,M,59,162,22.48,I,92,113,98,99,16,Abnormal,Hypertension,Neurosurgery,Etomidate,135,Low
+P1036,53,F,65,190,18.01,II,78,137,63,98,22,Normal,None,Orthopedic,Etomidate,129,Medium
+P1037,36,M,49,175,16.0,III,60,158,85,95,22,Normal,Diabetes,Cardiac,Etomidate,160,High
+P1038,50,M,98,159,38.76,II,89,146,99,94,17,Normal,Hypertension,Gynecology,Propofol,136,Medium
+P1039,33,F,46,151,20.17,I,78,131,90,96,13,Normal,Asthma,General,Sevoflurane,149,Low
+P1040,64,F,45,175,14.69,II,98,116,72,94,18,Normal,Diabetes,Orthopedic,Propofol,99,Medium
+P1041,59,M,89,188,25.18,III,94,135,90,96,24,Normal,Hypertension,Gynecology,Sevoflurane,146,High
+P1042,56,F,76,170,26.3,III,88,112,89,95,22,Normal,Diabetes,General,Etomidate,97,High
+P1043,42,M,68,170,23.53,II,77,108,78,99,19,Abnormal,Diabetes,Neurosurgery,Sevoflurane,102,Medium
+P1044,36,F,73,183,21.8,I,83,129,80,100,17,Normal,Heart Disease,Orthopedic,Propofol,118,Low
+P1045,80,F,75,187,21.45,II,94,131,100,100,23,Normal,Asthma,Urology,Sevoflurane,99,Medium
+P1046,66,F,99,170,34.26,I,85,159,74,95,22,Normal,Asthma,ENT,Sevoflurane,178,Low
+P1047,55,M,64,174,21.14,I,98,107,86,98,23,Normal,Diabetes,Cardiac,Sevoflurane,92,Low
+P1048,33,M,94,180,29.01,I,75,114,68,95,19,Normal,Diabetes,Orthopedic,Sevoflurane,163,Low
+P1049,33,M,76,162,28.96,II,68,149,76,98,22,Normal,Heart Disease,General,Etomidate,159,Medium
+P1050,79,M,78,183,23.29,I,84,160,74,95,22,Normal,Heart Disease,Orthopedic,Sevoflurane,107,Low
+P1051,19,M,95,153,40.58,III,81,145,91,98,19,Normal,Asthma,Neurosurgery,Etomidate,133,High
+P1052,60,M,60,178,18.94,I,62,135,96,99,15,Normal,Asthma,Neurosurgery,Propofol,127,Low
+P1053,76,M,49,172,16.56,II,87,125,62,95,16,Normal,None,Cardiac,Etomidate,155,Medium
+P1054,59,F,49,178,15.47,I,80,124,82,95,15,Normal,Hypertension,ENT,Sevoflurane,144,Low
+P1055,58,M,75,174,24.77,I,86,105,91,100,14,Abnormal,Diabetes,Urology,Propofol,160,Low
+P1056,79,M,56,151,24.56,III,76,102,76,96,17,Normal,Diabetes,ENT,Propofol,113,High
+P1057,45,F,59,162,22.48,III,75,149,87,97,24,Abnormal,None,General,Etomidate,161,High
+P1058,34,F,71,151,31.14,III,82,105,89,97,23,Normal,Heart Disease,General,Propofol,85,High
+P1059,66,F,64,153,27.34,II,68,109,72,95,18,Normal,Asthma,ENT,Sevoflurane,108,Medium
+P1060,55,F,74,161,28.55,II,79,132,84,100,14,Abnormal,Asthma,Gynecology,Etomidate,87,Medium
+P1061,30,F,99,159,39.16,II,79,103,92,95,21,Normal,None,ENT,Sevoflurane,101,Medium
+P1062,24,F,52,161,20.06,III,75,116,78,100,20,Normal,Diabetes,Orthopedic,Sevoflurane,178,High
+P1063,57,F,71,173,23.72,II,99,124,72,99,22,Normal,Hypertension,Orthopedic,Sevoflurane,104,Medium
+P1064,19,M,56,170,19.38,III,93,132,83,97,14,Abnormal,Heart Disease,Cardiac,Sevoflurane,147,High
+P1065,52,M,99,188,28.01,III,77,143,62,100,20,Normal,Hypertension,Neurosurgery,Etomidate,174,High
+P1066,55,M,93,168,32.95,III,77,148,98,96,18,Normal,Hypertension,Gynecology,Propofol,115,High
+P1067,32,F,70,171,23.94,I,67,134,64,94,18,Normal,Diabetes,General,Etomidate,114,Low
+P1068,48,F,96,190,26.59,II,92,155,88,96,24,Normal,Hypertension,General,Etomidate,117,Medium
+P1069,43,F,49,186,14.16,II,88,148,62,98,15,Normal,Hypertension,Urology,Sevoflurane,129,Medium
+P1070,66,M,77,153,32.89,I,91,134,80,100,19,Normal,Heart Disease,General,Propofol,172,Low
+P1071,77,F,51,172,17.24,II,91,143,81,98,14,Normal,Heart Disease,Urology,Propofol,136,Medium
+P1072,48,F,53,162,20.2,III,76,136,93,100,20,Normal,Heart Disease,Gynecology,Etomidate,98,High
+P1073,49,M,87,185,25.42,I,99,136,85,96,19,Normal,None,Gynecology,Etomidate,111,Low
+P1074,28,F,63,162,24.01,I,93,127,66,100,23,Normal,Diabetes,Cardiac,Etomidate,164,Low
+P1075,43,M,45,169,15.76,I,71,123,61,96,21,Normal,None,Urology,Etomidate,87,Low
+P1076,71,M,63,171,21.55,III,98,153,81,99,13,Abnormal,Asthma,Gynecology,Propofol,150,High
+P1077,79,F,58,186,16.76,II,65,104,84,97,23,Normal,Asthma,Gynecology,Etomidate,120,Medium
+P1078,23,F,72,182,21.74,I,73,142,69,98,15,Normal,Diabetes,ENT,Sevoflurane,150,Low
+P1079,37,M,71,183,21.2,III,77,125,99,97,23,Normal,Diabetes,Urology,Sevoflurane,144,High
+P1080,74,M,93,175,30.37,III,81,115,74,100,18,Normal,None,Gynecology,Propofol,151,High
+P1081,49,F,58,178,18.31,III,94,147,98,100,13,Normal,Diabetes,ENT,Propofol,89,High
+P1082,75,M,69,168,24.45,I,93,146,70,95,22,Normal,Heart Disease,Neurosurgery,Etomidate,82,Low
+P1083,20,F,74,189,20.72,III,78,120,93,96,15,Normal,Asthma,Neurosurgery,Propofol,93,High
+P1084,56,F,51,165,18.73,I,93,113,81,96,23,Normal,Diabetes,ENT,Etomidate,124,Low
+P1085,50,F,82,185,23.96,I,61,139,97,99,19,Abnormal,Heart Disease,Urology,Etomidate,170,Low
+P1086,51,F,70,172,23.66,II,79,131,86,100,16,Normal,Asthma,Gynecology,Sevoflurane,91,Medium
+P1087,36,M,66,169,23.11,II,69,135,97,98,23,Normal,Hypertension,ENT,Sevoflurane,127,Medium
+P1088,50,F,59,166,21.41,II,72,122,63,98,23,Abnormal,Diabetes,General,Sevoflurane,173,Medium
+P1089,45,F,98,181,29.91,I,67,154,97,96,19,Normal,None,ENT,Sevoflurane,175,Low
+P1090,18,F,88,150,39.11,II,98,114,71,100,14,Normal,None,Neurosurgery,Propofol,93,Medium
+P1091,69,M,77,180,23.77,I,97,138,100,94,22,Normal,Diabetes,Urology,Etomidate,82,Low
+P1092,23,F,96,152,41.55,I,70,108,84,94,12,Normal,Diabetes,General,Propofol,151,Low
+P1093,37,M,90,175,29.39,III,64,112,76,100,16,Normal,Hypertension,ENT,Etomidate,147,High
+P1094,32,M,95,186,27.46,I,73,101,91,97,18,Normal,None,ENT,Propofol,151,Low
+P1095,24,M,92,177,29.37,III,92,116,98,95,17,Normal,Asthma,General,Etomidate,161,High
+P1096,67,F,97,157,39.35,III,79,100,64,94,21,Abnormal,Asthma,Cardiac,Etomidate,175,High
+P1097,40,M,76,150,33.78,II,87,134,73,99,15,Abnormal,Hypertension,Cardiac,Propofol,106,Medium
+P1098,65,M,91,187,26.02,II,89,127,75,94,22,Normal,None,Gynecology,Etomidate,151,Medium
+P1099,73,F,81,185,23.67,I,66,105,71,99,21,Normal,Diabetes,Orthopedic,Propofol,142,Low
+P1100,78,M,75,172,25.35,II,96,138,82,96,13,Normal,Heart Disease,Cardiac,Sevoflurane,89,Medium
+P1101,74,M,89,166,32.3,II,77,101,92,94,22,Normal,Diabetes,Neurosurgery,Etomidate,129,Medium
+P1102,20,M,59,174,19.49,I,70,110,74,98,16,Normal,Diabetes,ENT,Sevoflurane,131,Low
+P1103,24,F,66,165,24.24,III,91,146,62,95,13,Normal,Diabetes,Gynecology,Etomidate,177,High
+P1104,28,M,91,151,39.91,III,92,107,91,96,24,Normal,None,ENT,Etomidate,97,High
+P1105,75,M,79,159,31.25,III,68,103,92,97,22,Normal,Asthma,Orthopedic,Sevoflurane,173,High
+P1106,66,F,71,170,24.57,I,86,114,66,97,20,Normal,Hypertension,General,Sevoflurane,177,Low
+P1107,79,M,75,189,21.0,I,76,135,80,100,19,Normal,None,Urology,Propofol,83,Low
+P1108,34,F,47,181,14.35,III,60,119,64,100,14,Normal,Hypertension,General,Propofol,177,High
+P1109,75,M,52,165,19.1,II,92,152,88,98,12,Normal,Asthma,Gynecology,Sevoflurane,174,Medium
+P1110,21,M,85,172,28.73,II,61,137,77,99,16,Normal,None,Cardiac,Propofol,167,Medium
+P1111,64,F,72,186,20.81,II,86,141,92,99,24,Normal,Asthma,ENT,Etomidate,173,Medium
+P1112,63,M,75,183,22.4,III,71,118,83,96,20,Normal,Diabetes,General,Propofol,88,High
+P1113,68,M,48,183,14.33,II,62,144,79,96,18,Abnormal,Heart Disease,ENT,Propofol,118,Medium
+P1114,78,M,47,159,18.59,II,84,118,68,96,20,Normal,Hypertension,Orthopedic,Propofol,88,Medium
+P1115,77,F,57,189,15.96,I,79,112,61,99,23,Abnormal,Heart Disease,Cardiac,Etomidate,164,Low
+P1116,71,F,81,177,25.85,I,96,101,64,96,21,Normal,Asthma,Urology,Etomidate,141,Low
+P1117,32,M,60,166,21.77,I,67,112,81,95,18,Normal,None,Cardiac,Propofol,116,Low
+P1118,34,F,78,188,22.07,I,76,135,61,99,14,Normal,None,Neurosurgery,Propofol,93,Low
+P1119,49,M,62,162,23.62,II,91,143,80,98,20,Normal,Hypertension,Gynecology,Propofol,157,Medium
+P1120,18,F,70,181,21.37,III,64,108,84,99,22,Normal,Asthma,Urology,Propofol,123,High
+P1121,29,M,47,154,19.82,III,82,141,74,100,23,Normal,None,Orthopedic,Sevoflurane,166,High
+P1122,43,M,85,180,26.23,III,94,143,67,98,18,Normal,Diabetes,Orthopedic,Sevoflurane,104,High
+P1123,43,M,58,154,24.46,II,89,125,73,98,21,Abnormal,None,Cardiac,Sevoflurane,130,Medium
+P1124,31,F,73,177,23.3,I,97,135,80,99,19,Abnormal,Diabetes,Cardiac,Propofol,137,Low
+P1125,66,F,87,176,28.09,I,63,125,90,96,13,Abnormal,None,Gynecology,Propofol,180,Low
+P1126,44,F,77,185,22.5,II,60,126,75,99,14,Normal,None,ENT,Etomidate,165,Medium
+P1127,30,F,52,170,17.99,I,87,153,67,94,20,Normal,Heart Disease,Gynecology,Sevoflurane,116,Low
+P1128,78,F,49,160,19.14,III,70,119,87,96,19,Normal,Asthma,Urology,Sevoflurane,179,High
+P1129,34,M,72,161,27.78,III,100,140,75,98,12,Normal,Diabetes,Urology,Sevoflurane,108,High
+P1130,72,F,99,163,37.26,III,60,120,92,98,24,Normal,Asthma,ENT,Etomidate,90,High
+P1131,68,F,76,165,27.92,II,72,110,61,94,24,Normal,Hypertension,Neurosurgery,Propofol,138,Medium
+P1132,75,F,48,182,14.49,I,64,102,77,97,24,Normal,Asthma,Cardiac,Etomidate,84,Low
+P1133,73,M,62,178,19.57,I,69,122,99,98,12,Normal,Heart Disease,General,Propofol,129,Low
+P1134,23,M,91,155,37.88,III,94,133,63,94,19,Normal,Hypertension,ENT,Sevoflurane,175,High
+P1135,71,M,90,155,37.46,II,67,115,61,96,18,Normal,None,ENT,Propofol,136,Medium
+P1136,57,F,71,160,27.73,I,91,151,65,94,20,Abnormal,None,Orthopedic,Etomidate,171,Low
+P1137,71,M,60,160,23.44,III,60,117,94,100,18,Abnormal,Diabetes,Orthopedic,Etomidate,157,High
+P1138,55,M,93,156,38.21,II,61,116,61,95,19,Normal,Hypertension,ENT,Sevoflurane,169,Medium
+P1139,27,F,95,159,37.58,III,63,107,81,98,12,Normal,Asthma,Neurosurgery,Etomidate,99,High
+P1140,58,F,98,171,33.51,III,90,140,79,98,13,Normal,Hypertension,Gynecology,Etomidate,93,High
+P1141,38,M,56,161,21.6,II,79,106,61,99,14,Normal,Diabetes,ENT,Propofol,82,Medium
+P1142,44,M,92,171,31.46,II,83,104,64,94,21,Normal,None,Gynecology,Sevoflurane,101,Medium
+P1143,52,F,67,168,23.74,III,81,129,98,96,22,Normal,None,Urology,Propofol,171,High
+P1144,57,F,69,167,24.74,I,73,101,94,98,18,Normal,Hypertension,Orthopedic,Etomidate,129,Low
+P1145,18,F,74,190,20.5,I,78,111,92,94,21,Normal,Asthma,Cardiac,Propofol,143,Low
+P1146,56,M,75,175,24.49,II,76,114,75,98,19,Abnormal,Diabetes,Gynecology,Etomidate,116,Medium
+P1147,52,M,48,155,19.98,I,86,157,93,96,17,Normal,Diabetes,Neurosurgery,Sevoflurane,107,Low
+P1148,59,M,55,189,15.4,II,73,130,70,95,15,Normal,Hypertension,Urology,Sevoflurane,116,Medium
+P1149,27,F,71,189,19.88,I,77,140,89,99,22,Normal,Hypertension,ENT,Etomidate,116,Low
+P1150,58,M,93,152,40.25,II,89,143,80,94,18,Normal,Asthma,Urology,Etomidate,95,Medium
+P1151,43,F,71,151,31.14,I,82,149,88,99,24,Normal,None,Cardiac,Propofol,164,Low
+P1152,58,M,49,155,20.4,I,85,120,97,96,14,Normal,None,Urology,Sevoflurane,114,Low
+P1153,24,M,88,158,35.25,I,79,141,64,97,19,Normal,Heart Disease,Neurosurgery,Sevoflurane,118,Low
+P1154,63,F,80,151,35.09,III,66,144,77,98,17,Normal,Hypertension,Cardiac,Etomidate,92,High
+P1155,28,M,49,172,16.56,III,68,100,93,99,14,Normal,Hypertension,ENT,Sevoflurane,106,High
+P1156,30,M,61,177,19.47,III,66,154,72,99,14,Normal,Hypertension,Cardiac,Etomidate,140,High
+P1157,65,F,94,164,34.95,III,76,159,60,95,14,Normal,None,Urology,Etomidate,131,High
+P1158,35,M,48,169,16.81,III,60,137,85,99,15,Normal,None,General,Propofol,86,High
+P1159,25,M,45,174,14.86,II,78,113,91,99,13,Abnormal,Heart Disease,Cardiac,Etomidate,150,Medium
+P1160,54,F,86,153,36.74,I,65,119,99,98,24,Normal,Asthma,Gynecology,Etomidate,80,Low
+P1161,22,F,63,189,17.64,II,71,126,94,99,15,Normal,Hypertension,General,Etomidate,174,Medium
+P1162,59,M,50,159,19.78,III,85,127,60,95,12,Normal,Diabetes,Cardiac,Propofol,165,High
+P1163,64,F,63,157,25.56,III,95,147,98,98,14,Normal,Hypertension,Gynecology,Sevoflurane,151,High
+P1164,25,F,77,176,24.86,II,63,126,79,100,21,Normal,Asthma,Neurosurgery,Etomidate,163,Medium
+P1165,66,M,53,169,18.56,I,68,119,93,100,20,Normal,Diabetes,Gynecology,Sevoflurane,113,Low
+P1166,64,F,63,181,19.23,I,74,117,78,95,13,Abnormal,Diabetes,Gynecology,Propofol,116,Low
+P1167,48,F,93,187,26.59,III,70,100,78,100,15,Normal,Asthma,Orthopedic,Propofol,137,High
+P1168,36,M,76,175,24.82,I,91,125,76,96,14,Normal,Heart Disease,Orthopedic,Sevoflurane,115,Low
+P1169,23,M,54,163,20.32,III,71,111,97,98,19,Normal,Asthma,General,Etomidate,154,High
+P1170,25,F,57,154,24.03,III,91,150,89,94,18,Normal,Heart Disease,Neurosurgery,Propofol,85,High
+P1171,29,M,98,152,42.42,III,78,118,71,98,16,Normal,None,Cardiac,Etomidate,180,High
+P1172,67,M,65,189,18.2,I,73,145,81,95,13,Normal,Asthma,General,Etomidate,164,Low
+P1173,77,M,94,155,39.13,III,75,132,75,95,21,Normal,None,Neurosurgery,Sevoflurane,116,High
+P1174,58,M,89,164,33.09,III,67,155,61,99,17,Normal,Heart Disease,Urology,Propofol,142,High
+P1175,62,M,46,164,17.1,III,70,127,100,94,15,Normal,Heart Disease,Neurosurgery,Propofol,167,High
+P1176,80,F,54,161,20.83,III,68,152,88,98,18,Normal,None,Orthopedic,Etomidate,134,High
+P1177,39,F,59,152,25.54,III,97,114,66,99,22,Normal,Asthma,Orthopedic,Propofol,112,High
+P1178,27,F,93,179,29.03,II,82,114,86,97,19,Normal,None,Urology,Propofol,177,Medium
+P1179,79,M,61,161,23.53,III,78,135,68,98,13,Normal,Diabetes,Neurosurgery,Etomidate,87,High
+P1180,53,F,52,152,22.51,III,73,125,81,96,18,Normal,Asthma,Neurosurgery,Propofol,151,High
+P1181,52,F,52,150,23.11,III,76,125,94,96,16,Normal,Heart Disease,Cardiac,Propofol,102,High
+P1182,65,M,87,181,26.56,III,65,100,93,99,12,Normal,Heart Disease,Orthopedic,Propofol,162,High
+P1183,36,F,93,171,31.8,I,77,117,92,100,21,Normal,None,Neurosurgery,Sevoflurane,90,Low
+P1184,47,M,91,178,28.72,III,65,144,81,97,22,Normal,Diabetes,Urology,Etomidate,109,High
+P1185,63,F,98,175,32.0,III,87,132,62,94,19,Normal,None,Gynecology,Propofol,173,High
+P1186,33,F,83,161,32.02,III,60,158,93,97,20,Normal,Hypertension,Gynecology,Sevoflurane,143,High
+P1187,23,F,46,152,19.91,II,87,118,94,98,20,Normal,None,ENT,Etomidate,175,Medium
+P1188,60,M,61,151,26.75,I,64,138,82,95,15,Normal,Hypertension,Urology,Sevoflurane,111,Low
+P1189,21,M,49,186,14.16,II,85,112,61,96,23,Normal,Heart Disease,Urology,Etomidate,165,Medium
+P1190,24,F,90,157,36.51,III,99,114,76,98,17,Normal,Asthma,Neurosurgery,Etomidate,93,High
+P1191,46,M,80,187,22.88,I,67,143,99,95,20,Normal,None,Cardiac,Etomidate,102,Low
+P1192,41,F,83,165,30.49,I,82,157,84,96,14,Normal,Diabetes,Cardiac,Etomidate,96,Low
+P1193,40,F,86,181,26.25,II,63,124,80,99,22,Normal,Asthma,General,Etomidate,147,Medium
+P1194,42,F,75,175,24.49,I,65,103,84,98,17,Normal,Diabetes,Urology,Sevoflurane,174,Low
+P1195,73,M,87,180,26.85,I,93,158,62,99,20,Normal,Diabetes,Orthopedic,Sevoflurane,130,Low
+P1196,34,F,68,177,21.71,II,79,141,79,100,15,Normal,Heart Disease,Cardiac,Etomidate,169,Medium
+P1197,27,F,97,160,37.89,II,68,113,69,98,18,Normal,Hypertension,Neurosurgery,Propofol,124,Medium
+P1198,57,F,63,180,19.44,II,77,147,69,95,15,Normal,Diabetes,General,Etomidate,130,Medium
+P1199,57,F,49,179,15.29,III,64,104,94,95,23,Normal,None,Orthopedic,Etomidate,159,High
+P1200,71,M,81,184,23.92,III,78,107,100,98,24,Normal,Diabetes,Neurosurgery,Propofol,114,High
+P1201,55,M,62,169,21.71,III,70,123,62,98,14,Normal,Heart Disease,Orthopedic,Etomidate,176,High
+P1202,34,M,100,190,27.7,II,84,121,77,95,18,Abnormal,None,Orthopedic,Etomidate,125,Medium
+P1203,77,M,68,164,25.28,I,92,129,95,94,15,Abnormal,Heart Disease,Neurosurgery,Etomidate,87,Low
+P1204,61,F,45,177,14.36,III,100,102,84,95,19,Normal,None,Neurosurgery,Propofol,158,High
+P1205,50,F,67,160,26.17,I,63,144,90,97,23,Normal,Heart Disease,General,Propofol,158,Low
+P1206,40,M,87,166,31.57,III,75,155,90,97,13,Normal,Asthma,General,Sevoflurane,149,High
+P1207,80,F,59,186,17.05,II,85,156,87,97,21,Normal,Hypertension,Gynecology,Propofol,140,Medium
+P1208,48,F,82,167,29.4,I,81,160,62,95,22,Abnormal,None,Urology,Propofol,103,Low
+P1209,54,F,62,165,22.77,III,72,120,80,100,17,Normal,Hypertension,Cardiac,Propofol,175,High
+P1210,41,F,90,154,37.95,III,81,148,76,94,17,Normal,Asthma,Orthopedic,Etomidate,146,High
+P1211,30,F,60,190,16.62,II,83,158,100,97,18,Normal,None,General,Etomidate,130,Medium
+P1212,35,F,51,153,21.79,II,61,106,79,94,15,Normal,Diabetes,Urology,Propofol,94,Medium
+P1213,42,F,52,157,21.1,III,90,153,64,100,24,Normal,Heart Disease,Gynecology,Propofol,124,High
+P1214,46,M,75,180,23.15,III,92,147,62,96,12,Normal,Diabetes,Cardiac,Propofol,169,High
+P1215,25,F,71,169,24.86,III,60,105,72,96,20,Normal,Hypertension,Gynecology,Etomidate,88,High
+P1216,73,M,72,157,29.21,III,93,144,72,99,20,Normal,Heart Disease,Cardiac,Etomidate,110,High
+P1217,58,M,65,167,23.31,II,68,101,61,97,22,Normal,Diabetes,Urology,Sevoflurane,133,Medium
+P1218,30,F,76,185,22.21,I,79,157,92,100,18,Normal,None,Orthopedic,Sevoflurane,101,Low
+P1219,77,M,54,178,17.04,I,61,107,60,98,19,Abnormal,Asthma,Orthopedic,Propofol,179,Low
+P1220,59,F,68,172,22.99,I,99,100,91,100,16,Normal,Asthma,Orthopedic,Propofol,154,Low
+P1221,48,F,52,179,16.23,II,69,131,74,94,16,Abnormal,Asthma,General,Sevoflurane,147,Medium
+P1222,37,M,58,151,25.44,I,79,144,78,100,20,Normal,Diabetes,Urology,Propofol,149,Low
+P1223,61,F,60,181,18.31,I,70,118,60,97,13,Normal,Asthma,Orthopedic,Sevoflurane,156,Low
+P1224,23,F,84,177,26.81,II,95,122,90,96,21,Normal,Heart Disease,Urology,Sevoflurane,141,Medium
+P1225,53,F,56,190,15.51,III,60,119,70,94,13,Normal,None,Gynecology,Sevoflurane,106,High
+P1226,78,M,71,162,27.05,III,83,158,95,97,16,Normal,Hypertension,Neurosurgery,Etomidate,175,High
+P1227,31,F,75,164,27.89,II,70,122,77,98,20,Normal,Diabetes,Urology,Sevoflurane,80,Medium
+P1228,61,F,64,172,21.63,I,92,135,92,96,14,Normal,Hypertension,Urology,Propofol,133,Low
+P1229,70,F,67,164,24.91,I,63,148,70,98,24,Abnormal,None,Orthopedic,Propofol,118,Low
+P1230,75,F,67,169,23.46,II,97,118,80,99,22,Abnormal,Asthma,General,Sevoflurane,143,Medium
+P1231,58,M,92,179,28.71,II,79,123,61,94,21,Normal,Hypertension,Cardiac,Etomidate,102,Medium
+P1232,54,F,88,184,25.99,II,87,147,92,97,15,Normal,Hypertension,ENT,Sevoflurane,139,Medium
+P1233,30,F,70,166,25.4,II,80,159,87,96,14,Normal,None,Orthopedic,Propofol,116,Medium
+P1234,69,M,62,189,17.36,III,71,142,64,98,15,Normal,None,Urology,Sevoflurane,155,High
+P1235,28,M,50,190,13.85,III,89,124,92,98,17,Normal,Diabetes,Neurosurgery,Propofol,146,High
+P1236,65,F,99,150,44.0,II,98,139,94,96,17,Abnormal,Diabetes,General,Etomidate,156,Medium
+P1237,58,F,79,187,22.59,III,90,149,71,95,16,Normal,Asthma,Urology,Sevoflurane,124,High
+P1238,72,F,45,187,12.87,II,74,107,85,100,14,Normal,Hypertension,ENT,Etomidate,175,Medium
+P1239,28,M,64,160,25.0,I,61,156,82,96,20,Normal,Heart Disease,Gynecology,Propofol,121,Low
+P1240,46,F,84,188,23.77,II,80,158,90,97,14,Normal,Hypertension,General,Propofol,115,Medium
+P1241,24,F,76,186,21.97,I,75,148,92,94,13,Normal,Heart Disease,General,Sevoflurane,125,Low
+P1242,55,F,88,181,26.86,I,91,124,75,94,20,Abnormal,None,Cardiac,Sevoflurane,84,Low
+P1243,22,F,98,183,29.26,I,86,118,73,97,14,Normal,None,Gynecology,Etomidate,151,Low
+P1244,53,F,75,169,26.26,I,98,110,69,94,14,Normal,Asthma,ENT,Sevoflurane,140,Low
+P1245,70,M,91,161,35.11,I,69,135,87,98,21,Normal,Heart Disease,General,Sevoflurane,103,Low
+P1246,24,F,76,152,32.89,III,63,137,88,100,17,Normal,Hypertension,Neurosurgery,Etomidate,80,High
+P1247,24,M,95,162,36.2,II,63,144,94,96,21,Normal,Heart Disease,Neurosurgery,Sevoflurane,141,Medium
+P1248,21,F,58,167,20.8,I,71,133,79,94,22,Normal,Heart Disease,ENT,Etomidate,159,Low
+P1249,32,F,51,188,14.43,I,68,126,75,99,18,Normal,Heart Disease,General,Propofol,106,Low
+P1250,52,M,57,177,18.19,I,75,109,60,97,16,Normal,Hypertension,Orthopedic,Etomidate,120,Low
+P1251,71,F,98,188,27.73,III,95,105,69,97,21,Normal,None,Cardiac,Propofol,95,High
+P1252,21,F,89,164,33.09,II,84,140,61,100,23,Normal,Diabetes,Cardiac,Etomidate,112,Medium
+P1253,76,F,63,164,23.42,III,61,134,96,97,15,Normal,Diabetes,Orthopedic,Propofol,172,High
+P1254,66,M,63,166,22.86,I,97,127,94,99,12,Normal,Diabetes,Gynecology,Sevoflurane,80,Low
+P1255,35,F,77,158,30.84,II,85,127,67,100,21,Normal,Heart Disease,Urology,Sevoflurane,127,Medium
+P1256,40,M,60,159,23.73,III,82,138,65,94,16,Abnormal,Hypertension,Neurosurgery,Propofol,156,High
+P1257,47,F,49,171,16.76,III,60,100,95,98,16,Normal,Diabetes,Orthopedic,Sevoflurane,159,High
+P1258,26,M,92,164,34.21,I,75,116,88,96,23,Normal,Diabetes,Neurosurgery,Sevoflurane,84,Low
+P1259,29,M,84,172,28.39,III,81,107,87,98,14,Normal,None,Urology,Sevoflurane,130,High
+P1260,28,F,68,157,27.59,II,60,142,82,96,20,Abnormal,Hypertension,General,Sevoflurane,137,Medium
+P1261,20,M,78,172,26.37,III,81,138,87,94,14,Normal,Hypertension,Orthopedic,Etomidate,105,High
+P1262,30,M,49,187,14.01,II,81,160,89,94,15,Abnormal,Diabetes,Cardiac,Sevoflurane,120,Medium
+P1263,43,M,77,170,26.64,III,91,158,78,94,12,Normal,Asthma,General,Etomidate,146,High
+P1264,49,F,97,150,43.11,II,86,147,81,95,20,Normal,None,Neurosurgery,Etomidate,175,Medium
+P1265,37,F,92,174,30.39,III,73,154,91,100,15,Normal,Heart Disease,Orthopedic,Etomidate,137,High
+P1266,66,F,50,159,19.78,III,82,147,93,98,21,Normal,Asthma,Cardiac,Sevoflurane,158,High
+P1267,46,F,94,174,31.05,III,67,136,61,100,20,Normal,Heart Disease,Orthopedic,Propofol,157,High
+P1268,78,F,54,157,21.91,I,100,156,87,99,19,Normal,Heart Disease,Neurosurgery,Etomidate,158,Low
+P1269,59,F,61,165,22.41,I,100,116,95,96,17,Normal,Asthma,General,Sevoflurane,156,Low
+P1270,18,M,92,190,25.48,III,62,156,96,95,12,Normal,Heart Disease,Orthopedic,Propofol,157,High
+P1271,61,M,46,168,16.3,I,98,155,75,99,22,Abnormal,Asthma,Orthopedic,Sevoflurane,90,Low
+P1272,38,F,47,180,14.51,III,73,103,97,96,14,Normal,Diabetes,Gynecology,Propofol,117,High
+P1273,31,F,61,166,22.14,I,67,133,68,100,23,Normal,Diabetes,Urology,Etomidate,158,Low
+P1274,54,M,61,181,18.62,III,60,113,73,96,18,Normal,Diabetes,Orthopedic,Sevoflurane,138,High
+P1275,69,F,77,182,23.25,III,71,151,71,96,15,Normal,Heart Disease,Orthopedic,Etomidate,102,High
+P1276,48,M,75,168,26.57,II,77,141,73,100,19,Normal,Asthma,Neurosurgery,Etomidate,178,Medium
+P1277,48,F,52,158,20.83,III,76,152,63,100,13,Abnormal,Hypertension,Orthopedic,Sevoflurane,151,High
+P1278,22,M,69,161,26.62,I,89,129,83,100,17,Normal,Hypertension,ENT,Propofol,168,Low
+P1279,45,M,63,186,18.21,III,65,129,98,97,17,Normal,Hypertension,Cardiac,Sevoflurane,151,High
+P1280,52,F,79,174,26.09,I,100,138,75,100,15,Normal,None,Urology,Propofol,158,Low
+P1281,60,F,93,169,32.56,III,75,131,66,97,23,Normal,Hypertension,General,Sevoflurane,114,High
+P1282,44,M,64,162,24.39,I,94,114,98,95,23,Normal,Hypertension,ENT,Propofol,141,Low
+P1283,63,F,100,163,37.64,II,62,137,60,97,15,Abnormal,Heart Disease,Orthopedic,Etomidate,109,Medium
+P1284,34,M,84,158,33.65,III,86,129,82,98,20,Normal,Asthma,Gynecology,Sevoflurane,98,High
+P1285,26,F,52,152,22.51,II,96,112,97,94,20,Normal,Hypertension,ENT,Propofol,179,Medium
+P1286,28,M,61,162,23.24,II,90,145,93,95,23,Normal,Heart Disease,ENT,Etomidate,107,Medium
+P1287,30,F,90,182,27.17,II,94,121,64,94,15,Normal,Asthma,General,Propofol,102,Medium
+P1288,33,F,54,158,21.63,II,81,122,67,96,17,Normal,Diabetes,Neurosurgery,Etomidate,108,Medium
+P1289,67,F,74,155,30.8,II,90,123,88,95,22,Normal,Hypertension,Orthopedic,Propofol,160,Medium
+P1290,59,M,94,164,34.95,III,83,123,69,94,23,Normal,Hypertension,Gynecology,Sevoflurane,169,High
+P1291,48,F,49,179,15.29,II,67,147,91,95,14,Normal,Hypertension,Cardiac,Sevoflurane,164,Medium
+P1292,39,F,46,170,15.92,III,60,148,81,99,22,Normal,Heart Disease,ENT,Etomidate,118,High
+P1293,69,M,69,153,29.48,II,99,131,84,99,16,Normal,None,Neurosurgery,Etomidate,99,Medium
+P1294,36,M,67,188,18.96,II,98,157,73,97,22,Normal,Asthma,Urology,Propofol,161,Medium
+P1295,46,F,54,168,19.13,I,94,121,72,100,24,Normal,Diabetes,Urology,Sevoflurane,110,Low
+P1296,58,M,90,179,28.09,II,62,155,62,96,24,Normal,None,ENT,Sevoflurane,100,Medium
+P1297,43,F,51,160,19.92,II,95,145,75,97,24,Normal,Asthma,ENT,Sevoflurane,90,Medium
+P1298,54,M,78,178,24.62,II,82,142,82,94,17,Abnormal,Asthma,Orthopedic,Propofol,138,Medium
+P1299,47,M,98,189,27.43,III,98,112,66,96,19,Normal,Diabetes,Neurosurgery,Sevoflurane,124,High
+P1300,76,F,59,173,19.71,III,75,141,68,95,19,Normal,Asthma,General,Propofol,161,High
+P1301,35,M,51,170,17.65,II,67,106,65,96,20,Normal,Diabetes,ENT,Etomidate,85,Medium
+P1302,19,M,92,181,28.08,III,68,115,80,100,19,Abnormal,Hypertension,Gynecology,Sevoflurane,145,High
+P1303,31,M,93,185,27.17,I,91,101,98,94,15,Normal,None,Urology,Sevoflurane,154,Low
+P1304,33,F,65,187,18.59,I,96,152,78,96,23,Normal,Hypertension,Orthopedic,Propofol,145,Low
+P1305,49,M,64,174,21.14,III,70,106,90,96,20,Normal,None,Cardiac,Etomidate,156,High
+P1306,65,M,67,173,22.39,II,68,119,67,94,19,Normal,Asthma,Urology,Propofol,100,Medium
+P1307,62,M,71,151,31.14,II,79,149,91,97,18,Normal,Diabetes,Gynecology,Propofol,173,Medium
+P1308,73,F,65,186,18.79,I,82,121,94,98,19,Normal,Heart Disease,Gynecology,Etomidate,154,Low
+P1309,46,F,84,169,29.41,III,62,130,81,98,15,Abnormal,Asthma,Neurosurgery,Sevoflurane,119,High
+P1310,41,F,72,158,28.84,III,98,136,100,94,15,Normal,Heart Disease,Orthopedic,Propofol,101,High
+P1311,51,M,83,177,26.49,II,75,112,75,96,17,Normal,Heart Disease,General,Etomidate,133,Medium
+P1312,29,M,93,151,40.79,III,89,153,81,95,23,Normal,Heart Disease,ENT,Propofol,127,High
+P1313,77,M,67,170,23.18,III,88,136,85,98,14,Normal,Hypertension,General,Propofol,175,High
+P1314,28,M,68,184,20.09,III,94,130,63,94,16,Normal,Hypertension,General,Sevoflurane,85,High
+P1315,70,M,66,156,27.12,III,88,147,95,95,22,Normal,Diabetes,Gynecology,Propofol,174,High
+P1316,56,M,95,164,35.32,II,64,142,80,95,12,Normal,Asthma,General,Sevoflurane,149,Medium
+P1317,64,F,56,170,19.38,II,77,107,63,99,15,Normal,Hypertension,Neurosurgery,Sevoflurane,109,Medium
+P1318,72,M,51,180,15.74,II,61,122,98,94,20,Normal,Hypertension,Urology,Sevoflurane,90,Medium
+P1319,38,F,65,150,28.89,II,62,121,63,100,18,Normal,Hypertension,Neurosurgery,Sevoflurane,92,Medium
+P1320,19,F,85,154,35.84,I,68,143,69,98,17,Abnormal,Heart Disease,ENT,Etomidate,109,Low
+P1321,43,F,81,163,30.49,II,65,137,98,97,15,Normal,Asthma,ENT,Propofol,155,Medium
+P1322,27,F,83,173,27.73,III,94,131,60,96,24,Normal,None,Cardiac,Sevoflurane,122,High
+P1323,57,F,96,151,42.1,II,84,136,76,96,22,Normal,Heart Disease,Gynecology,Sevoflurane,171,Medium
+P1324,79,M,94,155,39.13,II,83,151,67,98,21,Normal,None,Orthopedic,Etomidate,99,Medium
+P1325,19,F,93,181,28.39,I,69,143,84,95,15,Normal,Heart Disease,Gynecology,Sevoflurane,146,Low
+P1326,32,M,71,160,27.73,II,81,132,95,98,13,Normal,None,Orthopedic,Etomidate,118,Medium
+P1327,80,M,49,174,16.18,II,93,130,95,97,14,Normal,None,Gynecology,Propofol,97,Medium
+P1328,53,M,52,178,16.41,II,87,120,80,97,23,Normal,None,Gynecology,Sevoflurane,114,Medium
+P1329,35,M,68,173,22.72,III,98,128,90,97,21,Normal,None,General,Sevoflurane,158,High
+P1330,71,F,57,164,21.19,I,86,128,91,97,21,Abnormal,Asthma,Orthopedic,Etomidate,150,Low
+P1331,28,M,48,172,16.22,III,72,153,75,100,17,Normal,Asthma,Gynecology,Propofol,121,High
+P1332,65,F,95,156,39.04,II,61,118,75,97,17,Normal,Diabetes,Orthopedic,Etomidate,151,Medium
+P1333,54,M,70,173,23.39,I,97,154,72,96,12,Normal,Diabetes,ENT,Sevoflurane,108,Low
+P1334,23,F,71,187,20.3,II,66,134,96,99,13,Normal,None,Neurosurgery,Propofol,116,Medium
+P1335,44,M,51,167,18.29,I,98,147,70,97,16,Abnormal,Asthma,Cardiac,Propofol,157,Low
+P1336,61,F,53,178,16.73,III,68,140,86,98,19,Normal,Diabetes,ENT,Sevoflurane,171,High
+P1337,28,M,47,153,20.08,III,92,134,84,96,19,Normal,None,Gynecology,Sevoflurane,119,High
+P1338,26,M,73,174,24.11,I,86,125,61,96,12,Normal,Hypertension,Orthopedic,Propofol,117,Low
+P1339,31,F,75,174,24.77,II,70,119,92,100,13,Abnormal,Hypertension,Orthopedic,Etomidate,134,Medium
+P1340,66,F,52,161,20.06,II,92,148,73,94,15,Abnormal,Hypertension,Urology,Etomidate,92,Medium
+P1341,19,M,68,177,21.71,II,64,142,84,98,18,Normal,Asthma,Neurosurgery,Etomidate,113,Medium
+P1342,44,M,93,182,28.08,II,63,103,85,95,18,Normal,Heart Disease,Gynecology,Sevoflurane,168,Medium
+P1343,37,M,79,189,22.12,III,65,107,68,98,21,Normal,Asthma,Neurosurgery,Propofol,106,High
+P1344,24,F,52,175,16.98,III,95,136,98,97,22,Normal,Asthma,General,Propofol,80,High
+P1345,63,M,95,165,34.89,I,68,159,94,96,15,Normal,Asthma,Orthopedic,Propofol,173,Low
+P1346,18,F,85,171,29.07,I,77,129,96,97,17,Normal,None,Urology,Propofol,149,Low
+P1347,39,F,93,166,33.75,I,93,133,95,100,15,Normal,None,Gynecology,Propofol,158,Low
+P1348,25,M,55,168,19.49,III,88,151,61,99,19,Normal,Diabetes,Urology,Propofol,179,High
+P1349,22,M,73,169,25.56,III,78,129,96,98,15,Normal,Asthma,General,Propofol,117,High
+P1350,46,M,87,175,28.41,III,97,115,71,99,18,Normal,Asthma,Cardiac,Sevoflurane,127,High
+P1351,49,M,98,174,32.37,II,92,151,95,99,19,Abnormal,Heart Disease,ENT,Propofol,132,Medium
+P1352,79,M,95,172,32.11,III,60,132,88,94,12,Normal,Asthma,ENT,Propofol,106,High
+P1353,27,F,75,167,26.89,II,76,142,98,96,24,Abnormal,Asthma,ENT,Etomidate,170,Medium
+P1354,48,M,80,154,33.73,III,71,101,84,97,16,Normal,Hypertension,General,Sevoflurane,175,High
+P1355,20,M,68,189,19.04,II,91,112,94,97,23,Normal,Hypertension,ENT,Etomidate,116,Medium
+P1356,74,F,83,186,23.99,III,61,153,97,99,16,Normal,None,Cardiac,Etomidate,124,High
+P1357,47,M,96,188,27.16,II,73,116,66,100,21,Normal,Asthma,Urology,Propofol,93,Medium
+P1358,61,F,53,152,22.94,II,69,106,79,96,15,Abnormal,None,General,Etomidate,158,Medium
+P1359,62,F,65,169,22.76,I,88,135,63,98,18,Normal,Diabetes,Orthopedic,Propofol,143,Low
+P1360,48,M,94,186,27.17,I,97,133,76,96,16,Normal,None,ENT,Sevoflurane,160,Low
+P1361,79,M,50,189,14.0,III,68,151,63,99,21,Normal,Heart Disease,Neurosurgery,Propofol,177,High
+P1362,45,F,74,190,20.5,I,87,106,85,98,18,Normal,None,General,Propofol,102,Low
+P1363,41,M,71,156,29.17,I,96,135,87,95,15,Normal,Diabetes,Orthopedic,Propofol,113,Low
+P1364,80,M,93,183,27.77,III,75,132,90,95,15,Normal,Asthma,Neurosurgery,Etomidate,175,High
+P1365,49,F,55,170,19.03,I,91,138,90,94,17,Normal,Diabetes,Orthopedic,Propofol,148,Low
+P1366,39,F,56,187,16.01,II,84,144,68,99,19,Abnormal,None,Gynecology,Propofol,176,Medium
+P1367,76,M,90,166,32.66,I,73,111,96,96,15,Abnormal,Hypertension,ENT,Etomidate,180,Low
+P1368,58,M,68,172,22.99,III,62,115,69,94,23,Normal,Hypertension,ENT,Etomidate,99,High
+P1369,29,M,97,177,30.96,I,98,109,77,96,12,Abnormal,Diabetes,Gynecology,Etomidate,152,Low
+P1370,59,M,98,176,31.64,III,62,133,63,97,17,Normal,Hypertension,Cardiac,Etomidate,177,High
+P1371,47,F,90,150,40.0,III,77,130,90,99,13,Normal,Diabetes,Orthopedic,Propofol,115,High
+P1372,37,M,84,168,29.76,I,67,158,65,98,15,Normal,Hypertension,Orthopedic,Sevoflurane,100,Low
+P1373,77,M,98,172,33.13,II,82,142,60,97,14,Normal,Heart Disease,Urology,Sevoflurane,151,Medium
+P1374,64,M,87,161,33.56,II,93,155,77,96,20,Normal,None,ENT,Etomidate,120,Medium
+P1375,22,M,64,159,25.32,II,63,128,98,98,13,Normal,None,Orthopedic,Etomidate,134,Medium
+P1376,26,F,85,174,28.08,I,77,104,62,94,16,Normal,Hypertension,General,Propofol,164,Low
+P1377,59,F,89,153,38.02,III,68,103,70,99,24,Normal,Asthma,Neurosurgery,Sevoflurane,87,High
+P1378,32,M,88,151,38.59,III,100,104,94,94,19,Normal,Diabetes,Neurosurgery,Sevoflurane,103,High
+P1379,51,F,80,151,35.09,II,83,135,82,95,15,Normal,Heart Disease,Cardiac,Propofol,83,Medium
+P1380,61,F,79,184,23.33,III,87,155,83,97,21,Normal,Asthma,ENT,Sevoflurane,115,High
+P1381,60,M,76,155,31.63,III,63,114,66,97,21,Normal,Heart Disease,Cardiac,Sevoflurane,142,High
+P1382,58,F,65,167,23.31,II,78,150,64,99,18,Normal,Heart Disease,Neurosurgery,Sevoflurane,167,Medium
+P1383,33,M,50,152,21.64,III,64,153,84,96,15,Normal,Asthma,Urology,Propofol,125,High
+P1384,25,M,57,161,21.99,III,91,123,69,99,18,Normal,Heart Disease,ENT,Propofol,140,High
+P1385,18,M,90,176,29.05,I,71,125,97,94,23,Normal,Heart Disease,ENT,Etomidate,151,Low
+P1386,29,F,54,152,23.37,III,87,151,88,96,24,Normal,None,ENT,Etomidate,96,High
+P1387,34,F,65,188,18.39,I,76,121,85,96,24,Normal,Hypertension,ENT,Etomidate,99,Low
+P1388,21,M,49,170,16.96,II,88,136,65,100,19,Normal,Heart Disease,Orthopedic,Propofol,122,Medium
+P1389,27,M,63,165,23.14,II,62,136,98,100,24,Normal,Diabetes,Neurosurgery,Sevoflurane,120,Medium
+P1390,57,F,97,152,41.98,I,68,115,81,100,17,Normal,None,General,Sevoflurane,103,Low
+P1391,41,F,74,154,31.2,II,89,107,64,96,15,Normal,None,Gynecology,Etomidate,152,Medium
+P1392,25,M,73,181,22.28,II,75,107,95,99,20,Normal,Asthma,Orthopedic,Etomidate,108,Medium
+P1393,69,M,78,190,21.61,II,100,122,94,97,17,Normal,Diabetes,Orthopedic,Sevoflurane,141,Medium
+P1394,23,F,73,171,24.96,III,87,159,76,98,24,Normal,Asthma,Neurosurgery,Propofol,86,High
+P1395,58,M,95,155,39.54,III,80,134,76,99,12,Normal,None,ENT,Sevoflurane,135,High
+P1396,31,M,67,175,21.88,II,66,150,98,98,23,Normal,None,ENT,Propofol,114,Medium
+P1397,66,F,71,178,22.41,I,98,150,95,95,17,Normal,Asthma,Gynecology,Propofol,164,Low
+P1398,22,M,59,168,20.9,III,93,158,88,97,18,Normal,Asthma,Neurosurgery,Etomidate,174,High
+P1399,57,F,88,155,36.63,III,62,131,63,98,15,Normal,Diabetes,Cardiac,Sevoflurane,159,High
+P1400,29,M,100,185,29.22,II,75,104,94,96,12,Normal,Diabetes,Orthopedic,Etomidate,92,Medium
+P1401,35,F,64,186,18.5,III,63,111,71,95,16,Normal,None,ENT,Propofol,87,High
+P1402,67,M,64,167,22.95,I,60,143,82,95,12,Normal,Diabetes,Neurosurgery,Sevoflurane,163,Low
+P1403,48,F,89,166,32.3,III,84,143,61,98,23,Normal,Asthma,Cardiac,Etomidate,167,High
+P1404,50,M,85,159,33.62,III,89,124,77,95,20,Normal,Diabetes,General,Sevoflurane,80,High
+P1405,78,F,70,179,21.85,II,91,113,89,95,21,Abnormal,None,Gynecology,Propofol,86,Medium
+P1406,27,M,58,188,16.41,I,61,100,99,100,24,Abnormal,Heart Disease,Urology,Propofol,176,Low
+P1407,63,M,48,164,17.85,II,78,135,72,98,22,Normal,None,Gynecology,Sevoflurane,164,Medium
+P1408,76,F,58,173,19.38,III,62,138,79,95,21,Normal,Asthma,Orthopedic,Sevoflurane,162,High
+P1409,64,M,46,165,16.9,II,84,140,84,99,23,Normal,Asthma,Urology,Propofol,162,Medium
+P1410,28,F,46,178,14.52,I,76,156,83,96,19,Normal,None,Neurosurgery,Etomidate,118,Low
+P1411,40,M,48,183,14.33,III,75,128,91,95,18,Normal,Heart Disease,General,Sevoflurane,115,High
+P1412,57,M,50,182,15.09,II,97,144,100,94,18,Normal,None,General,Sevoflurane,142,Medium
+P1413,48,F,79,158,31.65,III,89,149,92,99,21,Normal,Heart Disease,Gynecology,Sevoflurane,156,High
+P1414,78,F,58,162,22.1,II,96,135,65,98,16,Normal,Hypertension,ENT,Etomidate,170,Medium
+P1415,66,M,54,186,15.61,I,68,144,85,100,15,Normal,None,Urology,Sevoflurane,90,Low
+P1416,24,F,64,171,21.89,I,76,116,91,99,24,Normal,None,Orthopedic,Propofol,136,Low
+P1417,30,M,76,175,24.82,III,97,131,63,96,18,Normal,None,Cardiac,Sevoflurane,111,High
+P1418,19,M,86,174,28.41,III,63,122,83,100,23,Normal,Hypertension,Urology,Propofol,134,High
+P1419,58,M,59,156,24.24,III,61,152,66,99,21,Normal,Hypertension,ENT,Sevoflurane,158,High
+P1420,22,M,47,190,13.02,II,97,147,83,97,17,Normal,Hypertension,Urology,Propofol,135,Medium
+P1421,63,M,75,179,23.41,I,67,159,62,99,17,Normal,Hypertension,General,Propofol,92,Low
+P1422,51,F,91,178,28.72,I,87,110,98,96,17,Abnormal,Asthma,Urology,Sevoflurane,172,Low
+P1423,29,M,79,159,31.25,I,87,102,69,99,12,Normal,Diabetes,Cardiac,Etomidate,180,Low
+P1424,36,M,48,172,16.22,I,94,105,83,96,23,Normal,Diabetes,Cardiac,Etomidate,173,Low
+P1425,25,F,92,157,37.32,I,77,111,82,95,18,Normal,Diabetes,Orthopedic,Etomidate,124,Low
+P1426,35,M,55,183,16.42,II,93,118,61,97,20,Normal,Hypertension,Neurosurgery,Sevoflurane,155,Medium
+P1427,30,M,45,190,12.47,III,67,117,66,98,12,Normal,Heart Disease,General,Propofol,135,High
+P1428,42,M,59,187,16.87,III,92,117,71,100,12,Normal,Heart Disease,Cardiac,Sevoflurane,145,High
+P1429,31,M,83,164,30.86,II,63,147,94,100,21,Normal,Heart Disease,ENT,Etomidate,155,Medium
+P1430,34,F,72,161,27.78,I,100,126,94,95,23,Abnormal,Heart Disease,Neurosurgery,Etomidate,98,Low
+P1431,71,F,95,175,31.02,I,72,120,77,94,20,Abnormal,Diabetes,ENT,Etomidate,110,Low
+P1432,75,F,74,174,24.44,II,95,140,68,95,15,Normal,None,Gynecology,Propofol,107,Medium
+P1433,23,M,53,169,18.56,I,69,110,67,95,12,Normal,Asthma,General,Sevoflurane,148,Low
+P1434,23,F,67,187,19.16,II,75,152,69,94,14,Normal,Hypertension,General,Sevoflurane,112,Medium
+P1435,57,F,93,172,31.44,I,64,143,82,94,19,Normal,Heart Disease,ENT,Propofol,148,Low
+P1436,24,M,91,180,28.09,II,98,105,83,98,12,Normal,Asthma,Gynecology,Sevoflurane,126,Medium
+P1437,31,M,46,156,18.9,II,94,140,82,98,23,Normal,Hypertension,Neurosurgery,Propofol,94,Medium
+P1438,24,F,96,169,33.61,III,92,101,80,94,12,Normal,Heart Disease,Orthopedic,Etomidate,104,High
+P1439,38,F,86,184,25.4,II,71,119,62,94,13,Normal,Asthma,Cardiac,Sevoflurane,140,Medium
+P1440,24,F,74,171,25.31,III,100,129,76,98,18,Normal,Asthma,Gynecology,Propofol,109,High
+P1441,75,M,70,164,26.03,I,79,144,66,96,12,Normal,Hypertension,Cardiac,Etomidate,93,Low
+P1442,65,M,74,154,31.2,II,86,150,78,97,24,Normal,Diabetes,Urology,Sevoflurane,160,Medium
+P1443,28,F,100,151,43.86,II,75,104,85,94,12,Abnormal,Hypertension,ENT,Sevoflurane,103,Medium
+P1444,56,F,57,172,19.27,I,88,119,92,96,18,Normal,Asthma,General,Etomidate,86,Low
+P1445,56,M,61,189,17.08,II,73,135,100,94,21,Normal,Hypertension,Cardiac,Sevoflurane,155,Medium
+P1446,25,M,97,179,30.27,II,99,150,81,94,16,Normal,None,Urology,Sevoflurane,87,Medium
+P1447,38,F,76,155,31.63,II,74,146,65,98,16,Normal,None,Neurosurgery,Propofol,130,Medium
+P1448,68,F,47,184,13.88,I,61,116,78,94,19,Normal,Heart Disease,General,Etomidate,178,Low
+P1449,42,M,47,157,19.07,I,82,120,96,98,16,Abnormal,None,Cardiac,Sevoflurane,124,Low
+P1450,63,F,85,174,28.08,I,77,127,81,99,19,Normal,Hypertension,ENT,Sevoflurane,122,Low
+P1451,28,M,49,175,16.0,III,96,128,91,97,24,Normal,Asthma,Orthopedic,Sevoflurane,176,High
+P1452,24,F,45,174,14.86,I,72,144,74,95,15,Normal,None,Gynecology,Etomidate,163,Low
+P1453,80,F,60,159,23.73,III,67,128,61,99,19,Normal,Asthma,Gynecology,Propofol,150,High
+P1454,68,M,93,151,40.79,II,98,152,75,100,17,Normal,Asthma,General,Propofol,104,Medium
+P1455,29,F,96,182,28.98,II,74,102,88,97,15,Normal,Asthma,Gynecology,Propofol,169,Medium
+P1456,53,F,67,174,22.13,III,91,133,68,95,13,Abnormal,Asthma,Urology,Sevoflurane,80,High
+P1457,79,F,96,157,38.95,II,87,159,69,99,18,Normal,None,Urology,Sevoflurane,87,Medium
+P1458,42,F,97,161,37.42,III,78,102,75,99,24,Normal,Diabetes,ENT,Propofol,80,High
+P1459,38,M,62,185,18.12,II,62,123,79,96,24,Normal,Hypertension,General,Etomidate,167,Medium
+P1460,65,F,87,176,28.09,I,86,154,80,94,24,Normal,Hypertension,Gynecology,Etomidate,125,Low
+P1461,70,F,86,189,24.08,II,64,102,66,97,13,Normal,Asthma,Urology,Propofol,135,Medium
+P1462,37,M,84,156,34.52,I,69,102,79,98,19,Normal,Diabetes,Urology,Etomidate,120,Low
+P1463,47,F,71,176,22.92,III,97,139,92,99,13,Normal,Diabetes,Urology,Propofol,141,High
+P1464,18,M,58,150,25.78,III,76,108,72,98,16,Normal,Diabetes,Cardiac,Propofol,102,High
+P1465,47,F,52,179,16.23,I,81,116,86,94,23,Normal,None,General,Propofol,115,Low
+P1466,54,F,100,182,30.19,II,67,147,79,97,17,Normal,Diabetes,Cardiac,Etomidate,99,Medium
+P1467,66,M,55,162,20.96,II,75,114,62,99,17,Normal,Heart Disease,Cardiac,Sevoflurane,174,Medium
+P1468,31,F,60,184,17.72,I,60,115,85,97,12,Normal,Heart Disease,Neurosurgery,Sevoflurane,88,Low
+P1469,57,F,84,176,27.12,II,85,122,75,96,24,Normal,Hypertension,Cardiac,Etomidate,139,Medium
+P1470,53,M,54,162,20.58,III,76,143,94,95,16,Normal,Diabetes,ENT,Sevoflurane,164,High
+P1471,77,F,80,181,24.42,III,81,145,65,99,18,Normal,Asthma,Neurosurgery,Propofol,106,High
+P1472,66,M,49,158,19.63,II,73,117,70,100,13,Normal,Heart Disease,Gynecology,Sevoflurane,123,Medium
+P1473,48,F,73,168,25.86,I,99,128,73,95,12,Abnormal,Hypertension,Orthopedic,Propofol,114,Low
+P1474,44,M,92,176,29.7,I,67,158,65,96,22,Normal,Heart Disease,General,Sevoflurane,157,Low
+P1475,49,F,52,154,21.93,III,90,147,84,97,23,Normal,None,General,Sevoflurane,89,High
+P1476,48,M,63,182,19.02,I,71,121,70,95,19,Normal,Asthma,Urology,Sevoflurane,95,Low
+P1477,45,M,55,184,16.25,I,91,120,98,95,22,Normal,Hypertension,Cardiac,Propofol,90,Low
+P1478,74,M,60,150,26.67,II,81,122,91,97,12,Normal,Diabetes,Gynecology,Propofol,82,Medium
+P1479,50,F,48,164,17.85,II,72,124,99,100,17,Normal,Hypertension,Cardiac,Sevoflurane,176,Medium
+P1480,58,M,89,181,27.17,III,100,158,99,100,14,Normal,Hypertension,Neurosurgery,Propofol,147,High
+P1481,62,F,61,157,24.75,I,89,133,70,97,14,Normal,None,Gynecology,Etomidate,166,Low
+P1482,57,F,58,160,22.66,III,62,114,95,97,21,Normal,Asthma,Neurosurgery,Sevoflurane,170,High
+P1483,22,M,88,163,33.12,I,96,159,100,98,18,Normal,None,Neurosurgery,Sevoflurane,97,Low
+P1484,31,F,86,165,31.59,III,64,140,86,98,15,Normal,Hypertension,General,Sevoflurane,101,High
+P1485,31,M,83,185,24.25,I,60,138,84,99,20,Abnormal,Hypertension,Cardiac,Propofol,113,Low
+P1486,61,M,96,190,26.59,III,75,122,68,100,16,Normal,Heart Disease,Cardiac,Sevoflurane,83,High
+P1487,39,M,64,186,18.5,III,87,123,95,99,23,Normal,Asthma,Gynecology,Propofol,173,High
+P1488,53,F,97,164,36.06,III,74,115,73,95,16,Normal,Hypertension,Urology,Etomidate,178,High
+P1489,63,M,83,180,25.62,I,71,149,68,96,23,Abnormal,Heart Disease,Neurosurgery,Propofol,122,Low
+P1490,39,F,64,187,18.3,II,73,139,72,94,21,Normal,Heart Disease,ENT,Sevoflurane,96,Medium
+P1491,75,M,50,170,17.3,II,70,119,62,96,18,Normal,Diabetes,General,Sevoflurane,105,Medium
+P1492,64,M,59,188,16.69,II,64,102,91,100,22,Normal,Diabetes,Cardiac,Sevoflurane,147,Medium
+P1493,22,M,45,165,16.53,I,60,109,80,98,12,Normal,Hypertension,ENT,Etomidate,152,Low
+P1494,51,F,65,158,26.04,I,65,108,67,99,21,Normal,None,Gynecology,Etomidate,146,Low
+P1495,47,F,67,168,23.74,II,80,131,77,96,18,Abnormal,Hypertension,Gynecology,Etomidate,81,Medium
+P1496,47,M,52,182,15.7,I,63,110,71,94,21,Normal,Hypertension,General,Propofol,171,Low
+P1497,65,M,76,186,21.97,III,61,135,96,99,23,Normal,Heart Disease,Urology,Etomidate,92,High
+P1498,27,M,45,185,13.15,III,95,154,100,98,19,Normal,Heart Disease,General,Etomidate,118,High
+P1499,44,M,80,187,22.88,II,98,132,96,95,23,Abnormal,Heart Disease,General,Sevoflurane,83,Medium
+P1500,60,M,87,153,37.17,II,65,155,91,98,14,Normal,Asthma,ENT,Etomidate,142,Medium
+P1501,61,M,94,167,33.71,II,62,126,62,98,20,Normal,None,ENT,Propofol,96,Medium
+P1502,80,M,49,153,20.93,II,71,106,60,96,16,Normal,None,Neurosurgery,Etomidate,118,Medium
+P1503,47,M,82,166,29.76,III,97,147,62,100,17,Normal,Asthma,Cardiac,Propofol,155,High
+P1504,55,F,77,166,27.94,I,84,159,74,97,17,Normal,Hypertension,Urology,Propofol,153,Low
+P1505,52,M,80,155,33.3,III,88,106,75,95,22,Normal,None,Orthopedic,Etomidate,91,High
+P1506,66,F,86,188,24.33,III,77,126,62,97,18,Normal,Diabetes,Gynecology,Propofol,178,High
+P1507,21,F,100,181,30.52,I,72,145,98,94,15,Normal,None,ENT,Etomidate,90,Low
+P1508,39,F,58,158,23.23,II,72,129,66,98,20,Normal,Hypertension,Neurosurgery,Etomidate,168,Medium
+P1509,30,M,79,164,29.37,I,73,151,88,97,20,Normal,Heart Disease,General,Etomidate,103,Low
+P1510,68,F,65,152,28.13,III,76,100,76,95,14,Normal,Hypertension,Urology,Etomidate,140,High
+P1511,52,M,53,169,18.56,III,67,121,84,97,20,Normal,Heart Disease,General,Etomidate,114,High
+P1512,56,M,76,163,28.6,II,87,127,60,99,14,Normal,None,Urology,Propofol,104,Medium
+P1513,26,F,52,188,14.71,II,88,135,89,99,23,Normal,None,Gynecology,Sevoflurane,176,Medium
+P1514,19,M,91,167,32.63,I,83,118,87,94,15,Normal,Diabetes,Urology,Propofol,86,Low
+P1515,66,F,59,172,19.94,III,100,115,62,97,21,Normal,Hypertension,ENT,Propofol,137,High
+P1516,33,M,58,187,16.59,III,82,137,72,95,13,Normal,None,Urology,Sevoflurane,166,High
+P1517,74,M,51,169,17.86,II,68,156,69,99,18,Normal,Hypertension,Orthopedic,Sevoflurane,96,Medium
+P1518,65,M,45,169,15.76,II,62,139,84,95,14,Normal,Asthma,Neurosurgery,Sevoflurane,168,Medium
+P1519,48,M,56,181,17.09,III,100,156,70,94,19,Abnormal,None,Urology,Etomidate,160,High
+P1520,72,M,63,161,24.3,II,90,143,77,98,15,Normal,Hypertension,ENT,Propofol,160,Medium
+P1521,74,M,64,188,18.11,I,84,105,75,95,18,Normal,Diabetes,ENT,Sevoflurane,84,Low
+P1522,23,M,80,175,26.12,III,67,143,97,96,15,Normal,None,Cardiac,Propofol,122,High
+P1523,39,M,46,190,12.74,III,86,113,64,97,23,Abnormal,None,ENT,Sevoflurane,121,High
+P1524,33,M,81,153,34.6,III,68,157,60,99,23,Normal,Hypertension,Gynecology,Sevoflurane,101,High
+P1525,26,F,85,176,27.44,II,60,106,88,96,22,Normal,None,Urology,Propofol,152,Medium
+P1526,45,M,72,155,29.97,III,89,100,63,98,12,Normal,Heart Disease,Orthopedic,Etomidate,106,High
+P1527,31,M,51,189,14.28,III,96,112,90,96,13,Normal,None,Urology,Etomidate,166,High
+P1528,33,M,77,151,33.77,III,72,157,67,98,20,Normal,Heart Disease,Urology,Etomidate,162,High
+P1529,54,F,70,177,22.34,II,88,126,90,97,19,Abnormal,None,Gynecology,Etomidate,94,Medium
+P1530,53,F,67,182,20.23,I,78,111,97,94,20,Normal,Heart Disease,Cardiac,Sevoflurane,113,Low
+P1531,71,F,53,163,19.95,II,96,147,94,96,13,Normal,Heart Disease,Urology,Sevoflurane,175,Medium
+P1532,20,M,50,178,15.78,III,97,131,99,96,18,Normal,None,ENT,Sevoflurane,121,High
+P1533,45,M,75,186,21.68,II,92,129,99,98,19,Normal,None,Cardiac,Etomidate,83,Medium
+P1534,18,F,55,177,17.56,II,73,156,67,99,15,Normal,Heart Disease,ENT,Propofol,134,Medium
+P1535,76,M,86,163,32.37,II,90,151,72,96,22,Normal,Diabetes,Neurosurgery,Etomidate,112,Medium
+P1536,33,F,80,150,35.56,I,84,127,74,96,13,Normal,None,Neurosurgery,Propofol,163,Low
+P1537,37,M,59,167,21.16,III,74,105,83,97,22,Normal,None,Cardiac,Etomidate,173,High
+P1538,33,M,49,161,18.9,III,80,159,84,99,12,Normal,None,Orthopedic,Etomidate,133,High
+P1539,68,M,61,183,18.21,III,80,105,91,100,20,Normal,Heart Disease,Gynecology,Propofol,125,High
+P1540,30,M,96,175,31.35,II,100,131,90,100,13,Normal,Asthma,Neurosurgery,Etomidate,96,Medium
+P1541,31,F,46,168,16.3,II,82,123,62,100,20,Abnormal,Heart Disease,Gynecology,Propofol,87,Medium
+P1542,27,F,61,152,26.4,I,64,149,74,98,23,Normal,Hypertension,ENT,Sevoflurane,135,Low
+P1543,59,M,69,153,29.48,III,91,141,66,95,14,Normal,Asthma,General,Etomidate,149,High
+P1544,59,F,52,167,18.65,III,71,137,64,98,21,Normal,Asthma,ENT,Propofol,146,High
+P1545,33,M,75,170,25.95,III,78,130,89,95,24,Normal,None,General,Etomidate,93,High
+P1546,36,F,89,185,26.0,I,90,140,78,94,23,Normal,Hypertension,ENT,Etomidate,176,Low
+P1547,36,F,98,178,30.93,I,61,151,61,97,15,Normal,Hypertension,Neurosurgery,Etomidate,104,Low
+P1548,67,F,59,186,17.05,I,89,138,75,97,14,Normal,Asthma,General,Propofol,170,Low
+P1549,57,F,92,187,26.31,I,64,117,78,100,17,Abnormal,Asthma,Cardiac,Sevoflurane,153,Low
+P1550,20,M,61,175,19.92,II,89,152,65,98,18,Normal,None,Gynecology,Etomidate,124,Medium
+P1551,32,F,85,158,34.05,I,97,134,67,94,21,Normal,Diabetes,Gynecology,Etomidate,144,Low
+P1552,71,F,49,190,13.57,II,98,119,70,98,21,Normal,Hypertension,ENT,Propofol,121,Medium
+P1553,47,M,88,185,25.71,II,77,128,75,100,22,Abnormal,Diabetes,General,Etomidate,130,Medium
+P1554,78,F,90,178,28.41,I,79,101,62,96,18,Normal,Diabetes,Orthopedic,Etomidate,89,Low
+P1555,32,F,77,179,24.03,I,80,108,71,96,14,Normal,Asthma,Cardiac,Sevoflurane,109,Low
+P1556,70,M,77,178,24.3,I,83,139,83,98,12,Normal,Heart Disease,Orthopedic,Sevoflurane,164,Low
+P1557,64,M,82,183,24.49,I,82,124,99,96,15,Normal,Heart Disease,Urology,Propofol,117,Low
+P1558,39,F,63,183,18.81,I,72,109,69,98,13,Normal,Asthma,Gynecology,Etomidate,126,Low
+P1559,63,F,72,173,24.06,I,89,146,74,100,12,Normal,Asthma,Cardiac,Propofol,106,Low
+P1560,26,F,78,155,32.47,I,91,129,69,95,21,Normal,Heart Disease,Orthopedic,Etomidate,133,Low
+P1561,42,F,94,165,34.53,III,96,121,67,98,17,Abnormal,None,Urology,Etomidate,150,High
+P1562,36,M,60,158,24.03,III,62,138,100,96,20,Normal,Asthma,Urology,Sevoflurane,131,High
+P1563,40,F,59,168,20.9,I,94,156,67,97,12,Abnormal,Asthma,Cardiac,Etomidate,167,Low
+P1564,53,M,65,175,21.22,III,97,148,77,100,19,Normal,Diabetes,ENT,Sevoflurane,155,High
+P1565,30,M,68,178,21.46,I,98,109,87,100,13,Normal,Asthma,Orthopedic,Etomidate,113,Low
+P1566,70,F,81,153,34.6,III,90,102,98,94,17,Normal,None,Gynecology,Propofol,144,High
+P1567,44,F,57,179,17.79,I,85,128,72,97,13,Abnormal,Asthma,Gynecology,Etomidate,121,Low
+P1568,34,M,67,187,19.16,I,76,102,65,99,14,Abnormal,Asthma,General,Propofol,104,Low
+P1569,78,M,65,155,27.06,II,89,120,65,100,21,Normal,Hypertension,Orthopedic,Sevoflurane,143,Medium
+P1570,65,F,64,160,25.0,I,70,114,78,94,22,Normal,Diabetes,Orthopedic,Propofol,125,Low
+P1571,36,M,51,174,16.85,III,70,121,87,95,23,Normal,Heart Disease,Cardiac,Sevoflurane,127,High
+P1572,28,F,72,186,20.81,II,93,156,94,97,19,Normal,Hypertension,Gynecology,Etomidate,136,Medium
+P1573,71,F,57,175,18.61,II,60,143,77,95,18,Normal,Heart Disease,Cardiac,Propofol,166,Medium
+P1574,78,F,90,176,29.05,II,97,116,72,96,23,Normal,None,Cardiac,Etomidate,85,Medium
+P1575,74,F,97,190,26.87,II,76,122,75,98,22,Normal,Diabetes,Cardiac,Etomidate,85,Medium
+P1576,27,F,75,162,28.58,I,92,154,99,98,24,Normal,None,General,Propofol,119,Low
+P1577,63,M,84,150,37.33,II,76,113,79,100,24,Normal,Diabetes,ENT,Etomidate,163,Medium
+P1578,73,M,95,181,29.0,II,89,154,83,99,21,Normal,None,Neurosurgery,Propofol,151,Medium
+P1579,43,M,70,155,29.14,III,61,160,83,95,14,Normal,Heart Disease,ENT,Sevoflurane,149,High
+P1580,68,M,61,167,21.87,II,72,131,99,99,17,Normal,Hypertension,Orthopedic,Sevoflurane,146,Medium
+P1581,31,M,97,162,36.96,III,78,130,75,97,15,Normal,Asthma,Cardiac,Sevoflurane,119,High
+P1582,57,F,59,179,18.41,I,79,113,60,97,13,Normal,Heart Disease,Urology,Propofol,141,Low
+P1583,24,F,58,163,21.83,II,72,127,83,97,15,Normal,Diabetes,Neurosurgery,Propofol,173,Medium
+P1584,77,M,64,153,27.34,III,92,100,92,100,23,Normal,Heart Disease,Urology,Etomidate,137,High
+P1585,19,M,95,160,37.11,I,70,116,71,94,18,Normal,Diabetes,ENT,Propofol,98,Low
+P1586,18,F,99,155,41.21,III,65,147,87,94,17,Normal,Asthma,Orthopedic,Etomidate,174,High
+P1587,28,F,93,152,40.25,III,68,136,97,99,24,Normal,Hypertension,Cardiac,Sevoflurane,127,High
+P1588,34,M,91,165,33.43,II,68,145,78,94,13,Normal,None,Orthopedic,Sevoflurane,166,Medium
+P1589,64,F,61,163,22.96,II,93,134,91,96,14,Normal,None,Urology,Sevoflurane,168,Medium
+P1590,74,F,95,177,30.32,II,81,128,83,100,24,Normal,None,Orthopedic,Propofol,134,Medium
+P1591,24,F,86,156,35.34,III,62,143,79,98,22,Normal,Asthma,Gynecology,Propofol,116,High
+P1592,50,M,82,163,30.86,II,89,142,81,98,13,Normal,Asthma,Cardiac,Etomidate,96,Medium
+P1593,25,F,87,174,28.74,I,98,116,83,95,20,Normal,Diabetes,Gynecology,Sevoflurane,125,Low
+P1594,21,M,96,153,41.01,I,63,131,70,98,23,Normal,None,Neurosurgery,Propofol,111,Low
+P1595,73,M,67,189,18.76,I,83,138,76,95,14,Normal,Heart Disease,ENT,Etomidate,139,Low
+P1596,78,M,51,190,14.13,II,86,115,80,97,18,Normal,Heart Disease,ENT,Propofol,176,Medium
+P1597,41,M,55,156,22.6,II,93,117,64,98,18,Normal,Hypertension,ENT,Propofol,145,Medium
+P1598,37,F,67,171,22.91,I,73,119,74,95,19,Normal,Asthma,Orthopedic,Propofol,128,Low
+P1599,46,M,59,165,21.67,III,63,118,99,99,24,Normal,Hypertension,Gynecology,Etomidate,140,High
+P1600,74,F,50,165,18.37,III,76,103,88,96,13,Normal,Diabetes,Urology,Sevoflurane,111,High
+P1601,70,F,80,155,33.3,I,89,101,69,96,23,Normal,Diabetes,Cardiac,Sevoflurane,168,Low
+P1602,55,F,90,153,38.45,III,68,102,65,96,14,Normal,Heart Disease,Urology,Sevoflurane,110,High
+P1603,23,M,83,155,34.55,I,64,110,90,97,21,Normal,Heart Disease,Neurosurgery,Sevoflurane,153,Low
+P1604,71,F,86,184,25.4,II,96,106,85,94,23,Normal,Hypertension,Urology,Propofol,106,Medium
+P1605,77,M,55,189,15.4,I,68,120,65,96,15,Normal,Hypertension,Neurosurgery,Sevoflurane,123,Low
+P1606,70,M,97,165,35.63,I,74,151,87,96,21,Abnormal,Diabetes,Urology,Propofol,137,Low
+P1607,77,F,48,161,18.52,I,99,141,97,95,19,Normal,Asthma,Urology,Etomidate,161,Low
+P1608,40,M,59,165,21.67,I,82,152,91,98,18,Abnormal,Heart Disease,ENT,Sevoflurane,124,Low
+P1609,58,M,66,171,22.57,I,60,142,86,99,16,Normal,Heart Disease,General,Sevoflurane,100,Low
+P1610,24,F,97,171,33.17,II,82,100,68,99,22,Abnormal,None,Neurosurgery,Propofol,176,Medium
+P1611,61,F,64,172,21.63,III,65,152,74,95,24,Normal,Hypertension,Neurosurgery,Etomidate,106,High
+P1612,64,M,87,168,30.82,III,85,160,81,100,15,Normal,None,General,Sevoflurane,115,High
+P1613,58,M,98,167,35.14,III,82,137,85,94,17,Normal,Hypertension,Neurosurgery,Etomidate,82,High
+P1614,69,F,75,181,22.89,I,80,117,92,97,21,Normal,Hypertension,Orthopedic,Etomidate,161,Low
+P1615,67,M,50,162,19.05,II,95,146,85,99,16,Normal,Heart Disease,Gynecology,Sevoflurane,112,Medium
+P1616,34,F,88,173,29.4,I,70,110,83,96,24,Normal,Hypertension,General,Sevoflurane,162,Low
+P1617,26,M,66,166,23.95,III,64,139,61,94,24,Normal,None,Urology,Propofol,114,High
+P1618,26,F,93,190,25.76,II,95,149,99,97,17,Normal,Diabetes,Urology,Propofol,176,Medium
+P1619,21,M,48,164,17.85,I,88,153,78,98,23,Abnormal,Asthma,General,Sevoflurane,149,Low
+P1620,80,M,51,186,14.74,II,75,127,70,94,19,Normal,Asthma,Cardiac,Etomidate,148,Medium
+P1621,18,M,67,177,21.39,I,99,160,69,100,13,Abnormal,Heart Disease,Gynecology,Sevoflurane,164,Low
+P1622,30,F,55,176,17.76,III,89,119,65,96,16,Normal,Hypertension,Gynecology,Propofol,138,High
+P1623,77,M,83,167,29.76,II,62,109,94,96,15,Normal,Diabetes,Gynecology,Etomidate,115,Medium
+P1624,21,M,57,158,22.83,III,71,101,76,95,18,Normal,Hypertension,Neurosurgery,Etomidate,107,High
+P1625,21,M,53,159,20.96,I,60,131,86,94,22,Normal,None,Urology,Sevoflurane,136,Low
+P1626,26,M,94,161,36.26,II,94,101,98,96,15,Normal,Asthma,Cardiac,Sevoflurane,88,Medium
+P1627,32,F,74,183,22.1,III,67,148,73,100,21,Normal,Asthma,Gynecology,Etomidate,107,High
+P1628,23,M,69,156,28.35,II,65,139,79,96,21,Normal,Diabetes,Cardiac,Sevoflurane,104,Medium
+P1629,48,F,53,182,16.0,I,72,140,81,94,12,Normal,Hypertension,Gynecology,Etomidate,148,Low
+P1630,73,M,88,156,36.16,III,73,150,75,98,17,Normal,Asthma,Cardiac,Etomidate,168,High
+P1631,58,M,66,182,19.93,I,76,105,81,95,21,Normal,Heart Disease,General,Sevoflurane,111,Low
+P1632,35,M,90,187,25.74,III,78,142,88,95,23,Normal,Heart Disease,ENT,Sevoflurane,108,High
+P1633,73,F,94,157,38.14,III,88,102,94,95,15,Normal,Asthma,Gynecology,Etomidate,92,High
+P1634,67,F,62,182,18.72,I,71,114,93,97,18,Normal,Heart Disease,Urology,Etomidate,172,Low
+P1635,43,F,72,177,22.98,III,92,124,93,98,15,Abnormal,Asthma,General,Propofol,118,High
+P1636,28,F,95,157,38.54,I,61,130,83,100,20,Normal,Asthma,ENT,Sevoflurane,81,Low
+P1637,62,M,52,187,14.87,I,66,124,81,96,22,Normal,None,Neurosurgery,Etomidate,112,Low
+P1638,33,M,84,177,26.81,I,89,111,65,99,24,Normal,Diabetes,Cardiac,Sevoflurane,122,Low
+P1639,80,M,90,158,36.05,III,88,118,60,95,16,Normal,Heart Disease,Cardiac,Etomidate,162,High
+P1640,73,M,64,187,18.3,III,80,126,63,95,21,Normal,Asthma,General,Etomidate,125,High
+P1641,69,M,71,156,29.17,I,83,134,70,98,12,Normal,Hypertension,Orthopedic,Sevoflurane,164,Low
+P1642,34,F,83,177,26.49,I,67,128,74,97,17,Normal,None,General,Propofol,145,Low
+P1643,53,F,60,169,21.01,II,76,118,72,94,24,Normal,None,Cardiac,Propofol,142,Medium
+P1644,61,F,99,162,37.72,III,63,149,69,95,23,Normal,Asthma,ENT,Sevoflurane,164,High
+P1645,74,M,81,151,35.52,II,95,153,62,97,13,Normal,None,Cardiac,Etomidate,156,Medium
+P1646,37,M,85,156,34.93,II,83,123,93,98,16,Normal,None,Neurosurgery,Etomidate,84,Medium
+P1647,57,M,56,155,23.31,III,83,114,74,95,21,Normal,Diabetes,Cardiac,Sevoflurane,148,High
+P1648,39,F,71,174,23.45,III,75,117,84,98,14,Normal,Heart Disease,General,Sevoflurane,95,High
+P1649,32,F,51,188,14.43,II,72,142,76,96,23,Normal,Diabetes,Neurosurgery,Propofol,150,Medium
+P1650,78,F,62,172,20.96,III,75,142,90,96,19,Normal,Hypertension,Orthopedic,Propofol,96,High
+P1651,41,M,88,167,31.55,I,80,130,91,94,19,Normal,Heart Disease,Gynecology,Etomidate,163,Low
+P1652,37,F,61,179,19.04,III,99,137,73,95,22,Normal,Hypertension,Orthopedic,Propofol,156,High
+P1653,63,M,48,153,20.5,III,93,117,86,95,19,Normal,Diabetes,Urology,Sevoflurane,80,High
+P1654,53,F,46,168,16.3,I,81,154,66,100,16,Normal,Diabetes,Urology,Sevoflurane,105,Low
+P1655,72,F,52,159,20.57,II,96,107,63,99,24,Abnormal,Diabetes,Neurosurgery,Sevoflurane,158,Medium
+P1656,20,M,97,178,30.61,I,80,141,83,100,15,Normal,Hypertension,Cardiac,Etomidate,132,Low
+P1657,77,F,56,181,17.09,III,75,147,92,94,16,Normal,Asthma,General,Etomidate,162,High
+P1658,57,F,56,189,15.68,II,61,139,65,100,24,Abnormal,Asthma,General,Etomidate,143,Medium
+P1659,63,F,57,171,19.49,II,94,160,98,95,17,Normal,Heart Disease,Urology,Sevoflurane,121,Medium
+P1660,37,M,65,169,22.76,I,66,126,95,96,12,Normal,Hypertension,ENT,Propofol,170,Low
+P1661,71,F,92,182,27.77,II,75,128,61,97,21,Normal,Hypertension,Urology,Sevoflurane,115,Medium
+P1662,24,M,72,150,32.0,II,63,130,100,97,12,Normal,Heart Disease,Cardiac,Sevoflurane,108,Medium
+P1663,71,M,92,161,35.49,III,80,119,85,98,14,Normal,Diabetes,ENT,Sevoflurane,130,High
+P1664,23,F,60,172,20.28,I,80,106,81,95,24,Normal,Asthma,General,Etomidate,155,Low
+P1665,69,M,94,175,30.69,III,75,112,100,94,22,Abnormal,Hypertension,Cardiac,Sevoflurane,180,High
+P1666,47,M,59,151,25.88,II,62,119,88,100,14,Normal,None,Urology,Sevoflurane,105,Medium
+P1667,26,F,54,173,18.04,III,76,116,98,95,21,Normal,None,Orthopedic,Etomidate,164,High
+P1668,42,M,87,170,30.1,I,77,113,86,98,13,Normal,Diabetes,Urology,Sevoflurane,90,Low
+P1669,37,F,94,184,27.76,II,97,135,60,94,20,Normal,None,Orthopedic,Propofol,152,Medium
+P1670,33,M,67,150,29.78,II,85,123,74,97,13,Normal,Heart Disease,Cardiac,Propofol,107,Medium
+P1671,54,F,92,179,28.71,II,66,130,95,98,17,Normal,Hypertension,Gynecology,Etomidate,149,Medium
+P1672,28,M,89,177,28.41,III,95,130,77,100,15,Normal,Hypertension,Urology,Etomidate,152,High
+P1673,52,F,53,177,16.92,III,85,116,96,99,15,Normal,Hypertension,Cardiac,Etomidate,127,High
+P1674,72,F,97,158,38.86,III,70,151,73,97,20,Normal,None,General,Propofol,158,High
+P1675,47,M,88,153,37.59,I,80,113,77,96,19,Normal,Asthma,Urology,Propofol,140,Low
+P1676,61,M,74,185,21.62,II,70,133,90,96,19,Normal,Hypertension,ENT,Etomidate,132,Medium
+P1677,48,F,85,162,32.39,I,60,114,95,96,18,Normal,Diabetes,General,Etomidate,133,Low
+P1678,76,F,48,171,16.42,II,67,103,67,98,15,Normal,Diabetes,Cardiac,Sevoflurane,88,Medium
+P1679,36,F,53,190,14.68,II,77,144,62,98,22,Normal,Asthma,Gynecology,Etomidate,156,Medium
+P1680,51,M,66,164,24.54,I,77,110,72,100,16,Normal,Asthma,Gynecology,Propofol,100,Low
+P1681,25,F,49,180,15.12,I,82,132,73,98,20,Normal,Heart Disease,Gynecology,Etomidate,167,Low
+P1682,22,M,69,168,24.45,III,89,139,84,99,14,Normal,None,Cardiac,Etomidate,168,High
+P1683,43,M,86,171,29.41,I,93,119,88,100,22,Normal,Diabetes,Gynecology,Etomidate,104,Low
+P1684,74,F,65,166,23.59,I,65,145,64,95,18,Normal,Asthma,ENT,Sevoflurane,107,Low
+P1685,72,M,98,190,27.15,II,97,151,75,99,15,Normal,Diabetes,Cardiac,Sevoflurane,112,Medium
+P1686,36,F,99,173,33.08,II,72,121,77,98,22,Normal,Hypertension,Neurosurgery,Sevoflurane,113,Medium
+P1687,47,M,50,180,15.43,I,85,132,74,96,19,Abnormal,Heart Disease,Orthopedic,Propofol,137,Low
+P1688,51,M,63,176,20.34,I,68,127,90,96,20,Normal,None,Urology,Sevoflurane,83,Low
+P1689,20,F,94,163,35.38,II,88,107,98,97,21,Normal,None,Cardiac,Propofol,96,Medium
+P1690,40,M,79,165,29.02,I,62,116,72,96,18,Normal,Hypertension,ENT,Etomidate,155,Low
+P1691,49,M,49,151,21.49,III,61,121,66,95,21,Normal,None,Cardiac,Propofol,88,High
+P1692,23,M,71,183,21.2,II,70,106,92,96,20,Normal,Hypertension,Cardiac,Etomidate,118,Medium
+P1693,57,M,51,159,20.17,II,75,145,75,100,16,Normal,None,General,Propofol,169,Medium
+P1694,48,F,45,170,15.57,I,63,143,85,95,23,Normal,Heart Disease,Urology,Etomidate,87,Low
+P1695,67,F,98,154,41.32,III,62,135,96,96,15,Normal,Diabetes,ENT,Propofol,112,High
+P1696,68,F,69,178,21.78,II,91,101,99,99,17,Normal,Asthma,Urology,Etomidate,159,Medium
+P1697,39,M,45,188,12.73,III,76,143,81,95,22,Normal,Heart Disease,General,Propofol,171,High
+P1698,78,F,86,179,26.84,II,70,115,90,98,22,Abnormal,Heart Disease,Urology,Sevoflurane,115,Medium
+P1699,27,F,66,156,27.12,II,81,148,90,99,12,Normal,Diabetes,Gynecology,Sevoflurane,147,Medium
+P1700,78,M,78,167,27.97,III,80,101,93,100,20,Abnormal,Hypertension,Orthopedic,Propofol,141,High
+P1701,46,F,94,184,27.76,II,79,152,96,98,15,Abnormal,Asthma,General,Sevoflurane,93,Medium
+P1702,23,F,96,159,37.97,I,98,100,92,94,19,Abnormal,Hypertension,Cardiac,Etomidate,180,Low
+P1703,47,F,99,183,29.56,I,89,127,92,96,13,Normal,Asthma,Gynecology,Etomidate,139,Low
+P1704,51,M,81,173,27.06,II,75,129,93,95,19,Normal,Diabetes,Orthopedic,Propofol,146,Medium
+P1705,51,M,69,168,24.45,I,80,142,73,95,23,Normal,Hypertension,Urology,Etomidate,91,Low
+P1706,57,M,77,172,26.03,II,89,140,98,97,20,Normal,Diabetes,Neurosurgery,Etomidate,86,Medium
+P1707,24,F,48,158,19.23,I,92,112,79,100,14,Normal,Diabetes,Cardiac,Sevoflurane,83,Low
+P1708,64,M,78,150,34.67,III,75,115,90,95,14,Normal,Asthma,Neurosurgery,Etomidate,166,High
+P1709,31,F,57,171,19.49,I,84,108,68,100,16,Normal,None,Cardiac,Etomidate,147,Low
+P1710,22,F,80,180,24.69,I,94,143,98,96,23,Normal,Hypertension,Orthopedic,Sevoflurane,128,Low
+P1711,77,M,63,184,18.61,III,81,134,83,95,23,Abnormal,Asthma,ENT,Etomidate,86,High
+P1712,55,F,83,174,27.41,I,63,149,95,98,12,Normal,Diabetes,Neurosurgery,Propofol,130,Low
+P1713,41,F,55,189,15.4,II,98,105,71,95,24,Normal,None,Urology,Sevoflurane,157,Medium
+P1714,54,M,73,180,22.53,III,95,132,88,95,19,Normal,Asthma,ENT,Etomidate,107,High
+P1715,56,M,76,185,22.21,I,83,127,82,97,20,Normal,Diabetes,Gynecology,Sevoflurane,173,Low
+P1716,30,M,74,182,22.34,III,77,133,94,100,23,Normal,Hypertension,Cardiac,Sevoflurane,128,High
+P1717,50,F,73,160,28.52,I,95,134,72,94,24,Normal,Hypertension,General,Etomidate,88,Low
+P1718,49,M,58,179,18.1,II,63,152,95,98,17,Abnormal,Hypertension,General,Etomidate,162,Medium
+P1719,50,F,80,188,22.63,III,77,158,74,97,20,Normal,None,Neurosurgery,Sevoflurane,178,High
+P1720,23,F,46,161,17.75,II,71,101,68,97,15,Normal,Hypertension,Neurosurgery,Etomidate,176,Medium
+P1721,39,M,82,174,27.08,I,80,126,95,96,19,Normal,None,Cardiac,Etomidate,120,Low
+P1722,62,F,91,160,35.55,III,67,134,81,97,23,Normal,Heart Disease,General,Etomidate,85,High
+P1723,73,M,76,169,26.61,I,83,117,68,97,23,Normal,Diabetes,Cardiac,Etomidate,124,Low
+P1724,50,M,46,156,18.9,III,61,109,74,95,21,Normal,Heart Disease,ENT,Propofol,177,High
+P1725,55,F,75,175,24.49,I,61,149,63,97,13,Normal,Diabetes,Urology,Propofol,160,Low
+P1726,25,F,93,179,29.03,III,75,145,60,96,24,Normal,None,Neurosurgery,Etomidate,156,High
+P1727,27,F,60,182,18.11,II,83,112,84,95,15,Normal,Diabetes,Neurosurgery,Propofol,154,Medium
+P1728,62,F,73,188,20.65,III,75,144,76,99,16,Normal,Asthma,Neurosurgery,Sevoflurane,114,High
+P1729,46,F,46,176,14.85,II,89,133,60,99,18,Normal,None,Urology,Propofol,153,Medium
+P1730,65,M,68,170,23.53,I,76,148,83,100,14,Normal,Hypertension,Neurosurgery,Etomidate,168,Low
+P1731,51,M,66,181,20.15,I,67,143,98,100,15,Normal,Hypertension,Urology,Sevoflurane,97,Low
+P1732,76,F,82,165,30.12,I,72,123,68,97,17,Normal,Heart Disease,ENT,Sevoflurane,128,Low
+P1733,19,F,99,156,40.68,III,79,114,73,100,12,Normal,None,Gynecology,Sevoflurane,100,High
+P1734,20,F,79,172,26.7,I,88,140,97,95,15,Normal,Hypertension,ENT,Sevoflurane,143,Low
+P1735,57,M,75,156,30.82,III,68,143,79,98,23,Normal,Heart Disease,ENT,Sevoflurane,165,High
+P1736,58,F,95,151,41.66,I,74,152,71,98,16,Normal,Diabetes,Cardiac,Etomidate,129,Low
+P1737,36,F,95,181,29.0,III,75,153,75,99,16,Normal,Asthma,ENT,Propofol,125,High
+P1738,51,F,92,159,36.39,I,74,145,63,99,22,Normal,Diabetes,General,Sevoflurane,144,Low
+P1739,80,M,47,171,16.07,III,68,153,86,98,13,Normal,Heart Disease,General,Etomidate,80,High
+P1740,58,M,65,160,25.39,III,84,152,75,97,17,Normal,Asthma,General,Propofol,170,High
+P1741,58,F,62,185,18.12,III,69,136,88,96,24,Normal,None,Neurosurgery,Propofol,150,High
+P1742,43,M,60,164,22.31,I,78,142,91,100,18,Normal,Heart Disease,ENT,Propofol,82,Low
+P1743,78,F,66,158,26.44,II,73,102,100,98,13,Normal,Hypertension,ENT,Propofol,91,Medium
+P1744,61,M,55,175,17.96,I,84,121,77,96,15,Normal,Hypertension,Gynecology,Propofol,176,Low
+P1745,19,F,91,152,39.39,III,70,114,67,95,12,Normal,Asthma,Neurosurgery,Sevoflurane,93,High
+P1746,45,F,48,165,17.63,III,70,119,100,95,20,Normal,Diabetes,ENT,Etomidate,95,High
+P1747,35,M,97,189,27.15,II,86,148,71,100,20,Normal,Hypertension,General,Etomidate,92,Medium
+P1748,25,F,58,167,20.8,III,86,106,62,94,21,Normal,Hypertension,Cardiac,Etomidate,116,High
+P1749,26,M,79,166,28.67,II,74,102,76,97,23,Normal,None,ENT,Etomidate,120,Medium
+P1750,71,M,89,170,30.8,III,70,111,68,96,19,Abnormal,Heart Disease,General,Etomidate,129,High
+P1751,35,M,67,159,26.5,I,77,155,62,97,21,Normal,Diabetes,General,Etomidate,176,Low
+P1752,78,M,74,150,32.89,II,83,107,74,95,13,Abnormal,Diabetes,Cardiac,Etomidate,140,Medium
+P1753,57,F,66,173,22.05,I,74,158,89,98,12,Normal,Diabetes,Cardiac,Etomidate,158,Low
+P1754,75,F,89,175,29.06,III,90,149,62,100,20,Normal,Diabetes,General,Propofol,128,High
+P1755,73,M,47,168,16.65,I,60,159,76,96,15,Normal,Hypertension,ENT,Sevoflurane,144,Low
+P1756,43,F,99,154,41.74,I,93,154,61,96,12,Normal,Diabetes,Cardiac,Etomidate,113,Low
+P1757,55,F,98,152,42.42,I,90,137,83,94,15,Abnormal,Asthma,ENT,Propofol,114,Low
+P1758,47,M,80,157,32.46,II,76,115,92,99,18,Normal,Diabetes,General,Sevoflurane,101,Medium
+P1759,24,F,99,165,36.36,II,65,132,91,96,18,Normal,Asthma,Gynecology,Propofol,105,Medium
+P1760,36,F,71,151,31.14,III,81,159,74,94,13,Normal,Hypertension,Urology,Propofol,90,High
+P1761,59,F,45,180,13.89,III,67,118,64,97,12,Normal,Asthma,Cardiac,Sevoflurane,109,High
+P1762,67,F,47,154,19.82,II,64,102,85,95,18,Normal,Hypertension,ENT,Etomidate,109,Medium
+P1763,36,F,46,183,13.74,I,60,121,85,99,22,Normal,Hypertension,Gynecology,Sevoflurane,176,Low
+P1764,67,F,45,178,14.2,I,75,100,84,100,17,Normal,Hypertension,General,Sevoflurane,145,Low
+P1765,67,F,90,179,28.09,II,66,132,73,97,18,Normal,Asthma,General,Etomidate,108,Medium
+P1766,22,F,93,160,36.33,II,91,147,85,98,22,Normal,Heart Disease,Cardiac,Sevoflurane,135,Medium
+P1767,79,M,81,184,23.92,II,65,110,74,94,16,Normal,None,Neurosurgery,Sevoflurane,146,Medium
+P1768,42,F,87,187,24.88,II,83,126,87,97,15,Normal,Diabetes,Cardiac,Propofol,160,Medium
+P1769,29,F,59,180,18.21,I,81,144,98,94,14,Normal,Hypertension,Cardiac,Propofol,144,Low
+P1770,61,M,49,170,16.96,II,95,112,96,98,12,Normal,Diabetes,Cardiac,Sevoflurane,152,Medium
+P1771,69,F,79,172,26.7,III,75,118,60,94,13,Normal,Asthma,Gynecology,Etomidate,114,High
+P1772,77,M,83,178,26.2,II,81,134,74,95,15,Normal,Asthma,General,Sevoflurane,118,Medium
+P1773,56,F,55,171,18.81,III,76,126,65,98,24,Normal,None,ENT,Sevoflurane,173,High
+P1774,74,M,89,161,34.34,III,84,155,66,95,19,Normal,None,ENT,Propofol,84,High
+P1775,67,F,73,182,22.04,I,83,104,75,94,13,Normal,Diabetes,General,Propofol,84,Low
+P1776,49,M,89,161,34.34,I,87,120,70,95,21,Normal,Diabetes,Gynecology,Etomidate,104,Low
+P1777,47,F,58,173,19.38,III,100,135,83,97,13,Normal,Diabetes,Neurosurgery,Sevoflurane,153,High
+P1778,59,M,53,159,20.96,III,79,143,76,98,22,Normal,Heart Disease,Gynecology,Etomidate,80,High
+P1779,58,F,98,154,41.32,I,87,149,85,99,23,Normal,None,ENT,Sevoflurane,104,Low
+P1780,45,M,86,170,29.76,II,98,146,67,94,15,Normal,Diabetes,ENT,Etomidate,125,Medium
+P1781,19,M,57,151,25.0,I,82,110,86,100,22,Normal,Hypertension,Gynecology,Propofol,105,Low
+P1782,28,F,99,188,28.01,III,89,138,87,94,17,Normal,Heart Disease,Cardiac,Etomidate,120,High
+P1783,76,F,97,166,35.2,II,76,106,83,94,12,Normal,Diabetes,Cardiac,Etomidate,168,Medium
+P1784,39,M,51,158,20.43,II,77,151,73,100,20,Normal,Diabetes,Neurosurgery,Propofol,171,Medium
+P1785,33,M,45,165,16.53,II,96,137,71,98,20,Normal,Hypertension,ENT,Etomidate,98,Medium
+P1786,74,F,64,190,17.73,I,62,118,86,96,17,Normal,Asthma,ENT,Propofol,137,Low
+P1787,61,M,61,182,18.42,I,85,154,76,100,12,Normal,Heart Disease,General,Propofol,132,Low
+P1788,27,M,58,170,20.07,II,77,155,83,95,12,Normal,Hypertension,Orthopedic,Etomidate,160,Medium
+P1789,43,F,94,151,41.23,II,91,155,71,97,14,Normal,Diabetes,Cardiac,Propofol,88,Medium
+P1790,79,M,48,174,15.85,I,67,125,89,96,18,Normal,Hypertension,Urology,Sevoflurane,118,Low
+P1791,32,M,57,172,19.27,II,79,154,83,96,15,Normal,Heart Disease,Cardiac,Etomidate,105,Medium
+P1792,50,M,62,167,22.23,II,97,144,85,94,16,Normal,Heart Disease,Orthopedic,Etomidate,112,Medium
+P1793,63,F,86,151,37.72,I,88,131,89,94,15,Normal,Diabetes,Urology,Etomidate,80,Low
+P1794,61,F,60,167,21.51,II,96,104,97,97,15,Normal,Diabetes,General,Etomidate,90,Medium
+P1795,32,M,47,181,14.35,II,82,153,71,95,16,Normal,Diabetes,Urology,Sevoflurane,153,Medium
+P1796,64,M,45,158,18.03,II,67,111,97,100,16,Normal,Diabetes,Neurosurgery,Propofol,176,Medium
+P1797,79,F,94,150,41.78,I,61,130,96,95,17,Normal,Diabetes,ENT,Etomidate,87,Low
+P1798,71,F,50,179,15.61,III,98,154,61,96,24,Normal,None,Cardiac,Sevoflurane,154,High
+P1799,59,M,57,181,17.4,I,70,143,97,95,13,Normal,Diabetes,ENT,Etomidate,128,Low
+P1800,53,M,55,152,23.81,III,86,114,86,94,12,Normal,Hypertension,ENT,Sevoflurane,93,High
+P1801,25,F,98,157,39.76,I,66,149,71,98,14,Normal,Hypertension,Gynecology,Sevoflurane,102,Low
+P1802,73,M,77,182,23.25,I,66,104,61,100,16,Normal,Asthma,Gynecology,Propofol,123,Low
+P1803,47,F,100,181,30.52,I,88,137,69,97,24,Normal,Diabetes,ENT,Sevoflurane,85,Low
+P1804,56,F,81,177,25.85,II,73,104,69,97,12,Normal,Diabetes,Urology,Propofol,144,Medium
+P1805,49,M,86,190,23.82,I,73,131,65,98,21,Normal,Asthma,Neurosurgery,Propofol,98,Low
+P1806,18,F,78,164,29.0,II,63,154,66,96,18,Normal,Hypertension,Cardiac,Propofol,134,Medium
+P1807,59,M,100,154,42.17,III,94,153,95,100,19,Normal,None,Neurosurgery,Propofol,143,High
+P1808,23,M,67,177,21.39,II,61,120,60,95,24,Normal,Asthma,Gynecology,Sevoflurane,163,Medium
+P1809,21,M,95,157,38.54,I,71,120,75,96,21,Normal,Diabetes,General,Etomidate,165,Low
+P1810,44,F,49,168,17.36,I,97,101,73,95,19,Normal,Diabetes,General,Sevoflurane,124,Low
+P1811,62,F,87,178,27.46,III,97,103,68,98,20,Normal,Diabetes,ENT,Etomidate,140,High
+P1812,51,M,47,168,16.65,III,73,138,78,99,13,Abnormal,Hypertension,Neurosurgery,Etomidate,101,High
+P1813,27,F,70,171,23.94,III,96,159,81,99,24,Normal,None,ENT,Propofol,122,High
+P1814,35,F,47,172,15.89,I,75,158,86,97,20,Normal,Heart Disease,ENT,Sevoflurane,161,Low
+P1815,20,M,60,168,21.26,I,90,106,100,100,17,Normal,Asthma,General,Propofol,164,Low
+P1816,23,F,66,155,27.47,II,77,132,98,96,12,Normal,None,General,Propofol,159,Medium
+P1817,26,F,52,161,20.06,I,62,140,62,99,24,Normal,None,Cardiac,Propofol,83,Low
+P1818,37,M,87,157,35.3,III,63,103,76,97,24,Normal,Hypertension,Neurosurgery,Etomidate,162,High
+P1819,68,M,88,188,24.9,II,72,155,95,96,12,Normal,Diabetes,Urology,Sevoflurane,116,Medium
+P1820,52,M,57,164,21.19,I,81,119,62,100,13,Normal,Hypertension,General,Propofol,154,Low
+P1821,66,F,62,170,21.45,III,90,132,84,95,12,Normal,None,Gynecology,Propofol,176,High
+P1822,57,F,89,155,37.04,III,81,142,82,94,21,Normal,Diabetes,Gynecology,Propofol,122,High
+P1823,77,M,47,178,14.83,I,65,137,62,95,19,Normal,Diabetes,General,Etomidate,135,Low
+P1824,22,F,58,159,22.94,II,69,128,80,99,16,Normal,Hypertension,ENT,Etomidate,169,Medium
+P1825,28,F,97,165,35.63,II,91,145,62,98,22,Normal,Hypertension,Orthopedic,Etomidate,132,Medium
+P1826,73,F,51,183,15.23,I,61,128,64,99,18,Normal,Heart Disease,Cardiac,Sevoflurane,141,Low
+P1827,54,F,52,161,20.06,I,82,134,62,97,13,Normal,Heart Disease,Neurosurgery,Etomidate,150,Low
+P1828,51,M,93,154,39.21,III,85,140,75,95,20,Normal,None,Gynecology,Etomidate,174,High
+P1829,45,F,45,151,19.74,III,69,131,88,100,18,Normal,None,Urology,Etomidate,174,High
+P1830,28,M,63,174,20.81,I,89,103,95,100,22,Normal,Asthma,Urology,Sevoflurane,95,Low
+P1831,36,M,95,171,32.49,III,100,124,82,96,22,Normal,None,Neurosurgery,Etomidate,152,High
+P1832,61,F,56,189,15.68,I,64,115,63,97,21,Abnormal,Hypertension,Orthopedic,Propofol,176,Low
+P1833,46,M,90,188,25.46,III,76,133,71,98,22,Normal,Asthma,Orthopedic,Etomidate,134,High
+P1834,48,F,67,157,27.18,I,67,103,83,98,18,Normal,Asthma,Urology,Sevoflurane,85,Low
+P1835,62,F,84,166,30.48,II,70,104,85,99,23,Normal,Hypertension,ENT,Etomidate,109,Medium
+P1836,34,F,50,175,16.33,II,84,147,97,97,20,Normal,Diabetes,General,Sevoflurane,104,Medium
+P1837,44,M,68,174,22.46,I,80,144,75,95,21,Normal,Asthma,Orthopedic,Propofol,81,Low
+P1838,46,M,73,159,28.88,II,72,106,91,100,18,Normal,None,Gynecology,Propofol,100,Medium
+P1839,64,M,88,162,33.53,III,75,107,98,99,15,Normal,Hypertension,Urology,Etomidate,159,High
+P1840,57,M,92,162,35.06,III,90,142,84,96,14,Normal,Hypertension,Urology,Propofol,161,High
+P1841,69,F,83,188,23.48,II,94,157,92,96,14,Normal,Diabetes,ENT,Etomidate,102,Medium
+P1842,80,M,72,190,19.94,I,77,103,96,94,19,Normal,Hypertension,General,Etomidate,111,Low
+P1843,73,F,66,181,20.15,III,89,115,85,98,20,Normal,Asthma,Neurosurgery,Etomidate,129,High
+P1844,30,M,98,158,39.26,II,63,129,84,94,16,Normal,Asthma,General,Sevoflurane,136,Medium
+P1845,65,F,58,189,16.24,II,85,136,80,98,17,Normal,Hypertension,Urology,Propofol,138,Medium
+P1846,77,M,51,176,16.46,II,87,102,93,94,22,Abnormal,Hypertension,Urology,Etomidate,99,Medium
+P1847,23,F,70,152,30.3,I,71,136,73,96,23,Normal,Heart Disease,ENT,Sevoflurane,81,Low
+P1848,66,M,68,164,25.28,III,85,134,98,96,18,Normal,Asthma,Cardiac,Etomidate,153,High
+P1849,76,F,94,185,27.47,I,80,146,60,94,18,Normal,Asthma,Orthopedic,Sevoflurane,83,Low
+P1850,54,M,54,155,22.48,II,63,151,86,95,19,Normal,Hypertension,Gynecology,Propofol,112,Medium
+P1851,45,F,60,168,21.26,III,100,146,79,94,13,Normal,None,Neurosurgery,Propofol,102,High
+P1852,64,M,100,156,41.09,I,62,103,65,99,12,Normal,None,ENT,Sevoflurane,168,Low
+P1853,34,M,71,158,28.44,III,86,143,64,99,15,Normal,Heart Disease,General,Sevoflurane,98,High
+P1854,53,M,77,176,24.86,III,67,101,70,96,17,Abnormal,None,Gynecology,Propofol,124,High
+P1855,77,M,90,187,25.74,II,85,104,98,96,21,Normal,None,Orthopedic,Propofol,168,Medium
+P1856,33,F,92,186,26.59,III,100,133,96,98,12,Abnormal,Asthma,Orthopedic,Sevoflurane,101,High
+P1857,62,M,77,158,30.84,II,89,142,90,95,19,Normal,None,Neurosurgery,Sevoflurane,151,Medium
+P1858,54,F,59,171,20.18,III,78,105,91,97,22,Normal,Asthma,Urology,Propofol,132,High
+P1859,26,F,95,160,37.11,II,97,118,95,100,16,Normal,Diabetes,ENT,Sevoflurane,85,Medium
+P1860,24,F,81,175,26.45,II,79,142,81,98,15,Normal,Hypertension,Urology,Etomidate,83,Medium
+P1861,67,M,69,179,21.53,III,77,153,90,94,19,Abnormal,Asthma,Neurosurgery,Propofol,137,High
+P1862,22,M,64,182,19.32,I,79,100,70,97,15,Normal,None,ENT,Propofol,114,Low
+P1863,78,F,47,183,14.03,III,83,109,68,99,19,Normal,Diabetes,General,Sevoflurane,103,High
+P1864,18,M,74,166,26.85,I,96,127,94,97,13,Normal,Heart Disease,Neurosurgery,Etomidate,106,Low
+P1865,39,M,88,185,25.71,II,90,155,97,95,24,Normal,Hypertension,Urology,Etomidate,155,Medium
+P1866,64,M,56,175,18.29,III,75,149,66,95,17,Normal,Hypertension,Gynecology,Sevoflurane,137,High
+P1867,33,F,58,169,20.31,I,88,146,85,98,24,Normal,Asthma,Urology,Etomidate,142,Low
+P1868,37,M,61,187,17.44,II,94,138,67,95,17,Normal,None,General,Etomidate,127,Medium
+P1869,53,M,62,167,22.23,I,60,147,99,94,13,Abnormal,Diabetes,Cardiac,Propofol,102,Low
+P1870,51,M,99,174,32.7,II,81,117,63,95,12,Normal,Heart Disease,ENT,Propofol,115,Medium
+P1871,56,M,55,189,15.4,III,94,126,63,99,24,Normal,Asthma,ENT,Sevoflurane,89,High
+P1872,43,M,59,169,20.66,I,80,146,61,100,24,Normal,None,Cardiac,Etomidate,134,Low
+P1873,41,M,94,182,28.38,I,83,116,87,100,24,Abnormal,Asthma,Gynecology,Propofol,135,Low
+P1874,40,F,59,168,20.9,I,84,109,89,100,18,Normal,Diabetes,Cardiac,Sevoflurane,113,Low
+P1875,23,F,84,153,35.88,I,92,147,74,94,15,Normal,Heart Disease,Urology,Etomidate,105,Low
+P1876,79,M,89,151,39.03,III,98,131,86,95,17,Normal,Asthma,Neurosurgery,Sevoflurane,166,High
+P1877,19,F,47,181,14.35,III,68,145,71,98,16,Normal,Diabetes,General,Etomidate,99,High
+P1878,77,M,62,154,26.14,II,62,138,87,100,12,Normal,Diabetes,ENT,Propofol,158,Medium
+P1879,31,F,83,150,36.89,I,81,106,94,100,20,Normal,Asthma,ENT,Etomidate,99,Low
+P1880,75,M,85,155,35.38,II,92,153,65,95,23,Abnormal,Heart Disease,Gynecology,Propofol,161,Medium
+P1881,61,F,67,155,27.89,II,74,125,65,95,17,Normal,Heart Disease,Neurosurgery,Etomidate,171,Medium
+P1882,67,M,63,164,23.42,I,78,114,72,100,22,Normal,None,Orthopedic,Etomidate,100,Low
+P1883,26,F,81,184,23.92,I,87,103,71,100,23,Normal,Asthma,General,Sevoflurane,146,Low
+P1884,50,M,66,161,25.46,III,76,111,68,100,17,Normal,None,ENT,Propofol,100,High
+P1885,71,F,55,164,20.45,II,80,144,85,99,14,Normal,Hypertension,Urology,Propofol,177,Medium
+P1886,34,F,61,186,17.63,II,60,151,76,99,13,Normal,Asthma,General,Sevoflurane,150,Medium
+P1887,61,F,49,179,15.29,II,99,132,76,100,14,Normal,Diabetes,Orthopedic,Propofol,153,Medium
+P1888,66,M,91,180,28.09,II,77,154,75,99,20,Abnormal,Asthma,Orthopedic,Sevoflurane,132,Medium
+P1889,30,M,49,176,15.82,III,68,114,83,96,12,Normal,Heart Disease,General,Etomidate,107,High
+P1890,66,M,85,177,27.13,I,62,153,84,97,15,Normal,None,Gynecology,Etomidate,164,Low
+P1891,75,F,64,188,18.11,III,97,118,85,100,15,Abnormal,Heart Disease,ENT,Propofol,109,High
+P1892,28,F,98,182,29.59,II,61,141,75,94,18,Normal,Asthma,ENT,Sevoflurane,126,Medium
+P1893,59,F,84,173,28.07,II,79,110,73,99,24,Normal,Asthma,General,Etomidate,136,Medium
+P1894,34,F,67,159,26.5,I,84,138,67,96,14,Normal,Diabetes,Gynecology,Propofol,137,Low
+P1895,71,F,69,158,27.64,III,63,143,63,95,12,Normal,None,Neurosurgery,Sevoflurane,152,High
+P1896,32,M,62,164,23.05,II,74,115,98,99,22,Normal,None,Neurosurgery,Sevoflurane,126,Medium
+P1897,58,F,49,163,18.44,II,83,134,89,98,18,Normal,Asthma,ENT,Etomidate,152,Medium
+P1898,41,M,79,178,24.93,III,73,102,95,95,21,Normal,Hypertension,Gynecology,Etomidate,128,High
+P1899,28,M,53,161,20.45,II,63,148,71,98,15,Abnormal,Hypertension,Neurosurgery,Propofol,99,Medium
+P1900,50,M,61,167,21.87,III,100,139,100,97,23,Normal,None,Urology,Propofol,142,High
+P1901,77,F,77,169,26.96,II,95,159,78,100,16,Normal,Heart Disease,Orthopedic,Sevoflurane,149,Medium
+P1902,36,F,47,158,18.83,II,78,148,89,97,18,Normal,Hypertension,ENT,Propofol,154,Medium
+P1903,31,M,62,164,23.05,II,84,100,96,97,20,Normal,Diabetes,Urology,Etomidate,122,Medium
+P1904,71,F,52,185,15.19,III,61,136,97,96,16,Normal,Heart Disease,General,Etomidate,89,High
+P1905,52,F,68,150,30.22,III,99,153,80,99,17,Normal,None,Orthopedic,Sevoflurane,108,High
+P1906,34,F,53,179,16.54,II,60,100,95,97,22,Normal,Hypertension,Gynecology,Etomidate,174,Medium
+P1907,57,M,60,173,20.05,I,68,101,93,97,16,Normal,Asthma,Neurosurgery,Propofol,146,Low
+P1908,70,M,78,174,25.76,II,63,106,86,95,16,Normal,Asthma,Orthopedic,Sevoflurane,155,Medium
+P1909,71,M,85,177,27.13,I,65,113,79,100,20,Normal,Asthma,Urology,Etomidate,92,Low
+P1910,25,M,58,177,18.51,II,84,101,72,98,19,Normal,Hypertension,Urology,Sevoflurane,133,Medium
+P1911,32,M,86,186,24.86,III,85,129,70,94,19,Normal,Diabetes,General,Propofol,123,High
+P1912,41,M,87,174,28.74,I,83,156,87,97,22,Normal,None,Urology,Sevoflurane,124,Low
+P1913,23,F,79,185,23.08,III,93,121,92,100,16,Normal,Heart Disease,Orthopedic,Sevoflurane,138,High
+P1914,21,M,48,175,15.67,III,78,143,74,100,21,Normal,None,Neurosurgery,Etomidate,140,High
+P1915,18,F,60,165,22.04,I,89,158,69,97,20,Normal,Diabetes,Neurosurgery,Etomidate,129,Low
+P1916,79,M,59,184,17.43,III,85,156,65,94,16,Normal,Asthma,Orthopedic,Etomidate,100,High
+P1917,18,F,58,189,16.24,III,95,133,86,94,18,Normal,Hypertension,Cardiac,Propofol,126,High
+P1918,37,F,92,155,38.29,II,89,130,97,97,20,Normal,None,ENT,Etomidate,95,Medium
+P1919,62,F,85,170,29.41,II,64,139,80,94,15,Normal,None,Orthopedic,Sevoflurane,118,Medium
+P1920,19,F,80,172,27.04,I,62,155,93,95,12,Normal,Heart Disease,Neurosurgery,Etomidate,150,Low
+P1921,61,M,89,152,38.52,III,79,103,100,99,12,Normal,Asthma,General,Propofol,133,High
+P1922,35,F,85,175,27.76,I,79,145,62,99,22,Normal,Diabetes,Urology,Sevoflurane,102,Low
+P1923,79,M,55,169,19.26,III,69,117,71,100,20,Normal,None,Urology,Propofol,165,High
+P1924,45,M,89,152,38.52,III,68,116,63,100,20,Normal,None,Cardiac,Etomidate,150,High
+P1925,56,F,49,190,13.57,I,90,110,87,96,24,Normal,Asthma,Gynecology,Sevoflurane,129,Low
+P1926,49,F,66,157,26.78,III,88,141,76,100,20,Normal,Asthma,Gynecology,Propofol,80,High
+P1927,35,F,69,181,21.06,III,95,100,60,98,24,Normal,Heart Disease,Cardiac,Propofol,154,High
+P1928,24,M,52,157,21.1,I,95,106,91,100,15,Normal,None,Gynecology,Etomidate,167,Low
+P1929,67,M,51,160,19.92,I,70,100,70,96,13,Normal,Hypertension,Neurosurgery,Sevoflurane,143,Low
+P1930,41,M,61,156,25.07,I,80,101,78,94,13,Abnormal,Heart Disease,General,Etomidate,141,Low
+P1931,78,F,51,190,14.13,II,61,107,70,96,23,Abnormal,None,ENT,Sevoflurane,163,Medium
+P1932,36,M,89,150,39.56,II,94,115,92,100,24,Normal,None,General,Etomidate,166,Medium
+P1933,69,F,50,188,14.15,II,67,150,89,99,19,Normal,Heart Disease,Gynecology,Sevoflurane,175,Medium
+P1934,20,M,84,171,28.73,III,90,158,60,94,13,Normal,Heart Disease,Orthopedic,Propofol,124,High
+P1935,74,M,81,185,23.67,I,82,102,97,95,20,Abnormal,Diabetes,General,Sevoflurane,85,Low
+P1936,32,F,69,183,20.6,II,93,102,99,97,18,Normal,Hypertension,Neurosurgery,Propofol,130,Medium
+P1937,69,F,78,190,21.61,III,89,138,94,95,22,Normal,Asthma,ENT,Etomidate,137,High
+P1938,78,M,81,173,27.06,III,89,135,64,99,23,Normal,None,Neurosurgery,Propofol,87,High
+P1939,55,M,84,153,35.88,II,91,124,64,98,20,Normal,None,Cardiac,Etomidate,92,Medium
+P1940,74,F,94,178,29.67,III,91,148,77,94,17,Normal,None,Cardiac,Etomidate,148,High
+P1941,62,M,69,159,27.29,I,63,143,70,97,24,Normal,None,Gynecology,Sevoflurane,141,Low
+P1942,32,F,94,168,33.3,I,79,116,94,94,15,Normal,None,Urology,Propofol,113,Low
+P1943,70,F,95,184,28.06,III,94,130,71,95,12,Normal,Asthma,Cardiac,Etomidate,117,High
+P1944,53,M,59,153,25.2,II,67,107,64,94,20,Normal,Hypertension,Urology,Sevoflurane,83,Medium
+P1945,53,F,49,177,15.64,III,75,152,82,98,16,Normal,None,ENT,Propofol,109,High
+P1946,50,M,48,171,16.42,II,60,119,84,94,16,Normal,Asthma,Cardiac,Etomidate,139,Medium
+P1947,72,M,65,155,27.06,III,79,136,65,99,21,Normal,Asthma,General,Propofol,109,High
+P1948,21,F,81,189,22.68,III,89,133,96,97,21,Abnormal,Hypertension,Neurosurgery,Propofol,96,High
+P1949,30,M,75,183,22.4,II,95,130,66,94,16,Normal,Asthma,Urology,Propofol,170,Medium
+P1950,50,M,46,190,12.74,III,84,145,95,98,21,Normal,Diabetes,ENT,Etomidate,126,High
+P1951,79,M,56,151,24.56,I,86,125,74,97,20,Normal,Diabetes,General,Propofol,125,Low
+P1952,43,F,96,160,37.5,III,85,100,99,96,19,Normal,Asthma,ENT,Etomidate,113,High
+P1953,36,F,85,170,29.41,II,97,106,62,96,19,Normal,Hypertension,Cardiac,Etomidate,129,Medium
+P1954,22,M,77,171,26.33,II,60,103,67,96,12,Normal,Heart Disease,ENT,Etomidate,87,Medium
+P1955,65,F,62,180,19.14,I,67,103,63,97,14,Normal,Asthma,Cardiac,Propofol,112,Low
+P1956,41,F,51,187,14.58,I,86,108,67,94,14,Normal,Asthma,Orthopedic,Sevoflurane,143,Low
+P1957,28,M,85,190,23.55,II,83,115,96,99,18,Abnormal,Asthma,Neurosurgery,Sevoflurane,124,Medium
+P1958,28,M,81,165,29.75,II,63,128,68,98,21,Normal,Heart Disease,Neurosurgery,Etomidate,161,Medium
+P1959,46,M,60,150,26.67,I,73,147,98,99,12,Normal,Heart Disease,Neurosurgery,Sevoflurane,157,Low
+P1960,29,M,83,182,25.06,II,99,101,72,95,23,Normal,None,ENT,Etomidate,91,Medium
+P1961,26,M,81,185,23.67,I,66,157,97,97,15,Normal,None,General,Etomidate,111,Low
+P1962,74,M,54,163,20.32,II,91,118,69,97,14,Normal,None,Cardiac,Propofol,168,Medium
+P1963,58,M,60,179,18.73,II,73,130,82,99,22,Abnormal,Asthma,ENT,Etomidate,174,Medium
+P1964,34,F,61,187,17.44,III,61,119,99,98,23,Normal,None,ENT,Etomidate,87,High
+P1965,30,M,100,152,43.28,III,69,148,98,100,17,Normal,Diabetes,ENT,Etomidate,95,High
+P1966,55,F,100,170,34.6,II,77,123,84,95,16,Normal,Asthma,Cardiac,Sevoflurane,115,Medium
+P1967,74,M,78,169,27.31,II,93,125,100,99,18,Normal,Diabetes,Urology,Etomidate,155,Medium
+P1968,52,M,88,186,25.44,II,67,109,67,99,17,Normal,Heart Disease,ENT,Sevoflurane,147,Medium
+P1969,31,M,90,158,36.05,II,72,129,82,97,17,Normal,Hypertension,Urology,Sevoflurane,166,Medium
+P1970,19,M,67,159,26.5,II,86,151,66,95,22,Normal,Heart Disease,Orthopedic,Sevoflurane,129,Medium
+P1971,55,F,86,161,33.18,I,89,112,97,98,18,Normal,None,General,Sevoflurane,132,Low
+P1972,27,M,50,188,14.15,III,99,158,69,94,19,Normal,None,Neurosurgery,Sevoflurane,160,High
+P1973,72,M,91,159,36.0,II,67,125,71,96,21,Normal,Hypertension,Gynecology,Propofol,126,Medium
+P1974,64,F,88,160,34.37,I,93,154,62,94,24,Normal,None,ENT,Etomidate,102,Low
+P1975,68,F,94,154,39.64,III,98,144,69,96,16,Abnormal,None,ENT,Sevoflurane,173,High
+P1976,65,M,66,161,25.46,I,85,144,70,96,19,Normal,None,Gynecology,Propofol,165,Low
+P1977,71,M,53,165,19.47,I,62,108,78,96,24,Normal,Diabetes,Neurosurgery,Sevoflurane,128,Low
+P1978,58,M,95,175,31.02,I,79,159,72,94,18,Normal,Heart Disease,General,Propofol,146,Low
+P1979,37,M,69,163,25.97,I,86,103,79,99,15,Normal,None,ENT,Etomidate,173,Low
+P1980,25,F,74,154,31.2,II,88,105,97,97,15,Normal,Asthma,Neurosurgery,Propofol,86,Medium
+P1981,49,F,89,166,32.3,III,60,117,70,95,13,Abnormal,Heart Disease,Orthopedic,Sevoflurane,80,High
+P1982,30,M,89,188,25.18,II,81,136,74,94,23,Normal,Heart Disease,ENT,Sevoflurane,144,Medium
+P1983,78,M,53,186,15.32,II,91,137,80,98,17,Normal,Asthma,Orthopedic,Etomidate,80,Medium
+P1984,42,F,73,190,20.22,I,67,102,77,94,19,Normal,None,Cardiac,Etomidate,93,Low
+P1985,59,M,62,169,21.71,III,99,139,69,96,23,Normal,Heart Disease,ENT,Etomidate,119,High
+P1986,18,M,79,151,34.65,II,70,125,93,95,12,Normal,Hypertension,ENT,Etomidate,111,Medium
+P1987,51,F,91,172,30.76,II,60,120,92,100,12,Normal,Hypertension,ENT,Propofol,102,Medium
+P1988,69,M,66,168,23.38,I,68,150,73,94,13,Normal,Asthma,ENT,Propofol,110,Low
+P1989,71,F,74,175,24.16,I,73,102,66,97,22,Normal,Diabetes,Urology,Etomidate,154,Low
+P1990,73,M,93,169,32.56,II,60,104,83,96,18,Normal,Heart Disease,General,Sevoflurane,165,Medium
+P1991,31,F,82,179,25.59,III,66,101,93,97,22,Normal,Diabetes,ENT,Sevoflurane,95,High
+P1992,22,M,74,162,28.2,II,86,123,77,94,15,Normal,Heart Disease,Cardiac,Propofol,156,Medium
+P1993,67,F,83,158,33.25,II,80,127,79,98,13,Normal,Asthma,General,Etomidate,164,Medium
+P1994,28,M,96,155,39.96,III,60,150,86,94,24,Abnormal,Hypertension,Urology,Sevoflurane,93,High
+P1995,21,F,55,153,23.5,III,79,108,82,95,12,Normal,None,General,Sevoflurane,172,High
+P1996,60,M,97,162,36.96,III,75,134,70,98,23,Normal,Hypertension,Cardiac,Sevoflurane,138,High
+P1997,68,F,68,171,23.26,III,69,130,98,99,15,Normal,Heart Disease,Orthopedic,Etomidate,100,High
+P1998,28,M,76,182,22.94,III,70,136,89,94,13,Normal,None,Cardiac,Etomidate,152,High
+P1999,46,M,72,178,22.72,I,73,117,83,94,19,Abnormal,Diabetes,Gynecology,Propofol,111,Low
+P2000,64,M,90,190,24.93,I,92,154,86,96,21,Normal,Hypertension,Orthopedic,Sevoflurane,118,Low

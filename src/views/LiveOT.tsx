@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useApp } from '../context/AppContext';
+import { API_BASE_URL, getAuthHeaders } from '../config/api';
 
 export const LiveOT: React.FC = () => {
   const { simulatedState, setSimulatedState, patients } = useApp();
@@ -10,9 +11,16 @@ export const LiveOT: React.FC = () => {
   const etco2CanvasRef = useRef<HTMLCanvasElement>(null);
   const pawCanvasRef = useRef<HTMLCanvasElement>(null);
   
-  // Audio Ref and Mute State
+  // Audio Refs and State Management for Live Audio Monitor
   const audioCtxRef = useRef<AudioContext | null>(null);
-  const [isMuted, setIsMuted] = useState(true);
+  const masterGainRef = useRef<GainNode | null>(null);
+  const heartbeatTimeoutRef = useRef<number | null>(null);
+  const [isAudioEnabled, setIsAudioEnabled] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [audioVolume, setAudioVolume] = useState(0.6);
+  const [audioCtxState, setAudioCtxState] = useState<AudioContextState | 'uninitialized'>('uninitialized');
+  const [audioBlockedError, setAudioBlockedError] = useState<string | null>(null);
+  const [isHeartbeatPulse, setIsHeartbeatPulse] = useState(false);
 
   // Vitals State
   const [vitals, setVitals] = useState({
@@ -53,7 +61,7 @@ export const LiveOT: React.FC = () => {
   const [propofolRate, setPropofolRate] = useState<number>(150); // mcg/kg/min
   
   const [timelineLogs, setTimelineLogs] = useState<Array<{ time: string; msg: string; type: 'info' | 'warning' | 'drug' | 'success' }>>([
-    { time: '14:20:00', msg: 'System initialized. Receiver telemetry locked on Patient Robert Miller.', type: 'info' },
+    { time: '14:20:00', msg: `System initialized. Telemetry locked on synthetic patient ${patient?.name || 'Aarav Mehta'} (${patient?.id || 'SD-2026-0001'}).`, type: 'info' },
     { time: '14:20:15', msg: 'Ventilator synchronized. Target Tidal Volume 480mL at RR 12.', type: 'info' }
   ]);
 
@@ -185,9 +193,9 @@ export const LiveOT: React.FC = () => {
       await Promise.all(
         models.map(async (mId) => {
           try {
-            const res = await fetch(`http://localhost:8000/predict/${mId}`, {
+            const res = await fetch(`${API_BASE_URL}/predict/${mId}`, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: getAuthHeaders(),
               body: JSON.stringify(payload)
             });
             if (res.ok) {
@@ -196,18 +204,7 @@ export const LiveOT: React.FC = () => {
               updatedRisks[mId] = Math.round(prob * 100);
             }
           } catch (err) {
-            // Heuristic clinical logic if API server is offline or loading
-            if (mId === 'Hypotension') {
-              const z = (hr - 80)/12 * 0.3 - (sbp - 115)/18 * 1.5 - (mapVal - 85)/14 * 2.0;
-              const p = 1 / (1 + Math.exp(-z));
-              updatedRisks.Hypotension = Math.round(p * 100);
-            } else if (mId === 'Hypoxia') {
-              updatedRisks.Hypoxia = spo2 < 90 ? 95 : (spo2 < 94 ? 60 : 5);
-            } else if (mId === 'Bradycardia') {
-              updatedRisks.Bradycardia = hr < 50 ? 98 : (hr < 60 ? 70 : 8);
-            } else if (mId === 'Tachycardia') {
-              updatedRisks.Tachycardia = hr > 110 ? 99 : (hr > 100 ? 75 : 10);
-            }
+            console.warn(`Inference unavailable for ${mId}:`, err);
           }
         })
       );
@@ -219,68 +216,254 @@ export const LiveOT: React.FC = () => {
 
   const hypotensionRisk = aiRisks.Hypotension;
 
-  // Web Audio Synth - Play beat with frequency mapped to SpO2 (auditory oximetry)
-  const playHeartbeatSound = (spo2Val: number) => {
-    if (isMuted) return;
+  // Sync state refs to prevent stale closures in audio scheduler
+  const vitalsRef = useRef(vitals);
+  vitalsRef.current = vitals;
+  const isAudioEnabledRef = useRef(isAudioEnabled);
+  isAudioEnabledRef.current = isAudioEnabled;
+  const isMutedRef = useRef(isMuted);
+  isMutedRef.current = isMuted;
+  const audioVolumeRef = useRef(audioVolume);
+  audioVolumeRef.current = audioVolume;
+
+  // Initialize or resume AudioContext safely upon explicit user interaction
+  const initOrResumeAudio = async (): Promise<boolean> => {
     try {
       if (!audioCtxRef.current) {
-        audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+        if (!AudioContextClass) {
+          setAudioBlockedError("Web Audio API is not supported in this browser.");
+          return false;
+        }
+        const ctx = new AudioContextClass();
+        audioCtxRef.current = ctx;
+
+        const masterGain = ctx.createGain();
+        masterGain.gain.setValueAtTime(isMuted ? 0 : audioVolume, ctx.currentTime);
+        masterGain.connect(ctx.destination);
+        masterGainRef.current = masterGain;
       }
+
       const ctx = audioCtxRef.current;
       if (ctx.state === 'suspended') {
-        ctx.resume();
+        await ctx.resume();
       }
-
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-
-      // Auditory Oximetry: Pitch maps to SpO2 level
-      const freq = 120 + (spo2Val * 4.8);
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, ctx.currentTime);
-
-      gain.gain.setValueAtTime(0.08, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc.start();
-      osc.stop(ctx.currentTime + 0.15);
-    } catch (e) {
-      console.warn("AudioContext failed:", e);
+      setAudioCtxState(ctx.state);
+      setAudioBlockedError(null);
+      return ctx.state === 'running';
+    } catch (err: any) {
+      console.warn("AudioContext activation blocked or failed:", err);
+      setAudioBlockedError("Audio playback was blocked by the browser. Click 'Enable Heartbeat' to start audio.");
+      return false;
     }
   };
 
-  // Web Audio Synth - Play triple beeping critical alarm
-  const playAlarmSound = () => {
-    if (isMuted) return;
-    try {
-      if (!audioCtxRef.current) {
-        audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+  // Toggle audio enable/disable on explicit user gesture
+  const handleToggleAudio = async () => {
+    if (!isAudioEnabled) {
+      const ok = await initOrResumeAudio();
+      setIsAudioEnabled(true);
+      setIsMuted(false);
+      if (ok) {
+        addLog('Live Audio Monitor: Simulated heartbeat audio enabled (Auditory Oximetry active).', 'info');
       }
+    } else {
+      setIsAudioEnabled(false);
+      if (heartbeatTimeoutRef.current) {
+        clearTimeout(heartbeatTimeoutRef.current);
+        heartbeatTimeoutRef.current = null;
+      }
+      addLog('Live Audio Monitor: Simulated heartbeat audio disabled.', 'info');
+    }
+  };
+
+  // Toggle mute/unmute
+  const handleToggleMute = async () => {
+    const nextMute = !isMuted;
+    setIsMuted(nextMute);
+    if (!nextMute && !isAudioEnabled) {
+      setIsAudioEnabled(true);
+      await initOrResumeAudio();
+    } else if (!nextMute && audioCtxRef.current && audioCtxRef.current.state === 'suspended') {
+      await audioCtxRef.current.resume();
+      setAudioCtxState(audioCtxRef.current.state);
+    }
+    
+    if (masterGainRef.current && audioCtxRef.current) {
+      masterGainRef.current.gain.setValueAtTime(nextMute ? 0 : audioVolume, audioCtxRef.current.currentTime);
+    }
+    addLog(`Live Audio Monitor: Speaker output ${nextMute ? 'muted' : 'unmuted'}.`, 'info');
+  };
+
+  // Volume change handler
+  const handleVolumeChange = (newVol: number) => {
+    setAudioVolume(newVol);
+    if (masterGainRef.current && audioCtxRef.current) {
+      masterGainRef.current.gain.setValueAtTime(isMuted ? 0 : newVol, audioCtxRef.current.currentTime);
+    }
+  };
+
+  // Medically recognizable simulated clinical heartbeat sound: "LUB" followed by "DUB"
+  // Features auditory oximetry: pitch is dynamically modulated by SpO2 level
+  const playLubDubSound = (spo2Val: number) => {
+    if (!audioCtxRef.current || isMutedRef.current || !isAudioEnabledRef.current) return;
+    try {
       const ctx = audioCtxRef.current;
-      if (ctx.state === 'suspended') ctx.resume();
+      if (ctx.state === 'suspended') {
+        ctx.resume().catch(() => {});
+      }
+      if (ctx.state !== 'running') return;
 
       const now = ctx.currentTime;
-      [0, 0.18, 0.36].forEach(delay => {
+      // Auditory Oximetry pitch scaling: pitch scales with SpO2 saturation
+      const spo2Ratio = Math.max(0.65, Math.min(1.25, (spo2Val || 98) / 98));
+      const lubFreq = 100 * spo2Ratio;
+      const dubFreq = 142 * spo2Ratio;
+      const effectiveVol = audioVolumeRef.current * 0.45;
+
+      // 1. S1 "LUB" - Atrioventricular valve closure (low resonant tone with downward glide)
+      const lubOsc = ctx.createOscillator();
+      const lubGain = ctx.createGain();
+      lubOsc.type = 'sine';
+      lubOsc.frequency.setValueAtTime(lubFreq, now);
+      lubOsc.frequency.exponentialRampToValueAtTime(lubFreq * 0.72, now + 0.08);
+
+      lubGain.gain.setValueAtTime(0.001, now);
+      lubGain.gain.linearRampToValueAtTime(effectiveVol, now + 0.015);
+      lubGain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+
+      lubOsc.connect(lubGain);
+      if (masterGainRef.current) {
+        lubGain.connect(masterGainRef.current);
+      } else {
+        lubGain.connect(ctx.destination);
+      }
+
+      lubOsc.start(now);
+      lubOsc.stop(now + 0.10);
+
+      // 2. S2 "DUB" - Semilunar valve closure (slightly higher pitch, crisper, follows 120ms after S1)
+      const dubDelay = 0.12;
+      const dubOsc = ctx.createOscillator();
+      const dubGain = ctx.createGain();
+      dubOsc.type = 'sine';
+      dubOsc.frequency.setValueAtTime(dubFreq, now + dubDelay);
+      dubOsc.frequency.exponentialRampToValueAtTime(dubFreq * 0.82, now + dubDelay + 0.06);
+
+      const dubVol = effectiveVol * 0.75;
+      dubGain.gain.setValueAtTime(0.001, now + dubDelay);
+      dubGain.gain.linearRampToValueAtTime(dubVol, now + dubDelay + 0.012);
+      dubGain.gain.exponentialRampToValueAtTime(0.001, now + dubDelay + 0.07);
+
+      dubOsc.connect(dubGain);
+      if (masterGainRef.current) {
+        dubGain.connect(masterGainRef.current);
+      } else {
+        dubGain.connect(ctx.destination);
+      }
+
+      dubOsc.start(now + dubDelay);
+      dubOsc.stop(now + dubDelay + 0.08);
+
+      // Brief visual pulse indicator for accessibility & synchronization
+      setIsHeartbeatPulse(true);
+      setTimeout(() => setIsHeartbeatPulse(false), 140);
+    } catch (e) {
+      console.warn("Heartbeat audio synthesis failed:", e);
+    }
+  };
+
+  // Critical alarm sound (3 rapid warning beeps)
+  const playAlarmSound = () => {
+    if (!audioCtxRef.current || isMutedRef.current || !isAudioEnabledRef.current) return;
+    try {
+      const ctx = audioCtxRef.current;
+      if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+      if (ctx.state !== 'running') return;
+
+      const now = ctx.currentTime;
+      [0, 0.16, 0.32].forEach(delay => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(800, now + delay);
-        gain.gain.setValueAtTime(0.05, now + delay);
+        osc.frequency.setValueAtTime(820, now + delay);
+        gain.gain.setValueAtTime(0.04, now + delay);
         gain.gain.exponentialRampToValueAtTime(0.001, now + delay + 0.1);
 
         osc.connect(gain);
-        gain.connect(ctx.destination);
+        if (masterGainRef.current) {
+          gain.connect(masterGainRef.current);
+        } else {
+          gain.connect(ctx.destination);
+        }
 
         osc.start(now + delay);
-        osc.stop(now + delay + 0.12);
+        osc.stop(now + delay + 0.11);
       });
     } catch (e) {
       console.warn("Alarm audio failed:", e);
     }
   };
+
+  // Dedicated BPM-synchronized heartbeat timer loop
+  // Follows: beatIntervalMs = 60000 / heartRate
+  useEffect(() => {
+    if (!isAudioEnabled || isMuted) {
+      if (heartbeatTimeoutRef.current) {
+        clearTimeout(heartbeatTimeoutRef.current);
+        heartbeatTimeoutRef.current = null;
+      }
+      return;
+    }
+
+    let isCancelled = false;
+
+    const scheduleBeat = () => {
+      if (isCancelled || !isAudioEnabledRef.current || isMutedRef.current) return;
+
+      const currentHr = vitalsRef.current.hr || 72;
+      const currentSpo2 = vitalsRef.current.spo2 || 99;
+
+      playLubDubSound(currentSpo2);
+
+      // Dynamic interval: 60,000 / BPM ms (clamped between 300ms [200 BPM] and 2000ms [30 BPM])
+      const intervalMs = Math.max(300, Math.min(2000, Math.round(60000 / currentHr)));
+      heartbeatTimeoutRef.current = window.setTimeout(scheduleBeat, intervalMs);
+    };
+
+    scheduleBeat();
+
+    return () => {
+      isCancelled = true;
+      if (heartbeatTimeoutRef.current) {
+        clearTimeout(heartbeatTimeoutRef.current);
+        heartbeatTimeoutRef.current = null;
+      }
+    };
+  }, [isAudioEnabled, isMuted, vitals.hr]);
+
+  // Master Gain sync with volume/mute
+  useEffect(() => {
+    if (masterGainRef.current && audioCtxRef.current) {
+      masterGainRef.current.gain.setValueAtTime(
+        isMuted || !isAudioEnabled ? 0 : audioVolume,
+        audioCtxRef.current.currentTime
+      );
+    }
+  }, [audioVolume, isMuted, isAudioEnabled]);
+
+  // Clean up AudioContext and timers on component unmount
+  useEffect(() => {
+    return () => {
+      if (heartbeatTimeoutRef.current) {
+        clearTimeout(heartbeatTimeoutRef.current);
+      }
+      if (audioCtxRef.current && audioCtxRef.current.state !== 'closed') {
+        audioCtxRef.current.close().catch(() => {});
+        audioCtxRef.current = null;
+      }
+    };
+  }, []);
 
   // Interactive drug bolus trigger handlers
   const handleAtropineBolus = () => {
@@ -562,7 +745,6 @@ export const LiveOT: React.FC = () => {
         ecgY = height / 2 + 5;  // Q wave
       } else if (cyclePos === 38) {
         ecgY = height / 2 - 35; // R wave peak
-        playHeartbeatSound(vitals.spo2);
       } else if (cyclePos === 40) {
         ecgY = height / 2 + 15; // S wave dip
       } else if (cyclePos > 44 && cyclePos < 50) {
@@ -654,28 +836,110 @@ export const LiveOT: React.FC = () => {
 
   return (
     <div className="page-container">
+      {/* Research & Clinical Decision-Support Banner */}
+      <div className="prototype-advisory-banner">
+        <span>
+          <strong>RESEARCH PROTOTYPE</strong> • Live OT Telemetry Simulator (OR-01). Clinical decision-support demonstration only; continuous qualified clinician presence required.
+        </span>
+        <span className="badge badge-info">SYNTHETIC FEED</span>
+      </div>
+
       <div className="page-header">
         <div>
           <h1 className="page-title">Surgical Vitals Monitor (Live OT)</h1>
-          <p className="page-subtitle">High-fidelity waveform display and critical vitals alarms</p>
+          <p className="page-subtitle">High-fidelity waveform telemetry and clinical decision-support</p>
         </div>
-        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+          {/* Main Enable / Disable Heartbeat Button */}
           <button 
-            className="btn btn-secondary" 
-            onClick={() => {
-              setIsMuted(!isMuted);
-              addLog(`Telemetry monitor speaker output ${!isMuted ? 'muted' : 'unmuted'}.`, 'info');
+            className={`btn ${isAudioEnabled ? 'btn-primary' : 'btn-secondary'}`}
+            onClick={handleToggleAudio}
+            aria-label={isAudioEnabled ? "Disable simulated heartbeat audio" : "Enable simulated heartbeat audio"}
+            style={{ 
+              fontWeight: 700, 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '8px', 
+              backgroundColor: isAudioEnabled ? '#059669' : undefined,
+              borderColor: isAudioEnabled ? '#10b981' : '#64748b',
+              color: '#ffffff'
             }}
-            style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px', border: isMuted ? '1px solid var(--med-red)' : '1px solid var(--med-green)' }}
           >
-            {isMuted ? '🔇 Muted (Tap to hear heartbeat)' : '🔊 Unmute Telemetry Audio'}
+            {isAudioEnabled ? '🔊 Heartbeat ON' : '🔊 Enable Heartbeat'}
           </button>
-          
+
+          {/* Mute / Unmute Button */}
+          {isAudioEnabled && (
+            <button 
+              className="btn btn-secondary" 
+              onClick={handleToggleMute}
+              aria-label={isMuted ? "Unmute simulated heartbeat audio" : "Mute simulated heartbeat audio"}
+              style={{ 
+                fontWeight: 600, 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '6px',
+                borderColor: isMuted ? 'var(--med-red)' : 'var(--med-green)' 
+              }}
+            >
+              {isMuted ? '🔇 Muted' : '🔊 Mute'}
+            </button>
+          )}
+
+          {/* Volume Slider */}
+          {isAudioEnabled && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(30, 41, 59, 0.7)', padding: '4px 10px', borderRadius: '6px', border: '1px solid #334155' }}>
+              <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600 }}>VOL:</span>
+              <input 
+                type="range" 
+                min="0" 
+                max="1" 
+                step="0.05" 
+                value={isMuted ? 0 : audioVolume} 
+                onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
+                aria-label="Heartbeat audio volume control"
+                style={{ width: '70px', accentColor: '#10b981', cursor: 'pointer' }}
+              />
+              <span style={{ fontSize: '11px', color: '#cbd5e1', width: '28px' }}>{Math.round((isMuted ? 0 : audioVolume) * 100)}%</span>
+            </div>
+          )}
+
+          {/* Live Audio Telemetry Status Indicator */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', background: 'rgba(15, 23, 42, 0.8)', padding: '5px 10px', borderRadius: '6px', border: '1px solid #334155' }}>
+            <span 
+              style={{ 
+                width: '8px', 
+                height: '8px', 
+                borderRadius: '50%', 
+                backgroundColor: isAudioEnabled && !isMuted ? (isHeartbeatPulse ? '#ef4444' : '#10b981') : '#64748b',
+                boxShadow: isAudioEnabled && !isMuted && isHeartbeatPulse ? '0 0 8px #ef4444' : 'none',
+                transition: 'all 0.1s ease'
+              }} 
+            />
+            <span style={{ fontWeight: 600, color: isAudioEnabled && !isMuted ? '#10b981' : '#94a3b8' }}>
+              {isAudioEnabled ? (isMuted ? 'AUDIO: MUTED' : `HEARTBEAT AUDIO: ON (${vitals.hr} BPM)`) : 'AUDIO: STANDBY'}
+            </span>
+          </div>
+
           <span className={`badge ${isAlarming ? 'badge-danger' : 'badge-success'}`}>
-            {isAlarming ? `🚨 WARNING: ALARMS CRITICAL` : '✓ SYSTEM STABLE'}
+            {isAlarming ? `🚨 WARNING: ALARMS CRITICAL` : '✓ MONITORING: LIMITS MET'}
           </span>
         </div>
       </div>
+
+      {/* Browser Autoplay Blocked Warning Banner */}
+      {audioBlockedError && (
+        <div style={{ backgroundColor: '#7f1d1d', border: '1px solid #ef4444', color: '#fef2f2', padding: '10px 14px', borderRadius: '6px', marginBottom: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>⚠️ {audioBlockedError}</span>
+          <button 
+            className="btn btn-sm btn-primary" 
+            onClick={handleToggleAudio}
+            style={{ marginLeft: '12px' }}
+          >
+            Grant Audio Permission
+          </button>
+        </div>
+      )}
 
       <div style={{ display: 'grid', gridTemplateColumns: '2.8fr 1.2fr', gap: '24px' }}>
         
@@ -698,10 +962,10 @@ export const LiveOT: React.FC = () => {
             )}
             
             <div className="monitor-topbar">
-              <span>OR-B • PATIENT: {patient?.name || 'Robert Miller'} (ASA III)</span>
+              <span>OR-01 • SYNTHETIC PATIENT: {patient ? `${patient.name} (${patient.id}, ASA ${patient.asaScore})` : 'Aarav Mehta (SD-2026-0001, ASA I)'}</span>
               <span>RESPIRATOR: MODE: IPPV • MAC: {macFraction}</span>
-              <span style={{ color: isMuted ? 'var(--med-red)' : 'var(--med-green)' }}>
-                {isMuted ? 'AUDIO DISABLED' : 'AUDIO ACTIVE'}
+              <span style={{ color: isAudioEnabled && !isMuted ? 'var(--med-green)' : '#94a3b8', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                {isAudioEnabled ? (isMuted ? 'AUDIO: MUTED' : `HEARTBEAT AUDIO: ACTIVE [${audioCtxState.toUpperCase()}]`) : 'AUDIO: OFF'}
               </span>
             </div>
 

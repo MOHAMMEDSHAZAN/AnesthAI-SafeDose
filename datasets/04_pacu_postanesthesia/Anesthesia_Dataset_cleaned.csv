@@ -1,0 +1,301 @@
+PatientID,Age,Gender,BMI,SurgeryDuration,PreoperativeNotes,PostoperativeNotes,PainLevel,Outcome,Gender_Code,Preop_Hypertension,Preop_Diabetes,Preop_Stable,Postop_Pain,Postop_Nausea,Postop_Bleeding,Postop_Slow_Recovery,SurgeryType_Cardiovascular,SurgeryType_Cosmetic,SurgeryType_Neurological,SurgeryType_Orthopedic,AnesthesiaType_General,AnesthesiaType_Local,Complications_Delayed recovery,"Complications_Nausea, mild bleeding",Complications_Respiratory distress
+1,33,M,32,217,"Hypertension, diabetes","Minimal pain, no complications",7,0,1,1,1,0,1,0,0,0,0,0,1,0,0,1,0,0,0
+2,33,M,23,181,"Stable, no allergies","Minimal pain, no complications",7,1,1,0,0,1,1,0,0,0,1,0,0,0,0,1,0,1,0
+3,58,F,24,79,"Stable, no allergies","Minimal pain, no complications",3,1,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,1,0
+4,65,F,26,210,"Stable, no allergies","Pain, slow recovery",7,1,0,0,0,1,1,0,0,1,0,0,0,1,0,1,1,0,0
+5,65,M,28,221,"Stable, no allergies","Pain, slow recovery",5,0,1,0,0,1,1,0,0,1,0,0,1,0,1,0,0,0,1
+6,45,M,32,82,"Hypertension, diabetes","Minimal pain, no complications",4,1,1,1,1,0,1,0,0,0,0,0,1,0,1,0,0,0,0
+7,51,F,30,96,"Stable, no allergies","Pain, slow recovery",4,1,0,0,0,1,1,0,0,1,1,0,0,0,0,1,1,0,0
+8,33,M,24,210,"Hypertension, diabetes","Minimal pain, no complications",4,1,1,1,1,0,1,0,0,0,0,0,0,1,0,1,0,0,1
+9,45,F,32,226,"Stable, no allergies","Minimal pain, no complications",4,1,0,0,0,1,1,0,0,0,0,1,0,0,0,1,1,0,0
+10,58,M,28,207,"Stable, no allergies","Minimal pain, no complications",6,0,1,0,0,1,1,0,0,0,0,1,0,0,1,0,0,0,1
+11,33,F,28,118,"Hypertension, diabetes","Pain, slow recovery",6,1,0,1,1,0,1,0,0,1,0,0,1,0,0,1,0,0,1
+12,33,M,32,171,"Stable, no allergies","Minimal pain, no complications",2,0,1,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0
+13,72,M,30,116,"Hypertension, diabetes","Minimal pain, no complications",6,1,1,1,1,0,1,0,0,0,0,0,1,0,1,0,0,1,0
+14,65,M,26,231,"Stable, no allergies","Pain, slow recovery",5,1,1,0,0,1,1,0,0,1,0,0,1,0,1,0,0,0,1
+15,33,M,26,156,"Hypertension, diabetes","Pain, slow recovery",6,0,1,1,1,0,1,0,0,1,1,0,0,0,0,1,1,0,0
+16,72,F,23,188,"Hypertension, diabetes","Minimal pain, no complications",2,0,0,1,1,0,1,0,0,0,1,0,0,0,1,0,0,0,1
+17,72,F,30,215,"Hypertension, diabetes","Minimal pain, no complications",3,1,0,1,1,0,1,0,0,0,0,0,1,0,1,0,0,1,0
+18,65,F,26,199,"Hypertension, diabetes","Minimal pain, no complications",5,1,0,1,1,0,1,0,0,0,1,0,0,0,1,0,0,0,1
+19,33,F,26,119,"Stable, no allergies","Pain, slow recovery",5,1,0,0,0,1,1,0,0,1,0,0,0,1,1,0,0,0,1
+20,51,M,32,91,"Stable, no allergies","Minimal pain, no complications",4,1,1,0,0,1,1,0,0,0,0,0,1,0,0,1,1,0,0
+21,45,F,24,127,"Stable, no allergies","Pain, slow recovery",5,1,0,0,0,1,1,0,0,1,0,0,0,1,1,0,0,1,0
+22,51,F,30,192,"Hypertension, diabetes","Minimal pain, no complications",6,0,0,1,1,0,1,0,0,0,0,0,1,0,0,1,0,0,1
+23,58,F,28,63,"Stable, no allergies","Pain, slow recovery",3,0,0,0,0,1,1,0,0,1,0,0,0,1,0,1,0,0,0
+24,51,M,28,128,"Hypertension, diabetes","Minimal pain, no complications",2,1,1,1,1,0,1,0,0,0,1,0,0,0,1,0,0,0,0
+25,72,M,26,133,"Hypertension, diabetes","Pain, slow recovery",7,0,1,1,1,0,1,0,0,1,0,0,0,1,1,0,0,0,0
+26,51,M,28,139,"Stable, no allergies","Minimal pain, no complications",6,1,1,0,0,1,1,0,0,0,0,0,1,0,0,1,0,1,0
+27,72,M,23,188,"Hypertension, diabetes","Minimal pain, no complications",6,1,1,1,1,0,1,0,0,0,0,1,0,0,1,0,1,0,0
+28,45,F,23,200,"Hypertension, diabetes","Minimal pain, no complications",4,1,0,1,1,0,1,0,0,0,0,1,0,0,0,1,0,1,0
+29,45,F,26,199,"Hypertension, diabetes","Minimal pain, no complications",7,0,0,1,1,0,1,0,0,0,0,1,0,0,1,0,1,0,0
+30,33,F,24,188,"Hypertension, diabetes","Pain, slow recovery",3,1,0,1,1,0,1,0,0,1,0,0,1,0,0,1,1,0,0
+31,33,F,26,185,"Hypertension, diabetes","Minimal pain, no complications",7,0,0,1,1,0,1,0,0,0,0,0,1,0,1,0,0,1,0
+32,58,M,32,105,"Stable, no allergies","Pain, slow recovery",3,1,1,0,0,1,1,0,0,1,1,0,0,0,0,1,0,0,1
+33,58,F,26,153,"Stable, no allergies","Minimal pain, no complications",2,1,0,0,0,1,1,0,0,0,1,0,0,0,0,1,0,0,0
+34,72,F,30,75,"Stable, no allergies","Minimal pain, no complications",7,0,0,0,0,1,1,0,0,0,0,0,1,0,0,1,0,0,0
+35,33,M,23,103,"Hypertension, diabetes","Pain, slow recovery",6,0,1,1,1,0,1,0,0,1,0,0,0,1,0,1,0,1,0
+36,45,F,24,183,"Hypertension, diabetes","Pain, slow recovery",6,0,0,1,1,0,1,0,0,1,0,0,0,1,0,1,0,1,0
+37,65,M,28,205,"Hypertension, diabetes","Pain, slow recovery",7,1,1,1,1,0,1,0,0,1,1,0,0,0,1,0,0,0,1
+38,33,F,30,105,"Stable, no allergies","Minimal pain, no complications",3,1,0,0,0,1,1,0,0,0,0,0,1,0,0,1,0,1,0
+39,33,M,26,68,"Hypertension, diabetes","Pain, slow recovery",3,1,1,1,1,0,1,0,0,1,0,1,0,0,1,0,1,0,0
+40,58,M,24,72,"Hypertension, diabetes","Pain, slow recovery",4,1,1,1,1,0,1,0,0,1,0,0,0,1,1,0,0,0,1
+41,58,F,26,79,"Stable, no allergies","Pain, slow recovery",3,0,0,0,0,1,1,0,0,1,0,0,0,1,0,1,0,0,0
+42,58,M,32,117,"Stable, no allergies","Pain, slow recovery",7,0,1,0,0,1,1,0,0,1,0,1,0,0,1,0,1,0,0
+43,58,F,24,183,"Hypertension, diabetes","Pain, slow recovery",5,1,0,1,1,0,1,0,0,1,0,0,0,1,1,0,0,1,0
+44,51,F,28,162,"Hypertension, diabetes","Pain, slow recovery",4,0,0,1,1,0,1,0,0,1,0,1,0,0,0,1,0,0,1
+45,51,M,30,112,"Stable, no allergies","Minimal pain, no complications",7,0,1,0,0,1,1,0,0,0,0,0,0,1,1,0,1,0,0
+46,45,M,30,79,"Hypertension, diabetes","Pain, slow recovery",4,0,1,1,1,0,1,0,0,1,0,0,1,0,0,1,1,0,0
+47,58,M,23,122,"Stable, no allergies","Minimal pain, no complications",3,1,1,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0
+48,65,M,30,163,"Hypertension, diabetes","Minimal pain, no complications",4,0,1,1,1,0,1,0,0,0,1,0,0,0,1,0,1,0,0
+49,33,M,28,187,"Hypertension, diabetes","Pain, slow recovery",7,1,1,1,1,0,1,0,0,1,0,1,0,0,1,0,1,0,0
+50,51,F,26,240,"Stable, no allergies","Minimal pain, no complications",6,1,0,0,0,1,1,0,0,0,1,0,0,0,1,0,1,0,0
+51,51,F,30,189,"Hypertension, diabetes","Pain, slow recovery",5,0,0,1,1,0,1,0,0,1,1,0,0,0,0,1,0,1,0
+52,72,F,24,215,"Hypertension, diabetes","Pain, slow recovery",3,1,0,1,1,0,1,0,0,1,0,0,0,1,1,0,0,0,1
+53,65,F,24,100,"Stable, no allergies","Pain, slow recovery",5,1,0,0,0,1,1,0,0,1,0,0,0,1,1,0,0,0,1
+54,33,M,30,136,"Stable, no allergies","Minimal pain, no complications",7,0,1,0,0,1,1,0,0,0,0,0,1,0,0,1,0,1,0
+55,65,M,30,205,"Stable, no allergies","Pain, slow recovery",6,1,1,0,0,1,1,0,0,1,1,0,0,0,0,1,1,0,0
+56,33,F,23,152,"Stable, no allergies","Pain, slow recovery",3,1,0,0,0,1,1,0,0,1,1,0,0,0,0,1,0,0,0
+57,65,F,28,100,"Hypertension, diabetes","Minimal pain, no complications",5,0,0,1,1,0,1,0,0,0,0,0,0,1,0,1,0,0,1
+58,51,M,23,184,"Stable, no allergies","Pain, slow recovery",3,0,1,0,0,1,1,0,0,1,0,1,0,0,1,0,0,1,0
+59,72,M,23,180,"Hypertension, diabetes","Minimal pain, no complications",2,0,1,1,1,0,1,0,0,0,0,0,0,1,0,1,0,0,1
+60,33,M,30,84,"Hypertension, diabetes","Minimal pain, no complications",6,0,1,1,1,0,1,0,0,0,0,0,1,0,0,1,0,0,0
+61,33,M,24,210,"Stable, no allergies","Minimal pain, no complications",2,1,1,0,0,1,1,0,0,0,0,1,0,0,1,0,0,1,0
+62,45,M,32,203,"Hypertension, diabetes","Minimal pain, no complications",3,0,1,1,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0
+63,33,M,26,123,"Stable, no allergies","Pain, slow recovery",2,1,1,0,0,1,1,0,0,1,1,0,0,0,1,0,0,0,1
+64,33,M,28,187,"Stable, no allergies","Minimal pain, no complications",7,1,1,0,0,1,1,0,0,0,1,0,0,0,1,0,1,0,0
+65,45,M,26,216,"Hypertension, diabetes","Minimal pain, no complications",2,0,1,1,1,0,1,0,0,0,0,0,1,0,0,1,0,0,0
+66,51,F,24,197,"Hypertension, diabetes","Pain, slow recovery",2,1,0,1,1,0,1,0,0,1,1,0,0,0,0,1,0,0,0
+67,45,F,24,178,"Stable, no allergies","Minimal pain, no complications",5,1,0,0,0,1,1,0,0,0,0,1,0,0,1,0,0,1,0
+68,45,F,23,214,"Hypertension, diabetes","Minimal pain, no complications",4,1,0,1,1,0,1,0,0,0,0,1,0,0,0,1,0,0,0
+69,45,M,32,114,"Hypertension, diabetes","Pain, slow recovery",3,1,1,1,1,0,1,0,0,1,0,0,0,1,0,1,1,0,0
+70,51,M,24,181,"Stable, no allergies","Minimal pain, no complications",3,0,1,0,0,1,1,0,0,0,0,1,0,0,1,0,1,0,0
+71,51,M,32,195,"Hypertension, diabetes","Minimal pain, no complications",4,0,1,1,1,0,1,0,0,0,0,0,0,1,1,0,1,0,0
+72,45,M,28,197,"Hypertension, diabetes","Pain, slow recovery",6,0,1,1,1,0,1,0,0,1,0,0,0,1,0,1,0,0,1
+73,72,M,24,220,"Stable, no allergies","Minimal pain, no complications",2,1,1,0,0,1,1,0,0,0,0,0,0,1,0,1,0,1,0
+74,58,F,30,217,"Stable, no allergies","Minimal pain, no complications",7,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,1
+75,45,F,30,92,"Stable, no allergies","Minimal pain, no complications",6,0,0,0,0,1,1,0,0,0,0,1,0,0,0,1,0,1,0
+76,72,M,30,168,"Hypertension, diabetes","Minimal pain, no complications",5,1,1,1,1,0,1,0,0,0,0,1,0,0,0,1,0,0,0
+77,51,M,23,105,"Hypertension, diabetes","Pain, slow recovery",4,0,1,1,1,0,1,0,0,1,0,0,0,1,0,1,1,0,0
+78,45,F,30,206,"Stable, no allergies","Minimal pain, no complications",3,1,0,0,0,1,1,0,0,0,1,0,0,0,1,0,0,0,1
+79,33,M,26,176,"Stable, no allergies","Pain, slow recovery",2,1,1,0,0,1,1,0,0,1,0,1,0,0,1,0,0,0,1
+80,58,M,24,223,"Stable, no allergies","Minimal pain, no complications",6,0,1,0,0,1,1,0,0,0,0,1,0,0,0,1,0,0,1
+81,33,F,28,150,"Stable, no allergies","Pain, slow recovery",4,1,0,0,0,1,1,0,0,1,0,1,0,0,0,1,0,0,0
+82,65,M,26,224,"Stable, no allergies","Pain, slow recovery",7,1,1,0,0,1,1,0,0,1,1,0,0,0,1,0,0,0,1
+83,72,M,32,97,"Hypertension, diabetes","Pain, slow recovery",3,1,1,1,1,0,1,0,0,1,0,1,0,0,0,1,0,0,0
+84,72,F,23,139,"Hypertension, diabetes","Minimal pain, no complications",3,1,0,1,1,0,1,0,0,0,0,0,0,1,0,1,1,0,0
+85,72,F,24,63,"Hypertension, diabetes","Pain, slow recovery",7,1,0,1,1,0,1,0,0,1,0,1,0,0,0,1,0,0,1
+86,65,F,32,127,"Stable, no allergies","Pain, slow recovery",5,0,0,0,0,1,1,0,0,1,0,0,0,1,1,0,1,0,0
+87,72,M,28,227,"Stable, no allergies","Pain, slow recovery",5,1,1,0,0,1,1,0,0,1,0,1,0,0,1,0,0,1,0
+88,58,F,23,81,"Hypertension, diabetes","Minimal pain, no complications",6,1,0,1,1,0,1,0,0,0,1,0,0,0,1,0,0,0,1
+89,65,M,26,172,"Stable, no allergies","Minimal pain, no complications",3,1,1,0,0,1,1,0,0,0,1,0,0,0,0,1,1,0,0
+90,58,F,26,123,"Stable, no allergies","Minimal pain, no complications",2,1,0,0,0,1,1,0,0,0,0,1,0,0,1,0,1,0,0
+91,58,F,32,178,"Hypertension, diabetes","Pain, slow recovery",5,0,0,1,1,0,1,0,0,1,1,0,0,0,0,1,0,0,0
+92,45,M,32,125,"Hypertension, diabetes","Pain, slow recovery",5,0,1,1,1,0,1,0,0,1,0,1,0,0,1,0,0,0,1
+93,65,M,30,193,"Hypertension, diabetes","Pain, slow recovery",6,1,1,1,1,0,1,0,0,1,0,1,0,0,1,0,0,0,1
+94,51,M,23,168,"Stable, no allergies","Pain, slow recovery",4,0,1,0,0,1,1,0,0,1,0,0,1,0,1,0,0,1,0
+95,45,M,28,198,"Hypertension, diabetes","Pain, slow recovery",4,0,1,1,1,0,1,0,0,1,1,0,0,0,0,1,0,0,0
+96,65,F,23,99,"Hypertension, diabetes","Minimal pain, no complications",4,0,0,1,1,0,1,0,0,0,1,0,0,0,1,0,0,0,1
+97,33,M,26,163,"Hypertension, diabetes","Minimal pain, no complications",2,1,1,1,1,0,1,0,0,0,1,0,0,0,0,1,0,1,0
+98,45,F,24,86,"Hypertension, diabetes","Minimal pain, no complications",6,1,0,1,1,0,1,0,0,0,0,0,0,1,0,1,0,1,0
+99,33,M,30,128,"Hypertension, diabetes","Pain, slow recovery",4,0,1,1,1,0,1,0,0,1,0,1,0,0,0,1,0,1,0
+100,45,F,28,103,"Hypertension, diabetes","Minimal pain, no complications",2,0,0,1,1,0,1,0,0,0,0,0,1,0,1,0,0,0,1
+101,51,M,30,182,"Hypertension, diabetes","Pain, slow recovery",7,1,1,1,1,0,1,0,0,1,0,1,0,0,1,0,0,0,0
+102,51,M,26,99,"Hypertension, diabetes","Pain, slow recovery",7,1,1,1,1,0,1,0,0,1,0,0,0,1,0,1,0,0,0
+103,58,M,23,187,"Hypertension, diabetes","Minimal pain, no complications",2,0,1,1,1,0,1,0,0,0,1,0,0,0,1,0,0,0,0
+104,65,M,24,177,"Hypertension, diabetes","Minimal pain, no complications",3,0,1,1,1,0,1,0,0,0,0,0,0,1,0,1,1,0,0
+105,65,F,26,93,"Hypertension, diabetes","Minimal pain, no complications",3,1,0,1,1,0,1,0,0,0,1,0,0,0,1,0,1,0,0
+106,58,F,28,187,"Hypertension, diabetes","Minimal pain, no complications",2,0,0,1,1,0,1,0,0,0,1,0,0,0,0,1,0,1,0
+107,72,F,23,192,"Stable, no allergies","Pain, slow recovery",2,1,0,0,0,1,1,0,0,1,0,0,0,1,0,1,0,0,1
+108,33,F,24,120,"Hypertension, diabetes","Pain, slow recovery",6,1,0,1,1,0,1,0,0,1,0,1,0,0,1,0,0,0,0
+109,65,F,32,62,"Stable, no allergies","Pain, slow recovery",7,0,0,0,0,1,1,0,0,1,1,0,0,0,1,0,0,0,1
+110,45,M,32,118,"Stable, no allergies","Minimal pain, no complications",6,0,1,0,0,1,1,0,0,0,1,0,0,0,0,1,0,1,0
+111,72,M,24,160,"Stable, no allergies","Pain, slow recovery",5,1,1,0,0,1,1,0,0,1,0,0,0,1,1,0,1,0,0
+112,72,M,26,145,"Hypertension, diabetes","Pain, slow recovery",6,0,1,1,1,0,1,0,0,1,0,0,1,0,0,1,1,0,0
+113,33,F,24,161,"Stable, no allergies","Minimal pain, no complications",2,0,0,0,0,1,1,0,0,0,0,1,0,0,1,0,0,0,0
+114,45,F,24,113,"Stable, no allergies","Pain, slow recovery",5,1,0,0,0,1,1,0,0,1,0,0,0,1,0,1,0,1,0
+115,65,F,24,195,"Stable, no allergies","Pain, slow recovery",7,1,0,0,0,1,1,0,0,1,0,1,0,0,1,0,1,0,0
+116,72,F,24,181,"Hypertension, diabetes","Pain, slow recovery",7,0,0,1,1,0,1,0,0,1,0,0,0,1,1,0,0,0,0
+117,65,M,24,155,"Hypertension, diabetes","Pain, slow recovery",6,0,1,1,1,0,1,0,0,1,1,0,0,0,0,1,0,1,0
+118,72,F,32,235,"Hypertension, diabetes","Minimal pain, no complications",3,0,0,1,1,0,1,0,0,0,0,1,0,0,1,0,0,0,1
+119,65,M,26,108,"Stable, no allergies","Pain, slow recovery",5,0,1,0,0,1,1,0,0,1,0,0,0,1,0,1,0,0,0
+120,72,F,23,125,"Hypertension, diabetes","Pain, slow recovery",6,0,0,1,1,0,1,0,0,1,0,1,0,0,1,0,1,0,0
+121,51,F,28,229,"Hypertension, diabetes","Pain, slow recovery",3,0,0,1,1,0,1,0,0,1,0,0,0,1,1,0,0,0,0
+122,33,M,26,220,"Hypertension, diabetes","Minimal pain, no complications",3,0,1,1,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0
+123,45,F,30,173,"Hypertension, diabetes","Minimal pain, no complications",4,1,0,1,1,0,1,0,0,0,0,1,0,0,1,0,0,0,1
+124,45,M,32,207,"Hypertension, diabetes","Pain, slow recovery",3,1,1,1,1,0,1,0,0,1,0,0,1,0,1,0,0,0,1
+125,58,M,32,96,"Stable, no allergies","Pain, slow recovery",6,1,1,0,0,1,1,0,0,1,0,1,0,0,1,0,0,0,1
+126,33,F,28,224,"Stable, no allergies","Pain, slow recovery",5,0,0,0,0,1,1,0,0,1,1,0,0,0,0,1,1,0,0
+127,65,F,30,232,"Stable, no allergies","Pain, slow recovery",5,0,0,0,0,1,1,0,0,1,0,0,0,1,0,1,0,1,0
+128,45,F,23,135,"Stable, no allergies","Minimal pain, no complications",2,1,0,0,0,1,1,0,0,0,0,1,0,0,1,0,0,0,1
+129,58,F,32,186,"Hypertension, diabetes","Minimal pain, no complications",4,0,0,1,1,0,1,0,0,0,0,0,1,0,1,0,0,0,0
+130,58,M,23,88,"Stable, no allergies","Minimal pain, no complications",4,0,1,0,0,1,1,0,0,0,0,0,1,0,1,0,0,1,0
+131,65,M,30,94,"Hypertension, diabetes","Minimal pain, no complications",3,0,1,1,1,0,1,0,0,0,0,0,0,1,0,1,0,0,1
+132,58,M,26,224,"Hypertension, diabetes","Pain, slow recovery",6,1,1,1,1,0,1,0,0,1,0,1,0,0,1,0,0,1,0
+133,65,F,28,149,"Hypertension, diabetes","Minimal pain, no complications",4,1,0,1,1,0,1,0,0,0,0,1,0,0,1,0,1,0,0
+134,58,M,23,116,"Hypertension, diabetes","Minimal pain, no complications",4,0,1,1,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0
+135,72,M,30,175,"Hypertension, diabetes","Minimal pain, no complications",7,1,1,1,1,0,1,0,0,0,0,0,1,0,1,0,0,0,0
+136,72,F,26,115,"Stable, no allergies","Pain, slow recovery",5,0,0,0,0,1,1,0,0,1,0,0,1,0,0,1,1,0,0
+137,72,F,28,80,"Stable, no allergies","Minimal pain, no complications",6,1,0,0,0,1,1,0,0,0,0,1,0,0,1,0,0,0,1
+138,72,M,32,231,"Stable, no allergies","Minimal pain, no complications",7,0,1,0,0,1,1,0,0,0,0,1,0,0,0,1,0,1,0
+139,65,M,26,207,"Stable, no allergies","Pain, slow recovery",7,0,1,0,0,1,1,0,0,1,0,0,0,1,1,0,1,0,0
+140,72,F,24,120,"Stable, no allergies","Minimal pain, no complications",3,0,0,0,0,1,1,0,0,0,0,0,1,0,1,0,0,1,0
+141,72,M,26,168,"Stable, no allergies","Pain, slow recovery",6,1,1,0,0,1,1,0,0,1,0,1,0,0,0,1,0,1,0
+142,33,M,32,195,"Stable, no allergies","Minimal pain, no complications",3,1,1,0,0,1,1,0,0,0,0,0,0,1,0,1,0,0,1
+143,51,M,28,240,"Stable, no allergies","Pain, slow recovery",4,0,1,0,0,1,1,0,0,1,0,1,0,0,0,1,0,0,1
+144,65,M,26,84,"Stable, no allergies","Minimal pain, no complications",4,1,1,0,0,1,1,0,0,0,1,0,0,0,1,0,0,0,0
+145,45,F,30,91,"Hypertension, diabetes","Pain, slow recovery",3,0,0,1,1,0,1,0,0,1,0,1,0,0,0,1,1,0,0
+146,51,F,26,223,"Hypertension, diabetes","Minimal pain, no complications",4,1,0,1,1,0,1,0,0,0,0,1,0,0,0,1,0,0,1
+147,45,F,32,67,"Stable, no allergies","Pain, slow recovery",2,1,0,0,0,1,1,0,0,1,0,1,0,0,1,0,0,0,0
+148,45,M,32,152,"Stable, no allergies","Minimal pain, no complications",3,1,1,0,0,1,1,0,0,0,1,0,0,0,0,1,0,1,0
+149,65,M,30,102,"Hypertension, diabetes","Pain, slow recovery",4,0,1,1,1,0,1,0,0,1,1,0,0,0,0,1,1,0,0
+150,72,M,30,76,"Hypertension, diabetes","Minimal pain, no complications",7,1,1,1,1,0,1,0,0,0,1,0,0,0,1,0,0,1,0
+151,65,F,23,218,"Hypertension, diabetes","Pain, slow recovery",3,0,0,1,1,0,1,0,0,1,0,0,1,0,1,0,1,0,0
+152,58,F,23,224,"Hypertension, diabetes","Pain, slow recovery",7,1,0,1,1,0,1,0,0,1,0,1,0,0,1,0,0,1,0
+153,72,M,28,169,"Stable, no allergies","Pain, slow recovery",6,1,1,0,0,1,1,0,0,1,1,0,0,0,0,1,0,0,0
+154,58,F,28,95,"Hypertension, diabetes","Pain, slow recovery",6,1,0,1,1,0,1,0,0,1,0,0,1,0,1,0,0,0,1
+155,58,M,23,117,"Hypertension, diabetes","Pain, slow recovery",4,1,1,1,1,0,1,0,0,1,1,0,0,0,1,0,0,0,0
+156,33,M,32,136,"Stable, no allergies","Minimal pain, no complications",4,0,1,0,0,1,1,0,0,0,1,0,0,0,0,1,0,1,0
+157,65,F,32,223,"Stable, no allergies","Pain, slow recovery",7,1,0,0,0,1,1,0,0,1,0,0,1,0,1,0,0,1,0
+158,33,M,26,197,"Stable, no allergies","Minimal pain, no complications",2,1,1,0,0,1,1,0,0,0,0,0,1,0,0,1,0,0,1
+159,51,M,30,169,"Stable, no allergies","Pain, slow recovery",4,0,1,0,0,1,1,0,0,1,0,0,1,0,0,1,0,0,0
+160,51,M,32,115,"Hypertension, diabetes","Pain, slow recovery",7,0,1,1,1,0,1,0,0,1,0,0,0,1,1,0,0,0,1
+161,58,F,30,114,"Hypertension, diabetes","Pain, slow recovery",2,1,0,1,1,0,1,0,0,1,0,1,0,0,0,1,0,0,0
+162,51,F,32,197,"Stable, no allergies","Minimal pain, no complications",2,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,1,0,0
+163,58,M,32,198,"Hypertension, diabetes","Minimal pain, no complications",3,0,1,1,1,0,1,0,0,0,0,0,0,1,1,0,0,0,1
+164,72,F,30,134,"Stable, no allergies","Pain, slow recovery",4,0,0,0,0,1,1,0,0,1,0,0,1,0,0,1,0,0,1
+165,58,M,23,136,"Stable, no allergies","Minimal pain, no complications",2,1,1,0,0,1,1,0,0,0,0,0,1,0,0,1,0,1,0
+166,58,F,32,145,"Stable, no allergies","Minimal pain, no complications",3,1,0,0,0,1,1,0,0,0,0,1,0,0,0,1,0,0,0
+167,72,M,23,70,"Stable, no allergies","Minimal pain, no complications",4,1,1,0,0,1,1,0,0,0,0,1,0,0,1,0,1,0,0
+168,33,F,24,166,"Hypertension, diabetes","Minimal pain, no complications",5,0,0,1,1,0,1,0,0,0,0,0,0,1,1,0,0,0,1
+169,65,F,24,215,"Stable, no allergies","Minimal pain, no complications",2,1,0,0,0,1,1,0,0,0,0,1,0,0,0,1,0,0,0
+170,45,F,28,69,"Hypertension, diabetes","Minimal pain, no complications",6,0,0,1,1,0,1,0,0,0,0,0,0,1,1,0,0,0,1
+171,33,M,24,106,"Hypertension, diabetes","Pain, slow recovery",6,1,1,1,1,0,1,0,0,1,0,0,0,1,0,1,0,0,1
+172,45,F,24,102,"Stable, no allergies","Minimal pain, no complications",5,0,0,0,0,1,1,0,0,0,0,0,1,0,0,1,0,1,0
+173,65,M,24,100,"Stable, no allergies","Minimal pain, no complications",3,1,1,0,0,1,1,0,0,0,0,0,0,1,0,1,0,0,0
+174,51,M,32,238,"Hypertension, diabetes","Minimal pain, no complications",4,1,1,1,1,0,1,0,0,0,0,0,0,1,1,0,0,1,0
+175,45,M,23,94,"Hypertension, diabetes","Pain, slow recovery",4,1,1,1,1,0,1,0,0,1,0,0,0,1,1,0,0,1,0
+176,65,F,26,198,"Stable, no allergies","Pain, slow recovery",2,0,0,0,0,1,1,0,0,1,0,0,0,1,1,0,0,1,0
+177,45,F,23,64,"Stable, no allergies","Minimal pain, no complications",4,0,0,0,0,1,1,0,0,0,0,0,0,1,0,1,0,0,1
+178,45,F,26,117,"Stable, no allergies","Minimal pain, no complications",3,0,0,0,0,1,1,0,0,0,1,0,0,0,1,0,0,0,1
+179,72,F,30,67,"Hypertension, diabetes","Minimal pain, no complications",2,1,0,1,1,0,1,0,0,0,1,0,0,0,1,0,1,0,0
+180,72,F,26,176,"Stable, no allergies","Pain, slow recovery",3,0,0,0,0,1,1,0,0,1,1,0,0,0,0,1,0,1,0
+181,33,M,23,70,"Hypertension, diabetes","Minimal pain, no complications",5,0,1,1,1,0,1,0,0,0,0,1,0,0,0,1,0,0,0
+182,72,F,26,199,"Stable, no allergies","Minimal pain, no complications",7,0,0,0,0,1,1,0,0,0,0,1,0,0,1,0,1,0,0
+183,33,M,26,124,"Stable, no allergies","Pain, slow recovery",4,1,1,0,0,1,1,0,0,1,0,0,1,0,0,1,0,0,0
+184,33,M,30,190,"Stable, no allergies","Pain, slow recovery",3,1,1,0,0,1,1,0,0,1,0,0,0,1,1,0,0,0,0
+185,58,F,26,169,"Hypertension, diabetes","Pain, slow recovery",5,1,0,1,1,0,1,0,0,1,0,0,0,1,0,1,0,1,0
+186,58,M,28,68,"Hypertension, diabetes","Pain, slow recovery",2,0,1,1,1,0,1,0,0,1,0,0,1,0,0,1,0,1,0
+187,45,M,30,95,"Stable, no allergies","Pain, slow recovery",4,1,1,0,0,1,1,0,0,1,0,0,0,1,0,1,0,0,1
+188,45,F,23,75,"Stable, no allergies","Pain, slow recovery",4,0,0,0,0,1,1,0,0,1,0,1,0,0,1,0,0,0,1
+189,65,F,28,147,"Hypertension, diabetes","Minimal pain, no complications",5,0,0,1,1,0,1,0,0,0,0,0,1,0,1,0,0,0,0
+190,72,F,28,115,"Hypertension, diabetes","Minimal pain, no complications",2,0,0,1,1,0,1,0,0,0,0,1,0,0,1,0,0,0,0
+191,51,M,24,186,"Stable, no allergies","Minimal pain, no complications",4,0,1,0,0,1,1,0,0,0,0,0,1,0,1,0,0,0,1
+192,45,M,24,235,"Hypertension, diabetes","Minimal pain, no complications",3,0,1,1,1,0,1,0,0,0,0,0,0,1,0,1,0,0,1
+193,51,F,32,192,"Hypertension, diabetes","Minimal pain, no complications",2,0,0,1,1,0,1,0,0,0,1,0,0,0,1,0,0,0,1
+194,45,F,28,67,"Hypertension, diabetes","Minimal pain, no complications",7,0,0,1,1,0,1,0,0,0,0,0,0,1,1,0,0,0,0
+195,65,M,24,142,"Hypertension, diabetes","Minimal pain, no complications",3,0,1,1,1,0,1,0,0,0,0,0,1,0,1,0,0,0,1
+196,45,F,28,146,"Hypertension, diabetes","Minimal pain, no complications",4,0,0,1,1,0,1,0,0,0,0,0,1,0,0,1,0,0,1
+197,51,M,30,173,"Hypertension, diabetes","Pain, slow recovery",6,1,1,1,1,0,1,0,0,1,0,1,0,0,0,1,1,0,0
+198,33,F,28,234,"Hypertension, diabetes","Pain, slow recovery",2,0,0,1,1,0,1,0,0,1,0,0,1,0,0,1,0,1,0
+199,33,M,28,225,"Stable, no allergies","Pain, slow recovery",4,0,1,0,0,1,1,0,0,1,0,0,0,1,1,0,1,0,0
+200,65,M,24,226,"Hypertension, diabetes","Pain, slow recovery",2,1,1,1,1,0,1,0,0,1,0,0,0,1,0,1,1,0,0
+201,58,F,24,90,"Stable, no allergies","Pain, slow recovery",5,0,0,0,0,1,1,0,0,1,1,0,0,0,1,0,0,0,0
+202,58,M,28,180,"Stable, no allergies","Minimal pain, no complications",6,0,1,0,0,1,1,0,0,0,0,0,0,1,0,1,0,1,0
+203,58,M,23,81,"Stable, no allergies","Minimal pain, no complications",4,1,1,0,0,1,1,0,0,0,1,0,0,0,0,1,0,1,0
+204,58,M,30,179,"Stable, no allergies","Minimal pain, no complications",3,0,1,0,0,1,1,0,0,0,1,0,0,0,1,0,1,0,0
+205,72,M,23,81,"Hypertension, diabetes","Minimal pain, no complications",5,0,1,1,1,0,1,0,0,0,0,0,1,0,0,1,0,1,0
+206,51,F,30,219,"Stable, no allergies","Minimal pain, no complications",3,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,1,0
+207,33,M,23,226,"Hypertension, diabetes","Minimal pain, no complications",6,1,1,1,1,0,1,0,0,0,0,0,1,0,0,1,0,1,0
+208,51,M,24,210,"Hypertension, diabetes","Minimal pain, no complications",4,0,1,1,1,0,1,0,0,0,0,1,0,0,0,1,0,1,0
+209,58,M,32,80,"Stable, no allergies","Pain, slow recovery",2,0,1,0,0,1,1,0,0,1,1,0,0,0,0,1,1,0,0
+210,72,F,30,114,"Stable, no allergies","Pain, slow recovery",7,0,0,0,0,1,1,0,0,1,1,0,0,0,1,0,0,1,0
+211,33,M,28,169,"Hypertension, diabetes","Minimal pain, no complications",5,1,1,1,1,0,1,0,0,0,0,1,0,0,1,0,0,1,0
+212,51,M,26,118,"Hypertension, diabetes","Minimal pain, no complications",2,1,1,1,1,0,1,0,0,0,0,0,1,0,0,1,0,0,1
+213,33,F,24,218,"Stable, no allergies","Pain, slow recovery",4,0,0,0,0,1,1,0,0,1,1,0,0,0,0,1,0,0,1
+214,65,F,24,106,"Hypertension, diabetes","Pain, slow recovery",5,0,0,1,1,0,1,0,0,1,0,1,0,0,0,1,1,0,0
+215,72,M,24,68,"Stable, no allergies","Pain, slow recovery",7,1,1,0,0,1,1,0,0,1,0,0,0,1,1,0,0,0,0
+216,65,F,28,101,"Stable, no allergies","Minimal pain, no complications",6,0,0,0,0,1,1,0,0,0,1,0,0,0,0,1,0,0,0
+217,72,M,26,120,"Hypertension, diabetes","Minimal pain, no complications",4,1,1,1,1,0,1,0,0,0,0,0,1,0,0,1,0,0,0
+218,65,M,30,145,"Hypertension, diabetes","Minimal pain, no complications",7,0,1,1,1,0,1,0,0,0,1,0,0,0,0,1,0,0,1
+219,65,F,26,176,"Hypertension, diabetes","Pain, slow recovery",2,1,0,1,1,0,1,0,0,1,0,0,0,1,1,0,0,1,0
+220,65,F,26,183,"Stable, no allergies","Pain, slow recovery",3,1,0,0,0,1,1,0,0,1,0,1,0,0,0,1,0,1,0
+221,65,M,32,97,"Stable, no allergies","Minimal pain, no complications",3,1,1,0,0,1,1,0,0,0,0,1,0,0,1,0,1,0,0
+222,58,F,28,188,"Hypertension, diabetes","Pain, slow recovery",3,1,0,1,1,0,1,0,0,1,1,0,0,0,0,1,0,1,0
+223,58,M,32,198,"Hypertension, diabetes","Pain, slow recovery",7,1,1,1,1,0,1,0,0,1,1,0,0,0,1,0,0,0,1
+224,45,M,28,90,"Hypertension, diabetes","Minimal pain, no complications",3,1,1,1,1,0,1,0,0,0,0,1,0,0,1,0,0,1,0
+225,33,F,26,61,"Stable, no allergies","Minimal pain, no complications",6,1,0,0,0,1,1,0,0,0,1,0,0,0,1,0,0,1,0
+226,45,F,23,73,"Stable, no allergies","Minimal pain, no complications",4,0,0,0,0,1,1,0,0,0,0,1,0,0,1,0,1,0,0
+227,45,M,23,80,"Hypertension, diabetes","Pain, slow recovery",7,1,1,1,1,0,1,0,0,1,0,0,1,0,1,0,0,0,1
+228,51,M,26,105,"Stable, no allergies","Minimal pain, no complications",4,0,1,0,0,1,1,0,0,0,0,0,1,0,1,0,0,0,0
+229,45,M,28,147,"Hypertension, diabetes","Pain, slow recovery",5,0,1,1,1,0,1,0,0,1,1,0,0,0,0,1,1,0,0
+230,72,F,26,102,"Hypertension, diabetes","Minimal pain, no complications",2,0,0,1,1,0,1,0,0,0,0,1,0,0,0,1,0,0,1
+231,65,F,26,60,"Hypertension, diabetes","Minimal pain, no complications",4,1,0,1,1,0,1,0,0,0,0,0,0,1,0,1,0,1,0
+232,72,F,30,230,"Hypertension, diabetes","Minimal pain, no complications",3,1,0,1,1,0,1,0,0,0,1,0,0,0,0,1,0,1,0
+233,65,F,23,167,"Hypertension, diabetes","Pain, slow recovery",5,0,0,1,1,0,1,0,0,1,0,0,0,1,0,1,0,1,0
+234,58,M,23,94,"Stable, no allergies","Minimal pain, no complications",4,0,1,0,0,1,1,0,0,0,0,0,0,1,1,0,0,1,0
+235,33,F,26,114,"Hypertension, diabetes","Pain, slow recovery",4,1,0,1,1,0,1,0,0,1,0,0,0,1,1,0,0,0,1
+236,33,M,26,121,"Hypertension, diabetes","Pain, slow recovery",7,1,1,1,1,0,1,0,0,1,0,1,0,0,1,0,1,0,0
+237,45,F,32,204,"Hypertension, diabetes","Pain, slow recovery",4,1,0,1,1,0,1,0,0,1,0,1,0,0,0,1,0,1,0
+238,51,F,28,199,"Stable, no allergies","Pain, slow recovery",4,0,0,0,0,1,1,0,0,1,1,0,0,0,0,1,0,0,0
+239,65,F,23,229,"Stable, no allergies","Minimal pain, no complications",6,0,0,0,0,1,1,0,0,0,0,0,1,0,1,0,0,0,1
+240,72,F,30,96,"Stable, no allergies","Minimal pain, no complications",6,1,0,0,0,1,1,0,0,0,0,1,0,0,1,0,1,0,0
+241,51,F,32,169,"Hypertension, diabetes","Minimal pain, no complications",3,0,0,1,1,0,1,0,0,0,0,1,0,0,1,0,0,0,0
+242,72,F,30,181,"Hypertension, diabetes","Minimal pain, no complications",4,1,0,1,1,0,1,0,0,0,0,0,1,0,1,0,0,0,0
+243,72,M,26,119,"Stable, no allergies","Minimal pain, no complications",7,0,1,0,0,1,1,0,0,0,0,0,0,1,0,1,1,0,0
+244,58,F,26,192,"Stable, no allergies","Pain, slow recovery",6,0,0,0,0,1,1,0,0,1,0,0,1,0,0,1,0,0,1
+245,51,M,24,165,"Hypertension, diabetes","Pain, slow recovery",2,0,1,1,1,0,1,0,0,1,0,0,0,1,0,1,1,0,0
+246,65,F,23,93,"Hypertension, diabetes","Minimal pain, no complications",3,1,0,1,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0
+247,58,M,24,105,"Hypertension, diabetes","Minimal pain, no complications",6,1,1,1,1,0,1,0,0,0,0,0,0,1,1,0,1,0,0
+248,45,M,28,86,"Hypertension, diabetes","Pain, slow recovery",3,1,1,1,1,0,1,0,0,1,0,0,0,1,0,1,0,0,0
+249,72,F,26,160,"Hypertension, diabetes","Minimal pain, no complications",7,1,0,1,1,0,1,0,0,0,0,0,0,1,0,1,0,0,1
+250,45,M,32,107,"Hypertension, diabetes","Minimal pain, no complications",4,0,1,1,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0
+251,51,M,26,162,"Hypertension, diabetes","Minimal pain, no complications",3,0,1,1,1,0,1,0,0,0,0,1,0,0,0,1,0,0,0
+252,58,F,24,102,"Hypertension, diabetes","Minimal pain, no complications",5,1,0,1,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0
+253,51,F,32,113,"Hypertension, diabetes","Minimal pain, no complications",7,0,0,1,1,0,1,0,0,0,0,0,1,0,1,0,0,1,0
+254,65,F,28,236,"Stable, no allergies","Pain, slow recovery",7,0,0,0,0,1,1,0,0,1,1,0,0,0,0,1,0,0,0
+255,51,F,26,126,"Stable, no allergies","Pain, slow recovery",7,1,0,0,0,1,1,0,0,1,1,0,0,0,1,0,0,0,0
+256,58,F,30,214,"Hypertension, diabetes","Minimal pain, no complications",5,0,0,1,1,0,1,0,0,0,0,1,0,0,1,0,0,0,1
+257,33,F,32,91,"Stable, no allergies","Minimal pain, no complications",3,1,0,0,0,1,1,0,0,0,0,0,1,0,0,1,0,1,0
+258,58,M,26,73,"Hypertension, diabetes","Minimal pain, no complications",3,0,1,1,1,0,1,0,0,0,0,0,1,0,0,1,0,0,0
+259,72,F,28,94,"Hypertension, diabetes","Pain, slow recovery",7,0,0,1,1,0,1,0,0,1,0,0,1,0,1,0,0,0,0
+260,33,M,28,167,"Hypertension, diabetes","Pain, slow recovery",3,1,1,1,1,0,1,0,0,1,0,0,0,1,0,1,0,0,0
+261,45,F,28,178,"Stable, no allergies","Minimal pain, no complications",3,1,0,0,0,1,1,0,0,0,0,1,0,0,0,1,1,0,0
+262,58,M,23,148,"Stable, no allergies","Pain, slow recovery",4,1,1,0,0,1,1,0,0,1,0,1,0,0,1,0,0,0,0
+263,51,M,24,66,"Hypertension, diabetes","Pain, slow recovery",5,0,1,1,1,0,1,0,0,1,0,1,0,0,1,0,1,0,0
+264,58,M,23,180,"Hypertension, diabetes","Pain, slow recovery",5,1,1,1,1,0,1,0,0,1,1,0,0,0,1,0,0,0,1
+265,65,F,30,193,"Hypertension, diabetes","Pain, slow recovery",7,1,0,1,1,0,1,0,0,1,0,0,0,1,1,0,0,0,1
+266,51,M,23,145,"Stable, no allergies","Pain, slow recovery",4,0,1,0,0,1,1,0,0,1,0,1,0,0,1,0,1,0,0
+267,58,M,23,117,"Stable, no allergies","Pain, slow recovery",7,1,1,0,0,1,1,0,0,1,1,0,0,0,1,0,1,0,0
+268,72,F,28,180,"Stable, no allergies","Minimal pain, no complications",6,0,0,0,0,1,1,0,0,0,0,0,1,0,1,0,1,0,0
+269,51,M,30,97,"Stable, no allergies","Minimal pain, no complications",5,0,1,0,0,1,1,0,0,0,0,0,1,0,0,1,0,0,0
+270,51,F,32,167,"Hypertension, diabetes","Pain, slow recovery",2,0,0,1,1,0,1,0,0,1,0,0,1,0,1,0,0,1,0
+271,45,F,28,77,"Hypertension, diabetes","Minimal pain, no complications",3,0,0,1,1,0,1,0,0,0,0,0,1,0,1,0,0,0,0
+272,58,F,28,86,"Hypertension, diabetes","Minimal pain, no complications",4,0,0,1,1,0,1,0,0,0,1,0,0,0,0,1,0,1,0
+273,72,F,32,170,"Hypertension, diabetes","Minimal pain, no complications",6,0,0,1,1,0,1,0,0,0,1,0,0,0,1,0,1,0,0
+274,51,M,30,134,"Hypertension, diabetes","Pain, slow recovery",3,0,1,1,1,0,1,0,0,1,0,1,0,0,0,1,0,0,0
+275,58,M,32,138,"Hypertension, diabetes","Pain, slow recovery",6,1,1,1,1,0,1,0,0,1,0,1,0,0,1,0,0,0,0
+276,58,F,28,84,"Stable, no allergies","Minimal pain, no complications",7,1,0,0,0,1,1,0,0,0,1,0,0,0,0,1,1,0,0
+277,45,M,24,165,"Hypertension, diabetes","Pain, slow recovery",6,0,1,1,1,0,1,0,0,1,0,0,0,1,0,1,0,0,1
+278,65,F,28,181,"Stable, no allergies","Pain, slow recovery",7,0,0,0,0,1,1,0,0,1,0,0,1,0,1,0,0,0,1
+279,45,F,23,81,"Stable, no allergies","Pain, slow recovery",4,0,0,0,0,1,1,0,0,1,0,1,0,0,0,1,0,1,0
+280,45,M,26,80,"Stable, no allergies","Minimal pain, no complications",7,1,1,0,0,1,1,0,0,0,0,1,0,0,0,1,0,1,0
+281,65,M,26,166,"Stable, no allergies","Pain, slow recovery",4,1,1,0,0,1,1,0,0,1,0,0,1,0,0,1,0,1,0
+282,65,M,26,237,"Stable, no allergies","Pain, slow recovery",5,1,1,0,0,1,1,0,0,1,1,0,0,0,1,0,1,0,0
+283,72,F,26,70,"Hypertension, diabetes","Pain, slow recovery",5,0,0,1,1,0,1,0,0,1,0,1,0,0,0,1,0,0,1
+284,51,F,28,95,"Hypertension, diabetes","Minimal pain, no complications",4,0,0,1,1,0,1,0,0,0,0,0,1,0,1,0,0,0,1
+285,51,F,24,142,"Stable, no allergies","Pain, slow recovery",6,0,0,0,0,1,1,0,0,1,0,0,0,1,0,1,0,1,0
+286,65,F,32,153,"Stable, no allergies","Pain, slow recovery",7,1,0,0,0,1,1,0,0,1,0,1,0,0,0,1,0,0,0
+287,65,M,24,122,"Stable, no allergies","Pain, slow recovery",4,0,1,0,0,1,1,0,0,1,1,0,0,0,1,0,0,0,1
+288,45,M,23,182,"Stable, no allergies","Minimal pain, no complications",5,1,1,0,0,1,1,0,0,0,1,0,0,0,1,0,0,0,1
+289,72,M,28,90,"Stable, no allergies","Pain, slow recovery",3,1,1,0,0,1,1,0,0,1,0,0,1,0,0,1,0,1,0
+290,65,M,28,79,"Stable, no allergies","Pain, slow recovery",3,1,1,0,0,1,1,0,0,1,0,1,0,0,1,0,0,0,1
+291,58,F,24,153,"Stable, no allergies","Pain, slow recovery",6,0,0,0,0,1,1,0,0,1,1,0,0,0,1,0,0,0,0
+292,33,M,28,166,"Hypertension, diabetes","Minimal pain, no complications",6,0,1,1,1,0,1,0,0,0,1,0,0,0,0,1,0,0,1
+293,58,M,28,203,"Hypertension, diabetes","Pain, slow recovery",5,1,1,1,1,0,1,0,0,1,0,1,0,0,0,1,0,1,0
+294,65,M,28,126,"Stable, no allergies","Pain, slow recovery",4,1,1,0,0,1,1,0,0,1,0,0,1,0,0,1,0,0,1
+295,51,F,23,66,"Hypertension, diabetes","Minimal pain, no complications",5,1,0,1,1,0,1,0,0,0,0,0,0,1,1,0,0,1,0
+296,33,M,23,187,"Stable, no allergies","Pain, slow recovery",6,0,1,0,0,1,1,0,0,1,0,0,1,0,1,0,0,1,0
+297,33,M,26,71,"Stable, no allergies","Pain, slow recovery",6,0,1,0,0,1,1,0,0,1,0,0,0,1,0,1,0,1,0
+298,65,M,32,63,"Stable, no allergies","Pain, slow recovery",2,1,1,0,0,1,1,0,0,1,1,0,0,0,0,1,0,0,1
+299,58,F,23,123,"Stable, no allergies","Pain, slow recovery",5,0,0,0,0,1,1,0,0,1,0,0,0,1,0,1,0,0,1
+300,33,F,23,135,"Stable, no allergies","Minimal pain, no complications",4,1,0,0,0,1,1,0,0,0,0,0,1,0,1,0,0,1,0

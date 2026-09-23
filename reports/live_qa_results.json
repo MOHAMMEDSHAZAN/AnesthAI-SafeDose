@@ -1,0 +1,242 @@
+[
+  {
+    "test": "Health Check",
+    "category": "Core System",
+    "status": "PASS",
+    "details": "10/10 models healthy. Sklearn: 6, PyTorch: 4"
+  },
+  {
+    "test": "CORS Origin Validation",
+    "category": "Security",
+    "status": "PASS",
+    "details": "Access-Control-Allow-Origin: http://localhost:5173 (No wildcard with credentials)"
+  },
+  {
+    "test": "Unauthenticated /predict",
+    "category": "Security",
+    "status": "PASS",
+    "details": "HTTP 401 correctly returned: Authentication required: Bearer token missing"
+  },
+  {
+    "test": "Unauthenticated /api/fluid/calculate",
+    "category": "Security",
+    "status": "PASS",
+    "details": "HTTP 401 correctly returned: Authentication required: Bearer token missing"
+  },
+  {
+    "test": "Unauthenticated /api/patients",
+    "category": "Security",
+    "status": "PASS",
+    "details": "HTTP 401 correctly returned: Authentication required: Bearer token missing"
+  },
+  {
+    "test": "Login anesthesiologist1",
+    "category": "Authentication",
+    "status": "PASS",
+    "details": "Issued valid JWT token for role Anesthesiologist"
+  },
+  {
+    "test": "Login surgeon1",
+    "category": "Authentication",
+    "status": "PASS",
+    "details": "Issued valid JWT token for role Surgeon"
+  },
+  {
+    "test": "Login nurse1",
+    "category": "Authentication",
+    "status": "PASS",
+    "details": "Issued valid JWT token for role Nurse"
+  },
+  {
+    "test": "Login admin1",
+    "category": "Authentication",
+    "status": "PASS",
+    "details": "Issued valid JWT token for role Admin"
+  },
+  {
+    "test": "Login student1",
+    "category": "Authentication",
+    "status": "PASS",
+    "details": "Issued valid JWT token for role Student"
+  },
+  {
+    "test": "Invalid Password Rejection",
+    "category": "Authentication",
+    "status": "PASS",
+    "details": "HTTP 401 returned: Invalid credentials provided"
+  },
+  {
+    "test": "Tampered Token Rejection",
+    "category": "Authentication",
+    "status": "PASS",
+    "details": "HTTP 401 returned: Clinical session token is invalid or expired"
+  },
+  {
+    "test": "Predict Arrhythmia",
+    "category": "ML Inference",
+    "status": "PASS",
+    "details": "Pred: 1, Prob: 0.290, Risk: Low Risk, XAI: Heuristic feature contribution"
+  },
+  {
+    "test": "Predict BloodLoss",
+    "category": "ML Inference",
+    "status": "PASS",
+    "details": "Pred: 1, Prob: 0.996, Risk: High Risk, XAI: Heuristic feature contribution"
+  },
+  {
+    "test": "Predict Bradycardia",
+    "category": "ML Inference",
+    "status": "PASS",
+    "details": "Pred: 0, Prob: 0.221, Risk: Low Risk, XAI: Heuristic feature contribution"
+  },
+  {
+    "test": "Predict FluidRecommendation",
+    "category": "ML Inference",
+    "status": "PASS",
+    "details": "Pred: 0, Prob: 0.180, Risk: Low Risk, XAI: Heuristic feature contribution"
+  },
+  {
+    "test": "Predict Mortality",
+    "category": "ML Inference",
+    "status": "PASS",
+    "details": "Pred: 0, Prob: 0.054, Risk: Low Risk, XAI: Heuristic feature contribution"
+  },
+  {
+    "test": "Predict Hypotension",
+    "category": "ML Inference",
+    "status": "PASS",
+    "details": "Pred: 1, Prob: 0.506, Risk: Medium Risk, XAI: Heuristic feature contribution"
+  },
+  {
+    "test": "Predict Hypoxia",
+    "category": "ML Inference",
+    "status": "PASS",
+    "details": "Pred: 0, Prob: 0.628, Risk: Medium Risk, XAI: Heuristic feature contribution"
+  },
+  {
+    "test": "Predict Tachycardia",
+    "category": "ML Inference",
+    "status": "PASS",
+    "details": "Pred: 1, Prob: 0.598, Risk: High Risk, XAI: Heuristic feature contribution"
+  },
+  {
+    "test": "Predict EmergencySeverity",
+    "category": "ML Inference",
+    "status": "PASS",
+    "details": "Pred: 1, Prob: 0.402, Risk: Low Risk, XAI: Heuristic feature contribution"
+  },
+  {
+    "test": "Predict ICU",
+    "category": "ML Inference",
+    "status": "PASS",
+    "details": "Pred: 0, Prob: 0.135, Risk: Low Risk, XAI: Heuristic feature contribution"
+  },
+  {
+    "test": "Demo Rejection Airway",
+    "category": "Demo Model Safety",
+    "status": "PASS",
+    "details": "HTTP 503 returned: Model inference unavailable: Airway"
+  },
+  {
+    "test": "Demo Rejection RiskPrediction",
+    "category": "Demo Model Safety",
+    "status": "PASS",
+    "details": "HTTP 503 returned: Model inference unavailable: RiskPrediction"
+  },
+  {
+    "test": "Demo Rejection PONV",
+    "category": "Demo Model Safety",
+    "status": "PASS",
+    "details": "HTTP 503 returned: Model inference unavailable: PONV"
+  },
+  {
+    "test": "Demo Rejection PACU",
+    "category": "Demo Model Safety",
+    "status": "PASS",
+    "details": "HTTP 503 returned: Model inference unavailable: PACU"
+  },
+  {
+    "test": "Demo Rejection DrugSafety",
+    "category": "Demo Model Safety",
+    "status": "PASS",
+    "details": "HTTP 503 returned: Model inference unavailable: DrugSafety"
+  },
+  {
+    "test": "Demo Rejection prototype_baseline",
+    "category": "Demo Model Safety",
+    "status": "PASS",
+    "details": "HTTP 503 returned: Model inference unavailable: prototype_baseline"
+  },
+  {
+    "test": "Assigned Patient Access",
+    "category": "Patient Authorization",
+    "status": "PASS",
+    "details": "Clinician 1 retrieved assigned patient SD-2026-0001"
+  },
+  {
+    "test": "Unassigned Patient Access",
+    "category": "Patient Authorization",
+    "status": "PASS",
+    "details": "HTTP 403 correctly returned: You are not authorized to access patient record: SD-2026-0003"
+  },
+  {
+    "test": "Admin Routine Patient Access",
+    "category": "Least Privilege",
+    "status": "PASS",
+    "details": "HTTP 403 correctly returned: You are not authorized to access patient record: SD-2026-0001"
+  },
+  {
+    "test": "Admin Prediction Access",
+    "category": "Least Privilege",
+    "status": "PASS",
+    "details": "HTTP 403 correctly returned: Role 'Admin' not authorized for clinical prediction execution"
+  },
+  {
+    "test": "Student Demo Patient Access",
+    "category": "RBAC",
+    "status": "PASS",
+    "details": "Student access permitted to synthetic demo patient"
+  },
+  {
+    "test": "Student Restricted Patient Access",
+    "category": "RBAC",
+    "status": "PASS",
+    "details": "HTTP 403 correctly returned: You are not authorized to access patient record: SD-2026-0003"
+  },
+  {
+    "test": "Nurse Data Minimization",
+    "category": "Data Minimization",
+    "status": "PASS",
+    "details": "Nurse received filtered patient fields (vitals present: False)"
+  },
+  {
+    "test": "Fluid Calculation Exec",
+    "category": "Clinical Engine",
+    "status": "PASS",
+    "details": "Net Balance: 570.0 mL, Maint: 110.0 mL/hr. Transparent advisory math."
+  },
+  {
+    "test": "Admin Fluid Calc Access",
+    "category": "Least Privilege",
+    "status": "PASS",
+    "details": "HTTP 403 returned: Role 'Admin' not authorized for clinical fluid calculation"
+  },
+  {
+    "test": "Alert Override Without Rationale",
+    "category": "Clinical Safety",
+    "status": "PASS",
+    "details": "Rejected with 400: Clinical override requires explicit documented reason."
+  },
+  {
+    "test": "Alert Override With Rationale",
+    "category": "Clinical Safety",
+    "status": "PASS",
+    "details": "Alert overridden and audited successfully"
+  },
+  {
+    "test": "Break-Glass Workflow",
+    "category": "Emergency Access",
+    "status": "PASS",
+    "details": "Temporary emergency access granted with mandatory audit logging"
+  }
+]

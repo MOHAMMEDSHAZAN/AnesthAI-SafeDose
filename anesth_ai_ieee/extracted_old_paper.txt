@@ -1,0 +1,790 @@
+
+=== PAGE 1 ===
+Page 1
+AnesthAI SafeDose: An AI-Based Clinical Decision Support System for
+Personalized Anesthesia Management and Perioperative Patient Safety
+Dr. Sowbahgya M P1, Mohammed Shazan 2, Mohan Gowda V C3 ,Puneeth S V4
+1Associate Professor 2Student
+Departmentof Computer Science and Engineering, Department of Computer Science and Engineering,
+K.S. Institute of Technology, K.S. Institute of Technology,
+Visvesvaraya Technological University, Belagavi - 590018. Visvesvaraya Technological University, Belagavi -
+590018. Bengaluru, Karnataka - 560109, India. Bengaluru, Karnataka - 560109, India.
+sowbhagya.mp@gmail.com mohammedshazan888@gmail.com
+3Student 4Student
+Departmentof Computer Science and Engineering, Departmentof Computer Science and Engineering,
+K.S. Institute of Technology, K.S. Institute of Technology,
+Visvesvaraya Technological University, Belagavi - 590018. Visvesvaraya Technological University, Belagavi -
+590018. Bengaluru, Karnataka - 560109, India.
+mohangowda4983@gmail.com
+***
+Bengaluru, Karnataka - 560109, India.
+punithsv948@gmail.com
+ABSTRACT-Perioperative patient management requires
+accurate anesthesia planning and timely clinical decision-
+making to improve surgical outcomes. This paper presents
+AnesthAI SafeDose, an artificial intelligence-based clinical
+decision support system that assists healthcare professionals
+during the preoperative, intraoperative, and postoperative phases
+of surgical care. The proposed framework integrates VitalDB,
+MIMIC-IV, and the MIT-BIH Arrhythmia Database to
+develop 15 predictive models for anesthesia technique selection,
+difficult airway assessment, postoperative nausea and vomiting
+(PONV), hemodynamic instability, ECG arrhythmia detection,
+emergency severity assessment, drug safety analysis, fluid
+recommendation, PACU recovery, ICU admission, and
+mortality prediction. A comparative learning framework
+employing machine learning, ensemble learning, and deep
+learning algorithms, including Logistic Regression, Decision
+Tree, Random Forest, XGBoost, CNN, LSTM, GRU, CNN-
+LSTM, TabNet, and Clinical Transformer, is used to identify the
+optimal model for each prediction task. A unified preprocessing
+pipeline performs data cleaning, feature engineering, temporal
+synchronization, and ECG signal processing. To improve
+transparency, the framework incorporates Explainable AI (XAI)
+using SHAP-based feature importance analysis. The system is
+deployed through a FastAPI backend and a React-based
+dashboard, providing real-time predictions, clinical
+recommendations, automated safety alerts, and perioperative
+monitoring. Experimental results demonstrate high predictive
+performance across multiple clinical tasks, highlighting the
+potential of AnesthAI SafeDose to enhance anesthesia planning,
+improve patient safety, and support evidence-based
+perioperative decision-making.
+KEY WORDS: Artificial Intelligence, Clinical Decision
+Support System, Explainable Artificial Intelligence (XAI),
+Perioperative Care, Anesthesia Dose Prediction, Machine
+Learning, Deep Learning, ECG Analysis, Patient Safety.
+1.INTRODUCTION
+Perioperative patient management requires accurate anesthesia
+planning, continuous physiological monitoring, and timely clinical
+decision-making to ensure patient safety and improve surgical
+outcomes. Conventional anesthesia management primarily relies
+on clinician expertise and standardized protocols, which may be
+insufficient for handling complex surgical cases involving
+heterogeneous patient data and rapidly changing physiological
+conditions.
+Recent advancements in Artificial Intelligence (AI), Machine
+Learning (ML), and Deep Learning (DL) have enabled
+intelligent clinical decision support systems capable of analyzing
+large-scale healthcare data and assisting clinicians with evidence-
+based recommendations. Publicly available datasets such as
+VitalDB, MIMIC-IV, and the MIT-BIH Arrhythmia Database
+have further accelerated research in perioperative predictive
+analytics by providing comprehensive physiological signals,
+electronic health records, and ECG waveforms. However, most
+existing AI-based anesthesia systems are designed for individual
+tasks, such as anesthesia dose prediction, arrhythmia detection, or
+postoperative risk assessment, providing limited support across the
+complete perioperative workflow.
+To address these limitations, this paper presents AnesthAI
+SafeDose, an explainable AI-based clinical decision support
+framework for personalized anesthesia management. The proposed
+system integrates multiple clinical datasets and employs a
+comparative learning approach using Logistic Regression,
+Decision Tree, Random Forest, XGBoost, CNN, LSTM, GRU,
+CNN-LSTM, TabNet, and Clinical Transformer models to
+perform fifteen perioperative prediction tasks, including anesthesia
+technique selection, difficult airway assessment, postoperative
+nausea and vomiting (PONV) prediction, hemodynamic instability
+prediction, ECG arrhythmia detection, emergency severity
+assessment, drug safety analysis, fluid recommendation, PACU
+recovery prediction, ICU transfer prediction, and mortality
+prediction.
+=== PAGE 2 ===
+Page 2
+A unified preprocessing pipeline performs data cleaning,
+missing-value imputation, feature engineering, temporal
+synchronization, and ECG signal processing to generate
+standardized inputs for predictive modeling. To improve model
+transparency and clinician confidence, the framework
+incorporates Explainable Artificial Intelligence (XAI) using
+SHAP-based feature importance analysis. The proposed system
+is implemented using a FastAPI backend integrated with a
+React-based clinical dashboard, providing real-time predictions,
+live patient monitoring, automated safety alerts, and interactive
+clinical analytics. By combining comparative AI models with
+explainable decision support, AnesthAI SafeDose provides an
+intelligent platform for personalized anesthesia planning and
+perioperative patient safety.
+2.LITERATURE SURVEY
+Artificial Intelligence (AI) has significantly improved
+perioperative healthcare by supporting anesthesia planning,
+physiological monitoring, and clinical decision-making.
+Machine learning techniques such as Logistic Regression,
+Decision Tree, Random Forest, Support Vector Machine, and
+Gradient Boosting have been widely adopted for anesthesia dose
+prediction using patient demographics, physiological parameters,
+and historical clinical records. Similarly, deep learning models
+including CNN, LSTM, GRU, Clinical Transformer, and
+TabNet have demonstrated promising performance in ECG
+analysis, complication prediction, and postoperative outcome
+assessment.
+Recent studies have also utilized publicly available datasets such
+as VitalDB, MIMIC-IV, and the MIT-BIH Arrhythmia
+Database to develop predictive models for hypotension,
+hypoxia, arrhythmia detection, postoperative nausea and
+vomiting (PONV), emergency severity assessment, and
+mortality prediction. Explainable Artificial Intelligence (XAI),
+particularly SHAP-based feature importance analysis, has
+further improved model interpretability by providing transparent
+explanations that support clinician confidence in AI-assisted
+recommendations.
+Despite these advancements, most existing systems address only
+specific clinical tasks, such as anesthesia dose estimation, ECG
+classification, or perioperative risk prediction. Few studies
+provide an integrated framework that combines comparative
+machine learning, explainable AI, real-time monitoring, and
+clinical decision support throughout the entire perioperative
+workflow. To address this limitation, the proposed AnesthAI
+SafeDose framework integrates multiple public clinical datasets,
+comparative AI models, XAI techniques, and a real-time web-
+based platform to deliver comprehensive and personalized
+perioperative decision support.
+Table 2.1:Comparison of Existing Anesthesia AI System
+Sl. No. Topic Approach Outcome
+1 AI-Based
+Intelligent
+Clinical
+Assistance
+System for
+Anesthesia
+(2025)
+AI-based dosage
+recommendation
+from patient data
+Improved
+dosage accuracy
+and safety
+2 SmartOR-AI:
+Predictive
+Analytics for
+Anesthesia
+Management
+(2025)
+ML with real-
+time monitoring
+for dosage and
+risk prediction
+Early risk
+detection and
+safer surgery
+3 Intelligent
+Anesthesia
+Dosage
+Monitoring
+System Using
+ML (2026)
+ML-based
+continuous vital-
+sign monitoring
+Real-time
+monitoring and
+improved
+dosage accuracy
+4 AI-Based
+Anesthesia Dose
+Prediction Using
+Computational
+Learning Models
+(2025)
+Decision Tree
+and Gradient
+Boosting
+Automated and
+faster dose
+prediction
+5 Pain Threshold-
+Based Anesthesia
+Dosage
+Calculation
+(2024)
+Pain threshold,
+BMI, and
+physiological
+features
+Personalized
+dosage and
+reduced
+overdose risk
+3.PROBLEM STATEMENT
+The administration of anesthesia is a complex clinical process that
+requires continuous assessment of patient-specific physiological
+conditions, medical history, surgical requirements, and real-time
+vital parameters to ensure safe and effective perioperative care. In
+current clinical practice, anesthesiologists primarily rely on their
+professional expertise, standardized dosage guidelines, and
+manual interpretation of patient information to determine
+appropriate anesthetic management. Although modern monitoring
+devices provide continuous physiological measurements, the
+integration of these heterogeneous data sources into meaningful
+clinical decisions remains largely dependent on human judgment.
+This manual approach may increase cognitive workload,
+particularly during lengthy or high-risk surgical procedures, and
+may contribute to delayed recognition of critical physiological
+changes such as hypotension, hypoxemia, cardiac arrhythmias, and
+adverse drug reactions.
+4.EXISTING PROBLEM
+Existing anesthesia management systems primarily focus on
+physiological monitoring and electronic documentation but often
+lack intelligent decision-support capabilities that can assist
+clinicians in predicting patient-specific risks, recommending
+personalized anesthesia strategies, and identifying early warning
+signs of perioperative complications. Furthermore, most available
+systems do not provide an integrated platform that combines
+preoperative assessment, anesthesia dose prediction,
+intraoperative monitoring, digital safety checklists, equipment
+verification, postoperative recovery evaluation, and structured
+incident reporting within a unified clinical workflow. The absence
+of explainable artificial intelligence and standardized safety
+protocols further limits the ability of clinicians to efficiently
+interpret complex patient data while maintaining comprehensive
+perioperative documentation.
+=== PAGE 3 ===
+Page 3
+To address these limitations, this research proposes AnesthAI
+SafeDose, an AI-based clinical decision support system for
+personalized anesthesia management and perioperative patient
+safety. The proposed system integrates patient demographics,
+medical history, laboratory findings, physiological signals, and
+intraoperative monitoring data obtained from publicly available
+clinical datasets to develop predictive models capable of
+supporting anesthesia-related decision-making. By combining
+machine learning, deep learning, real-time patient monitoring,
+digital safety checklists, incident management, and explainable
+artificial intelligence within a single web-based platform, the
+proposed framework aims to enhance clinical decision support,
+improve patient safety, standardize perioperative workflows, and
+assist anesthesiologists in delivering more personalized and data-
+driven anesthesia care. The system is intended to function as an
+intelligent decision-support tool, ensuring that all final clinical
+decisions remain under the supervision and responsibility of
+qualified healthcare professionals.
+5.OBJECTIVES
+The primary objective of this research is to develop AnesthAI
+SafeDose, an AI-based Clinical Decision Support System (CDSS)
+that assists anesthesiologists in delivering personalized, safe, and
+efficient perioperative anesthesia management.
+1. To develop an intelligent clinical decision support
+system for preoperative, intraoperative, and
+postoperative anesthesia management.
+2. To design AI-based predictive models for personalized
+anesthesia planning and perioperative risk assessment
+using patient demographics, clinical records, and
+physiological data.
+3. To predict perioperative complications such as
+hypotension, hypoxemia, arrhythmia, postoperative
+recovery, and drug safety using machine learning and
+deep learning techniques.
+4. To integrate real-time physiological monitoring with
+digital perioperative safety modules, including pre-
+anesthesia assessment, safety checklists, equipment
+verification, and recovery evaluation.
+5. To incorporate Explainable Artificial Intelligence (XAI)
+for interpretable predictions and clinically understandable
+recommendations.
+6. To develop a secure web-based platform that combines
+predictive analytics, patient management, clinical
+documentation, dashboards, and decision support to
+improve patient safety and assist anesthesiologists in
+clinical decision-making.
+6.PROPOSED METHODOLOGY
+The proposed AnesthAI SafeDose framework is an intelligent
+perioperative clinical decision support system that integrates
+machine learning, deep learning, and Explainable Artificial
+Intelligence (XAI) to support anesthesia management during the
+preoperative, intraoperative, and postoperative phases. The
+framework combines multiple clinical datasets, data
+preprocessing, predictive analytics, and real-time monitoring
+within a unified platform for personalized anesthesia
+management and patient safety.
+The system consists of five major modules: clinical data
+acquisition, data preprocessing, predictive analytics, clinical
+decision support, and real-time visualization. Clinical
+information is obtained from the VitalDB, MIMIC-IV, and
+MIT-BIH Arrhythmia Database, which provide patient
+demographics, physiological signals, laboratory reports,
+medication records, and ECG waveforms. During preprocessing,
+missing values are imputed, noisy records are removed, ECG
+signals are processed, features are engineered, and temporal
+data are synchronized to generate standardized datasets for
+model training.
+The predictive analytics module evaluates multiple machine
+learning and deep learning algorithms, including Logistic
+Regression, Decision Tree, Random Forest, XGBoost,
+Support Vector Machine (SVM), K-Nearest Neighbors
+(KNN), Gradient Boosting, CNN, LSTM, GRU, CNN-
+LSTM, Clinical Transformer, and TabNet, to identify the
+most suitable model for each clinical prediction task. The
+framework supports multiple applications such as anesthesia
+technique recommendation, difficult airway prediction,
+hypotension, hypoxia, arrhythmia detection, emergency severity
+assessment, fluid recommendation, drug safety analysis, PACU
+recovery prediction, ICU transfer prediction, and mortality risk
+estimation. Each prediction is supported by SHAP-based
+explainability to improve transparency and clinician
+confidence.
+The framework is deployed using a FastAPI backend integrated
+with a React-based clinical dashboard. The backend performs
+real-time model inference and generates automated safety alerts
+and personalized clinical recommendations, while the dashboard
+provides live patient monitoring, prediction results, and clinical
+analytics through a secure role-based interface. This integrated
+architecture enables scalable deployment and supports timely,
+evidence-based perioperative decision-making.
+7.SYSTEM ARCHITECTURE
+7.1 Clinical Data Sources
+The proposed AnesthAI SafeDose framework utilizes three
+publicly available clinical datasets: VitalDB, MIMIC-IV, and the
+MIT-BIH Arrhythmia Database. These datasets provide patient
+demographics, physiological signals, ECG waveforms, medication
+records, laboratory reports, and perioperative clinical information
+required for developing AI-based anesthesia prediction models.
+Table 7.1: Summary of Data Collection and Preprocessing
+Pipeline
+Stage Process Description
+Clinical Data
+Collection
+VitalDB Physiological
+waveforms, anesthesia
+records, ECG, BP, HR,
+SpO₂, RR, EtCO₂.
+MIMIC-IV Patient demographics,
+medical history,
+laboratory data,
+medications, and
+clinical outcomes.
+MIT-BIH Arrhythmia
+Database
+Annotated ECG
+recordings for
+arrhythmia detection.
+Data Integration Dataset Consolidation Merged datasets while
+preserving patient-
+specific information.
+Data Cleaning Data Validation Removed duplicate,
+=== PAGE 4 ===
+Page 4
+noisy, and incomplete
+records.
+Missing Value
+Handling
+Imputation Filled missing values
+using statistical
+techniques.
+Signal Processing ECG Parsing Processed ECG signals
+and synchronized
+physiological data.
+Feature
+Engineering
+Clinical Feature
+Extraction
+Extracted
+demographic,
+physiological, ECG,
+and derived clinical
+features.
+Feature Scaling Standardization Normalized numerical
+variables for model
+training.
+Temporal
+Synchronization
+Time Alignment Aligned physiological
+signals across different
+sampling intervals.
+Dataset
+Preparation
+Model-Ready Dataset Prepared datasets for
+training, validation,
+and testing.
+7.2 Data Acquisition and Preprocessing
+Clinical data undergo preprocessing through data cleaning,
+missing-value imputation, ECG signal processing, feature
+engineering, normalization, and temporal synchronization. The
+processed data are standardized to improve model performance
+and generate reliable datasets for machine learning and deep
+learning.
+Fig. 7.2: Data Preprocessing Pipeline
+7.3 Feature Extraction and Engineering
+Relevant demographic, physiological, and clinical features—
+including age, BMI, medical history, allergies, heart rate, blood
+pressure, SpO₂, respiratory rate, ECG features, shock index, and
+pulse pressure—are extracted. Additional engineered features
+further enhance prediction accuracy.
+7.4 Comparative AI Prediction Engine
+The extracted features are evaluated using multiple machine
+learning and deep learning models, including Logistic
+Regression, Decision Tree, Random Forest, XGBoost,
+Gradient Boosting, SVM, KNN, AdaBoost, CNN, LSTM,
+GRU, CNN-LSTM, Clinical Transformer, and TabNet.
+7.5 Explainable AI and Decision Support
+The framework incorporates Explainable Artificial Intelligence
+(XAI) using SHAP-based feature importance analysis to improve
+prediction transparency. The module provides confidence
+estimation, risk assessment, drug safety validation, and
+interpretable clinical recommendations for anesthesiologists.
+7.6 Clinical Prediction Models
+The proposed framework supports multiple perioperative
+prediction tasks, including anesthesia technique selection,
+difficult airway prediction, PONV prediction, hypotension,
+hypoxia, bradycardia, tachycardia, ECG arrhythmia detection,
+emergency severity assessment, fluid recommendation, drug
+safety analysis, PACU recovery, ICU transfer, mortality
+prediction, and overall perioperative risk assessment.
+Fig. 7.4: Model Training Workflow
+7.7 FastAPI Backend and REST API
+The prediction models are deployed using a FastAPI backend
+that performs real-time inference, manages prediction requests,
+generates clinical alerts, and delivers recommendation services
+through REST APIs.
+7.8 React-Based Clinical Dashboard
+A React-based dashboard provides healthcare professionals with
+patient management, preoperative assessment, live operating
+theatre monitoring, drug safety calculations, prediction results,
+and clinical analytics through an intuitive interface.
+7.9 Clinical Outcomes
+The proposed framework enables personalized anesthesia
+recommendations, continuous patient monitoring, early
+complication detection, automated clinical alerts, explainable AI-
+assisted decisions, and improved perioperative patient safety
+through an integrated AI-driven workflow.
+The proposed architecture integrates VitalDB, MIMIC-IV, and
+the MIT-BIH Arrhythmia Database into a unified
+preprocessing pipeline comprising data cleaning, feature
+
+=== PAGE 5 ===
+Page 5
+engineering, ECG processing, standardization, and temporal
+synchronization. The processed data are used to train and evaluate
+machine learning and deep learning models, whose predictions
+are deployed through a FastAPI backend and visualized using a
+React-based clinical dashboard for real-time decision support.
+Fig. 7.1: Proposed AnesthAI SafeDose System Architecture
+8.Machine Learning Models Evaluated
+The proposed AnesthAI SafeDose framework adopts a
+comparative learning approach by evaluating multiple machine
+learning, ensemble learning, and deep learning algorithms for
+different perioperative prediction tasks. Each model is trained and
+evaluated using standard performance metrics, and the best-
+performing algorithm is selected based on prediction accuracy,
+robustness, and clinical applicability. This strategy enables reliable
+decision support across various stages of anesthesia management
+while improving the overall performance of the proposed
+framework.
+TABLE 8.1: Machine Learning and Deep Learning Models
+Used in AnesthAI SafeDose
+Model Category Clinical
+Application
+Key Advantage
+Logistic
+Regression
+Machine
+Learning
+Risk prediction,
+PACU recovery,
+drug safety
+Simple,
+interpretable,
+and efficient
+classifier
+Decision Tree Machine
+Learning
+Hypotension,
+Hypoxia,
+Bradycardia,
+Tachycardia, Fluid
+recommendation
+Fast prediction
+with transparent
+decision rules
+Random
+Forest
+Ensemble
+Learning
+Clinical outcome
+prediction
+Reduces
+overfitting and
+improves
+generalization
+XGBoost Ensemble
+Learning
+Arrhythmia and
+Mortality
+prediction
+High accuracy
+for complex
+clinical datasets
+Gradient
+Boosting
+Ensemble
+Learning
+Perioperative risk
+assessment
+Learns nonlinear
+clinical
+relationships
+effectively
+Support
+Vector
+Machine
+(SVM)
+Machine
+Learning
+Clinical data
+classification
+Effective for
+high-
+dimensional
+datasets
+K-Nearest
+Neighbors
+(KNN)
+Machine
+Learning
+Patient outcome
+prediction
+Similarity-based
+personalized
+prediction
+AdaBoost Ensemble
+Learning
+Clinical
+classification
+Improves
+accuracy using
+boosted weak
+learners
+CNN Deep
+Learning
+ECG signal
+analysis
+Automatic
+extraction of
+waveform
+features
+LSTM Deep
+Learning
+Sequential vital
+sign prediction
+Captures long-
+term temporal
+dependencies
+GRU Deep
+Learning
+Time-series
+physiological
+monitoring
+Efficient
+sequential
+learning with
+fewer parameters
+CNN–LSTM Deep
+Learning
+ECG-based event
+prediction
+Combines spatial
+and temporal
+feature learning
+Clinical
+Transformer
+Deep
+Learning
+Multimodal clinical
+prediction
+Learns complex
+relationships
+using attention
+mechanisms
+TabNet Deep
+Learning
+Structured clinical
+data analysis
+Attention-based
+feature selection
+with
+interpretability
+The comparative evaluation enables the framework to identify the
+most appropriate predictive model for each clinical task. The
+selected models are subsequently deployed within the FastAPI-
+based decision support system to provide real-time predictions,
+clinical recommendations, and intelligent perioperative assistance
+through the React-based dashboard.
+Fig. 8.1: Comparative AI models used in the proposed
+AnesthAI SafeDose framework.
+9.RESULTS
+The proposed AnesthAI SafeDose framework was successfully
+implemented as a web-based clinical decision support system
+integrating machine learning, Explainable Artificial Intelligence
+(XAI), and real-time perioperative monitoring. The developed
+platform supports preoperative assessment, anesthesia planning,
+
+=== PAGE 6 ===
+Page 6
+intraoperative monitoring, postoperative recovery, and clinical
+analytics through an integrated React–FastAPI architecture.
+1. Pre-Anesthesia Safety Assessment
+The system records patient demographics, ASA classification,
+allergies, comorbidities, and preoperative safety checklist
+information to support standardized anesthesia evaluation.
+Fig. 9.1: Pre-anesthesia patient assessment and clinical safety
+checklist.
+2. Drug Dosage Calculator
+The dosage calculator estimates personalized anesthesia drug
+dosages based on patient-specific parameters and provides drug
+safety information for clinical decision support.
+Fig. 9.2: AI-based anesthesia drug dosage calculator.
+3. Live Operating Theatre Monitoring
+The monitoring dashboard displays real-time physiological
+parameters including ECG, heart rate, blood pressure, SpO₂,
+respiratory rate, EtCO₂, and ventilator information for continuous
+patient monitoring.
+Fig. 9.3: Real-time operating theatre monitoring
+dashboard.
+4. Clinical AI Models Dashboard
+The Clinical AI Models Dashboard presents prediction results,
+model evaluation metrics, confusion matrix, ROC analysis, and
+explainable AI visualizations for multiple perioperative prediction
+tasks.
+Fig. 9.4: Clinical AI dashboard showing model evaluation and
+explainability.
+5. PACU Recovery Prediction
+The PACU module evaluates postoperative recovery using the
+Modified Aldrete Score and generates AI-assisted discharge
+recommendations.
+Fig. 9.5: PACU recovery assessment module.
+6. Surgical Safety Time-Out
+The framework implements the WHO surgical safety checklist to
+verify patient identity, procedure details, anesthesia planning, and
+safety compliance before induction.
+Fig. 9.6: Digital surgical safety time-out module.
+=== PAGE 7 ===
+Page 7
+7. Safety Analytics Dashboard
+The analytics dashboard summarizes checklist compliance, audit
+statistics, medication safety events, and perioperative quality
+indicators to support continuous quality improvement.
+Fig. 9.7: Clinical safety analytics dashboard.
+8. Performance Evaluation
+The proposed framework was evaluated using multiple machine
+learning algorithms across thirteen perioperative prediction tasks.
+Table III summarizes the best-performing algorithm selected for
+each clinical application.
+Table 8.1 :Performance Evaluation of the Proposed
+AnesthAI SafeDose Framework
+Clinical Task Best Model Accuracy
+(%)
+F1-
+Score
+ROC-
+AUC
+Hypotension
+Prediction
+Decision
+Tree
+100.00 1.0000 1.0000
+Hypoxia
+Prediction
+Decision
+Tree
+100.00 1.0000 1.0000
+Bradycardia
+Detection
+Decision
+Tree
+100.00 1.0000 1.0000
+Tachycardia
+Detection
+Decision
+Tree
+100.00 1.0000 1.0000
+ECG Arrhythmia
+Detection
+XGBoost 99.09 0.9898 0.9991
+Perioperative
+Risk Prediction
+Logistic
+Regression
+83.33 0.7619 0.9259
+PONV Prediction Logistic
+Regression
+100.00 1.0000 1.0000
+Difficult Airway
+Prediction
+Logistic
+Regression
+100.00 1.0000 1.0000
+Emergency
+Severity
+Prediction
+Logistic
+Regression
+100.00 1.0000 1.0000
+PACU Recovery
+Prediction
+Logistic
+Regression
+100.00 1.0000 1.0000
+Fluid
+Recommendation
+Decision
+Tree
+100.00 1.0000 1.0000
+Mortality
+Prediction
+XGBoost 92.73 0.3333 0.6763
+Drug Safety
+Analysis
+Logistic
+Regression
+100.00 1.0000 1.0000
+10.CONCLUSION
+This paper presented AnesthAI SafeDose, an AI-based clinical
+decision support system for personalized anesthesia management
+and perioperative patient safety. The proposed framework integrates
+VitalDB, MIMIC-IV, and the MIT-BIH Arrhythmia Database
+with machine learning, deep learning, and Explainable Artificial
+Intelligence (XAI) to support anesthesia planning, perioperative risk
+prediction, physiological monitoring, and postoperative assessment.
+The FastAPI–React platform enables real-time prediction,
+automated safety alerts, and interpretable clinical recommendations
+through a unified interface. Experimental results demonstrate the
+effectiveness of the proposed framework in supporting multiple
+perioperative prediction tasks, highlighting its potential to improve
+clinical decision-making, patient safety, and the efficiency of
+anesthesia management.
+11.REFERENCES
+[1] Y. Cao, "Artificial Intelligence Revolutionizing Anesthesia
+Management," 2025.
+[2] R. Giri, S. H. Firdhos, and T. A. Vida, "Artificial Intelligence in
+Anesthesia: Enhancing Precision, Safety, and Global Access
+Through Data-Driven Systems," Journal of Clinical Medicine, 2025.
+[3] A. Bogoń et al., "Artificial Intelligence in Anesthesiology – A
+Review," 2024.
+[4] Z. Hu, G. Pan, X. Wang, and K. Li, "Intelligent Algorithm
+Based on Deep Learning to Predict the Dosage for Anesthesia,"
+2024.
+[5] X. Cai et al., "Advances in Automated Anesthesia: A
+Comprehensive Review," 2025.
+[6] J. Chen et al., "Feasibility of Intelligent Drug Control in the
+Maintenance Phase of General Anesthesia," 2023.
+[7] M. N. Al Qahtani et al., "Smart Anesthesia Systems: A Review
+of Technology Integration in Modern Anesthesia Practice," 2024.
+[8] M. Singhal et al., "A Comprehensive Analysis and Review of
+Artificial Intelligence in Anesthesia," Cureus, 2023.
+[9] R. Zarei et al., "A Systematic Literature Review of Precision
+Anesthesia," 2025.
+[10] T. Lee et al., "VitalDB, a High-Fidelity Multi-Parameter Vital
+Signs Database in Surgical Patients," Scientific Data, vol. 9, 2022.
+[11] A. E. W. Johnson et al., "MIMIC-IV, a Freely Accessible
+Electronic Health Record Dataset," Scientific Data, vol. 10, 2023.
+[12] M. P. Sowbhagya, H. K. Yogish, and G. T. Raju, "User
+Profiling for Web Personalization," in Proc. IEEE International
+Conference on Data Science and Information System, 2022.
+[13] M. P. Sowbhagya, H. K. Yogish, and G. T. Raju, "Web
+Personalization Using Amalgamation of Web Navigational Patterns
+and User Profiles," International Journal of Intelligent Systems and
+Applications in Engineering, vol. 12, no. 1, pp. 377–384, 2024.
+[14] M. P. Sowbhagya, H. K. Yogish, and G. T. Raju, "Perception-
+Based User Profiles for Web Personalization," International
+Journal on Recent and Innovation Trends in Computing and
+Communication, vol. 11, no. 7s, 2024.

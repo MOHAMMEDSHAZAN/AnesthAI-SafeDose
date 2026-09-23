@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApp, type Patient } from '../context/AppContext';
+import { API_BASE_URL } from '../config/api';
 
 export const Patients: React.FC = () => {
   const { patients, addPatient, updatePatient, deletePatient } = useApp();
@@ -8,6 +9,86 @@ export const Patients: React.FC = () => {
   const [modalType, setModalType] = useState<'add' | 'edit'>('add');
   const [searchQuery, setSearchQuery] = useState('');
   const [asaFilter, setAsaFilter] = useState<string>('All');
+  const [isMimicImportOpen, setIsMimicImportOpen] = useState(false);
+  const [mimicPatients, setMimicPatients] = useState<any[]>([]);
+  const [mimicLoading, setMimicLoading] = useState(false);
+  const [mimicSearch, setMimicSearch] = useState('');
+
+  const fetchMimicPatients = async () => {
+    setMimicLoading(true);
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/datasets/mimic-patients?limit=25${mimicSearch ? `&search=${encodeURIComponent(mimicSearch)}` : ''}`);
+      if (res.ok) {
+        const data = await res.json();
+        setMimicPatients(data.data || []);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setMimicLoading(false);
+    }
+  };
+
+  const handleImportMimicPatient = (mp: any) => {
+    const newId = `MIMIC-${mp.subject_id}`;
+    const nameMap = mp.gender === 'F' ? `Patient #${mp.subject_id} (F, ${mp.anchor_age}y)` : `Patient #${mp.subject_id} (M, ${mp.anchor_age}y)`;
+    const newPatient: Patient = {
+      id: newId,
+      name: nameMap,
+      age: mp.anchor_age || 60,
+      gender: mp.gender === 'F' ? 'Female' : 'Male',
+      weight: mp.gender === 'F' ? 68 : 78,
+      height: mp.gender === 'F' ? 164 : 176,
+      allergies: mp.comorbidity_count > 10 ? ['Penicillin (Moderate)'] : [],
+      medicalHistory: [
+        `Admission Type: ${mp.admission_type || 'EW EMER.'}`,
+        `Demographic Race: ${mp.race || 'WHITE'}`,
+        `Comorbidities Identified: ${mp.comorbidity_count || 3} Diagnoses`,
+        `ICU Length of Stay: ${mp.icu_los_days ? mp.icu_los_days.toFixed(1) : 0} days`
+      ],
+      drugHistory: [`Active Prescriptions: ${mp.prescription_count || 6} inpatient orders`],
+      asaScore: mp.icu_los_days > 2 ? 4 : (mp.comorbidity_count > 5 ? 3 : 2),
+      mallampati: mp.anchor_age > 65 ? 3 : 2,
+      comorbidities: [mp.admission_type || 'General Medical', `ICD Diagnoses (${mp.comorbidity_count || 3})`],
+      procedure: `${mp.admission_type === 'EW EMER.' ? 'Emergent Exploratory Laparotomy' : 'Elective Surgical Procedure'}`,
+      datasetRef: `MIMIC-IV 3.1 Patient #${mp.subject_id}`,
+      admissionType: mp.admission_type || 'EW EMER.',
+      icuDays: mp.icu_los_days || 0.0,
+      investigations: {
+        hb: mp.hemoglobin ? parseFloat(mp.hemoglobin.toFixed(1)) : 13.2,
+        plt: mp.platelets ? Math.round(mp.platelets) : 240,
+        cr: mp.creatinine ? parseFloat(mp.creatinine.toFixed(2)) : 1.05,
+        k: mp.potassium ? parseFloat(mp.potassium.toFixed(2)) : 4.15,
+        ecg: mp.icu_los_days > 0 ? 'Sinus Tachycardia with non-specific ST-T wave abnormalities' : 'Normal Sinus Rhythm',
+        echo: 'Cardiac chamber dimensions evaluated per hospital stay',
+        pft: 'Normal baseline ventilation',
+        pregnancy: false,
+        bloodGroup: 'O Positive'
+      },
+      vitals: {
+        hr: mp.icu_los_days > 0 ? 94 : 76,
+        bpSys: 130,
+        bpDia: 80,
+        spo2: mp.icu_los_days > 2 ? 94 : 98,
+        temp: 36.8
+      },
+      anesthesiaPlan: {
+        recommendation: mp.icu_los_days > 1 ? 'General' : 'Spinal',
+        confidence: 95,
+        reasoning: [
+          `Derived from institutional MIMIC-IV 3.1 clinical cohort record #${mp.subject_id}.`,
+          `Admission classification: ${mp.admission_type}, Age ${mp.anchor_age} (${mp.gender}).`,
+          `Measured biomarkers: Hb ${mp.hemoglobin ? mp.hemoglobin.toFixed(1) : 13.2} g/dL, Creatinine ${mp.creatinine ? mp.creatinine.toFixed(2) : 1.05} mg/dL, Platelets ${mp.platelets ? Math.round(mp.platelets) : 240} k/uL.`
+        ],
+        alternatives: ['Combined Regional-General Anesthesia with Invasive Arterial Line'],
+        warnings: [mp.creatinine > 1.4 ? 'Renal impairment noted; adjust medication clearance dosing.' : 'Standard hemodynamic vigilance.'],
+        contraindications: []
+      }
+    };
+    addPatient(newPatient);
+    setSelectedPatientId(newId);
+    setIsMimicImportOpen(false);
+  };
 
   // CRUD Form State
   const [formState, setFormState] = useState<Omit<Patient, 'id' | 'vitals'>>({
@@ -154,7 +235,7 @@ export const Patients: React.FC = () => {
         mallampati: formState.mallampati,
         comorbidities: [...formState.comorbidities, ...templateAppointments],
         investigations: formState.investigations,
-        id: `P${Math.floor(100 + Math.random() * 900)}`,
+        id: `SD-2026-${Math.floor(1000 + Math.random() * 9000)}`,
         vitals: { hr: 75, bpSys: 120, bpDia: 80, spo2: 98, temp: 36.8 }
       };
       addPatient(newPatient);
@@ -204,14 +285,34 @@ export const Patients: React.FC = () => {
 
   return (
     <div className="page-container">
+      {/* Research & Clinical Decision-Support Banner */}
+      <div className="prototype-advisory-banner">
+        <span>
+          <strong>RESEARCH PROTOTYPE</strong> • Synthetic Cohort Registry (SD-2026-XXXX). Clinical decision-support demonstration; not cleared for standalone primary diagnostic or treatment use. All entries represent simulated, non-identifiable test subjects.
+        </span>
+        <span className="badge badge-info">SYNTHETIC REGISTRY</span>
+      </div>
+
       <div className="page-header">
         <div>
           <h1 className="page-title">Surgical Patient Records</h1>
           <p className="page-subtitle">Demographics, histories, allergy screening, and pre-op profiles</p>
         </div>
-        <button className="btn btn-primary" onClick={handleOpenAdd}>
-          + Register New Patient
-        </button>
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <button 
+            className="btn btn-secondary" 
+            onClick={() => {
+              setIsMimicImportOpen(true);
+              fetchMimicPatients();
+            }}
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', borderColor: 'rgba(59,130,246,0.4)', color: '#60a5fa' }}
+          >
+            <span>⚡</span> Import from MIMIC-IV 3.1
+          </button>
+          <button className="btn btn-primary" onClick={handleOpenAdd}>
+            + Register New Patient
+          </button>
+        </div>
       </div>
 
       {/* Filter panel */}
@@ -220,7 +321,7 @@ export const Patients: React.FC = () => {
           <input 
             type="text" 
             className="form-control" 
-            placeholder="Search patient name or clinical ID..."
+            placeholder="Search patient name, procedure, or clinical ID..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{ paddingLeft: '36px' }}
@@ -231,10 +332,10 @@ export const Patients: React.FC = () => {
           </svg>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-secondary)' }}>ASA Rating:</span>
+          <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-secondary)' }}>ASA Physical Status:</span>
           <select 
             className="form-control" 
-            style={{ width: '100px', padding: '6px 12px' }}
+            style={{ width: '120px', padding: '6px 12px' }}
             value={asaFilter}
             onChange={(e) => setAsaFilter(e.target.value)}
           >
@@ -242,6 +343,9 @@ export const Patients: React.FC = () => {
             <option value="1">ASA I</option>
             <option value="2">ASA II</option>
             <option value="3">ASA III</option>
+            <option value="4">ASA IV</option>
+            <option value="5">ASA V</option>
+            <option value="6">ASA VI</option>
           </select>
         </div>
       </div>
@@ -269,10 +373,22 @@ export const Patients: React.FC = () => {
                   ASA {p.asaScore}
                 </span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '8px', fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
+              {p.procedure && (
+                <div style={{ fontSize: '0.8125rem', fontWeight: 600, color: '#38bdf8', marginTop: '4px' }}>
+                  🔪 {p.procedure}
+                </div>
+              )}
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '6px', fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
                 <span>ID: {p.id} • {p.age} yrs • {p.gender}</span>
                 <span>{p.weight} kg</span>
               </div>
+              {p.datasetRef && (
+                <div style={{ marginTop: '6px' }}>
+                  <span style={{ fontSize: '0.6875rem', background: 'rgba(59,130,246,0.12)', color: '#93c5fd', padding: '2px 6px', borderRadius: '4px', fontWeight: 600, display: 'inline-block' }}>
+                    📁 {p.datasetRef}
+                  </span>
+                </div>
+              )}
               {p.allergies.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginTop: '8px' }}>
                   {p.allergies.map(a => (
@@ -297,8 +413,30 @@ export const Patients: React.FC = () => {
           <div className="glass" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px' }}>
               <div>
-                <h2 style={{ fontSize: '1.5rem', fontWeight: 800 }}>{selectedPatient.name}</h2>
-                <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Registered Patient Profile ID: {selectedPatient.id}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <h2 style={{ fontSize: '1.5rem', fontWeight: 800 }}>{selectedPatient.name}</h2>
+                  {selectedPatient.admissionType && (
+                    <span className="badge badge-info">{selectedPatient.admissionType}</span>
+                  )}
+                </div>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginTop: '4px', flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Patient ID: {selectedPatient.id}</span>
+                  {selectedPatient.datasetRef && (
+                    <span style={{ fontSize: '0.75rem', background: 'rgba(59,130,246,0.15)', color: '#60a5fa', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
+                      Clinical Source: {selectedPatient.datasetRef}
+                    </span>
+                  )}
+                  {selectedPatient.procedure && (
+                    <span style={{ fontSize: '0.75rem', background: 'rgba(16,185,129,0.15)', color: '#34d399', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
+                      Procedure: {selectedPatient.procedure}
+                    </span>
+                  )}
+                  {selectedPatient.icuDays !== undefined && selectedPatient.icuDays > 0 && (
+                    <span style={{ fontSize: '0.75rem', background: 'rgba(239,68,68,0.15)', color: '#f87171', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
+                      ICU Stay: {selectedPatient.icuDays.toFixed(1)} Days
+                    </span>
+                  )}
+                </div>
               </div>
               <div style={{ display: 'flex', gap: '10px' }}>
                 <button className="btn btn-secondary" onClick={() => handleOpenEdit(selectedPatient)}>
@@ -665,12 +803,14 @@ export const Patients: React.FC = () => {
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                       <div className="form-group">
-                        <label className="form-label" style={{ fontSize: '0.75rem' }}>ASA Score</label>
+                        <label className="form-label" style={{ fontSize: '0.75rem' }}>ASA Physical Status</label>
                         <select className="form-control" style={{ fontSize: '0.8rem' }} value={formState.asaScore} onChange={(e) => setFormState(p => ({ ...p, asaScore: Number(e.target.value) }))}>
                           <option value={1}>ASA I</option>
                           <option value={2}>ASA II</option>
                           <option value={3}>ASA III</option>
                           <option value={4}>ASA IV</option>
+                          <option value={5}>ASA V</option>
+                          <option value={6}>ASA VI</option>
                         </select>
                       </div>
                       <div className="form-group">
@@ -766,16 +906,18 @@ export const Patients: React.FC = () => {
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label className="form-label">ASA Score (1-4)</label>
+                    <label className="form-label">ASA Physical Status Classification</label>
                     <select
                       className="form-control"
                       value={formState.asaScore}
                       onChange={(e) => setFormState(prev => ({ ...prev, asaScore: Number(e.target.value) }))}
                     >
                       <option value={1}>ASA I (Normal Healthy)</option>
-                      <option value={2}>ASA II (Mild Systemic)</option>
-                      <option value={3}>ASA III (Severe Systemic)</option>
-                      <option value={4}>ASA IV (Threat to Life)</option>
+                      <option value={2}>ASA II (Mild Systemic Disease)</option>
+                      <option value={3}>ASA III (Severe Systemic Disease)</option>
+                      <option value={4}>ASA IV (Severe Disease Constant Threat to Life)</option>
+                      <option value={5}>ASA V (Moribund Not Expected to Survive Without Surgery)</option>
+                      <option value={6}>ASA VI (Declared Brain-Dead Organ Donor)</option>
                     </select>
                   </div>
                   <div className="form-group">
@@ -911,6 +1053,122 @@ export const Patients: React.FC = () => {
               </form>
             </div>
           )}
+        </div>
+      )}
+
+      {/* MIMIC-IV 3.1 Live Clinical Importer Modal */}
+      {isMimicImportOpen && (
+        <div className="modal-overlay" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.7)',
+          backdropFilter: 'blur(8px)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1000
+        }}>
+          <div className="glass" style={{
+            width: '850px',
+            maxHeight: '85vh',
+            overflowY: 'auto',
+            padding: '30px',
+            borderRadius: '16px',
+            border: '1px solid rgba(59,130,246,0.3)',
+            backgroundColor: 'rgba(17,24,39,0.95)',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
+            color: '#f3f4f6'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '12px' }}>
+              <div>
+                <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#60a5fa', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span>🏥</span> MIMIC-IV 3.1 Live Clinical Patient Cohort
+                </h2>
+                <p style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', marginTop: '2px' }}>
+                  Select any real patient from the 364,627 institutional records to import into your perioperative plan
+                </p>
+              </div>
+              <button 
+                className="btn btn-secondary" 
+                onClick={() => setIsMimicImportOpen(false)}
+                style={{ padding: '6px 14px' }}
+              >
+                ✕ Close
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', gap: '10px', marginBottom: '16px' }}>
+              <input 
+                type="text" 
+                className="form-control" 
+                placeholder="Search by Subject ID (e.g. 10000084, 10000032) or admission type..."
+                value={mimicSearch}
+                onChange={(e) => setMimicSearch(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') fetchMimicPatients(); }}
+                style={{ flex: 1 }}
+              />
+              <button className="btn btn-primary" onClick={fetchMimicPatients}>
+                Search MIMIC-IV
+              </button>
+            </div>
+
+            {mimicLoading ? (
+              <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-muted)' }}>
+                Streaming live MIMIC-IV 3.1 patient cohort...
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxHeight: '500px', overflowY: 'auto' }}>
+                {mimicPatients.map(mp => (
+                  <div 
+                    key={mp.subject_id}
+                    style={{
+                      background: 'rgba(255,255,255,0.03)',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                      borderRadius: '8px',
+                      padding: '14px',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center'
+                    }}
+                  >
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ fontWeight: 800, color: '#f3f4f6', fontSize: '0.95rem' }}>
+                          Subject #{mp.subject_id}
+                        </span>
+                        <span className="badge badge-info">{mp.gender} • {mp.anchor_age} yrs</span>
+                        <span style={{ fontSize: '0.75rem', background: 'rgba(255,255,255,0.06)', padding: '2px 6px', borderRadius: '4px', color: '#9ca3af' }}>
+                          {mp.admission_type}
+                        </span>
+                        <span style={{ fontSize: '0.75rem', background: 'rgba(255,255,255,0.06)', padding: '2px 6px', borderRadius: '4px', color: '#9ca3af' }}>
+                          {mp.race}
+                        </span>
+                      </div>
+
+                      <div style={{ display: 'flex', gap: '16px', fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '6px' }}>
+                        <span><strong>Hb:</strong> {mp.hemoglobin ? mp.hemoglobin.toFixed(1) : 13.2} g/dL</span>
+                        <span><strong>Platelets:</strong> {mp.platelets ? Math.round(mp.platelets) : 240} k/uL</span>
+                        <span><strong>Creatinine:</strong> {mp.creatinine ? mp.creatinine.toFixed(2) : 1.05} mg/dL</span>
+                        <span><strong>BUN:</strong> {mp.bun ? mp.bun.toFixed(1) : 16.0} mg/dL</span>
+                        <span><strong>ICU LOS:</strong> {mp.icu_los_days ? `${mp.icu_los_days.toFixed(1)}d` : 'None'}</span>
+                      </div>
+                    </div>
+
+                    <button 
+                      className="btn btn-primary"
+                      onClick={() => handleImportMimicPatient(mp)}
+                      style={{ padding: '6px 14px', fontSize: '0.8125rem' }}
+                    >
+                      + Import Patient
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>

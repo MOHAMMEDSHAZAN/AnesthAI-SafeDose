@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 370" width="100%" height="auto">
+  <defs>
+    <style>
+      .phase-title { font-family: 'Times New Roman', serif; font-size: 15px; font-weight: bold; fill: #ffffff; text-anchor: middle; }
+      .phase-sub { font-family: 'Times New Roman', serif; font-size: 12px; font-style: italic; fill: #e2e8f0; text-anchor: middle; }
+      .box { fill: #ffffff; stroke: #94a3b8; stroke-width: 1.5; rx: 7; }
+      .item-header { font-family: 'Times New Roman', serif; font-size: 12.5px; font-weight: bold; fill: #0f172a; }
+      .item-txt { font-family: 'Times New Roman', serif; font-size: 11.5px; fill: #1e293b; }
+      .flow-arrow { stroke: #0284c7; stroke-width: 3.5; fill: none; marker-end: url(#big-arrow); }
+      .badge { rx: 4; stroke-width: 1; }
+    </style>
+    <marker id="big-arrow" markerWidth="9" markerHeight="8" refX="8" refY="4" orient="auto">
+      <polygon points="0 0, 9 4, 0 8" fill="#0284c7" />
+    </marker>
+  </defs>
+
+  <rect x="5" y="5" width="990" height="360" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" rx="8" />
+
+  <!-- PHASE 1: PREOPERATIVE -->
+  <g transform="translate(15, 15)">
+    <rect x="0" y="0" width="300" height="335" class="box" stroke="#2563eb" />
+    <rect x="0" y="0" width="300" height="52" fill="#1d4ed8" rx="7" />
+    <text x="150" y="25" class="phase-title">PHASE 1 &#8212; PREOPERATIVE</text>
+    <text x="150" y="43" class="phase-sub">Clinical Assessment &amp; Planning</text>
+    
+    <rect x="12" y="64" width="276" height="52" fill="#eff6ff" stroke="#bfdbfe" class="badge" />
+    <text x="20" y="81" class="item-header">1. Patient Registration &amp; Demographics</text>
+    <text x="28" y="100" class="item-txt">&#8226; Age, Gender, Measured Weight &amp; Height</text>
+
+    <rect x="12" y="122" width="276" height="52" fill="#eff6ff" stroke="#bfdbfe" class="badge" />
+    <text x="20" y="139" class="item-header">2. Body-Size &amp; Airway Evaluation</text>
+    <text x="28" y="158" class="item-txt">&#8226; Calculated BMI, Janmahasatian Lean Body Mass</text>
+
+    <rect x="12" y="180" width="276" height="58" fill="#eff6ff" stroke="#bfdbfe" class="badge" />
+    <text x="20" y="197" class="item-header">3. Clinician-Confirmed ASA Classification</text>
+    <text x="28" y="216" class="item-txt">&#8226; ASA I–VI with Independent Emergency 'E'</text>
+    <text x="28" y="230" class="item-txt" font-style="italic" fill="#1e40af">Attending clinician review required</text>
+
+    <rect x="12" y="244" width="276" height="78" fill="#eff6ff" stroke="#bfdbfe" class="badge" />
+    <text x="20" y="261" class="item-header">4. Dose Support &amp; Safety Checklist</text>
+    <text x="28" y="279" class="item-txt">&#8226; Parameter-based dosing basis (TBW vs. LBM)</text>
+    <text x="28" y="296" class="item-txt">&#8226; WHO Pre-Induction Checklist (21 items verified)</text>
+    <text x="28" y="312" class="item-txt" fill="#dc2626">&#8226; Organ dysfunction &amp; contraindication alerts</text>
+  </g>
+
+  <!-- Arrow Phase 1 -> Phase 2 -->
+  <line x1="322" y1="180" x2="346" y2="180" class="flow-arrow" />
+
+  <!-- PHASE 2: INTRAOPERATIVE -->
+  <g transform="translate(350, 15)">
+    <rect x="0" y="0" width="300" height="335" class="box" stroke="#059669" />
+    <rect x="0" y="0" width="300" height="52" fill="#047857" rx="7" />
+    <text x="150" y="25" class="phase-title">PHASE 2 &#8212; INTRAOPERATIVE</text>
+    <text x="150" y="43" class="phase-sub">Continuous Surveillance &amp; Decision Support</text>
+    
+    <rect x="12" y="64" width="276" height="52" fill="#ecfdf5" stroke="#a7f3d0" class="badge" />
+    <text x="20" y="81" class="item-header">1. Multi-Parameter Vital Streaming</text>
+    <text x="28" y="100" class="item-txt">&#8226; HR, ECG, SBP, DBP, MAP, SpO2, EtCO2, Temp</text>
+
+    <rect x="12" y="122" width="276" height="52" fill="#ecfdf5" stroke="#a7f3d0" class="badge" />
+    <text x="20" y="139" class="item-header">2. Multi-Task Predictive ML Risk</text>
+    <text x="28" y="158" class="item-txt">&#8226; Hypotension, Hypoxia, Brady/Tachycardia, ECG</text>
+
+    <rect x="12" y="180" width="276" height="58" fill="#ecfdf5" stroke="#a7f3d0" class="badge" />
+    <text x="20" y="197" class="item-header">3. Decoupled Deterministic Fluid Engine</text>
+    <text x="28" y="216" class="item-txt">&#8226; Holliday-Segar basal maintenance &amp; EBV</text>
+    <text x="28" y="230" class="item-txt">&#8226; Net fluid balance, measured blood loss, oliguria</text>
+
+    <rect x="12" y="244" width="276" height="78" fill="#ecfdf5" stroke="#a7f3d0" class="badge" />
+    <text x="20" y="261" class="item-header">4. Clinical Alert Semantics &amp; Break-Glass</text>
+    <text x="28" y="279" class="item-txt">&#8226; 'No configured alerts triggered' nominal status</text>
+    <text x="28" y="296" class="item-txt">&#8226; TreeSHAP explanations &amp; clinician override log</text>
+    <text x="28" y="312" class="item-txt" fill="#b91c1c">&#8226; Audited Emergency Break-Glass (112, 108)</text>
+  </g>
+
+  <!-- Arrow Phase 2 -> Phase 3 -->
+  <line x1="657" y1="180" x2="681" y2="180" class="flow-arrow" />
+
+  <!-- PHASE 3: POSTOPERATIVE -->
+  <g transform="translate(685, 15)">
+    <rect x="0" y="0" width="300" height="335" class="box" stroke="#7c3aed" />
+    <rect x="0" y="0" width="300" height="52" fill="#6d28d9" rx="7" />
+    <text x="150" y="25" class="phase-title">PHASE 3 &#8212; POSTOPERATIVE</text>
+    <text x="150" y="43" class="phase-sub">PACU Surveillance &amp; Recovery</text>
+    
+    <rect x="12" y="64" width="276" height="52" fill="#faf5ff" stroke="#ddd6fe" class="badge" />
+    <text x="20" y="81" class="item-header">1. PACU Physiological Monitoring</text>
+    <text x="28" y="100" class="item-txt">&#8226; Post-anesthetic hemodynamics &amp; SpO2 recovery</text>
+
+    <rect x="12" y="122" width="276" height="52" fill="#faf5ff" stroke="#ddd6fe" class="badge" />
+    <text x="20" y="139" class="item-header">2. Modified Aldrete Recovery Score</text>
+    <text x="28" y="158" class="item-txt">&#8226; Motor, respiration, circulation, consciousness</text>
+
+    <rect x="12" y="180" width="276" height="58" fill="#faf5ff" stroke="#ddd6fe" class="badge" />
+    <text x="20" y="197" class="item-header">3. Surgical Sign-Out Checklist</text>
+    <text x="28" y="216" class="item-txt">&#8226; WHO 12-point post-op verification</text>
+    <text x="28" y="230" class="item-txt">&#8226; Instrument / swab counts &amp; specimen labels</text>
+
+    <rect x="12" y="244" width="276" height="78" fill="#faf5ff" stroke="#ddd6fe" class="badge" />
+    <text x="20" y="261" class="item-header">4. Handover &amp; Discharge Readiness</text>
+    <text x="28" y="279" class="item-txt">&#8226; Cumulative operative fluid balance summary</text>
+    <text x="28" y="296" class="item-txt">&#8226; Ward transfer handover documentation</text>
+    <text x="28" y="312" class="item-txt" fill="#6d28d9">&#8226; Immutable audit trail recording all events</text>
+  </g>
+</svg>

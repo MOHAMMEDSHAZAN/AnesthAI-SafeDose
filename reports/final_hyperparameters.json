@@ -1,0 +1,12 @@
+{
+  "EmergencySeverity": {
+    "algorithm": "CatBoost",
+    "threshold": 0.27499999999999997,
+    "params": {
+      "iterations": 80,
+      "depth": 6,
+      "verbose": 0,
+      "random_state": 42
+    }
+  }
+}

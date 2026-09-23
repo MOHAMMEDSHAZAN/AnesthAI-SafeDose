@@ -1,0 +1,1062 @@
+[
+  {
+    "filename": "Airway.pkl",
+    "task": "Airway",
+    "algorithm": "Decision Tree",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "Airway_CNN.pt",
+    "task": "Airway",
+    "algorithm": "PyTorch CNN",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Airway_CNN_LSTM.pt",
+    "task": "Airway",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Airway_GRU.pt",
+    "task": "Airway",
+    "algorithm": "PyTorch GRU",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Airway_LSTM.pt",
+    "task": "Airway",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Airway_Transformer.pt",
+    "task": "Airway",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Arrhythmia.pkl",
+    "task": "Arrhythmia",
+    "algorithm": "GRU",
+    "dataset": "MIT-BIH WFDB Arrhythmia Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Arrhythmia_CNN.pt",
+    "task": "Arrhythmia",
+    "algorithm": "PyTorch CNN",
+    "dataset": "MIT-BIH WFDB Arrhythmia Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Arrhythmia_CNN_LSTM.pt",
+    "task": "Arrhythmia",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "MIT-BIH WFDB Arrhythmia Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Arrhythmia_GRU.pkl",
+    "task": "Arrhythmia",
+    "algorithm": "GRU",
+    "dataset": "MIT-BIH WFDB Arrhythmia Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Arrhythmia_GRU.pt",
+    "task": "Arrhythmia",
+    "algorithm": "PyTorch GRU",
+    "dataset": "MIT-BIH WFDB Arrhythmia Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Arrhythmia_LSTM.pt",
+    "task": "Arrhythmia",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "MIT-BIH WFDB Arrhythmia Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Arrhythmia_Transformer.pt",
+    "task": "Arrhythmia",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "MIT-BIH WFDB Arrhythmia Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "BloodLoss.pkl",
+    "task": "BloodLoss",
+    "algorithm": "CNN",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "BloodLoss_CNN.pkl",
+    "task": "BloodLoss",
+    "algorithm": "CNN",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "BloodLoss_CNN.pt",
+    "task": "BloodLoss",
+    "algorithm": "PyTorch CNN",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "BloodLoss_CNN_LSTM.pt",
+    "task": "BloodLoss",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "BloodLoss_GRU.pt",
+    "task": "BloodLoss",
+    "algorithm": "PyTorch GRU",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "BloodLoss_LSTM.pt",
+    "task": "BloodLoss",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "BloodLoss_Transformer.pt",
+    "task": "BloodLoss",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Bradycardia.pkl",
+    "task": "Bradycardia",
+    "algorithm": "CNN",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Bradycardia_CNN.pkl",
+    "task": "Bradycardia",
+    "algorithm": "CNN",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Bradycardia_CNN.pt",
+    "task": "Bradycardia",
+    "algorithm": "PyTorch CNN",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Bradycardia_CNN_LSTM.pt",
+    "task": "Bradycardia",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Bradycardia_GRU.pt",
+    "task": "Bradycardia",
+    "algorithm": "PyTorch GRU",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Bradycardia_LSTM.pt",
+    "task": "Bradycardia",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Bradycardia_Transformer.pt",
+    "task": "Bradycardia",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "DrugSafety.pkl",
+    "task": "DrugSafety",
+    "algorithm": "Logistic Regression",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "DrugSafety_CNN.pt",
+    "task": "DrugSafety",
+    "algorithm": "PyTorch CNN",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "DrugSafety_CNN_LSTM.pt",
+    "task": "DrugSafety",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "DrugSafety_GRU.pt",
+    "task": "DrugSafety",
+    "algorithm": "PyTorch GRU",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "DrugSafety_LSTM.pt",
+    "task": "DrugSafety",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "DrugSafety_Transformer.pt",
+    "task": "DrugSafety",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "EmergencySeverity.pkl",
+    "task": "EmergencySeverity",
+    "algorithm": "MLP",
+    "dataset": "MIMIC-IV ED",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "EmergencySeverity_CNN.pt",
+    "task": "EmergencySeverity",
+    "algorithm": "PyTorch CNN",
+    "dataset": "MIMIC-IV ED",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "EmergencySeverity_CNN_LSTM.pt",
+    "task": "EmergencySeverity",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "MIMIC-IV ED",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "EmergencySeverity_GRU.pt",
+    "task": "EmergencySeverity",
+    "algorithm": "PyTorch GRU",
+    "dataset": "MIMIC-IV ED",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "EmergencySeverity_LSTM.pt",
+    "task": "EmergencySeverity",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "MIMIC-IV ED",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "EmergencySeverity_MLP.pkl",
+    "task": "EmergencySeverity",
+    "algorithm": "MLP",
+    "dataset": "MIMIC-IV ED",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "EmergencySeverity_Transformer.pt",
+    "task": "EmergencySeverity",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "MIMIC-IV ED",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "FluidRecommendation.pkl",
+    "task": "FluidRecommendation",
+    "algorithm": "CNN",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "FluidRecommendation_CNN.pkl",
+    "task": "FluidRecommendation",
+    "algorithm": "CNN",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "FluidRecommendation_CNN.pt",
+    "task": "FluidRecommendation",
+    "algorithm": "PyTorch CNN",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "FluidRecommendation_CNN_LSTM.pt",
+    "task": "FluidRecommendation",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "FluidRecommendation_GRU.pt",
+    "task": "FluidRecommendation",
+    "algorithm": "PyTorch GRU",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "FluidRecommendation_LSTM.pt",
+    "task": "FluidRecommendation",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "FluidRecommendation_Transformer.pt",
+    "task": "FluidRecommendation",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Hypotension.pkl",
+    "task": "Hypotension",
+    "algorithm": "Random Forest",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "Hypotension_CNN.pt",
+    "task": "Hypotension",
+    "algorithm": "PyTorch CNN",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Hypotension_CNN_LSTM.pt",
+    "task": "Hypotension",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Hypotension_GRU.pt",
+    "task": "Hypotension",
+    "algorithm": "PyTorch GRU",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Hypotension_LSTM.pt",
+    "task": "Hypotension",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Hypotension_Random_Forest.pkl",
+    "task": "Hypotension",
+    "algorithm": "Random Forest",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "Hypotension_Transformer.pt",
+    "task": "Hypotension",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Hypoxia.pkl",
+    "task": "Hypoxia",
+    "algorithm": "LightGBM",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "Hypoxia_CNN.pt",
+    "task": "Hypoxia",
+    "algorithm": "PyTorch CNN",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Hypoxia_CNN_LSTM.pt",
+    "task": "Hypoxia",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Hypoxia_GRU.pt",
+    "task": "Hypoxia",
+    "algorithm": "PyTorch GRU",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Hypoxia_LSTM.pt",
+    "task": "Hypoxia",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Hypoxia_LightGBM.pkl",
+    "task": "Hypoxia",
+    "algorithm": "LightGBM",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "Hypoxia_Transformer.pt",
+    "task": "Hypoxia",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "ICU.pkl",
+    "task": "ICU",
+    "algorithm": "Extra Trees",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "ICU_CNN.pt",
+    "task": "ICU",
+    "algorithm": "PyTorch CNN",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "ICU_CNN_LSTM.pt",
+    "task": "ICU",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "ICU_Extra_Trees.pkl",
+    "task": "ICU",
+    "algorithm": "Extra Trees",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "ICU_GRU.pt",
+    "task": "ICU",
+    "algorithm": "PyTorch GRU",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "ICU_LSTM.pt",
+    "task": "ICU",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "ICU_Transformer.pt",
+    "task": "ICU",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Mortality.pkl",
+    "task": "Mortality",
+    "algorithm": "GRU",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Mortality_CNN.pt",
+    "task": "Mortality",
+    "algorithm": "PyTorch CNN",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Mortality_CNN_LSTM.pt",
+    "task": "Mortality",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Mortality_GRU.pkl",
+    "task": "Mortality",
+    "algorithm": "GRU",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Mortality_GRU.pt",
+    "task": "Mortality",
+    "algorithm": "PyTorch GRU",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Mortality_LSTM.pt",
+    "task": "Mortality",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Mortality_Transformer.pt",
+    "task": "Mortality",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "MIMIC-IV 3.1 Clinical Database",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "PACU.pkl",
+    "task": "PACU",
+    "algorithm": "Logistic Regression",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "PACU_CNN.pt",
+    "task": "PACU",
+    "algorithm": "PyTorch CNN",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "PACU_CNN_LSTM.pt",
+    "task": "PACU",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "PACU_GRU.pt",
+    "task": "PACU",
+    "algorithm": "PyTorch GRU",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "PACU_LSTM.pt",
+    "task": "PACU",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "PACU_Transformer.pt",
+    "task": "PACU",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "PONV.pkl",
+    "task": "PONV",
+    "algorithm": "Logistic Regression",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "PONV_CNN.pt",
+    "task": "PONV",
+    "algorithm": "PyTorch CNN",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "PONV_CNN_LSTM.pt",
+    "task": "PONV",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "PONV_GRU.pt",
+    "task": "PONV",
+    "algorithm": "PyTorch GRU",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "PONV_LSTM.pt",
+    "task": "PONV",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "PONV_Transformer.pt",
+    "task": "PONV",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "RiskPrediction.pkl",
+    "task": "RiskPrediction",
+    "algorithm": "Decision Tree",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "RiskPrediction_CNN.pt",
+    "task": "RiskPrediction",
+    "algorithm": "PyTorch CNN",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "RiskPrediction_CNN_LSTM.pt",
+    "task": "RiskPrediction",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "RiskPrediction_GRU.pt",
+    "task": "RiskPrediction",
+    "algorithm": "PyTorch GRU",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "RiskPrediction_LSTM.pt",
+    "task": "RiskPrediction",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "RiskPrediction_Transformer.pt",
+    "task": "RiskPrediction",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Unvalidated mock/heuristic demonstration dataset; lacks verified real clinical cohort benchmark validation",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Tachycardia.pkl",
+    "task": "Tachycardia",
+    "algorithm": "Random Forest",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "Tachycardia_CNN.pt",
+    "task": "Tachycardia",
+    "algorithm": "PyTorch CNN",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Tachycardia_CNN_LSTM.pt",
+    "task": "Tachycardia",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Tachycardia_GRU.pt",
+    "task": "Tachycardia",
+    "algorithm": "PyTorch GRU",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Tachycardia_LSTM.pt",
+    "task": "Tachycardia",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "Tachycardia_Random_Forest.pkl",
+    "task": "Tachycardia",
+    "algorithm": "Random Forest",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "Tachycardia_Transformer.pt",
+    "task": "Tachycardia",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "VitalDB High-Frequency Hemodynamics",
+    "validated_or_non_validated": "Validated",
+    "reason_if_non_validated": "",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "prototype_baseline.pkl",
+    "task": "prototype_baseline",
+    "algorithm": "DecisionTree",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Exploratory prototype baseline trained on mock/ad-hoc features for UI demonstration only",
+    "loaded_by_fastapi": true,
+    "exposed_through_prediction_endpoint": true
+  },
+  {
+    "filename": "prototype_baseline_CNN.pt",
+    "task": "prototype_baseline",
+    "algorithm": "PyTorch CNN",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Exploratory prototype baseline trained on mock/ad-hoc features for UI demonstration only",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "prototype_baseline_CNN_LSTM.pt",
+    "task": "prototype_baseline",
+    "algorithm": "PyTorch CNN-LSTM",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Exploratory prototype baseline trained on mock/ad-hoc features for UI demonstration only",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "prototype_baseline_GRU.pt",
+    "task": "prototype_baseline",
+    "algorithm": "PyTorch GRU",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Exploratory prototype baseline trained on mock/ad-hoc features for UI demonstration only",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "prototype_baseline_LSTM.pt",
+    "task": "prototype_baseline",
+    "algorithm": "PyTorch LSTM",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Exploratory prototype baseline trained on mock/ad-hoc features for UI demonstration only",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  },
+  {
+    "filename": "prototype_baseline_Transformer.pt",
+    "task": "prototype_baseline",
+    "algorithm": "PyTorch Transformer",
+    "dataset": "Synthetic / Unverified Mock Cohort",
+    "validated_or_non_validated": "Non-validated",
+    "reason_if_non_validated": "Exploratory prototype baseline trained on mock/ad-hoc features for UI demonstration only",
+    "loaded_by_fastapi": false,
+    "exposed_through_prediction_endpoint": false
+  }
+]

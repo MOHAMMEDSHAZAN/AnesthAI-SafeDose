@@ -22,11 +22,11 @@ export const ProcedureTimeout: React.FC = () => {
   ];
 
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
-  const [anesthesiologist, setAnesthesiologist] = useState<string>('Dr. Sarah Jenkins');
-  const [surgeon, setSurgeon] = useState<string>('Dr. Robert Blake');
-  const [otNurse, setOtNurse] = useState<string>('Nurse Emily Watson');
-  const [otherProvider, setOtherProvider] = useState<string>('Dr. James Wilson (Resident)');
-  const [completedBy, setCompletedBy] = useState<string>('Dr. Sarah Jenkins');
+  const [anesthesiologist, setAnesthesiologist] = useState<string>('Dr. Arjun Malhotra (DEMO-LIC-2048)');
+  const [surgeon, setSurgeon] = useState<string>('Dr. Vikram Sengupta, MS (Surg)');
+  const [otNurse, setOtNurse] = useState<string>('Nisha Verma, RN (DEMO-RN-1042)');
+  const [otherProvider, setOtherProvider] = useState<string>('Dr. Priya Sundaram (DEMO-RES-4019)');
+  const [completedBy, setCompletedBy] = useState<string>('Dr. Arjun Malhotra (DEMO-LIC-2048)');
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   useEffect(() => {
@@ -36,11 +36,11 @@ export const ProcedureTimeout: React.FC = () => {
         dbChecked[chk.key] = !!existingChecklist.data[chk.key];
       });
       setCheckedItems(dbChecked);
-      setAnesthesiologist(existingChecklist.data.to_anesthesiologist || 'Dr. Sarah Jenkins');
-      setSurgeon(existingChecklist.data.to_surgeon || 'Dr. Robert Blake');
-      setOtNurse(existingChecklist.data.to_nurse || 'Nurse Emily Watson');
-      setOtherProvider(existingChecklist.data.to_other || '');
-      setCompletedBy(existingChecklist.data.to_completed_by || 'Dr. Sarah Jenkins');
+      setAnesthesiologist(existingChecklist.data.to_anesthesiologist || 'Dr. Arjun Malhotra (DEMO-LIC-2048)');
+      setSurgeon(existingChecklist.data.to_surgeon || 'Dr. Vikram Sengupta, MS (Surg)');
+      setOtNurse(existingChecklist.data.to_nurse || 'Nisha Verma, RN (DEMO-RN-1042)');
+      setOtherProvider(existingChecklist.data.to_other || 'Dr. Priya Sundaram (DEMO-RES-4019)');
+      setCompletedBy(existingChecklist.data.to_completed_by || 'Dr. Arjun Malhotra (DEMO-LIC-2048)');
       setIsCompleted(existingChecklist.timeoutStatus === 'completed');
     }
   }, [existingChecklist]);

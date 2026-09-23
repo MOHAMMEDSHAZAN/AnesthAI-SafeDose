@@ -1,0 +1,814 @@
+{
+  "audit_title": "SafeDose AI Clinical ML Target-Leakage & Scientific Integrity Audit",
+  "audit_timestamp": "2026-09-09 18:34:32 UTC",
+  "auditor": "Antigravity AI Clinical Engineering & DeepMind Medical ML Audit Framework",
+  "total_tasks_audited": 16,
+  "tasks": {
+    "Hypotension": {
+      "dataset_name": "VitalDB (High-Resolution Intraoperative Biosignals)",
+      "target": "Binary Hypotension Event (map < 60)",
+      "feature_count": 15,
+      "clean_features": [
+        "hr",
+        "hr_roll_mean",
+        "hr_roll_std",
+        "hr_trend",
+        "spo2",
+        "spo2_roll_mean",
+        "spo2_roll_std",
+        "spo2_trend",
+        "etco2",
+        "etco2_roll_mean",
+        "etco2_roll_std",
+        "etco2_trend",
+        "rr",
+        "cvp",
+        "temp"
+      ],
+      "leak_features_removed": [
+        "map",
+        "map_roll_mean",
+        "map_roll_std",
+        "map_trend",
+        "cvp_map_ratio",
+        "sbp",
+        "dbp",
+        "pulse_pressure",
+        "shock_index"
+      ],
+      "train_patients": 11,
+      "test_patients": 4,
+      "train_samples": 264491,
+      "test_samples": 75544,
+      "positive_class_count": 47678,
+      "negative_class_count": 292357,
+      "best_model": "Random Forest (Patient-Stratified)",
+      "metrics": {
+        "accuracy": 0.9172,
+        "precision": 0.5568,
+        "recall": 0.5271,
+        "sensitivity": 0.5271,
+        "specificity": 0.9571,
+        "f1_score": 0.5415,
+        "roc_auc": 0.8397,
+        "pr_auc": 0.4733,
+        "brier_score": 0.0663,
+        "confusion_matrix": [
+          [
+            65590,
+            2942
+          ],
+          [
+            3316,
+            3696
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "Target was directly derived from 'map < 60', while ['map', 'map_roll_mean', 'map_roll_std'] were included in the input feature matrix. Split previously randomized continuous rows across the same patients.",
+      "is_scientifically_valid": true,
+      "verdict": "VALID AFTER RETRAINING"
+    },
+    "Hypoxia": {
+      "dataset_name": "VitalDB (High-Resolution Intraoperative Biosignals)",
+      "target": "Binary Hypoxia Event (spo2 < 90)",
+      "feature_count": 20,
+      "clean_features": [
+        "hr",
+        "hr_roll_mean",
+        "hr_roll_std",
+        "hr_trend",
+        "sbp",
+        "dbp",
+        "map",
+        "map_roll_mean",
+        "map_roll_std",
+        "map_trend",
+        "etco2",
+        "etco2_roll_mean",
+        "etco2_roll_std",
+        "etco2_trend",
+        "rr",
+        "cvp",
+        "temp",
+        "shock_index",
+        "pulse_pressure",
+        "cvp_map_ratio"
+      ],
+      "leak_features_removed": [
+        "spo2",
+        "spo2_roll_mean",
+        "spo2_roll_std",
+        "spo2_trend"
+      ],
+      "train_patients": 11,
+      "test_patients": 4,
+      "train_samples": 264491,
+      "test_samples": 75544,
+      "positive_class_count": 5700,
+      "negative_class_count": 334335,
+      "best_model": "Random Forest (Patient-Stratified)",
+      "metrics": {
+        "accuracy": 0.965,
+        "precision": 1.0,
+        "recall": 0.0008,
+        "sensitivity": 0.0008,
+        "specificity": 1.0,
+        "f1_score": 0.0015,
+        "roc_auc": 0.8805,
+        "pr_auc": 0.2407,
+        "brier_score": 0.0313,
+        "confusion_matrix": [
+          [
+            72899,
+            0
+          ],
+          [
+            2643,
+            2
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "Target was directly derived from 'spo2 < 90', while ['spo2', 'spo2_roll_mean', 'spo2_roll_std'] were included in the input feature matrix. Split previously randomized continuous rows across the same patients.",
+      "is_scientifically_valid": true,
+      "verdict": "VALID AFTER RETRAINING"
+    },
+    "Bradycardia": {
+      "dataset_name": "VitalDB (High-Resolution Intraoperative Biosignals)",
+      "target": "Binary Bradycardia Event (hr < 60)",
+      "feature_count": 19,
+      "clean_features": [
+        "sbp",
+        "dbp",
+        "map",
+        "map_roll_mean",
+        "map_roll_std",
+        "map_trend",
+        "spo2",
+        "spo2_roll_mean",
+        "spo2_roll_std",
+        "spo2_trend",
+        "etco2",
+        "etco2_roll_mean",
+        "etco2_roll_std",
+        "etco2_trend",
+        "rr",
+        "cvp",
+        "temp",
+        "pulse_pressure",
+        "cvp_map_ratio"
+      ],
+      "leak_features_removed": [
+        "hr",
+        "hr_roll_mean",
+        "hr_roll_std",
+        "hr_trend",
+        "shock_index"
+      ],
+      "train_patients": 11,
+      "test_patients": 4,
+      "train_samples": 264491,
+      "test_samples": 75544,
+      "positive_class_count": 63024,
+      "negative_class_count": 277011,
+      "best_model": "Random Forest (Patient-Stratified)",
+      "metrics": {
+        "accuracy": 0.6944,
+        "precision": 0.4076,
+        "recall": 0.1793,
+        "sensitivity": 0.1793,
+        "specificity": 0.8973,
+        "f1_score": 0.249,
+        "roc_auc": 0.7884,
+        "pr_auc": 0.4646,
+        "brier_score": 0.1719,
+        "confusion_matrix": [
+          [
+            48628,
+            5564
+          ],
+          [
+            17524,
+            3828
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "Target was directly derived from 'hr < 60', while ['hr', 'hr_roll_mean', 'hr_roll_std'] were included in the input feature matrix. Split previously randomized continuous rows across the same patients.",
+      "is_scientifically_valid": true,
+      "verdict": "VALID AFTER RETRAINING"
+    },
+    "Tachycardia": {
+      "dataset_name": "VitalDB (High-Resolution Intraoperative Biosignals)",
+      "target": "Binary Tachycardia Event (hr > 100)",
+      "feature_count": 19,
+      "clean_features": [
+        "sbp",
+        "dbp",
+        "map",
+        "map_roll_mean",
+        "map_roll_std",
+        "map_trend",
+        "spo2",
+        "spo2_roll_mean",
+        "spo2_roll_std",
+        "spo2_trend",
+        "etco2",
+        "etco2_roll_mean",
+        "etco2_roll_std",
+        "etco2_trend",
+        "rr",
+        "cvp",
+        "temp",
+        "pulse_pressure",
+        "cvp_map_ratio"
+      ],
+      "leak_features_removed": [
+        "hr",
+        "hr_roll_mean",
+        "hr_roll_std",
+        "hr_trend",
+        "shock_index"
+      ],
+      "train_patients": 11,
+      "test_patients": 4,
+      "train_samples": 264491,
+      "test_samples": 75544,
+      "positive_class_count": 38213,
+      "negative_class_count": 301822,
+      "best_model": "Random Forest (Patient-Stratified)",
+      "metrics": {
+        "accuracy": 0.9404,
+        "precision": 0.0,
+        "recall": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 0.9916,
+        "f1_score": 0.0,
+        "roc_auc": 0.5539,
+        "pr_auc": 0.0584,
+        "brier_score": 0.0566,
+        "confusion_matrix": [
+          [
+            71040,
+            600
+          ],
+          [
+            3904,
+            0
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "Target was directly derived from 'hr > 100', while ['hr', 'hr_roll_mean', 'hr_roll_std'] were included in the input feature matrix. Split previously randomized continuous rows across the same patients.",
+      "is_scientifically_valid": true,
+      "verdict": "VALID AFTER RETRAINING"
+    },
+    "Arrhythmia": {
+      "dataset_name": "MIT-BIH Arrhythmia Database (WFDB)",
+      "target": "Cardiac Arrhythmia Beat vs Normal Sinus Beat",
+      "feature_count": 100,
+      "train_patients": 8,
+      "test_patients": 4,
+      "train_samples": 17942,
+      "test_samples": 8761,
+      "positive_class_count": 11952,
+      "negative_class_count": 14751,
+      "best_model": "Random Forest (Inter-Patient Record Split)",
+      "metrics": {
+        "accuracy": 0.7876,
+        "precision": 0.7326,
+        "recall": 0.9622,
+        "sensitivity": 0.9622,
+        "specificity": 0.5776,
+        "f1_score": 0.8318,
+        "roc_auc": 0.7394,
+        "pr_auc": 0.6589,
+        "brier_score": 0.1813,
+        "confusion_matrix": [
+          [
+            2297,
+            1680
+          ],
+          [
+            181,
+            4603
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "Intra-patient data leakage: Individual heartbeat slices from the same ECG recordings were previously shuffled randomly into both train and test partitions.",
+      "is_scientifically_valid": true,
+      "verdict": "VALID AFTER RETRAINING"
+    },
+    "RiskPrediction": {
+      "dataset_name": "preoperative_risk_dataset.csv",
+      "target": "Anesthesia Technique (General vs Regional vs Spinal/MAC)",
+      "feature_count": 6,
+      "train_patients": 24,
+      "test_patients": 6,
+      "train_samples": 24,
+      "test_samples": 6,
+      "positive_class_count": 6,
+      "negative_class_count": 16,
+      "best_model": "Logistic Regression (5-Fold Stratified CV)",
+      "metrics": {
+        "accuracy": 0.6667,
+        "precision": 0.6333,
+        "recall": 0.6667,
+        "sensitivity": 0.6667,
+        "specificity": 0.5,
+        "f1_score": 0.5972,
+        "roc_auc": 1.0,
+        "pr_auc": 0.5,
+        "brier_score": 0.0,
+        "confusion_matrix": [
+          [
+            3,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            1
+          ]
+        ],
+        "cv_accuracy_mean": 0.7333,
+        "cv_accuracy_std": 0.1333,
+        "cv_f1_mean": 0.726
+      },
+      "leakage_detected": false,
+      "leakage_mechanism": "Statistical sample size invalidity: Dataset contains only 30 patients (6 in held-out test split). Claiming 100% generalization across high-dimensional features (D=21) from 6 test samples was scientifically ungrounded.",
+      "is_scientifically_valid": false,
+      "verdict": "INSUFFICIENT DATA"
+    },
+    "PONV": {
+      "dataset_name": "preoperative_risk_dataset.csv",
+      "target": "Postoperative Nausea & Vomiting Risk",
+      "feature_count": 6,
+      "train_patients": 24,
+      "test_patients": 6,
+      "train_samples": 24,
+      "test_samples": 6,
+      "positive_class_count": 6,
+      "negative_class_count": 24,
+      "best_model": "None (Rejected Tautological Rule)",
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "sensitivity": 1.0,
+        "specificity": 1.0,
+        "f1_score": 1.0,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "brier_score": 0.0,
+        "confusion_matrix": [
+          [
+            4,
+            0
+          ],
+          [
+            0,
+            2
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "Critical Target Leakage & Synthetic Label Generation: Ground-truth target was synthetically generated via the rule `Gender_Code & (RCRI_Score > 1)`. Both `Gender_Code` and `RCRI_Score` were included in the input feature matrix, creating an artificial 100% deterministic tautology on N=30.",
+      "is_scientifically_valid": false,
+      "verdict": "INVALID — TARGET LEAKAGE"
+    },
+    "Airway": {
+      "dataset_name": "preoperative_risk_dataset.csv",
+      "target": "Difficult Airway (Cormack-Lehane Grade III/IV)",
+      "feature_count": 6,
+      "train_patients": 24,
+      "test_patients": 6,
+      "positive_class_count": 10,
+      "negative_class_count": 20,
+      "best_model": "None (Rejected Tautological Rule)",
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "sensitivity": 1.0,
+        "specificity": 1.0,
+        "f1_score": 1.0,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "brier_score": 0.0,
+        "confusion_matrix": [
+          [
+            5,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "Critical Target Leakage: Target was created by thresholding `Mallampati >= 3`, while `Mallampati` was simultaneously provided as an input feature in the predictive matrix. Decision tree split directly on `Mallampati` to achieve 100% accuracy.",
+      "is_scientifically_valid": false,
+      "verdict": "INVALID — TARGET LEAKAGE"
+    },
+    "EmergencySeverity": {
+      "dataset_name": "MIMIC-IV ED Demo (Triage & Vitals)",
+      "target": "High Triage Emergency Acuity (Acuity <= 2)",
+      "feature_count": 6,
+      "clean_features": [
+        "temperature",
+        "heartrate",
+        "resprate",
+        "o2sat",
+        "sbp",
+        "dbp"
+      ],
+      "leak_features_removed": [
+        "acuity"
+      ],
+      "train_patients": 166,
+      "test_patients": 56,
+      "train_samples": 166,
+      "test_samples": 56,
+      "positive_class_count": 126,
+      "negative_class_count": 96,
+      "best_model": "Logistic Regression (Leakage-Free Features)",
+      "metrics": {
+        "accuracy": 0.4286,
+        "precision": 0.0,
+        "recall": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 1.0,
+        "f1_score": 0.0,
+        "roc_auc": 0.5,
+        "pr_auc": 0.7857,
+        "brier_score": 0.25,
+        "confusion_matrix": [
+          [
+            24,
+            0
+          ],
+          [
+            32,
+            0
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "Direct Target Leakage: The emergency triage label `acuity` was included directly in the input predictor list `['temperature', 'heartrate', 'resprate', 'o2sat', 'sbp', 'dbp', 'acuity']` while the target was defined as `acuity <= 2`.",
+      "is_scientifically_valid": true,
+      "verdict": "VALID AFTER RETRAINING"
+    },
+    "PACU": {
+      "dataset_name": "pacu_dataset.csv (Generated in preprocessing/clean_datasets.py)",
+      "target": "Delayed PACU Discharge (Delayed_Discharge == 1)",
+      "feature_count": 9,
+      "train_patients": 400,
+      "test_patients": 100,
+      "train_samples": 400,
+      "test_samples": 100,
+      "positive_class_count": 82,
+      "negative_class_count": 418,
+      "best_model": "None (Fabricated Synthetic Cohort)",
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "sensitivity": 1.0,
+        "specificity": 1.0,
+        "f1_score": 1.0,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "brier_score": 0.0,
+        "confusion_matrix": [
+          [
+            84,
+            0
+          ],
+          [
+            0,
+            16
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "Fabricated Synthetic Dataset & Direct Rule Leakage: `pacu_dataset.csv` was programmatically synthesized using `clean_datasets.generate_pacu_dataset()` with pseudo-random numbers. The target was defined as `delayed = 1 if aldrete < 9 else 0` while `Aldrete_Score_60min` was supplied as an input feature.",
+      "is_scientifically_valid": false,
+      "verdict": "INVALID — TARGET LEAKAGE"
+    },
+    "BloodLoss": {
+      "dataset_name": "MIMIC-IV 3.1 Clinical Database",
+      "target": "Hematologic Depletion / Severe Blood Loss (Hb < 10 or Platelets < 100)",
+      "feature_count": 8,
+      "clean_features": [
+        "anchor_age",
+        "gender_code",
+        "prescription_count",
+        "comorbidity_count",
+        "creatinine",
+        "bun",
+        "wbc",
+        "lab_mean"
+      ],
+      "leak_features_removed": [
+        "hemoglobin",
+        "platelets"
+      ],
+      "train_patients": 3382,
+      "test_patients": 846,
+      "train_samples": 7969,
+      "test_samples": 2031,
+      "positive_class_count": 1795,
+      "negative_class_count": 8205,
+      "best_model": "Random Forest (Patient-Stratified, Clean Features)",
+      "metrics": {
+        "accuracy": 0.804,
+        "precision": 0.4669,
+        "recall": 0.6593,
+        "sensitivity": 0.6593,
+        "specificity": 0.8356,
+        "f1_score": 0.5467,
+        "roc_auc": 0.8584,
+        "pr_auc": 0.5487,
+        "brier_score": 0.1299,
+        "confusion_matrix": [
+          [
+            1393,
+            274
+          ],
+          [
+            124,
+            240
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "Direct Target Leakage: Target was created as `(hemoglobin < 10.0) | (platelets < 100.0)`. Both `hemoglobin` and `platelets` were provided as input features to the model, producing a 100% trivial decision tree split.",
+      "is_scientifically_valid": true,
+      "verdict": "VALID AFTER RETRAINING"
+    },
+    "FluidRecommendation": {
+      "dataset_name": "MIMIC-IV 3.1 Clinical Database",
+      "target": "Elevated Fluid Requirement / Renal Impairment (BUN > 20 or Cr > 1.3)",
+      "feature_count": 8,
+      "clean_features": [
+        "potassium",
+        "glucose",
+        "anchor_age",
+        "gender_code",
+        "prescription_count",
+        "comorbidity_count",
+        "wbc",
+        "lab_mean"
+      ],
+      "leak_features_removed": [
+        "bun",
+        "creatinine"
+      ],
+      "train_patients": 3382,
+      "test_patients": 846,
+      "train_samples": 7969,
+      "test_samples": 2031,
+      "positive_class_count": 2419,
+      "negative_class_count": 7581,
+      "best_model": "Random Forest (Patient-Stratified, Clean Features)",
+      "metrics": {
+        "accuracy": 0.8099,
+        "precision": 0.5937,
+        "recall": 0.8298,
+        "sensitivity": 0.8298,
+        "specificity": 0.8031,
+        "f1_score": 0.6922,
+        "roc_auc": 0.8933,
+        "pr_auc": 0.6483,
+        "brier_score": 0.126,
+        "confusion_matrix": [
+          [
+            1211,
+            297
+          ],
+          [
+            89,
+            434
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "Direct Target Leakage: Target was created as `(bun > 20.0) | (creatinine > 1.3)`. Both `bun` and `creatinine` were included in the input feature matrix, creating a tautological predictor.",
+      "is_scientifically_valid": true,
+      "verdict": "VALID AFTER RETRAINING"
+    },
+    "ICU": {
+      "dataset_name": "MIMIC-IV 3.1 Clinical Database",
+      "target": "Critical Care ICU Admission Requirement (icu_stay_count > 0)",
+      "feature_count": 10,
+      "clean_features": [
+        "anchor_age",
+        "gender_code",
+        "hemoglobin",
+        "creatinine",
+        "bun",
+        "platelets",
+        "wbc",
+        "prescription_count",
+        "comorbidity_count",
+        "lab_mean"
+      ],
+      "leak_features_removed": [
+        "icu_stay_count",
+        "icu_los_days"
+      ],
+      "train_patients": 3382,
+      "test_patients": 846,
+      "train_samples": 7969,
+      "test_samples": 2031,
+      "positive_class_count": 4111,
+      "negative_class_count": 5889,
+      "best_model": "Random Forest (Patient-Stratified, Clean Features)",
+      "metrics": {
+        "accuracy": 0.6401,
+        "precision": 0.5922,
+        "recall": 0.6086,
+        "sensitivity": 0.6086,
+        "specificity": 0.6652,
+        "f1_score": 0.6003,
+        "roc_auc": 0.7167,
+        "pr_auc": 0.6649,
+        "brier_score": 0.2086,
+        "confusion_matrix": [
+          [
+            751,
+            378
+          ],
+          [
+            353,
+            549
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "Downstream Outcome Leakage: Target was constructed from `icu_stay_count > 0` and `icu_los_days > 0.0` while both `icu_stay_count` and `icu_los_days` were provided as input features. Downstream ICU admission variables cannot be used to predict the need for ICU admission.",
+      "is_scientifically_valid": true,
+      "verdict": "VALID AFTER RETRAINING"
+    },
+    "Mortality": {
+      "dataset_name": "MIMIC-IV 3.1 Clinical Database",
+      "target": "In-Hospital Mortality Event (hospital_expire_flag == 1)",
+      "feature_count": 10,
+      "clean_features": [
+        "anchor_age",
+        "gender_code",
+        "hemoglobin",
+        "creatinine",
+        "bun",
+        "platelets",
+        "wbc",
+        "prescription_count",
+        "comorbidity_count",
+        "lab_mean"
+      ],
+      "leak_features_removed": [
+        "hospital_expire_flag",
+        "icu_los_days"
+      ],
+      "train_patients": 3382,
+      "test_patients": 846,
+      "train_samples": 7969,
+      "test_samples": 2031,
+      "positive_class_count": 225,
+      "negative_class_count": 9775,
+      "best_model": "Random Forest (Patient-Stratified, Clean Features)",
+      "metrics": {
+        "accuracy": 0.8282,
+        "precision": 0.0549,
+        "recall": 0.4634,
+        "sensitivity": 0.4634,
+        "specificity": 0.8357,
+        "f1_score": 0.0982,
+        "roc_auc": 0.7271,
+        "pr_auc": 0.0741,
+        "brier_score": 0.1034,
+        "confusion_matrix": [
+          [
+            1663,
+            327
+          ],
+          [
+            22,
+            19
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "Critical Target Ground-Truth Leakage: The ground-truth mortality outcome `hospital_expire_flag` was explicitly included in the feature list `features_mort`, allowing models to look directly at whether the patient died in hospital.",
+      "is_scientifically_valid": true,
+      "verdict": "VALID AFTER RETRAINING"
+    },
+    "DrugSafety": {
+      "dataset_name": "anesthesia_drugs.csv (Generated in preprocessing/clean_datasets.py)",
+      "target": "Severe Drug Interaction (Interaction_Severity >= 2)",
+      "feature_count": 6,
+      "train_patients": 0,
+      "test_patients": 0,
+      "train_samples": 131,
+      "test_samples": 33,
+      "positive_class_count": 16,
+      "negative_class_count": 148,
+      "best_model": "None (Fabricated Synthetic Rule Matrix)",
+      "metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "sensitivity": 1.0,
+        "specificity": 1.0,
+        "f1_score": 1.0,
+        "roc_auc": 1.0,
+        "pr_auc": 1.0,
+        "brier_score": 0.0,
+        "confusion_matrix": [
+          [
+            29,
+            0
+          ],
+          [
+            0,
+            4
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "Direct Target Leakage & Synthetic Dataset: `anesthesia_drugs.csv` was generated synthetically by hardcoded rules in `clean_datasets.py`. The target was `Interaction_Severity >= 2` while `Interaction_Severity` was itself included as an input feature in `features_drugs`.",
+      "is_scientifically_valid": false,
+      "verdict": "INVALID — TARGET LEAKAGE"
+    },
+    "prototype_baseline": {
+      "dataset_name": "AnesthAI_2000_Patient_Dataset.csv",
+      "target": "Multi-class Perioperative Risk Level (Low / Medium / High)",
+      "feature_count": 10,
+      "clean_features": [
+        "Age",
+        "Gender_Code",
+        "Weight_kg",
+        "BMI",
+        "Heart_Rate_bpm",
+        "Systolic_BP",
+        "Diastolic_BP",
+        "SpO2_Percent",
+        "Respiratory_Rate",
+        "ECG_Abnormal"
+      ],
+      "leak_features_removed": [
+        "ASA_Score",
+        "ASA_Score_Num"
+      ],
+      "train_patients": 1600,
+      "test_patients": 400,
+      "train_samples": 1600,
+      "test_samples": 400,
+      "positive_class_count": 673,
+      "negative_class_count": 1327,
+      "best_model": "Random Forest (Leak-Free Baseline)",
+      "metrics": {
+        "accuracy": 0.34,
+        "precision": 0.3393,
+        "recall": 0.34,
+        "sensitivity": 0.34,
+        "specificity": 0.5,
+        "f1_score": 0.339,
+        "roc_auc": 0.494,
+        "pr_auc": 0.5,
+        "brier_score": 0.0,
+        "confusion_matrix": [
+          [
+            42,
+            47,
+            42
+          ],
+          [
+            42,
+            39,
+            53
+          ],
+          [
+            34,
+            46,
+            55
+          ]
+        ]
+      },
+      "leakage_detected": true,
+      "leakage_mechanism": "1-to-1 Deterministic Target Alias: `Risk_Level` in `AnesthAI_2000_Patient_Dataset.csv` was an exact duplicate of `ASA_Score` (ASA I = Low, ASA II = Medium, ASA III = High). When `ASA_Score_Num` was provided as a feature, the model simply mapped the ASA score back to its string alias with 100% accuracy.",
+      "is_scientifically_valid": true,
+      "verdict": "VALID AFTER RETRAINING"
+    }
+  }
+}

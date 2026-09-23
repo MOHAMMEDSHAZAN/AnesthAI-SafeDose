@@ -1,0 +1,56 @@
+{
+  "timestamp": "2026-09-13 06:34:37 UTC",
+  "random_seed": 42,
+  "python_version": "3.13.7",
+  "pytorch_version": "2.12.0+cpu",
+  "cuda_available": false,
+  "gpu_device": "None (CPU Fallback)",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "library_versions": {
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "torch": "2.12.0+cpu"
+  },
+  "split_isolation_records": {
+    "EmergencySeverity": {
+      "total_samples": 425087,
+      "unique_groups": 205504,
+      "train_samples": 296538,
+      "val_samples": 64174,
+      "test_samples": 64375,
+      "train_groups": 143852,
+      "val_groups": 30826,
+      "test_groups": 30826,
+      "train_val_overlap": 0,
+      "train_test_overlap": 0,
+      "val_test_overlap": 0
+    }
+  },
+  "hyperparameters": {
+    "EmergencySeverity": {
+      "algorithm": "CatBoost",
+      "threshold": 0.27499999999999997,
+      "params": {
+        "iterations": 80,
+        "depth": 6,
+        "verbose": 0,
+        "random_state": 42
+      }
+    }
+  },
+  "feature_lists": {
+    "EmergencySeverity": [
+      "temperature",
+      "heartrate",
+      "resprate",
+      "o2sat",
+      "sbp",
+      "dbp"
+    ]
+  },
+  "task_durations_seconds": {
+    "EmergencySeverity": 311.91
+  },
+  "total_pipeline_duration_seconds": 324.78
+}

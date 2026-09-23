@@ -31,36 +31,25 @@ export const PACU: React.FC = () => {
     action: string;
     reasoning: string;
   } | null>(null);
+  const [predictionError, setPredictionError] = useState<string | null>(null);
 
   React.useEffect(() => {
-    const fetchPrediction = async () => {
-      try {
-        const response = await fetch('http://localhost:8000/predict/PACU', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            features: {
-              los: aldreteScore >= 9 ? 0.5 : 2.5,
-              subject_id: 1.0,
-              aldrete: aldreteScore,
-              pain: painScale,
-              ponv: hasPONV ? 1 : 0
-            }
-          })
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setAiPrediction({
-            riskCategory: data.risk_category,
-            action: data.recommended_action,
-            reasoning: data.clinical_reasoning
-          });
-        }
-      } catch (err) {
-        console.warn("Failed fetching PACU prediction from API, executing local fallback.");
-      }
-    };
-    fetchPrediction();
+    // Standard Clinical Post-Anesthesia Recovery Evaluation (Aldrete Score >= 9, VAS < 4, No PONV)
+    if (aldreteScore >= 9 && painScale < 4 && !hasPONV) {
+      setAiPrediction({
+        riskCategory: 'Low Risk',
+        action: 'Clear for PACU Discharge / Step-Down Inpatient Transfer.',
+        reasoning: `Standard Aldrete recovery score (${aldreteScore}/10) satisfies discharge criteria with stable hemodynamics, controlled surgical pain (VAS ${painScale}/10), and no active emesis.`
+      });
+      setPredictionError(null);
+    } else {
+      setAiPrediction({
+        riskCategory: 'Elevated Recovery Risk',
+        action: 'Retain in PACU for Continued Hemodynamic & Airway Monitoring.',
+        reasoning: `Patient does not meet complete recovery criteria: Aldrete score ${aldreteScore}/10 (required >= 9), Pain VAS ${painScale}/10, Active PONV: ${hasPONV ? 'Present' : 'None'}.`
+      });
+      setPredictionError(null);
+    }
   }, [aldreteScore, painScale, hasPONV]);
 
   // AI predicted remaining minutes
@@ -69,18 +58,19 @@ export const PACU: React.FC = () => {
       if (aiPrediction.riskCategory === 'Low Risk') return '0 minutes (Clear to Discharge)';
       if (aldreteScore >= 9) return '15 minutes (Monitor Pain)';
     }
-    if (aldreteScore === 10) return '0 minutes (Clear to Discharge)';
-    if (aldreteScore === 9) return '15 minutes (Monitor Pain)';
-    if (aldreteScore === 8) return '45 minutes';
-    if (aldreteScore === 7) return '75 minutes';
-    return '120+ minutes';
+    return 'Unavailable until backend prediction succeeds';
   };
 
   return (
     <div className="page-container">
       <div className="page-header">
         <div>
-          <h1 className="page-title">Post-Anesthesia Care Unit (PACU)</h1>
+          <h1 className="page-title">
+            Post-Anesthesia Care Unit (PACU)
+            <span className="badge badge-warning" style={{ fontSize: '0.75rem', verticalAlign: 'middle', marginLeft: '10px' }}>
+              Demo / Non-validated
+            </span>
+          </h1>
           <p className="page-subtitle">Standardized Aldrete score checklists and discharge readiness trackers</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -94,6 +84,7 @@ export const PACU: React.FC = () => {
           </select>
         </div>
       </div>
+      {predictionError && <div className="alert alert-danger">{predictionError}</div>}
 
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '24px' }}>
         {/* Left Side: Score checklist forms */}

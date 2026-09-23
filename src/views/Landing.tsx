@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useApp } from '../context/AppContext';
 
 interface LandingProps {
   onGetStarted: () => void;
 }
 
 export const Landing: React.FC<LandingProps> = ({ onGetStarted }) => {
+  const { theme, toggleTheme } = useApp();
   const ecgCanvasRef = useRef<HTMLCanvasElement>(null);
   const [selectedPlan, setSelectedPlan] = useState<'individual' | 'hospital' | 'enterprise'>('hospital');
 
@@ -103,11 +105,38 @@ export const Landing: React.FC<LandingProps> = ({ onGetStarted }) => {
             <line x1="22" y1="12" x2="2" y2="12"/>
             <path d="M5.4 12h2.2l2.3-6 3.3 12 2.3-8 1.1 4.5 2 2.5h2"/>
           </svg>
-          <span style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>AnesthAI <span style={{ color: 'var(--med-blue)' }}>SafeDose</span></span>
+          <span style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)', fontSize: '1.25rem', fontWeight: 800 }}>Anesth <span style={{ color: 'var(--med-blue)' }}>AI</span></span>
         </div>
-        <button className="quick-action-btn" onClick={onGetStarted} style={{ fontFamily: 'var(--font-nav)', borderRadius: '30px' }}>
-          Access Clinician Portal
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <button 
+            className="icon-btn" 
+            onClick={toggleTheme} 
+            title="Toggle Theme"
+            aria-label="Toggle Light and Dark Mode"
+            style={{ width: '38px', height: '38px', borderRadius: '50%' }}
+          >
+            {theme === 'dark' ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+              </svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            )}
+          </button>
+          <button className="quick-action-btn" onClick={onGetStarted} style={{ fontFamily: 'var(--font-nav)', borderRadius: '30px' }}>
+            Access Clinician Portal
+          </button>
+        </div>
       </nav>
 
       {/* Hero Section (Clinic-1.0.0 Double-Column) */}
@@ -122,11 +151,11 @@ export const Landing: React.FC<LandingProps> = ({ onGetStarted }) => {
               </div>
               <div className="badge-item">
                 <span style={{ color: 'var(--med-green)' }}>●</span>
-                <span>24/7 Crisis Assistance</span>
+                <span>24/7 Safety Assistance</span>
               </div>
               <div className="badge-item">
                 <span style={{ color: 'var(--med-cyan)' }}>★</span>
-                <span>Precision Dosing AI</span>
+                <span>Dose Calculation Support</span>
               </div>
             </div>
 
@@ -136,7 +165,7 @@ export const Landing: React.FC<LandingProps> = ({ onGetStarted }) => {
             </h1>
 
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '32px', lineHeight: '1.6' }}>
-              AnesthAI SafeDose empowers surgical teams with AI perioperative planning, weight-adjusted drug safety calculators, interactive airway assessments, and instant ACLS emergency protocols.
+              Anesth AI empowers surgical teams with clinician-verified anesthesia dose calculations, perioperative risk prediction, deterministic fluid calculations, and structured 3-phase intraoperative safety checklists.
             </p>
 
             <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
@@ -197,7 +226,7 @@ export const Landing: React.FC<LandingProps> = ({ onGetStarted }) => {
         <div className="glass" style={{ padding: '24px', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-color)', boxShadow: 'var(--shadow-md)' }}>
           <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '16px', color: 'var(--text-primary)', fontFamily: 'var(--font-heading)', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ width: '8px', height: '8px', backgroundColor: 'var(--med-green)', borderRadius: '50%', display: 'inline-block', animation: 'heart-pulse 1s infinite' }}></span>
-            Ward OT-1 Telemetry Preview (Robert Miller, P001)
+            Ward OT-1 Telemetry Preview (Aarav Mehta, SD-2026-0001)
           </h3>
           
           <div style={{ backgroundColor: '#020617', border: '1px solid #1e293b', borderRadius: 'var(--radius-lg)', padding: '16px', boxShadow: 'inset 0 0 20px rgba(0,0,0,0.8)' }}>
@@ -363,7 +392,7 @@ export const Landing: React.FC<LandingProps> = ({ onGetStarted }) => {
 
       {/* Landing Footer */}
       <footer className="landing-footer">
-        <p>© 2026 AnesthAI SafeDose. Clinical decision support only. All final authority belongs to licensed clinicians.</p>
+        <p>© 2026 Anesth AI. Clinical decision support only. All final authority belongs to licensed clinicians.</p>
       </footer>
     </div>
   );

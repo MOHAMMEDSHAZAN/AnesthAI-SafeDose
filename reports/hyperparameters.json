@@ -1,0 +1,178 @@
+{
+  "Hypotension": {
+    "algorithm": "Hist Gradient Boosting",
+    "threshold": 0.475,
+    "params": {
+      "categorical_features": "from_dtype",
+      "class_weight": "balanced",
+      "early_stopping": "auto",
+      "interaction_cst": null,
+      "l2_regularization": 0.0,
+      "learning_rate": 0.1,
+      "loss": "log_loss",
+      "max_bins": 255,
+      "max_depth": 8,
+      "max_features": 1.0,
+      "max_iter": 100,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 20,
+      "monotonic_cst": null,
+      "n_iter_no_change": 10,
+      "random_state": 42,
+      "scoring": "loss",
+      "tol": 1e-07,
+      "validation_fraction": 0.1,
+      "verbose": 0,
+      "warm_start": false
+    }
+  },
+  "Hypoxia": {
+    "algorithm": "Hist Gradient Boosting",
+    "threshold": 0.825,
+    "params": {
+      "categorical_features": "from_dtype",
+      "class_weight": "balanced",
+      "early_stopping": "auto",
+      "interaction_cst": null,
+      "l2_regularization": 0.0,
+      "learning_rate": 0.1,
+      "loss": "log_loss",
+      "max_bins": 255,
+      "max_depth": 8,
+      "max_features": 1.0,
+      "max_iter": 100,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 20,
+      "monotonic_cst": null,
+      "n_iter_no_change": 10,
+      "random_state": 42,
+      "scoring": "loss",
+      "tol": 1e-07,
+      "validation_fraction": 0.1,
+      "verbose": 0,
+      "warm_start": false
+    }
+  },
+  "Bradycardia": {
+    "algorithm": "CNN",
+    "threshold": 0.6,
+    "params": {
+      "lr": 0.002,
+      "batch_size": 512
+    }
+  },
+  "Tachycardia": {
+    "algorithm": "Hist Gradient Boosting",
+    "threshold": 0.25,
+    "params": {
+      "categorical_features": "from_dtype",
+      "class_weight": "balanced",
+      "early_stopping": "auto",
+      "interaction_cst": null,
+      "l2_regularization": 0.0,
+      "learning_rate": 0.1,
+      "loss": "log_loss",
+      "max_bins": 255,
+      "max_depth": 8,
+      "max_features": 1.0,
+      "max_iter": 100,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 20,
+      "monotonic_cst": null,
+      "n_iter_no_change": 10,
+      "random_state": 42,
+      "scoring": "loss",
+      "tol": 1e-07,
+      "validation_fraction": 0.1,
+      "verbose": 0,
+      "warm_start": false
+    }
+  },
+  "Arrhythmia": {
+    "algorithm": "Hist Gradient Boosting",
+    "threshold": 0.05,
+    "params": {
+      "categorical_features": "from_dtype",
+      "class_weight": "balanced",
+      "early_stopping": "auto",
+      "interaction_cst": null,
+      "l2_regularization": 0.0,
+      "learning_rate": 0.1,
+      "loss": "log_loss",
+      "max_bins": 255,
+      "max_depth": 8,
+      "max_features": 1.0,
+      "max_iter": 100,
+      "max_leaf_nodes": 31,
+      "min_samples_leaf": 20,
+      "monotonic_cst": null,
+      "n_iter_no_change": 10,
+      "random_state": 42,
+      "scoring": "loss",
+      "tol": 1e-07,
+      "validation_fraction": 0.1,
+      "verbose": 0,
+      "warm_start": false
+    }
+  },
+  "EmergencySeverity": {
+    "algorithm": "CatBoost",
+    "threshold": 0.32499999999999996,
+    "params": {
+      "iterations": 80,
+      "depth": 6,
+      "verbose": 0,
+      "random_state": 42
+    }
+  },
+  "BloodLoss": {
+    "algorithm": "LSTM",
+    "threshold": 0.525,
+    "params": {
+      "lr": 0.002,
+      "batch_size": 512
+    }
+  },
+  "FluidRecommendation": {
+    "algorithm": "LightGBM",
+    "threshold": 0.525,
+    "params": {
+      "boosting_type": "gbdt",
+      "class_weight": "balanced",
+      "colsample_bytree": 1.0,
+      "importance_type": "split",
+      "learning_rate": 0.1,
+      "max_depth": 6,
+      "min_child_samples": 20,
+      "min_child_weight": 0.001,
+      "min_split_gain": 0.0,
+      "n_estimators": 80,
+      "n_jobs": -1,
+      "num_leaves": 31,
+      "objective": null,
+      "random_state": 42,
+      "reg_alpha": 0.0,
+      "reg_lambda": 0.0,
+      "subsample": 1.0,
+      "subsample_for_bin": 200000,
+      "subsample_freq": 0,
+      "verbose": -1
+    }
+  },
+  "ICU": {
+    "algorithm": "GRU",
+    "threshold": 0.42499999999999993,
+    "params": {
+      "lr": 0.002,
+      "batch_size": 512
+    }
+  },
+  "Mortality": {
+    "algorithm": "GRU",
+    "threshold": 0.9,
+    "params": {
+      "lr": 0.002,
+      "batch_size": 512
+    }
+  }
+}

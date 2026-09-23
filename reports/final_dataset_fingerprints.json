@@ -1,0 +1,56 @@
+{
+  "vitaldb_hemodynamics_cleaned.csv": {
+    "relative_path": "datasets\\01_hypotension\\vitaldb_hemodynamics_cleaned.csv",
+    "size_bytes": 38919697,
+    "size_mb": 37.117,
+    "sha256_head_10mb": "bbb4fe4de15ddfeb868dca34ca69b16171a462065aea906468bf4c9037caf730"
+  },
+  "mit_bih_ecg_cleaned.csv": {
+    "relative_path": "datasets\\03_arrhythmia\\mit_bih_ecg_cleaned.csv",
+    "size_bytes": 13856633,
+    "size_mb": 13.215,
+    "sha256_head_10mb": "8b21e358b1287ddd63c1f1de9e657b93cf732382cbcb401b9e8c44a96c2f8372"
+  },
+  "patients.csv.gz": {
+    "relative_path": "datasets\\mimiciv\\3.1\\hosp\\patients.csv.gz",
+    "size_bytes": 2835586,
+    "size_mb": 2.704,
+    "sha256_head_10mb": "4c7507de7ecad8c5ba7647ea4d26018e88ff6672c5fc22ab59c2a5697d687cdd"
+  },
+  "admissions.csv.gz": {
+    "relative_path": "datasets\\mimiciv\\3.1\\hosp\\admissions.csv.gz",
+    "size_bytes": 19928140,
+    "size_mb": 19.005,
+    "sha256_head_10mb": "cd66bad1c2a2cad2331630ab67994a9e78f06a1718c5a3baad195d8f3fb4a88c"
+  },
+  "prescriptions.csv.gz": {
+    "relative_path": "datasets\\mimiciv\\3.1\\hosp\\prescriptions.csv.gz",
+    "size_bytes": 606298611,
+    "size_mb": 578.211,
+    "sha256_head_10mb": "7614465ac1e85ab0e85577c63d434d731201a15373147e3b40fca5cc9892b395"
+  },
+  "icustays.csv.gz": {
+    "relative_path": "datasets\\mimiciv\\3.1\\icu\\icustays.csv.gz",
+    "size_bytes": 3342355,
+    "size_mb": 3.188,
+    "sha256_head_10mb": "3c590ed37f1fb7a77a128f2f6961f836001512ba81adcd0dfeced2702f96bc5f"
+  },
+  "edstays.csv.gz": {
+    "relative_path": "datasets\\04_preoperative_risk\\mimic-iv-ed-demo-2.2\\mimic-iv-ed-demo-2.2\\ed\\edstays.csv.gz",
+    "size_bytes": 6258,
+    "size_mb": 0.006,
+    "sha256_head_10mb": "fc185cb111a70e9dfd8457c6e1da4f9366dee729e072282995dcd7045a5a3c52"
+  },
+  "triage.csv.gz": {
+    "relative_path": "datasets\\04_preoperative_risk\\mimic-iv-ed-demo-2.2\\mimic-iv-ed-demo-2.2\\ed\\triage.csv.gz",
+    "size_bytes": 5489,
+    "size_mb": 0.005,
+    "sha256_head_10mb": "086dadcb49adc5f24bdda0e342ec9cf0fbcb2e9595516c5c101d408434e1e09b"
+  },
+  "vitalsign.csv.gz": {
+    "relative_path": "datasets\\04_preoperative_risk\\mimic-iv-ed-demo-2.2\\mimic-iv-ed-demo-2.2\\ed\\vitalsign.csv.gz",
+    "size_bytes": 15307,
+    "size_mb": 0.015,
+    "sha256_head_10mb": "89967d8b9dd139d540e9d08270bb6282dd2df0eb7111d38bfe2a79c0b291ab78"
+  }
+}

@@ -44,7 +44,7 @@ export const RecoverySafety: React.FC = () => {
   const [notes, setNotes] = useState('');
   const [concerns, setConcerns] = useState('');
   const [interventionPlan, setInterventionPlan] = useState('');
-  const [clinician, setClinician] = useState('Nurse Emily Watson');
+  const [clinician, setClinician] = useState('Nisha Verma, RN (DEMO-RN-1042)');
   const [isCompleted, setIsCompleted] = useState(false);
 
   // PACU Aldrete metrics (Mock display connecting to PACU module variables where available)
@@ -57,26 +57,21 @@ export const RecoverySafety: React.FC = () => {
 
   useEffect(() => {
     if (existingChecklist && existingChecklist.data) {
-      const dbChecked: Record<string, boolean> = {};
-      recoveryChecks.forEach(chk => {
-        dbChecked[chk.key] = !!existingChecklist.data[chk.key];
-      });
-      setCheckedItems(dbChecked);
-      
+      setCheckedItems(existingChecklist.data.rec_checked || {});
       setAirwayPatent(existingChecklist.data.rec_airway_patent || 'Yes');
       setAirwaySupport(existingChecklist.data.rec_airway_support || 'No');
       setSpo2(existingChecklist.data.rec_spo2 || 98);
       setRr(existingChecklist.data.rec_rr || 14);
-      setO2Therapy(existingChecklist.data.rec_o2_therapy || 'Nasal Cannula');
-      setVentStatus(existingChecklist.data.rec_vent_status || 'Spontaneous');
+      setO2Therapy(existingChecklist.data.rec_o2_therapy || 'Nasal Cannula 2L/min');
+      setVentStatus(existingChecklist.data.rec_vent_status || 'Spontaneous breathing');
       setTemp(existingChecklist.data.rec_temp || 36.4);
       setTempIntervention(existingChecklist.data.rec_temp_interv || 'No');
-      setPainScore(existingChecklist.data.rec_pain_score || 3);
+      setPainScore(existingChecklist.data.rec_pain_score !== undefined ? existingChecklist.data.rec_pain_score : 3);
       setPainControlled(existingChecklist.data.rec_pain_ctrl || 'Yes');
       setNotes(existingChecklist.data.rec_notes || '');
       setConcerns(existingChecklist.data.rec_concerns_txt || '');
       setInterventionPlan(existingChecklist.data.rec_interv_plan || '');
-      setClinician(existingChecklist.data.rec_clinician || 'Nurse Emily Watson');
+      setClinician(existingChecklist.data.rec_clinician || 'Nisha Verma, RN (DEMO-RN-1042)');
       setIsCompleted(existingChecklist.recoveryStatus === 'completed');
     }
   }, [existingChecklist]);

@@ -142,8 +142,8 @@ export const PreAnesthesia: React.FC = () => {
                 <strong>{bmi} (Normal)</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span className="text-muted">ASA Status</span>
-                <span className="badge badge-warning">ASA {patient.asaScore}</span>
+                <span className="text-muted">ASA Physical Status</span>
+                <span className="badge badge-warning">{patient.asaPhysicalStatus || `ASA ${patient.asaScore}`}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span className="text-muted">Allergies</span>

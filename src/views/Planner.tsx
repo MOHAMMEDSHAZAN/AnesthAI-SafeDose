@@ -69,7 +69,7 @@ export const Planner: React.FC = () => {
               <div><strong>Name:</strong> {patient.name}</div>
               <div><strong>Age / Gender:</strong> {patient.age} years / {patient.gender}</div>
               <div><strong>Weight:</strong> {patient.weight} kg</div>
-              <div><strong>ASA Class:</strong> Class {patient.asaScore}</div>
+              <div><strong>ASA Physical Status:</strong> {patient.asaPhysicalStatus || `ASA ${patient.asaScore}`}</div>
               <div><strong>Mallampati:</strong> Class {patient.mallampati}</div>
               <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '10px', marginTop: '4px' }}>
                 <strong>Documented Allergies:</strong>

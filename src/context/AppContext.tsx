@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { supabase, isSupabaseConfigured } from '../supabaseClient';
+import { API_BASE_URL } from '../config/api';
 
 // ==========================================
 // SCHEMAS AND TYPES
@@ -8,21 +9,45 @@ import { supabase, isSupabaseConfigured } from '../supabaseClient';
 export interface Patient {
   id: string;
   name: string;
+  recordType?: 'SYNTHETIC DEMO';
   age: number;
   gender: 'Male' | 'Female' | 'Other';
   weight: number; // in kg
   height: number; // in cm
+  bmi?: number;
   allergies: string[];
   medicalHistory: string[];
   drugHistory: string[];
   asaScore: number;
+  asaPhysicalStatus?: string;
+  emergencyCase?: boolean;
+  clinicianConfirmed?: boolean;
+  confirmationTimestamp?: string;
+  confirmedBy?: string;
   mallampati: 1 | 2 | 3 | 4;
   comorbidities: string[];
+  procedure?: string;
+  datasetRef?: string;
+  admissionType?: string;
+  icuDays?: number;
+  surgeryDurationMin?: number;
+  anesthesiaDurationMin?: number;
+  assignedOR?: string;
+  assignedAnesthesiologist?: string;
+  assignedNurse?: string;
+  monitoringStatus?: string;
+  predictions?: any;
+  fluidBalance?: any;
+  alertHistory?: any[];
+  auditTrail?: any[];
+  doseParameters?: any;
   investigations: {
     hb: number;       // Hemoglobin g/dL
     plt: number;      // Platelets x10^3/uL
     cr: number;       // Creatinine mg/dL
     k: number;        // Potassium mEq/L
+    bun?: number;
+    wbc?: number;
     ecg: string;      // Summary of ECG
     echo: string;     // Summary of Echo
     pft: string;      // Pulmonary function tests
@@ -33,7 +58,10 @@ export interface Patient {
     hr: number;
     bpSys: number;
     bpDia: number;
+    map?: number;
     spo2: number;
+    rr?: number;
+    etco2?: number;
     temp: number;
   };
   anesthesiaPlan?: {
@@ -84,6 +112,181 @@ export type UserRole =
   | 'Hospital Admin' 
   | 'Researcher' 
   | 'Student';
+
+export type Permission = 
+  | 'VIEW_TELEMETRY'
+  | 'VIEW_MODELS'
+  | 'RUN_MODEL_INFERENCE'
+  | 'APPROVE_DRUG_DOSING'
+  | 'ADMINISTER_EMERGENCY_BOLUS'
+  | 'EDIT_PATIENT_RECORDS'
+  | 'DISCHARGE_PACU'
+  | 'MANAGE_USERS'
+  | 'VIEW_AUDIT_LOGS'
+  | 'OVERRIDE_AI_ALERTS';
+
+export const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
+  'Anesthesiologist': [
+    'VIEW_TELEMETRY', 'VIEW_MODELS', 'RUN_MODEL_INFERENCE', 'APPROVE_DRUG_DOSING',
+    'ADMINISTER_EMERGENCY_BOLUS', 'EDIT_PATIENT_RECORDS', 'DISCHARGE_PACU',
+    'MANAGE_USERS', 'VIEW_AUDIT_LOGS', 'OVERRIDE_AI_ALERTS'
+  ],
+  'Doctor': [
+    'VIEW_TELEMETRY', 'VIEW_MODELS', 'RUN_MODEL_INFERENCE', 'EDIT_PATIENT_RECORDS',
+    'DISCHARGE_PACU', 'VIEW_AUDIT_LOGS'
+  ],
+  'Resident': [
+    'VIEW_TELEMETRY', 'VIEW_MODELS', 'RUN_MODEL_INFERENCE', 'EDIT_PATIENT_RECORDS'
+  ],
+  'OT Nurse': [
+    'VIEW_TELEMETRY', 'VIEW_MODELS', 'EDIT_PATIENT_RECORDS'
+  ],
+  'PACU Nurse': [
+    'VIEW_TELEMETRY', 'VIEW_MODELS', 'EDIT_PATIENT_RECORDS', 'DISCHARGE_PACU'
+  ],
+  'Hospital Admin': [
+    'VIEW_TELEMETRY', 'VIEW_MODELS', 'MANAGE_USERS', 'VIEW_AUDIT_LOGS'
+  ],
+  'Researcher': [
+    'VIEW_TELEMETRY', 'VIEW_MODELS', 'VIEW_AUDIT_LOGS'
+  ],
+  'Student': [
+    'VIEW_TELEMETRY', 'VIEW_MODELS'
+  ]
+};
+
+export interface UserProfile {
+  name: string;
+  badgeId: string;
+  hospital: string;
+  department: string;
+  role: UserRole;
+  authMethod: 'retina_scan' | 'webauthn_fido2' | 'mfa_credentials' | 'smartcard_nfc' | 'trauma_break_glass';
+  clearanceLevel: string;
+  tokenExpiresAt: number;
+  token?: string;
+  permissions: Permission[];
+  npi?: string;
+  biometricHash?: string;
+}
+
+export const getProfileForRole = (
+  role: UserRole, 
+  authMethod: 'retina_scan' | 'webauthn_fido2' | 'mfa_credentials' | 'smartcard_nfc' | 'trauma_break_glass' = 'retina_scan',
+  token?: string
+): UserProfile => {
+  const permissions = ROLE_PERMISSIONS[role] || ROLE_PERMISSIONS['Student'];
+  switch (role) {
+    case 'Anesthesiologist':
+      return {
+        name: 'Dr. Arjun Malhotra',
+        badgeId: 'DEMO-STAFF-101',
+        hospital: 'Apex Surgical Research Center (Research Prototype)',
+        department: 'Dept. of Anesthesiology & Critical Care',
+        role: 'Anesthesiologist',
+        authMethod,
+        clearanceLevel: 'LEVEL 4 - FULL CLINICAL OVERSIGHT (DEMO STAFF PROFILE)',
+        tokenExpiresAt: Date.now() + 8 * 3600 * 1000,
+        permissions,
+        token,
+        npi: 'DEMO-LIC-2048'
+      };
+    case 'Doctor':
+      return {
+        name: 'Dr. Rajeshwar Rao, MS, MCh',
+        badgeId: 'DEMO-STAFF-105',
+        hospital: 'Apex Surgical Research Center (Research Prototype)',
+        department: 'Department of Surgery & Trauma',
+        role: 'Doctor',
+        authMethod,
+        clearanceLevel: 'LEVEL 4 - SURGICAL LEAD (DEMO STAFF PROFILE)',
+        tokenExpiresAt: Date.now() + 8 * 3600 * 1000,
+        permissions,
+        token,
+        npi: 'DEMO-SUR-1094'
+      };
+    case 'Resident':
+      return {
+        name: 'Dr. Priya Sundaram, MD',
+        badgeId: 'DEMO-STAFF-103',
+        hospital: 'Apex Surgical Research Center (Research Prototype)',
+        department: 'Anesthesia Residency Training Program',
+        role: 'Resident',
+        authMethod,
+        clearanceLevel: 'LEVEL 3 - RESIDENT CLINICIAN (DEMO STAFF PROFILE)',
+        tokenExpiresAt: Date.now() + 8 * 3600 * 1000,
+        permissions,
+        token,
+        npi: 'DEMO-RES-3012'
+      };
+    case 'OT Nurse':
+      return {
+        name: 'Nisha Verma, RN',
+        badgeId: 'DEMO-RN-1042',
+        hospital: 'Apex Surgical Research Center (Research Prototype)',
+        department: 'Operating Room Nursing Division',
+        role: 'OT Nurse',
+        authMethod,
+        clearanceLevel: 'LEVEL 2 - INTRAOPERATIVE NURSING (DEMO STAFF PROFILE)',
+        tokenExpiresAt: Date.now() + 8 * 3600 * 1000,
+        permissions,
+        token
+      };
+    case 'PACU Nurse':
+      return {
+        name: 'Sunita Patil, RN, CCRN',
+        badgeId: 'DEMO-RN-1055',
+        hospital: 'Apex Surgical Research Center (Research Prototype)',
+        department: 'Post-Anesthesia Care Unit (PACU)',
+        role: 'PACU Nurse',
+        authMethod,
+        clearanceLevel: 'LEVEL 2 - POST-OP CARE (DEMO STAFF PROFILE)',
+        tokenExpiresAt: Date.now() + 8 * 3600 * 1000,
+        permissions,
+        token
+      };
+    case 'Hospital Admin':
+      return {
+        name: 'Vikramaditya Sen, MHA',
+        badgeId: 'DEMO-AD-1001',
+        hospital: 'Apex Surgical Research Center (Research Prototype)',
+        department: 'Clinical Governance & Safety Administration',
+        role: 'Hospital Admin',
+        authMethod,
+        clearanceLevel: 'LEVEL 4 - EXECUTIVE ADMIN (DEMO STAFF PROFILE)',
+        tokenExpiresAt: Date.now() + 8 * 3600 * 1000,
+        permissions,
+        token
+      };
+    case 'Researcher':
+      return {
+        name: 'Dr. Siddharth Nair, PhD',
+        badgeId: 'DEMO-RE-5520',
+        hospital: 'Apex Surgical Research Center (Research Prototype)',
+        department: 'Computational Medicine & Pharmacology',
+        role: 'Researcher',
+        authMethod,
+        clearanceLevel: 'LEVEL 3 - RESEARCH & ANALYTICS (DEMO STAFF PROFILE)',
+        tokenExpiresAt: Date.now() + 8 * 3600 * 1000,
+        permissions,
+        token
+      };
+    case 'Student':
+    default:
+      return {
+        name: 'Ananya Deshmukh (MS-3)',
+        badgeId: 'DEMO-ST-0412',
+        hospital: 'Apex Medical College (Demo Simulation)',
+        department: 'Clinical Anesthesia Clerkship',
+        role: 'Student',
+        authMethod,
+        clearanceLevel: 'LEVEL 1 - STUDENT SIMULATION (DEMO STAFF PROFILE)',
+        tokenExpiresAt: Date.now() + 4 * 3600 * 1000,
+        permissions,
+        token
+      };
+  }
+};
 
 export interface SafetyChecklist {
   caseId: string;
@@ -149,6 +352,8 @@ export interface AppContextType {
   dismissNotification: (id: string) => void;
   userRole: UserRole;
   setUserRole: (role: UserRole) => void;
+  currentUser: UserProfile | null;
+  setCurrentUser: (user: UserProfile | null) => void;
   theme: 'dark' | 'light';
   toggleTheme: () => void;
   isSearchOpen: boolean;
@@ -174,188 +379,53 @@ export interface AppContextType {
   setActiveCaseId: (id: string) => void;
   activePatientId: string;
   setActivePatientId: (id: string) => void;
+
+  // Real Authentication & RBAC Access Control
+  authToken: string | null;
+  setAuthToken: (token: string | null) => void;
+  hasPermission: (permission: Permission) => boolean;
+  logout: () => void;
 }
 
 // ==========================================
-// DEFAULT MOCK DATA
+// CENTRAL SYNTHETIC DEMONSTRATION DATASET
 // ==========================================
 
-const defaultPatients: Patient[] = [
-  {
-    id: 'P001',
-    name: 'Robert Miller',
-    age: 67,
-    gender: 'Male',
-    weight: 84,
-    height: 178,
-    allergies: ['Penicillin', 'Sulfa Drugs'],
-    medicalHistory: ['Coronary Artery Disease', 'Hypertension', 'Type 2 Diabetes'],
-    drugHistory: ['Aspirin 81mg', 'Lisinopril 10mg', 'Metformin 500mg'],
-    asaScore: 3,
-    mallampati: 3,
-    comorbidities: ['Hypertension', 'CAD'],
-    investigations: {
-      hb: 12.4,
-      plt: 198,
-      cr: 1.2,
-      k: 4.1,
-      ecg: 'Sinus rhythm, Q waves in inferior leads (old infarct)',
-      echo: 'LVEF 45%, mild diastolic dysfunction',
-      pft: 'Mild obstructive pattern',
-      pregnancy: false,
-      bloodGroup: 'A Positive',
-    },
-    vitals: { hr: 72, bpSys: 142, bpDia: 88, spo2: 95, temp: 36.8 },
-    anesthesiaPlan: {
-      recommendation: 'General',
-      confidence: 90,
-      reasoning: [
-        'Complex laparoscopic prostatectomy requires secure airway protection via endotracheal intubation.',
-        'Length of procedure and steep Trendelenburg position contraindicates pure regional techniques.',
-        'Patient has high cardiac risk profile requiring controlled hemodynamic monitoring.'
-      ],
-      alternatives: ['Combined General-Epidural for post-op analgesia'],
-      warnings: ['Post-induction hypotension risk due to ACE inhibitors and poor myocardial compliance.'],
-      contraindications: ['Spinal anesthesia as sole technique (inadequate procedural time).']
-    }
-  },
-  {
-    id: 'P002',
-    name: 'Sophia Patel',
-    age: 28,
-    gender: 'Female',
-    weight: 62,
-    height: 165,
-    allergies: ['Latex'],
-    medicalHistory: ['Mild Intermittent Asthma'],
-    drugHistory: ['Albuterol Inhaler PRN'],
-    asaScore: 2,
-    mallampati: 1,
-    comorbidities: ['Asthma'],
-    investigations: {
-      hb: 13.8,
-      plt: 250,
-      cr: 0.7,
-      k: 4.3,
-      ecg: 'Normal Sinus Rhythm',
-      echo: 'Normal LVEF 60%',
-      pft: 'Within normal limits',
-      pregnancy: false,
-      bloodGroup: 'O Positive',
-    },
-    vitals: { hr: 80, bpSys: 118, bpDia: 74, spo2: 99, temp: 37.0 },
-    anesthesiaPlan: {
-      recommendation: 'Spinal',
-      confidence: 95,
-      reasoning: [
-        'Elective Cesarean Section is ideal for spinal anesthesia, preserving maternal consciousness.',
-        'Avoids potential airway irritation and bronchospasm from general anesthesia in an asthmatic.',
-        'Excellent post-procedure analgesic profile.'
-      ],
-      alternatives: ['Epidural', 'General Anesthesia (Rapid Sequence Induction for emergency only)'],
-      warnings: ['Potential asthma flare-up; keep albuterol available and use preservative-free spinal meds.'],
-      contraindications: ['Refusal', 'Coagulopathy (normal platelets of 250k rules this out).']
-    }
-  },
-  {
-    id: 'P003',
-    name: 'Liam Chen',
-    age: 9,
-    gender: 'Male',
-    weight: 31,
-    height: 132,
-    allergies: [],
-    medicalHistory: ['No significant past medical history'],
-    drugHistory: [],
-    asaScore: 1,
-    mallampati: 2,
-    comorbidities: [],
-    investigations: {
-      hb: 14.1,
-      plt: 290,
-      cr: 0.4,
-      k: 4.5,
-      ecg: 'Normal Sinus Rhythm for age',
-      echo: 'Unremarkable',
-      pft: 'Not indicated',
-      pregnancy: false,
-      bloodGroup: 'B Negative',
-    },
-    vitals: { hr: 95, bpSys: 104, bpDia: 62, spo2: 98, temp: 36.6 },
-    anesthesiaPlan: {
-      recommendation: 'General',
-      confidence: 98,
-      reasoning: [
-        'Pediatric patient undergoing tonsillectomy requiring active airway preservation (cuffed ETT or LMA).',
-        'Inhalation induction (sevoflurane/N2O/O2) is highly tolerated.'
-      ],
-      alternatives: ['None (MAC or Regional is clinically inappropriate for pediatric tonsillectomy)'],
-      warnings: ['Laryngospasm risk post-extubation. Assure deep suctioning and extubate fully awake.'],
-      contraindications: ['Scoliosis (unrelated, but spinal isn\'t indicated).']
-    }
-  }
-];
+import { DEMO_PATIENTS, DEMO_OPERATING_ROOMS } from '../data/syntheticDemoData';
 
-const defaultORs: OperatingRoom[] = [
-  {
-    id: 'OR-01',
-    name: 'Operating Room 1',
-    status: 'Active',
-    patientId: 'P001',
-    anesthesiologist: 'Dr. Sarah Jenkins',
-    surgeryName: 'Laparoscopic Prostatectomy',
-    elapsedTime: 45,
-    currentVitals: { hr: 74, bpSys: 138, bpDia: 82, spo2: 96, etco2: 38, temp: 36.5 }
-  },
-  {
-    id: 'OR-02',
-    name: 'Operating Room 2',
-    status: 'Active',
-    patientId: 'P003',
-    anesthesiologist: 'Dr. Alex Rivera',
-    surgeryName: 'Tonsillectomy & Adenoidectomy',
-    elapsedTime: 15,
-    currentVitals: { hr: 98, bpSys: 102, bpDia: 60, spo2: 99, etco2: 40, temp: 36.7 }
-  },
-  {
-    id: 'OR-03',
-    name: 'Operating Room 3',
-    status: 'Idle',
-    anesthesiologist: 'Dr. Michael Chang',
-    surgeryName: 'N/A',
-    elapsedTime: 0
-  }
-];
+const defaultPatients: Patient[] = DEMO_PATIENTS as unknown as Patient[];
+const defaultORs: OperatingRoom[] = DEMO_OPERATING_ROOMS as unknown as OperatingRoom[];
 
 const defaultNotifications: ClinicalNotification[] = [
   {
     id: 'n1',
     type: 'warning',
-    title: 'Penicillin Allergy Alert',
-    message: 'Patient Robert Miller (P001) has documented severe Penicillin allergy. Avoid beta-lactam antibiotics.',
-    timestamp: '12:30 PM',
-    patientId: 'P001',
+    title: 'Model-Estimated Hemodynamic Drift Review',
+    message: 'Synthetic Patient Rahul Sharma (SD-2026-0003) in OR-03 has model-estimated hypotension probability 62%. Invasive arterial line active; vasopressor titration advised.',
+    timestamp: '10:15 AM',
+    patientId: 'SD-2026-0003',
     dismissed: false
   },
   {
     id: 'n2',
     type: 'critical',
-    title: 'Hypoxia Alarm OR 1',
-    message: 'OR 1 patient SpO2 dropped below 92% (Currently 89%). Verify ventilation circuit and oxygen delivery.',
-    timestamp: '12:44 PM',
-    patientId: 'P001',
+    title: 'Emergency Septic Peritonitis Protocol Active',
+    message: 'OR-04 Patient Ananya Rao (SD-2026-0004) has acute septic peritonitis with vasopressor dependence. Norepinephrine active at 0.08 mcg/kg/min.',
+    timestamp: '11:05 AM',
+    patientId: 'SD-2026-0004',
     dismissed: false
   },
   {
     id: 'n3',
     type: 'info',
-    title: 'PACU Clearance Requested',
-    message: 'Sophia Patel (P002) has reached Aldrete score 9/10 and is candidate for discharge to ward.',
-    timestamp: '12:40 PM',
-    patientId: 'P002',
+    title: 'Elective Laparoscopic Clearance',
+    message: 'Synthetic Patient Aarav Mehta (SD-2026-0001) in OR-01: Monitoring status: No configured alerts currently triggered.',
+    timestamp: '11:30 AM',
+    patientId: 'SD-2026-0001',
     dismissed: false
   }
 ];
+
 
 // ==========================================
 // CONTEXT PROVIDER IMPLEMENTATION
@@ -368,7 +438,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [operatingRooms, setOperatingRooms] = useState<OperatingRoom[]>(defaultORs);
   const [notifications, setNotifications] = useState<ClinicalNotification[]>(defaultNotifications);
   const [userRole, setUserRole] = useState<UserRole>('Anesthesiologist');
-  const [theme, setTheme] = useState<'dark' | 'light'>('light');
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    try {
+      const saved = localStorage.getItem('anesth_theme');
+      if (saved === 'dark' || saved === 'light') return saved;
+      if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+    } catch {
+      // fallback
+    }
+    return 'light';
+  });
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [simulatedState, setSimulatedState] = useState<'normal' | 'bradycardia' | 'hypoxia' | 'hypotension' | 'tachycardia' | 'hyperthermia'>('normal');
   const [studentScore, setStudentScore] = useState<number>(180);
@@ -376,8 +457,59 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [checklists, setChecklists] = useState<SafetyChecklist[]>([]);
   const [incidents, setIncidents] = useState<AnesthesiaIncident[]>([]);
   const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>([]);
+  const [authToken, setAuthTokenState] = useState<string | null>(() => {
+    return localStorage.getItem('safedose_jwt_token');
+  });
+
+  const setAuthToken = (token: string | null) => {
+    setAuthTokenState(token);
+    if (token) {
+      localStorage.setItem('safedose_jwt_token', token);
+    } else {
+      localStorage.removeItem('safedose_jwt_token');
+    }
+  };
+
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
+    const saved = localStorage.getItem('anesthai_current_user');
+    if (saved) {
+      try { return JSON.parse(saved); } catch (e) { return null; }
+    }
+    return getProfileForRole('Anesthesiologist');
+  });
+
+  const handleSetCurrentUser = (user: UserProfile | null) => {
+    setCurrentUser(user);
+    if (user) {
+      setUserRole(user.role);
+      if (user.token) {
+        setAuthToken(user.token);
+      }
+      localStorage.setItem('anesthai_current_user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('anesthai_current_user');
+      setAuthToken(null);
+    }
+  };
+
+  const hasPermission = (permission: Permission): boolean => {
+    if (!currentUser) return false;
+    if (currentUser.permissions && currentUser.permissions.includes(permission)) {
+      return true;
+    }
+    const rolePerms = ROLE_PERMISSIONS[currentUser.role] || [];
+    return rolePerms.includes(permission);
+  };
+
+  const logout = () => {
+    setCurrentUser(null);
+    setAuthToken(null);
+    localStorage.removeItem('anesthai_current_user');
+    localStorage.removeItem('safedose_jwt_token');
+  };
+
   const [activeCaseId, setActiveCaseId] = useState<string>('OR-01');
-  const [activePatientId, setActivePatientId] = useState<string>('P001');
+  const [activePatientId, setActivePatientId] = useState<string>('SD-2026-0001');
 
   // Local storage caching helpers to keep the app operational offline
   const saveLocalPatients = (newPatients: Patient[]) => {
@@ -406,22 +538,61 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       if (!isSupabaseConfigured || !supabase) {
         const storedPatients = localStorage.getItem('anesthai_patients');
         if (storedPatients) {
-          try { setPatients(JSON.parse(storedPatients)); } catch (e) { console.error('Error parsing local patients:', e); }
+          try { 
+            const parsed = JSON.parse(storedPatients);
+            if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].id && parsed[0].id.startsWith('SD-2026-')) {
+              setPatients(parsed);
+            } else {
+              setPatients(defaultPatients);
+              saveLocalPatients(defaultPatients);
+            }
+          } catch (e) { 
+            console.error('Error parsing local patients:', e); 
+            setPatients(defaultPatients);
+            saveLocalPatients(defaultPatients);
+          }
         } else {
+          setPatients(defaultPatients);
           saveLocalPatients(defaultPatients);
         }
         
         const storedORs = localStorage.getItem('anesthai_operating_rooms');
         if (storedORs) {
-          try { setOperatingRooms(JSON.parse(storedORs)); } catch (e) { console.error('Error parsing local ORs:', e); }
+          try { 
+            const parsedORs = JSON.parse(storedORs);
+            if (Array.isArray(parsedORs) && parsedORs.length > 0 && parsedORs[0].patientId && parsedORs[0].patientId.startsWith('SD-2026-')) {
+              setOperatingRooms(parsedORs);
+            } else {
+              setOperatingRooms(defaultORs);
+              saveLocalORs(defaultORs);
+            }
+          } catch (e) { 
+            console.error('Error parsing local ORs:', e); 
+            setOperatingRooms(defaultORs);
+            saveLocalORs(defaultORs);
+          }
         } else {
+          setOperatingRooms(defaultORs);
           saveLocalORs(defaultORs);
         }
 
         const storedNotifs = localStorage.getItem('anesthai_notifications');
         if (storedNotifs) {
-          try { setNotifications(JSON.parse(storedNotifs)); } catch (e) { console.error('Error parsing local notifications:', e); }
+          try { 
+            const parsedNotifs = JSON.parse(storedNotifs);
+            if (Array.isArray(parsedNotifs) && parsedNotifs.length > 0 && parsedNotifs[0].patientId && parsedNotifs[0].patientId.startsWith('SD-2026-')) {
+              setNotifications(parsedNotifs);
+            } else {
+              setNotifications(defaultNotifications);
+              saveLocalNotifs(defaultNotifications);
+            }
+          } catch (e) { 
+            console.error('Error parsing local notifications:', e); 
+            setNotifications(defaultNotifications);
+            saveLocalNotifs(defaultNotifications);
+          }
         } else {
+          setNotifications(defaultNotifications);
           saveLocalNotifs(defaultNotifications);
         }
         return;
@@ -556,7 +727,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const loadSafetyData = async () => {
       // 1. Try checklists
       try {
-        const res = await fetch('http://localhost:8000/api/safety/checklists');
+        const res = await fetch(`${API_BASE_URL}/api/safety/checklists`);
         if (res.ok) {
           const data = await res.json();
           const mapped = data.map((c: any) => ({
@@ -584,7 +755,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
       // 2. Try incidents
       try {
-        const res = await fetch('http://localhost:8000/api/safety/incidents');
+        const res = await fetch(`${API_BASE_URL}/api/safety/incidents`);
         if (res.ok) {
           const data = await res.json();
           const mapped = data.map((i: any) => ({
@@ -626,7 +797,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
       // 3. Try audit logs
       try {
-        const res = await fetch('http://localhost:8000/api/safety/audit-logs');
+        const res = await fetch(`${API_BASE_URL}/api/safety/audit-logs`);
         if (res.ok) {
           const data = await res.json();
           const mapped = data.map((a: any) => ({
@@ -651,13 +822,27 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     loadSafetyData();
   }, []);
 
-  // Sync index.css theme class on body
+  // Sync index.css theme class and data-theme on documentElement and body
   useEffect(() => {
-    const body = document.body;
-    if (theme === 'light') {
-      body.classList.add('light-mode');
-    } else {
-      body.classList.remove('light-mode');
+    try {
+      const root = document.documentElement;
+      const body = document.body;
+      root.setAttribute('data-theme', theme);
+      body.setAttribute('data-theme', theme);
+      if (theme === 'light') {
+        body.classList.add('light-mode');
+        body.classList.remove('dark-mode');
+        root.classList.add('light-mode');
+        root.classList.remove('dark-mode');
+      } else {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+        root.classList.remove('light-mode');
+        root.classList.add('dark-mode');
+      }
+      localStorage.setItem('anesth_theme', theme);
+    } catch {
+      // ignore storage errors
     }
   }, [theme]);
 
@@ -690,7 +875,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       type: level,
       title,
       message: desc,
-      patientId: 'P001'
+      patientId: 'SD-2026-0001'
     });
   }, [simulatedState]);
 
@@ -879,7 +1064,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     // Send to backend
     try {
-      await fetch('http://localhost:8000/api/safety/checklists', {
+      await fetch(`${API_BASE_URL}/api/safety/checklists`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(checklist),
@@ -928,7 +1113,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     });
 
     try {
-      const res = await fetch('http://localhost:8000/api/safety/incidents', {
+      const res = await fetch(`${API_BASE_URL}/api/safety/incidents`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(fullReport),
@@ -979,7 +1164,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     });
 
     try {
-      await fetch(`http://localhost:8000/api/safety/incidents/${incidentId}`, {
+      await fetch(`${API_BASE_URL}/api/safety/incidents/${incidentId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates),
@@ -1021,7 +1206,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     });
 
     try {
-      await fetch('http://localhost:8000/api/safety/audit-logs', {
+      await fetch(`${API_BASE_URL}/api/safety/audit-logs`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newEntry),
@@ -1059,6 +1244,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         dismissNotification,
         userRole,
         setUserRole,
+        currentUser,
+        setCurrentUser: handleSetCurrentUser,
         theme,
         toggleTheme,
         isSearchOpen,
@@ -1078,6 +1265,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setActiveCaseId,
         activePatientId,
         setActivePatientId,
+        authToken,
+        setAuthToken,
+        hasPermission,
+        logout,
       }}
     >
       {children}

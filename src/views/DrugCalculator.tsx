@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
+import { API_BASE_URL } from '../config/api';
 
 interface Drug {
   name: string;
@@ -54,7 +55,7 @@ export const DrugCalculator: React.FC = () => {
   useEffect(() => {
     const fetchDrugs = async () => {
       try {
-        const res = await fetch('http://localhost:8000/api/drugs/database');
+        const res = await fetch(`${API_BASE_URL}/api/drugs/database`);
         if (res.ok) {
           const data = await res.json();
           if (data && data.length > 0) {
@@ -105,7 +106,7 @@ export const DrugCalculator: React.FC = () => {
           medical_history: patient?.medicalHistory || []
         };
         
-        const res = await fetch('http://localhost:8000/api/drugs/safety-check', {
+        const res = await fetch(`${API_BASE_URL}/api/drugs/safety-check`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body)
@@ -118,12 +119,12 @@ export const DrugCalculator: React.FC = () => {
           setSafetyContraindications(data.contraindications);
         }
       } catch (err) {
-        console.error("Failed to fetch safety check:", err);
+        console.warn("Safety check unavailable:", err);
       }
     };
     
     runSafetyCheck();
-  }, [selectedDrug, calculatedBolus, weight, age, activeRegimen, patient, selectedId]);
+  }, [selectedDrug, age, weight, calculatedBolus, activeRegimen, patient, selectedId]);
 
   const handleAddRegimen = (name: string) => {
     if (!activeRegimen.includes(name)) {
@@ -164,9 +165,22 @@ export const DrugCalculator: React.FC = () => {
 
   return (
     <div className="page-container">
+      {/* Research & Clinical Decision-Support Banner */}
+      <div className="prototype-advisory-banner">
+        <span>
+          <strong>RESEARCH PROTOTYPE</strong> • Weight & Age-Adjusted Anesthetic Dosing Calculator. Clinical decision-support advisory only; verify all calculated dosages, dilution protocols, and syringe markings before administration.
+        </span>
+        <span className="badge badge-info">DECISION SUPPORT</span>
+      </div>
+
       <div className="page-header">
         <div>
-          <h1 className="page-title">Surgical Drug Dosing Calculator</h1>
+          <h1 className="page-title">
+            Surgical Drug Dosing Calculator
+            <span className="badge badge-warning" style={{ fontSize: '0.75rem', verticalAlign: 'middle', marginLeft: '10px' }}>
+              Prototype Advisory
+            </span>
+          </h1>
           <p className="page-subtitle">Weight and age adjusted clinical formulas and interaction profiling</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>

@@ -1,0 +1,10 @@
+[
+  {
+    "user_id": "Dr. Sarah Jenkins",
+    "role": "Anesthesiologist",
+    "action": "Induction Override Authorized",
+    "entity": "Case CASE-999",
+    "reason": "ACLS emergency protocol active",
+    "timestamp": "2026-07-26T19:32:47.589277"
+  }
+]

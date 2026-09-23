@@ -28,8 +28,8 @@ export const FloatingAIAssistant: React.FC = () => {
       setIsListening(false);
       const voicePrompts = [
         "Suggest propofol bolus for 80kg patient.",
-        "What is the Mallampati score for Sophia Patel?",
-        "Check anesthesia plan contraindications for Robert Miller."
+        "What is the airway plan for Priya Nair (SD-2026-0002)?",
+        "Check anesthesia plan contraindications for Rahul Sharma (SD-2026-0003)."
       ];
       const randomPrompt = voicePrompts[Math.floor(Math.random() * voicePrompts.length)];
       setQuery(randomPrompt);
@@ -59,27 +59,27 @@ export const FloatingAIAssistant: React.FC = () => {
     if (cleanInput.includes('propofol') || cleanInput.includes('dose') || cleanInput.includes('dosing')) {
       return {
         sender: 'ai',
-        text: "For Propofol general anesthesia induction, the standard adult dose is 1.5 - 2.5 mg/kg IV. For a standard 70kg patient, that is 105 - 175 mg IV. In elderly or cardiac compromised patients (like Robert Miller), reduce induction dose to 1.0 - 1.5 mg/kg IV titrated slowly to avoid profound hypotension. Maintenance infusion is 100 - 200 mcg/kg/min.",
+        text: "For Propofol general anesthesia induction, the standard adult dose is 1.5 - 2.5 mg/kg IV. For a standard 70kg patient, that is 105 - 175 mg IV. In elderly or cardiac-compromised patients, reduce induction dose to 1.0 - 1.5 mg/kg IV titrated slowly to avoid profound hypotension. Maintenance infusion is 100 - 200 mcg/kg/min. Requires clinician review.",
         citations: ["Miller's Anesthesia, 9th Ed (p. 642)", "Barash Clinical Anesthesia, 8th Ed"]
       };
     }
 
-    // Robert Miller review
-    if (cleanInput.includes('robert') || cleanInput.includes('miller') || cleanInput.includes('p001')) {
-      const patient = patients.find(p => p.id === 'P001');
-      if (!patient) return { sender: 'ai', text: "Patient Robert Miller not found." };
+    // Rahul Sharma / SD-2026-0003 review
+    if (cleanInput.includes('rahul') || cleanInput.includes('sharma') || cleanInput.includes('sd-2026-0003')) {
+      const patient = patients.find(p => p.id === 'SD-2026-0003') || patients[0];
+      if (!patient) return { sender: 'ai', text: "Synthetic patient record not found." };
       return {
         sender: 'ai',
-        text: `Patient ${patient.name} (Age 67) has a history of CAD and Hypertension with an ASA Class III. Critical flags: documented Penicillin allergy (avoid cefazolin or beta-lactams for surgical prophylaxis). Suggested induction requires extra hydration and slow titration of propofol or using etomidate (0.2-0.3 mg/kg) to preserve hemodynamic stability.`,
+        text: `Synthetic Patient ${patient.name} (${patient.id}, Age ${patient.age}): History of CAD and Hypertension with ASA Physical Status III. Critical flags: documented Penicillin anaphylaxis (avoid cefazolin / beta-lactams). Model-estimated hypotension risk 62%. Suggested induction: slow titration of Propofol or Etomidate (0.2-0.3 mg/kg) with invasive arterial line monitoring. Decision-support advisory only; requires clinician review.`,
         citations: ["AHA/ACC Perioperative Cardiac Guidelines 2022", "Miller's Anesthesia, 9th Ed"]
       };
     }
 
-    // Sophia Patel review
-    if (cleanInput.includes('sophia') || cleanInput.includes('patel') || cleanInput.includes('p002')) {
+    // Priya Nair / SD-2026-0002 review
+    if (cleanInput.includes('priya') || cleanInput.includes('nair') || cleanInput.includes('sd-2026-0002')) {
       return {
         sender: 'ai',
-        text: "Sophia Patel (Age 28, ASA II) is scheduled for elective Cesarean Section. Recommendation: Spinal Anesthesia (0.5% Hyperbaric Bupivacaine 10-12mg + Fentanyl 15mcg + Morphine 150mcg intrathecal). Monitor for spinal-induced hypotension (keep phenylephrine infusion ready). Her mild asthma is stable.",
+        text: "Synthetic Patient Priya Nair (SD-2026-0002, Age 29, ASA II-E): Elective Cesarean Section. Recommendation: Subarachnoid spinal block (0.5% Hyperbaric Bupivacaine 10 mg + Fentanyl 15 mcg). Monitor for sympathetic blockade hypotension (phenylephrine titration ready; 15° left uterine tilt). Apfel PONV risk score 3/4. Decision-support advisory only; requires clinician review.",
         citations: ["SOAP Obstetric Anesthesia Consensus 2023", "ASA Practice Guidelines for Obstetric Anesthesia"]
       };
     }
@@ -88,7 +88,7 @@ export const FloatingAIAssistant: React.FC = () => {
     if (cleanInput.includes('airway') || cleanInput.includes('mallampati') || cleanInput.includes('intubate')) {
       return {
         sender: 'ai',
-        text: "A difficult airway assessment is based on the Mallampati score, thyromental distance (< 6cm indicates difficulty), and neck range of motion. Mallampati III/IV represents a high correlation with difficult direct laryngoscopy. Recommendations: Use video laryngoscopy (Glidescope/McGrath) as first-line, keep Bougie/LMA immediately available, and follow the ASA Difficult Airway Algorithm.",
+        text: "A difficult airway assessment is based on the Mallampati score, thyromental distance (< 6cm indicates difficulty), and neck range of motion. Mallampati III/IV represents a high correlation with difficult direct laryngoscopy. Recommendations: Video laryngoscopy as first-line, keep Bougie/LMA immediately available, and follow the ASA Difficult Airway Algorithm.",
         citations: ["ASA Practice Guidelines for Management of the Difficult Airway 2022"]
       };
     }
@@ -106,7 +106,7 @@ export const FloatingAIAssistant: React.FC = () => {
     return {
       sender: 'ai',
       text: "I analyzed your clinical query. Let me know if you would like me to compute weight-adjusted drug infusions, verify comorbidities warnings, or fetch emergency ACLS checklists. Remember, this tool is for clinical support and never replaces direct physician judgment.",
-      citations: ["AnesthAI SafeDose Database"]
+      citations: ["Clinical Reference Database"]
     };
   };
 
@@ -117,7 +117,7 @@ export const FloatingAIAssistant: React.FC = () => {
           <div className="assistant-chat-header">
             <div className="assistant-avatar">AI</div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{ fontSize: '0.8125rem', fontWeight: 700 }}>SafeDose AI Co-Pilot</span>
+              <span style={{ fontSize: '0.8125rem', fontWeight: 700 }}>Anesth AI Co-Pilot</span>
               <span style={{ fontSize: '0.65rem', color: 'var(--med-cyan)', fontWeight: 600 }}>Active decision support</span>
             </div>
             <button 
@@ -151,10 +151,10 @@ export const FloatingAIAssistant: React.FC = () => {
 
           <div style={{ padding: '0 12px', display: 'flex', gap: '6px', overflowX: 'auto', paddingBottom: '6px' }}>
             <button 
-              onClick={() => handleSend("Review patient Robert Miller")}
+              onClick={() => handleSend("Review synthetic patient Rahul Sharma (SD-2026-0003)")}
               style={{ padding: '4px 8px', borderRadius: '12px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', color: 'var(--text-secondary)', fontSize: '0.6875rem', cursor: 'pointer', whiteSpace: 'nowrap' }}
             >
-              🔎 Robert Miller
+              🔎 Rahul Sharma (SD-2026-0003)
             </button>
             <button 
               onClick={() => handleSend("Propofol dosing guidelines")}

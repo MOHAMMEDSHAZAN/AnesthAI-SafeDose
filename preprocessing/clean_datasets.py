@@ -169,98 +169,12 @@ def extract_vitaldb_hemodynamics(datasets_dir, output_path):
 
 
 def generate_anesthesia_drugs_dataset(output_path):
-    print("Generating anesthesia_drugs.csv...")
-    import csv
-    header = ['Drug_A', 'Drug_B', 'Interaction_Severity', 'Synergistic_Sedation', 'Respiratory_Depression_Risk', 'Induction_Dose_mg_kg', 'Renal_Clearance_Req', 'Hepatic_Clearance_Req']
-    drugs = ['Propofol', 'Fentanyl', 'Midazolam', 'Succinylcholine', 'Vecuronium', 'Neostigmine', 'Ephedrine', 'Atropine']
-    data = []
-    np.random.seed(42)
-    for i in range(len(drugs)):
-        for j in range(len(drugs)):
-            drug_a = drugs[i]
-            drug_b = drugs[j]
-            severity = 0
-            synergy = 0
-            resp_risk = 0
-            if (drug_a == 'Propofol' and drug_b == 'Fentanyl') or (drug_a == 'Fentanyl' and drug_b == 'Propofol'):
-                severity = 2
-                synergy = 1
-                resp_risk = 1
-            elif (drug_a == 'Midazolam' and drug_b == 'Fentanyl') or (drug_a == 'Fentanyl' and drug_b == 'Midazolam'):
-                severity = 2
-                synergy = 1
-                resp_risk = 1
-            elif (drug_a == 'Succinylcholine' and drug_b == 'Vecuronium') or (drug_a == 'Vecuronium' and drug_b == 'Succinylcholine'):
-                severity = 3
-                synergy = 0
-                resp_risk = 1
-            elif (drug_a == 'Neostigmine' and drug_b == 'Succinylcholine') or (drug_a == 'Succinylcholine' and drug_b == 'Neostigmine'):
-                severity = 3
-                synergy = 0
-                resp_risk = 0
-            elif (drug_a == 'Ephedrine' and drug_b == 'Atropine') or (drug_a == 'Atropine' and drug_b == 'Ephedrine'):
-                severity = 1
-                synergy = 0
-                resp_risk = 0
-            dose = 2.0 if drug_a == 'Propofol' else (0.002 if drug_a == 'Fentanyl' else (0.05 if drug_a == 'Midazolam' else (1.0 if drug_a == 'Succinylcholine' else 0.1)))
-            renal = 1 if drug_a in ['Vecuronium', 'Neostigmine'] else 0
-            hepatic = 1 if drug_a in ['Propofol', 'Midazolam', 'Fentanyl'] else 0
-            data.append([drug_a, drug_b, severity, synergy, resp_risk, dose, renal, hepatic])
-    for _ in range(100):
-        drug_a = np.random.choice(drugs)
-        drug_b = np.random.choice(drugs)
-        severity = int(np.random.choice([0, 1, 2], p=[0.6, 0.3, 0.1]))
-        synergy = 1 if severity >= 2 else int(np.random.choice([0, 1], p=[0.8, 0.2]))
-        resp_risk = 1 if severity >= 2 else int(np.random.choice([0, 1], p=[0.9, 0.1]))
-        dose = float(np.random.uniform(0.01, 2.0))
-        renal = int(np.random.choice([0, 1]))
-        hepatic = int(np.random.choice([0, 1]))
-        data.append([drug_a, drug_b, severity, synergy, resp_risk, dose, renal, hepatic])
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w', newline='') as f:
-        writer = csv.writer(f)
-        writer.writerow(header)
-        writer.writerows(data)
-    print(f"Successfully generated. Output saved to: {output_path}")
+    print("[REFUSED] generate_anesthesia_drugs_dataset: Synthetic dataset generation is disabled to preserve scientific validity.")
+    return
 
 def generate_pacu_dataset(output_path):
-    print("Generating pacu_dataset.csv...")
-    import csv
-    header = ['Age', 'Gender_Code', 'Surgery_Duration_min', 'EBL_mL', 'Anesthesia_Type', 'Pain_Score', 'PONV_Score', 'Arrival_Temp_C', 'Aldrete_Score_60min', 'Delayed_Discharge']
-    np.random.seed(42)
-    data = []
-    for _ in range(500):
-        age = int(np.random.normal(54, 15))
-        age = max(18, min(90, age))
-        gender = int(np.random.choice([0, 1]))
-        duration = int(np.random.normal(120, 45))
-        duration = max(30, duration)
-        ebl = int(np.random.exponential(150))
-        ebl = max(10, min(2000, ebl))
-        ane_type = int(np.random.choice([0, 1, 2], p=[0.2, 0.3, 0.5]))
-        pain = int(np.random.choice([1, 2, 3, 4, 5, 6, 7, 8], p=[0.1, 0.15, 0.2, 0.2, 0.15, 0.1, 0.05, 0.05]))
-        if ane_type == 2:
-            pain = min(10, pain + 2)
-        ponv = int(np.random.choice([0, 1, 2], p=[0.7, 0.2, 0.1]))
-        if gender == 1 and pain > 5:
-            ponv = int(np.random.choice([1, 2], p=[0.6, 0.4]))
-        arrival_temp = float(np.random.normal(36.0, 0.6))
-        arrival_temp = max(34.0, min(37.8, arrival_temp))
-        aldrete = 10
-        if pain > 7: aldrete -= 1
-        if ponv == 2: aldrete -= 1
-        if arrival_temp < 35.0: aldrete -= 1
-        if ebl > 800: aldrete -= 2
-        if duration > 240: aldrete -= 1
-        aldrete = max(4, min(10, aldrete))
-        delayed = 1 if aldrete < 9 else 0
-        data.append([age, gender, duration, ebl, ane_type, pain, ponv, f"{arrival_temp:.1f}", aldrete, delayed])
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w', newline='') as f:
-        writer = csv.writer(f)
-        writer.writerow(header)
-        writer.writerows(data)
-    print(f"Successfully generated. Output saved to: {output_path}")
+    print("[REFUSED] generate_pacu_dataset: Synthetic dataset generation is disabled to preserve scientific validity.")
+    return
 
 def main():
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -306,15 +220,13 @@ def main():
         os.path.join(datasets_dir, '01_hypotension', 'vitaldb_hemodynamics_cleaned.csv')
     )
     
-    # 7. Generate anesthesia drugs dataset
-    generate_anesthesia_drugs_dataset(
-        os.path.join(datasets_dir, '06_drug_safety', 'anesthesia_drugs.csv')
-    )
+    # 7. Generate anesthesia drugs dataset (DISABLED: Violates scientific validity; generates synthetic patients)
+    # generate_anesthesia_drugs_dataset(os.path.join(datasets_dir, '06_drug_safety', 'anesthesia_drugs.csv'))
+    print(" - Anesthesia drugs: Synthetic generation disabled to preserve scientific integrity.")
     
-    # 8. Generate PACU recovery dataset
-    generate_pacu_dataset(
-        os.path.join(datasets_dir, '05_pacu_recovery', 'pacu_dataset.csv')
-    )
+    # 8. Generate PACU recovery dataset (DISABLED: Violates scientific validity; generates synthetic patients)
+    # generate_pacu_dataset(os.path.join(datasets_dir, '05_pacu_recovery', 'pacu_dataset.csv'))
+    print(" - PACU recovery: Synthetic generation disabled to preserve scientific integrity.")
     
     print("\n====================================================")
     print("All datasets successfully cleaned and ready for training!")

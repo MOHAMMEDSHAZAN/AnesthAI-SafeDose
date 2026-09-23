@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import { DEMO_PATIENTS } from '../data/syntheticDemoData';
 
 interface AuditLog {
   timestamp: string;
@@ -8,10 +9,10 @@ interface AuditLog {
 }
 
 const initialAuditLogs: AuditLog[] = [
-  { timestamp: '12:30:15', user: 'Dr. Sarah Jenkins', action: 'Accessed Patient P001 pre-op evaluation sheet', ip: '10.120.40.82' },
-  { timestamp: '12:35:42', user: 'Dr. Alex Rivera', action: 'Computed Propofol induction dose (weight: 31kg)', ip: '10.120.40.104' },
-  { timestamp: '12:40:08', user: 'Nurse Linda Cho', action: 'Modified Aldrete recovery rating for Sophia Patel', ip: '10.120.44.15' },
-  { timestamp: '12:44:19', user: 'Dr. Sarah Jenkins', action: 'TRIGGERED EMERGENCY PORTAL - OR 1 HYPOXIA ALARM', ip: '10.120.40.82' }
+  { timestamp: '12:30:15', user: 'Dr. Arjun Malhotra (DEMO-LIC-2048)', action: 'Accessed Patient SD-2026-0001 pre-op evaluation sheet', ip: '10.120.40.82' },
+  { timestamp: '12:35:42', user: 'Dr. Rajeshwar Rao (DEMO-LIC-3091)', action: 'Computed Propofol induction dose (weight: 74kg)', ip: '10.120.40.104' },
+  { timestamp: '12:40:08', user: 'Nisha Verma, RN (DEMO-RN-1042)', action: 'Modified Aldrete recovery rating for Priya Nair (SD-2026-0002)', ip: '10.120.44.15' },
+  { timestamp: '12:44:19', user: 'Dr. Arjun Malhotra (DEMO-LIC-2048)', action: 'SIMULATED CRISIS PORTAL - OR-04 SEPTIC PROTOCOL', ip: '10.120.40.82' }
 ];
 
 export const AdminPanel: React.FC = () => {
@@ -20,7 +21,7 @@ export const AdminPanel: React.FC = () => {
   const [autoTimeout, setAutoTimeout] = useState('15'); // minutes
 
   // Active sync patient selector
-  const [selectedPatientId, setSelectedPatientId] = useState('P001');
+  const [selectedPatientId, setSelectedPatientId] = useState('SD-2026-0001');
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncLogs, setSyncLogs] = useState<string[]>([]);
   const [activeFHIRTab, setActiveFHIRTab] = useState<'Patient' | 'Observation'>('Patient');
@@ -46,14 +47,26 @@ export const AdminPanel: React.FC = () => {
     }));
   };
 
-  // Mock patient data for FHIR JSON mapping
-  const fhirPatientData: Record<string, { family: string, given: string, gender: string, birth: string }> = {
-    P001: { family: 'Miller', given: 'Robert', gender: 'male', birth: '1959-05-12' },
-    P002: { family: 'Patel', given: 'Sophia', gender: 'female', birth: '1998-09-18' },
-    P003: { family: 'Chen', given: 'Liam', gender: 'male', birth: '2017-02-24' }
-  };
+  // Synthetic patient data for FHIR JSON mapping from centralized dataset
+  const fhirPatientData: Record<string, { family: string, given: string, gender: string, birth: string, hr: number, spo2: number }> = useMemo(() => {
+    const map: Record<string, { family: string, given: string, gender: string, birth: string, hr: number, spo2: number }> = {};
+    DEMO_PATIENTS.forEach(p => {
+      const parts = p.name.split(' ');
+      map[p.id] = {
+        family: parts.slice(1).join(' ') || parts[0],
+        given: parts[0],
+        gender: p.gender.toLowerCase(),
+        birth: `${2026 - p.age}-01-15`,
+        hr: p.vitals.hr,
+        spo2: p.vitals.spo2
+      };
+    });
+    return map;
+  }, []);
 
-  const currentPatient = fhirPatientData[selectedPatientId] || fhirPatientData.P001;
+  const currentPatient = fhirPatientData[selectedPatientId] || fhirPatientData['SD-2026-0001'] || {
+    family: 'Kumar', given: 'Rajesh', gender: 'male', birth: '1974-01-15', hr: 74, spo2: 98
+  };
 
   // FHIR JSON Structures
   const patientFHIRJson = {
@@ -107,7 +120,7 @@ export const AdminPanel: React.FC = () => {
           ]
         },
         valueQuantity: {
-          value: selectedPatientId === 'P001' ? 72 : selectedPatientId === 'P002' ? 80 : 95,
+          value: currentPatient.hr,
           unit: "beats/minute",
           system: "http://unitsofmeasure.org",
           code: "/min"
@@ -124,7 +137,7 @@ export const AdminPanel: React.FC = () => {
           ]
         },
         valueQuantity: {
-          value: selectedPatientId === 'P001' ? 95 : selectedPatientId === 'P002' ? 99 : 98,
+          value: currentPatient.spo2,
           unit: "%",
           system: "http://unitsofmeasure.org",
           code: "%"
@@ -302,9 +315,9 @@ export const AdminPanel: React.FC = () => {
                 value={selectedPatientId}
                 onChange={(e) => setSelectedPatientId(e.target.value)}
               >
-                <option value="P001">Robert (P001)</option>
-                <option value="P002">Sophia (P002)</option>
-                <option value="P003">Liam (P003)</option>
+                {DEMO_PATIENTS.slice(0, 5).map(p => (
+                  <option key={p.id} value={p.id}>{p.name} ({p.id})</option>
+                ))}
               </select>
             </div>
           </div>

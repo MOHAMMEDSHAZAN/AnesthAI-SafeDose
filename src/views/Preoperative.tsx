@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useApp, type Patient } from '../context/AppContext';
+import { API_BASE_URL } from '../config/api';
 
 export const Preoperative: React.FC = () => {
   const { patients, updatePatient } = useApp();
@@ -32,8 +33,14 @@ export const Preoperative: React.FC = () => {
   const [activeCancer, setActiveCancer] = useState(false);
   const [swollenLegsVaricose, setSwollenLegsVaricose] = useState(false);
 
-  // New features states:
-  // ASA Classification Questionnaire State
+  // Standard ASA Physical Status Classification (Clinician-Confirmed)
+  const [selectedASA, setSelectedASA] = useState<'ASA I' | 'ASA II' | 'ASA III' | 'ASA IV' | 'ASA V' | 'ASA VI'>('ASA II');
+  const [isEmergency, setIsEmergency] = useState<boolean>(false);
+  const [clinicianConfirmed, setClinicianConfirmed] = useState<boolean>(false);
+  const [confirmationTimestamp, setConfirmationTimestamp] = useState<string>('');
+  const [confirmedBy, setConfirmedBy] = useState<string>('Attending Anesthesiologist');
+  const [asaRationale, setAsaRationale] = useState<string>('Evaluated during preoperative clinical assessment.');
+  const [asaAuditLogs, setAsaAuditLogs] = useState<Array<any>>([]);
   const [hasMildSys, setHasMildSys] = useState(false);
   const [hasSevereSys, setHasSevereSys] = useState(false);
   const [hasThreatLife, setHasThreatLife] = useState(false);
@@ -89,7 +96,14 @@ export const Preoperative: React.FC = () => {
       setActiveCancer(patient.medicalHistory.some(m => m.toLowerCase().includes('cancer') || m.toLowerCase().includes('malignancy') || m.toLowerCase().includes('tumor')));
       setSwollenLegsVaricose(patient.medicalHistory.some(m => m.toLowerCase().includes('varicose') || m.toLowerCase().includes('swollen') || m.toLowerCase().includes('edema')));
 
-      // Auto-check ASA indicators based on patient records
+      // Sync standard ASA Physical Status Classification
+      const initialASA = (patient.asaPhysicalStatus as any) || (patient.asaScore ? `ASA ${['I','II','III','IV','V','VI'][patient.asaScore - 1] || 'II'}` : 'ASA II');
+      setSelectedASA(initialASA);
+      setIsEmergency(patient.emergencyCase || false);
+      setClinicianConfirmed(patient.clinicianConfirmed || false);
+      setConfirmationTimestamp(patient.confirmationTimestamp || '');
+      setConfirmedBy(patient.confirmedBy || 'Attending Anesthesiologist');
+      
       setHasMildSys(patient.asaScore === 2);
       setHasSevereSys(patient.asaScore === 3);
       setHasThreatLife(patient.asaScore === 4);
@@ -98,6 +112,70 @@ export const Preoperative: React.FC = () => {
       setPredictionResult(null);
     }
   }, [selectedId, patient, weight]);
+
+  // Fetch ASA Audit Trail
+  const fetchASAAudit = async (patientId: string) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/asa-physical-status?patient_id=${patientId}`);
+      if (res.ok) {
+        const data = await res.json();
+        setAsaAuditLogs(data.audit_trail || []);
+        if (data.current) {
+          setSelectedASA(data.current.asa_physical_status);
+          setIsEmergency(data.current.emergency_case);
+          setClinicianConfirmed(data.current.clinician_confirmed);
+          setConfirmationTimestamp(data.current.confirmation_timestamp);
+          setConfirmedBy(data.current.clinician_name || data.current.clinician_id);
+        }
+      }
+    } catch (err) {
+      console.warn('Failed to fetch ASA status audit:', err);
+    }
+  };
+
+  useEffect(() => {
+    if (patient) {
+      fetchASAAudit(patient.id);
+    }
+  }, [patient?.id]);
+
+  // Handle clinician confirmation of ASA classification
+  const handleConfirmASA = async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/asa-physical-status`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          patient_id: patient.id,
+          asa_physical_status: selectedASA,
+          emergency_case: isEmergency,
+          clinician_id: confirmedBy || 'Attending Anesthesiologist',
+          clinician_name: confirmedBy || 'Attending Anesthesiologist',
+          clinician_confirmed: true,
+          clinical_rationale: asaRationale
+        })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setClinicianConfirmed(true);
+        setConfirmationTimestamp(data.record.confirmation_timestamp);
+        const asaNum = selectedASA === 'ASA I' ? 1 : selectedASA === 'ASA II' ? 2 : selectedASA === 'ASA III' ? 3 : selectedASA === 'ASA IV' ? 4 : selectedASA === 'ASA V' ? 5 : 6;
+        updatePatient({
+          ...patient,
+          asaScore: asaNum,
+          asaPhysicalStatus: `${selectedASA}${isEmergency ? '-E' : ''}`,
+          emergencyCase: isEmergency,
+          clinicianConfirmed: true,
+          confirmationTimestamp: data.record.confirmation_timestamp,
+          confirmedBy: confirmedBy
+        });
+        fetchASAAudit(patient.id);
+        alert(`ASA Physical Status Classification confirmed by clinician: ${selectedASA}${isEmergency ? '-E' : ''}`);
+      }
+    } catch (err) {
+      console.error('Error confirming ASA classification:', err);
+    }
+  };
 
   if (!patient) {
     return <div className="page-container">No patient records available. Create a patient first.</div>;
@@ -213,24 +291,30 @@ export const Preoperative: React.FC = () => {
       confidence: predictionResult ? Math.max(predictionResult.generalConf, predictionResult.spinalConf, predictionResult.macConf) : (85 - (cardiacScore * 5) - (airwayRiskScore * 3)),
       reasoning: aiRecs,
       alternatives: [recommendedTechnique === 'General' ? 'Spinal' : 'General'],
-      warnings: [`Difficult airway score: ${airwayRiskScore}/10`, `Cardiac Score: ${cardiacScore}/6`, `ASA Class: ${suggestedASA}`],
+      warnings: [`Difficult airway score: ${airwayRiskScore}/10`, `Cardiac Score: ${cardiacScore}/6`, `ASA Physical Status: ${selectedASA}${isEmergency ? '-E' : ''}`],
       contraindications: cardiacRiskLevel === 'High' && recommendedTechnique === 'General' ? ['High-dose inhalational agents due to myocardial depression'] : []
     };
 
+    const asaNum = selectedASA === 'ASA I' ? 1 : selectedASA === 'ASA II' ? 2 : selectedASA === 'ASA III' ? 3 : selectedASA === 'ASA IV' ? 4 : selectedASA === 'ASA V' ? 5 : 6;
     updatePatient({
       ...patient,
-      asaScore: suggestedASA,
+      asaScore: asaNum,
+      asaPhysicalStatus: `${selectedASA}${isEmergency ? '-E' : ''}`,
+      emergencyCase: isEmergency,
+      clinicianConfirmed: clinicianConfirmed,
+      confirmationTimestamp: confirmationTimestamp,
+      confirmedBy: confirmedBy,
       anesthesiaPlan: updatedPlan
     });
 
     alert("AI anesthesia plan computed & added to patient chart!");
   };
 
-  // Run Random Forest Technique Recommender
+  // Run Technique Recommender (Demo / Non-validated)
   const runRFPrediction = async () => {
     setIsPredicting(true);
     try {
-      const response = await fetch('http://localhost:8000/predict/RiskPrediction', {
+      const response = await fetch(`${API_BASE_URL}/predict/RiskPrediction`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -276,50 +360,9 @@ export const Preoperative: React.FC = () => {
         throw new Error('API server returned error code');
       }
     } catch (err) {
-      console.warn('FastAPI API offline, executing local heuristic fallback:', err);
-      // Classifiers logic fallback
-      let gen = 30;
-      let spi = 30;
-      let mac = 35;
-
-      if (airwayRiskLevel === 'High') {
-        gen += 50;
-        spi -= 30;
-        mac -= 20;
-      }
-      if (cardiacRiskLevel === 'High' || suggestedASA >= 4) {
-        mac += 45;
-        gen -= 25;
-        spi -= 30;
-      }
-      if (suggestedASA === 3) {
-        gen += 20;
-        mac += 10;
-        spi -= 20;
-      }
-      if (isFemale && age < 40 && suggestedASA <= 2 && airwayRiskLevel === 'Low') {
-        spi += 45;
-        gen -= 30;
-      }
-      if (copdAsthma && suggestedASA >= 2) {
-        spi += 20;
-        mac += 20;
-        gen -= 30;
-      }
-
-      const total = Math.max(1, gen + spi + mac);
-      const generalConf = Math.round((Math.max(5, gen) / total) * 100);
-      const macConf = Math.round((Math.max(5, mac) / total) * 100);
-      const spinalConf = 100 - generalConf - macConf;
-
-      let technique: 'General' | 'Spinal' | 'MAC' = 'General';
-      if (spinalConf > generalConf && spinalConf > macConf) {
-        technique = 'Spinal';
-      } else if (macConf > generalConf && macConf > spinalConf) {
-        technique = 'MAC';
-      }
-
-      setPredictionResult({ technique, generalConf, spinalConf, macConf });
+      console.warn('FastAPI prediction failed:', err);
+      alert('Prediction unavailable: Backend model service failed or is offline.');
+      setPredictionResult(null);
     } finally {
       setIsPredicting(false);
     }
@@ -349,83 +392,156 @@ export const Preoperative: React.FC = () => {
         {/* Left column: Score forms */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           
-          {/* NEW: ASA Classification Assistant */}
-          <div className="glass" style={{ padding: '20px', borderLeft: '4px solid var(--med-orange)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-              <h3 style={{ fontSize: '1.125rem', fontWeight: 700 }}>ASA Physical Status Classification Assistant</h3>
-              <span className="badge badge-warning" style={{ fontSize: '0.9rem', padding: '6px 12px', fontFamily: 'var(--font-mono)' }}>
-                SUGGESTED: ASA CLASS {suggestedASA}
-              </span>
+          {/* ASA Physical Status Classification */}
+          <div className="glass" style={{ padding: '20px', borderLeft: '4px solid var(--med-blue)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+              <div>
+                <h3 style={{ fontSize: '1.125rem', fontWeight: 700, margin: 0 }}>ASA Physical Status Classification</h3>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                  Standard classification confirmed by clinician with audit trail. AI does not autonomously assign ASA status.
+                </span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span className={`badge ${selectedASA === 'ASA I' || selectedASA === 'ASA II' ? 'badge-success' : 'badge-danger'}`} style={{ fontSize: '1rem', padding: '6px 14px', fontFamily: 'var(--font-mono)' }}>
+                  {selectedASA}{isEmergency ? '-E' : ''}
+                </span>
+                {clinicianConfirmed ? (
+                  <span className="badge badge-success" style={{ fontSize: '0.75rem' }}>✓ Clinician Confirmed</span>
+                ) : (
+                  <span className="badge badge-warning" style={{ fontSize: '0.75rem' }}>Pending Confirmation</span>
+                )}
+              </div>
             </div>
-            <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '14px' }}>
-              Select patient systemic health parameters to dynamically categorize operational risk.
-            </p>
-            
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-              <label className="checklist-item" style={{ margin: 0 }}>
-                <input 
-                  type="checkbox" 
-                  checked={hasMildSys} 
-                  onChange={(e) => {
-                    setHasMildSys(e.target.checked);
-                    if (e.target.checked) {
-                      setHasSevereSys(false);
-                      setHasThreatLife(false);
-                      setIsMoribund(false);
-                    }
-                  }} 
-                />
-                <span>Mild systemic disease (e.g. controlled HTN/asthma, smoker)</span>
-              </label>
-              
-              <label className="checklist-item" style={{ margin: 0 }}>
-                <input 
-                  type="checkbox" 
-                  checked={hasSevereSys} 
-                  onChange={(e) => {
-                    setHasSevereSys(e.target.checked);
-                    if (e.target.checked) {
-                      setHasMildSys(false);
-                      setHasThreatLife(false);
-                      setIsMoribund(false);
-                    }
-                  }} 
-                />
-                <span>Severe systemic disease (e.g. poorly controlled DM/COPD, CAD)</span>
-              </label>
 
-              <label className="checklist-item" style={{ margin: 0 }}>
-                <input 
-                  type="checkbox" 
-                  checked={hasThreatLife} 
-                  onChange={(e) => {
-                    setHasThreatLife(e.target.checked);
-                    if (e.target.checked) {
-                      setHasMildSys(false);
-                      setHasSevereSys(false);
-                      setIsMoribund(false);
-                    }
-                  }} 
-                />
-                <span>Systemic disease that is a constant threat to life (e.g. recent MI)</span>
+            {/* Classification Selection Buttons */}
+            <div style={{ marginTop: '14px' }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: '8px' }}>
+                Select ASA Physical Status:
               </label>
-
-              <label className="checklist-item" style={{ margin: 0 }}>
-                <input 
-                  type="checkbox" 
-                  checked={isMoribund} 
-                  onChange={(e) => {
-                    setIsMoribund(e.target.checked);
-                    if (e.target.checked) {
-                      setHasMildSys(false);
-                      setHasSevereSys(false);
-                      setHasThreatLife(false);
-                    }
-                  }} 
-                />
-                <span>Moribund patient not expected to survive without surgery</span>
-              </label>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '8px' }}>
+                {(['ASA I', 'ASA II', 'ASA III', 'ASA IV', 'ASA V', 'ASA VI'] as const).map((asa) => (
+                  <button
+                    key={asa}
+                    type="button"
+                    className={`btn ${selectedASA === asa ? 'btn-primary' : 'btn-secondary'}`}
+                    style={{ padding: '8px 4px', fontSize: '0.85rem', fontWeight: 700 }}
+                    onClick={() => {
+                      setSelectedASA(asa);
+                      setClinicianConfirmed(false);
+                    }}
+                  >
+                    [{asa}]
+                  </button>
+                ))}
+              </div>
             </div>
+
+            {/* Emergency Case Modifier */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '14px', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', borderRadius: '6px', border: '1px solid var(--border-color)' }}>
+              <div>
+                <strong style={{ fontSize: '0.85rem', color: 'var(--text-primary)' }}>Emergency Case (Modifier "E"):</strong>
+                <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                  Indicates surgery required without delay to preserve life or body part.
+                </p>
+              </div>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <button
+                  type="button"
+                  className={`btn ${!isEmergency ? 'btn-primary' : 'btn-secondary'}`}
+                  style={{ padding: '4px 14px', fontSize: '0.8rem' }}
+                  onClick={() => { setIsEmergency(false); setClinicianConfirmed(false); }}
+                >
+                  No
+                </button>
+                <button
+                  type="button"
+                  className={`btn ${isEmergency ? 'btn-danger' : 'btn-secondary'}`}
+                  style={{ padding: '4px 14px', fontSize: '0.8rem' }}
+                  onClick={() => { setIsEmergency(true); setClinicianConfirmed(false); }}
+                >
+                  Yes ("E")
+                </button>
+              </div>
+            </div>
+
+            {/* Clinical Explanation Card */}
+            <div style={{ marginTop: '12px', padding: '12px', background: 'rgba(0, 102, 255, 0.05)', borderRadius: '6px', border: '1px solid rgba(0, 102, 255, 0.15)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                <strong style={{ fontSize: '0.85rem', color: 'var(--med-cyan)' }}>Clinical Definition: {selectedASA}{isEmergency ? '-E' : ''}</strong>
+              </div>
+              <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+                {selectedASA === 'ASA I' && 'A normal healthy patient. Healthy, non-smoking, no or minimal alcohol use.'}
+                {selectedASA === 'ASA II' && 'A patient with mild systemic disease. Mild diseases only without substantive functional limitations (e.g., current smoker, social alcohol drinker, pregnancy, obesity 30 < BMI < 40, well-controlled DM/HTN, mild lung disease).'}
+                {selectedASA === 'ASA III' && 'A patient with severe systemic disease. Substantive functional limitations; one or more moderate to severe diseases (e.g., poorly controlled DM or HTN, COPD, morbid obesity BMI ≥40, active hepatitis, alcohol dependence/abuse, implanted pacemaker, moderate reduction of ejection fraction, ESRD on dialysis, history >3 months of MI, CVA, TIA, or CAD/stents).'}
+                {selectedASA === 'ASA IV' && 'A patient with severe systemic disease that is a constant threat to life (e.g., recent <3 months MI, CVA, TIA, or CAD/stents, ongoing cardiac ischemia or severe valve dysfunction, severe reduction of ejection fraction, shock, sepsis, DIC, ARD or ESRD not undergoing regularly scheduled dialysis).'}
+                {selectedASA === 'ASA V' && 'A moribund patient who is not expected to survive without the operation (e.g., ruptured abdominal/thoracic aneurysm, massive trauma, intracranial bleed with mass effect, ischemic bowel in the face of significant cardiac pathology or multiple organ/system dysfunction).'}
+                {selectedASA === 'ASA VI' && 'A declared brain-dead patient whose organs are being removed for donor purposes.'}
+              </p>
+              {isEmergency && (
+                <div style={{ marginTop: '6px', fontSize: '0.75rem', color: 'var(--med-red)', fontWeight: 600 }}>
+                  Emergency modifier "E" applied: Delay in treatment would significantly increase the threat to the patient\'s life or body part.
+                </div>
+              )}
+            </div>
+
+            {/* Clinician Confirmation & Governance */}
+            <div style={{ marginTop: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '10px' }}>
+                <div>
+                  <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px' }}>Attending Clinician / Anesthesiologist</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    style={{ fontSize: '0.8rem', padding: '6px 10px' }}
+                    value={confirmedBy}
+                    onChange={e => setConfirmedBy(e.target.value)}
+                    placeholder="Clinician Name / ID"
+                  />
+                </div>
+                <div>
+                  <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px' }}>Clinical Assessment Rationale</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    style={{ fontSize: '0.8rem', padding: '6px 10px' }}
+                    value={asaRationale}
+                    onChange={e => setAsaRationale(e.target.value)}
+                    placeholder="Rationale for classification"
+                  />
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                  {confirmationTimestamp ? `Confirmed on ${new Date(confirmationTimestamp).toLocaleString()}` : 'Classification pending clinician confirmation'}
+                </div>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  style={{ fontSize: '0.8rem', padding: '8px 16px' }}
+                  onClick={handleConfirmASA}
+                >
+                  Confirm ASA Physical Status Classification
+                </button>
+              </div>
+            </div>
+
+            {/* Audit Trail */}
+            {asaAuditLogs.length > 0 && (
+              <details style={{ marginTop: '12px', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                <summary style={{ cursor: 'pointer', fontWeight: 600, color: 'var(--med-blue)' }}>
+                  View ASA Classification Audit Trail ({asaAuditLogs.length} entries)
+                </summary>
+                <div style={{ marginTop: '8px', maxHeight: '120px', overflowY: 'auto', border: '1px solid var(--border-color)', borderRadius: '4px', padding: '6px' }}>
+                  {asaAuditLogs.map((log, idx) => (
+                    <div key={idx} style={{ padding: '4px 0', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between' }}>
+                      <span><strong>{log.action}</strong>: {log.asa_physical_status}{log.emergency_case ? '-E' : ''} by {log.clinician_name}</span>
+                      <span style={{ fontFamily: 'var(--font-mono)' }}>{new Date(log.timestamp).toLocaleTimeString()}</span>
+                    </div>
+                  ))}
+                </div>
+              </details>
+            )}
           </div>
 
           {/* NEW: Lab Results Alert Panel */}
@@ -629,10 +745,13 @@ export const Preoperative: React.FC = () => {
         {/* Right column: AI Decision Support & Random Forest Recommender Card */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           
-          {/* NEW: Random Forest Technique Recommender Panel */}
+          {/* NEW: Technique Recommender Panel (Demo / Non-validated) */}
           <div className="glass" style={{ padding: '20px', border: '1px solid var(--border-color-glow)' }}>
             <h3 style={{ fontSize: '1.125rem', fontWeight: 800, color: 'var(--med-cyan)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              🌲 Random Forest ML Recommender
+              🌲 Technique Recommender
+              <span className="badge badge-warning" style={{ fontSize: '0.65rem', verticalAlign: 'middle', marginLeft: '6px' }}>
+                Demo / Non-validated
+              </span>
             </h3>
             <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '14px' }}>
               Classify the recommended anesthetic technique based on features compiled in <code>preoperative_risk_dataset.csv</code>.
@@ -721,7 +840,7 @@ export const Preoperative: React.FC = () => {
                   <span style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Random Forest Feature Importance</span>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '6px' }}>
                     {[
-                      { name: 'ASA Class', imp: 35 },
+                      { name: 'ASA Status', imp: 35 },
                       { name: 'Mallampati', imp: 22 },
                       { name: 'Age / Weight', imp: 18 },
                       { name: 'Comorbidities', imp: 15 },

@@ -15,7 +15,7 @@ export const PreInduction: React.FC = () => {
         { key: 'confirm_proc', label: 'Procedure confirmed' },
         { key: 'confirm_consent', label: 'Consent status confirmed' },
         { key: 'review_allergies', label: 'Allergies reviewed' },
-        { key: 'review_asa', label: 'ASA status reviewed' }
+        { key: 'review_asa', label: 'ASA Physical Status Classification confirmed' }
       ]
     },
     {

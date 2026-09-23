@@ -1,0 +1,24 @@
+=== PAGE 1 === (7283 chars)
+Top 3: ['1', 'Anesthesia Dose Calculation And Safety Support System', 'Dr. Sowbahgya M P1, Mohammed Shazan2, Mohan Gowda V C3, Puneeth S V4']
+Bottom 3: ['has progressed chronologically from pharmacokinetic simulations', 'toward multi-modal clinical decision support, as surveyed by Cao', '(2025) and Bogoń et al. (2024).']
+
+=== PAGE 2 === (6614 chars)
+Top 3: ['2', 'Sowbhagya et al. (2022) established the foundations of multi-', 'source user and behavioral profiling in complex decision']
+Bottom 3: ['<15% systems implement', 'XAI; lacks emergency audit', 'logging.']
+
+=== PAGE 3 === (4596 chars)
+Top 3: ['3', 'III. SYSTEM REQUIREMENTS AND CLINICAL DESIGN', 'The clinical architecture of Anesth AI supports the perioperative']
+Bottom 3: ['execution with sub-50ms inference latency across all endpoints with', 'Pydantic schema validation, JWT authentication, and structured error', 'handling.']
+
+=== PAGE 4 === (7038 chars)
+Top 3: ['4', 'PHASE 1 — PREOPERATIVE', 'Clinical Assessment & Planning']
+Bottom 3: ['reductions in geriatric cohorts (≥ 65 years); and (5) Organ function', 'screening flags for severe aortic stenosis, renal impairment, and', 'hepatic insufficiency. The workflow follows: Patient data →']
+
+=== PAGE 5 === (5871 chars)
+Top 3: ['5', 'physiological body-size calculation → relevant dosing basis (TBW', 'vs. LBM) → rule calculation → safety/contraindication check →']
+Bottom 3: ['ClinicalLSTM; Intravenous Fluid Recommendation achieved an', 'AUROC of 0.8687 and 78.65% sensitivity with LightGBM; Hypoxia', 'prediction attained an AUROC of 0.9047 with HistGradientBoosting;']
+
+=== PAGE 6 === (7926 chars)
+Top 3: ['6', 'and Emergency Severity triage attained 78.78% sensitivity with', 'CatBoost (decision threshold 0.325).']
+Bottom 3: ['[26] L. Prokhorenkova et al., "CatBoost: Unbiased Boosting with Categorical Features,"', 'Advances in Neural Information Processing Systems (NeurIPS), vol. 31, pp. 6638–', '6648, 2018.']
+

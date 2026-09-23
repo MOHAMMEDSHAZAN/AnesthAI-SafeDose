@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useApp, type UserRole } from '../context/AppContext';
+import { useApp, type UserRole, getProfileForRole } from '../context/AppContext';
+import { API_BASE_URL } from '../config/api';
 
 interface AuthProps {
   onLoginSuccess: () => void;
 }
 
 export const Auth: React.FC<AuthProps> = ({ onLoginSuccess }) => {
-  const { userRole, setUserRole } = useApp();
+  const { userRole, setUserRole, setCurrentUser, setAuthToken } = useApp();
   const [email, setEmail] = useState('anesthesia.lead@hospital.org');
   const [password, setPassword] = useState('••••••••••••');
   const [step, setStep] = useState<'credentials' | 'otp'>('credentials');
@@ -68,10 +69,42 @@ export const Auth: React.FC<AuthProps> = ({ onLoginSuccess }) => {
     }
   };
 
-  const handleOtpSubmit = (e: React.FormEvent) => {
+  const syncBackendAuth = async (role: UserRole, authMethod: 'retina_scan' | 'webauthn_fido2' | 'mfa_credentials' | 'smartcard_nfc' | 'trauma_break_glass' = 'mfa_credentials') => {
+    let username = 'anesthesiologist1';
+    if (role === 'Doctor') username = 'surgeon1';
+    else if (role === 'Resident') username = 'anesthesiologist2';
+    else if (role === 'OT Nurse' || role === 'PACU Nurse') username = 'nurse1';
+    else if (role === 'Hospital Admin') username = 'admin1';
+    else if (role === 'Student') username = 'student1';
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password: 'password123' })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.token) {
+          setAuthToken(data.token);
+          const profile = getProfileForRole(role, authMethod, data.token);
+          if (data.user?.name) profile.name = data.user.name;
+          setCurrentUser(profile);
+          return;
+        }
+      }
+    } catch (err) {
+      console.warn('Backend login request fallback:', err);
+    }
+    const profile = getProfileForRole(role, authMethod);
+    setCurrentUser(profile);
+  };
+
+  const handleOtpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const entered = otp.join('');
     if (entered === generatedOtp) {
+      await syncBackendAuth(userRole, 'mfa_credentials');
       onLoginSuccess();
     } else {
       alert("Verification Failed: Passcode mismatch. Sync pager and try again.");
@@ -101,9 +134,10 @@ export const Auth: React.FC<AuthProps> = ({ onLoginSuccess }) => {
       } else if (progress >= 100) {
         clearInterval(interval);
         setScanStatus('Access Granted. Redirecting...');
-        setTimeout(() => {
+        setTimeout(async () => {
           setIsScanning(false);
           setUserRole('Anesthesiologist');
+          await syncBackendAuth('Anesthesiologist', 'retina_scan');
           onLoginSuccess();
         }, 800);
       }
@@ -111,13 +145,14 @@ export const Auth: React.FC<AuthProps> = ({ onLoginSuccess }) => {
   };
 
   // Fast-pass emergency bypass login
-  const handleTraumaBypass = () => {
+  const handleTraumaBypass = async () => {
     setUserRole('Anesthesiologist');
+    await syncBackendAuth('Anesthesiologist', 'trauma_break_glass');
     onLoginSuccess();
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1.2fr', backgroundColor: 'var(--bg-primary)', fontFamily: 'var(--font-sans)', color: 'var(--text-primary)' }}>
+    <div className="auth-page-container" style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: '1fr 1.2fr', backgroundColor: 'var(--bg-primary)', fontFamily: 'var(--font-sans)', color: 'var(--text-primary)' }}>
       
       {/* Left Column: Clinical Slideshow Showcase */}
       <div style={{
@@ -141,7 +176,7 @@ export const Auth: React.FC<AuthProps> = ({ onLoginSuccess }) => {
             <path d="M5.4 12h2.2l2.3-6 3.3 12 2.3-8 1.1 4.5 2 2.5h2"/>
           </svg>
           <span style={{ fontSize: '1.5rem', fontWeight: 800, fontFamily: 'var(--font-heading)' }}>
-            AnesthAI <span style={{ color: 'var(--med-cyan)' }}>SafeDose</span>
+            Anesth <span style={{ color: 'var(--med-cyan)' }}>AI</span>
           </span>
         </div>
 
@@ -455,7 +490,7 @@ export const Auth: React.FC<AuthProps> = ({ onLoginSuccess }) => {
                   <span>PAGE RECEIVED</span>
                   <span>14:28 PM</span>
                 </div>
-                <div>💬 SafeDose Gate:</div>
+                <div>💬 Anesth AI Gate:</div>
                 <div style={{ fontWeight: 800, fontSize: '0.9rem', margin: '4px 0' }}>
                   Auth Code: <span style={{ textDecoration: 'underline' }}>{generatedOtp}</span>
                 </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApp, type AnesthesiaIncident } from '../context/AppContext';
+import { API_BASE_URL } from '../config/api';
 
 export const ReportIncident: React.FC = () => {
   const { patients, activePatientId, activeCaseId, submitIncidentReport, logSafetyAudit } = useApp();
@@ -95,7 +96,7 @@ export const ReportIncident: React.FC = () => {
 
     setIsAnalyzing(true);
     try {
-      const res = await fetch('http://localhost:8000/api/safety/incidents/analyze', {
+      const res = await fetch(`${API_BASE_URL}/api/safety/incidents/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

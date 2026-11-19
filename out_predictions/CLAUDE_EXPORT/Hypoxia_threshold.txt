@@ -1,0 +1,19 @@
+Task: Intraoperative Hypoxia Prediction (VitalDB)
+Dataset: VitalDB (235 high-fidelity surgical cases, 1-second resolution)
+Model: HistGradientBoosting Classifier (hypoxia_histgb.pkl)
+Split Strategy: Train: 165 cases, Val: 35 cases, Test: 35 cases (Patient-grouped by caseid, seed=42)
+Threshold (tau): 0.8250
+Tuning Strategy: Tuned on validation cohort to optimize clinical precision-recall trade-off (val_threshold=0.825)
+Evaluation Results on Held-out Test Set:
+  Total Test Samples: 708755
+  True Negatives (TN): 695908
+  False Positives (FP): 5861
+  False Negatives (FN): 3600
+  True Positives (TP): 3386
+  Sensitivity (Recall): 0.4847
+  Specificity: 0.9916
+  Precision: 0.3662
+  F1 Score: 0.4172
+  Accuracy: 0.9867
+  ROC-AUC: 0.9047
+  PR-AUC: 0.3745

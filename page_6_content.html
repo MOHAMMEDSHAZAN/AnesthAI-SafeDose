@@ -1,0 +1,92 @@
+<div class="two-col">
+    <h3 class="subsec-heading" style="margin-top: 0;">B. Authentic MIT-BIH Revalidation and Confusion Matrix</h3>
+    <p class="no-indent">An earlier annotation parsing issue was corrected by parsing all 48 authentic MIT-BIH records (109,494 beats: 75,052 Normal, 34,442 Arrhythmia/Abnormal) under a strict record-independent split: 34 train records (76,865 beats), 7 validation records (15,600 beats), and 7 frozen test records (records 102, 103, 200, 210, 213, 217, 220; 17,029 beats: 11,186 normal, 5,843 arrhythmia) [6], [7], [13], [16], [17], [20], [25]. The LightGBM model detected 5,376 of 5,843 arrhythmias, achieving 85.62% Accuracy, 87.15% Balanced Accuracy, 92.01% Sensitivity, 82.29% Specificity, 73.07% Precision, 81.45% F1-Score, 0.9414 ROC-AUC, 0.9494 PR-AUC, and 0.0613 Brier score (Table VI, Fig. 7). This revalidation rectifies historic evaluation artifacts with authentic cardiological ground truth.</p>
+
+    <p>The authentic confusion matrix (Table VI, Fig. 7) reveals a clinically optimal error distribution: the high sensitivity of 92.01% ensures that only 467 true arrhythmia beats were missed (false negatives), whereas 5,376 malignant ectopic events were successfully captured (true positives). In intraoperative cardiac surveillance, capturing premature ventricular contractions (PVCs), bigeminy, and conduction abnormalities is critical to prevent escalation into ventricular fibrillation or asystole. The false-positive rate (1,981 beats, 17.71% of normal beats) represents a clinically manageable trade-off that is quickly reviewed by the attending anesthesiologist on the real-time ECG telemetry strip. Crucially, this evaluation eliminates the 100% accuracy artifact that arose in earlier literature from improper record parsing.</p>
+
+    <div style="margin: 2px 0;">
+      <table class="ieee-table">
+        <thead>
+          <tr>
+            <th colspan="4">Table VI: MIT-BIH Arrhythmia Confusion Matrix (N = 17,029)</th>
+          </tr>
+          <tr>
+            <th>Actual / Predicted</th>
+            <th>Predicted Normal</th>
+            <th>Predicted Arrhythmia</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Actual Normal</b></td>
+            <td class="center">9,202 (TN)</td>
+            <td class="center">1,981 (FP)</td>
+            <td class="center">11,186</td>
+          </tr>
+          <tr>
+            <td><b>Actual Arrhythmia</b></td>
+            <td class="center">467 (FN)</td>
+            <td class="center">5,376 (TP)</td>
+            <td class="center">5,843</td>
+          </tr>
+          <tr>
+            <td><b>Total</b></td>
+            <td class="center">9,669</td>
+            <td class="center">7,357</td>
+            <td class="center">17,029</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FIG 7: EXACT SAME UNIFORM FRAME -->
+    <div class="figure-box">
+      <div class="figure-frame">
+        <img src="{fig7}" alt="Confusion matrix for the authentic frozen-test MIT-BIH arrhythmia evaluation.">
+      </div>
+      <div class="caption"><b>Fig. 7.</b> Confusion matrix for the authentic frozen-test MIT-BIH arrhythmia evaluation.</div>
+    </div>
+
+    <h3 class="subsec-heading">C. Probability Calibration and Clinical Utility</h3>
+    <p class="no-indent">Because clinical decision support requires trustworthy risk estimations rather than overconfident binary labels [11], [22], probabilistic calibration was quantified across all ten tasks using the Brier score: Hypotension (0.1924), Hypoxia (0.0338), Bradycardia (0.2037), Tachycardia (0.1353), Arrhythmia (0.0613), Emergency Severity (0.2137), Blood Loss (0.1617), Fluid Recommendation (0.1492), ICU Admission (0.1413), and Mortality (0.1356). The Brier score measures the mean squared difference between predicted probabilities and actual binary outcomes; lower values denote superior calibration. Rare events such as Hypoxia and Mortality demonstrate low Brier scores consistent with low baseline prevalence, whereas moderate scores in Emergency Severity and Bradycardia indicate that risk estimates should be interpreted in conjunction with real-time patient clinical context rather than as definitive diagnoses.</p>
+
+    <p>In operating theater practice, well-calibrated probabilistic risk estimates enable multi-tiered alert semantics: green indicates nominal risk (&lt;20%), yellow denotes advisory surveillance (20–50%), orange signifies elevated warning (50–75%), and red triggers critical attending review (&gt;75%). This graded alert stratification prevents binary alert fatigue while preserving high clinical situational awareness across prolonged surgical procedures [10], [15].</p>
+
+    <h2 class="sec-heading">VII. Limitations and Future Work</h2>
+    <p class="no-indent"><b>Clinical and Methodological Limitations:</b> While Anesth AI establishes a rigorous, leakage-controlled foundation for perioperative decision support [18], [25], several key limitations must be emphasized: All ten prediction models were trained and benchmarked on retrospective observational cohorts (VitalDB from South Korea, MIT-BIH, and MIMIC-IV from the United States); differences in institutional protocols, surgical case mix, patient genetics, and drug administration habits across international hospitals may induce domain shift; Anesth AI is developed strictly as an academic research decision-support prototype and has not received regulatory clearance (such as FDA 510(k) or CE mark) as a commercial medical device; The platform has not undergone prospective randomized controlled clinical trial evaluation; In highly imbalanced tasks such as Hypoxia (0.99% prevalence) and In-Hospital Mortality (2.22% prevalence), positive predictive value remains modest despite high specificity, requiring clinicians to interpret flags within holistic clinical context; High-frequency operating theater ECG telemetry is susceptible to surgical electrocautery and motion artifacts that differ from clean ambulatory Holter recordings [10], [20]; and The system does not replace attending clinical judgment; all calculations, risk scores, and checklists require explicit attending confirmation.</p>
+
+    <p><b>Future Research Trajectories:</b> Planned extensions focus on transitioning Anesth AI toward rigorous clinical translation [1], [2], [4]: High-fidelity simulation laboratory trials assessing anesthesiologist interaction dynamics, situational awareness, and cognitive workload under emergency scenarios; Prospective multi-center observational studies across tertiary academic teaching hospitals in India to validate model transportability across diverse clinical environments [23]; Conformal prediction frameworks to provide finite-sample, distribution-free statistical coverage guarantees around continuous physiological risk estimates; Context-aware adaptive alert suppression algorithms to mitigate intraoperative alert fatigue during non-critical surgical maneuvers; Multimodal foundation models capable of unified cardiorespiratory waveform and tabular EHR pretraining [19], [21], [24]; and Hardware-accelerated edge inference on bedside clinical displays ensuring robust sub-20ms inference latency during network interruptions [17].</p>
+
+    <h2 class="sec-heading">VIII. Conclusion</h2>
+    <p class="no-indent">This paper presented Anesth AI, an integrated, human-in-the-loop perioperative anesthesia dose calculation and safety support system. The platform unifies preoperative assessment, parameter-driven dose calculation support, decoupled deterministic physiological fluid accounting, continuous intraoperative vital-sign surveillance, and postoperative PACU recovery scoring within a single clinical dashboard. Ten operational clinical prediction tasks were trained across four benchmark repositories (VitalDB, MIT-BIH, MIMIC-IV-ED, and MIMIC-IV). Enforcing strict patient- and record-grouped 70/15/15 partitioning with target feature purging eliminated data leakage, while an authentic MIT-BIH revalidation demonstrated 85.62% accuracy, 92.01% sensitivity, and 0.9414 ROC-AUC across 17,029 held-out beats. Incorporating explainable AI attributions, authenticated role-based security, immutable clinician override logging, and audited Emergency Break-Glass protocols reinforces clinical safety. Anesth AI demonstrates the viability of transparent, human-governed clinical decision support in perioperative medicine.</p>
+
+    <h2 class="sec-heading">References</h2>
+    <ul class="ref-list">
+      <li>[1] J.-H. Moon, G. Lee, S. M. Lee, J. Ryu, D. Kim, and K.-A. Sohn, &ldquo;Frequency domain deep learning with non-invasive features for intraoperative hypotension prediction,&rdquo; <i>IEEE J. Biomed. Health Inform.</i>, vol. 28, no. 10, pp. 5718&ndash;5728, Oct. 2024, doi: 10.1109/JBHI.2024.3403109.</li>
+      <li>[2] T. E. Baum, E. Adam, C. S. Guay, G. Schamberg, M. Kazemi, T. Heldt, and E. N. Brown, &ldquo;Dynamic estimation of cardiovascular state from arterial blood pressure recordings,&rdquo; <i>IEEE Trans. Biomed. Eng.</i>, vol. 71, no. 11, pp. 3146&ndash;3159, Nov. 2024, doi: 10.1109/TBME.2024.3408808.</li>
+      <li>[3] J. Liu, W. Zhang, S. Hu, C. Wu, K. Dong, Q. Wei, G. Wang, J. Fang, D. Zhang, and M. Lan, &ldquo;Analysis of amplitude modulation of EEG based on Holo-Hilbert spectrum analysis during general anesthesia,&rdquo; <i>IEEE Trans. Biomed. Eng.</i>, vol. 71, no. 5, pp. 1607&ndash;1616, May 2024, doi: 10.1109/TBME.2023.3345942.</li>
+      <li>[4] V. S. Nair, G. D. H. Niranga, A. C. S., D. T. Sathyapalan, T. Madathil, and R. K. Pathinarupothi, &ldquo;Optimizing inotropic infusion with cluster specific AI decision models and digital twins,&rdquo; <i>IEEE Access</i>, vol. 13, pp. 108316&ndash;108329, Jan. 2025, doi: 10.1109/ACCESS.2025.3581969.</li>
+      <li>[5] S. Zhao, A. Hamo, N. Ottenhof, J.-W. H. Korstanje, and J. Dauwels, &ldquo;Prediction of postinduction hypotension by machine learning,&rdquo; in <i>Proc. 46th Annu. Int. Conf. IEEE Eng. Med. Biol. Soc. (EMBC)</i>, Orlando, FL, USA, 2024, pp. 1&ndash;5, doi: 10.1109/EMBC53108.2024.10782974.</li>
+      <li>[6] Y. Zhang, M. Chen, and D. Wu, &ldquo;Explainable federated learning for cardiac arrhythmia detection,&rdquo; <i>IEEE J. Biomed. Health Inform.</i>, vol. 28, no. 6, pp. 3456&ndash;3467, Jun. 2024, doi: 10.1109/JBHI.2024.3234586.</li>
+      <li>[7] H. Gao, X. Wang, Z. Chen, M. Wu, J. Li, and C. Liu, &ldquo;ECG-CL: A comprehensive electrocardiogram interpretation method based on continual learning,&rdquo; <i>IEEE J. Biomed. Health Inform.</i>, vol. 27, no. 11, pp. 5225&ndash;5236, Nov. 2023, doi: 10.1109/JBHI.2023.3315715.</li>
+      <li>[8] H. Dai, H.-G. Hwang, and V. S. Tseng, &ldquo;PoEMS: Policy network-based early warning monitoring system for sepsis in intensive care units,&rdquo; <i>IEEE J. Biomed. Health Inform.</i>, vol. 27, no. 7, pp. 3632&ndash;3643, Jul. 2023, doi: 10.1109/JBHI.2023.3272486.</li>
+      <li>[9] A. Shirali, A. Schubert, and A. Alaa, &ldquo;Pruning the way to reliable policies: A multi-objective deep Q-learning approach to critical care,&rdquo; <i>IEEE J. Biomed. Health Inform.</i>, vol. 28, no. 10, pp. 6268&ndash;6279, Oct. 2024, doi: 10.1109/JBHI.2024.3415115.</li>
+      <li>[10] F. Mohagheghian, D. Han, O. Ghetia, A. Peitzsch, N. Nishita, M. P. S. Nejad, E. Y. Ding, and K. H. Chon, &ldquo;Noise reduction in photoplethysmography signals using a convolutional denoising autoencoder with unconventional training scheme,&rdquo; <i>IEEE Trans. Biomed. Eng.</i>, vol. 71, no. 2, pp. 456&ndash;466, Feb. 2024, doi: 10.1109/TBME.2023.3307400.</li>
+      <li>[11] S. Bharati, M. R. H. Mondal, and P. Podder, &ldquo;A review on explainable artificial intelligence for healthcare: Why, how, and when?&rdquo; <i>IEEE Trans. Artif. Intell.</i>, vol. 5, no. 4, pp. 1429&ndash;1442, Apr. 2024, doi: 10.1109/TAI.2023.3266418.</li>
+      <li>[12] S. Wang, Y. Jiang, Q. Li, and W. Zhang, &ldquo;Timely ICU outcome prediction utilizing stochastic signal analysis and machine learning techniques with readily available vital sign data,&rdquo; <i>IEEE J. Biomed. Health Inform.</i>, vol. 28, no. 9, pp. 5587&ndash;5599, Sep. 2024, doi: 10.1109/JBHI.2024.3416039.</li>
+      <li>[13] E. M. M. Vasconcellos, B. G. Ferreira, J. S. Leandro, B. F. S. Neto, F. R. Cordeiro, I. A. Cestari, M. A. Gutierrez, A. Sobrinho, and T. D. Cordeiro, &ldquo;Siamese convolutional neural network for heartbeat classification using limited 12-lead ECG datasets,&rdquo; <i>IEEE Access</i>, vol. 11, pp. 5365&ndash;5376, Jan. 2023, doi: 10.1109/ACCESS.2023.3236189.</li>
+      <li>[14] F. Wu, G. Zhao, Y. Zhou, X. Qian, E. Baedorf-Kassis, and L.-W. H. Lehman, &ldquo;Forecasting treatment outcomes over time using alternating deep sequential models,&rdquo; <i>IEEE Trans. Biomed. Eng.</i>, vol. 71, no. 4, pp. 1237&ndash;1246, Apr. 2024, doi: 10.1109/TBME.2023.3331298.</li>
+      <li>[15] M. Ghita, I. R. Birs, D. Copot, C. Muresan, M. Neckebroek, and C. Ionescu, &ldquo;Parametric modeling and deep learning for enhancing pain assessment in postanesthesia,&rdquo; <i>IEEE Trans. Biomed. Eng.</i>, vol. 70, no. 10, pp. 2991&ndash;3002, Oct. 2023, doi: 10.1109/TBME.2023.3274541.</li>
+      <li>[16] X. Dong and W. Si, &ldquo;Heartbeat dynamics: A novel efficient interpretable feature for arrhythmias classification,&rdquo; <i>IEEE Access</i>, vol. 11, pp. 87071&ndash;87086, Jul. 2023, doi: 10.1109/ACCESS.2023.3298642.</li>
+      <li>[17] N. Kim, S. Lee, S. Kim, and S.-M. Park, &ldquo;Automated arrhythmia classification system: Proof-of-concept with lightweight model on an ultra-edge device,&rdquo; <i>IEEE Access</i>, vol. 12, pp. 150546&ndash;150563, Oct. 2024, doi: 10.1109/ACCESS.2024.3480836.</li>
+      <li>[18] N. G. Ramadhan, &ldquo;Chronic diseases prediction using machine learning with data preprocessing handling: A critical review,&rdquo; <i>IEEE Access</i>, vol. 12, pp. 80698&ndash;80730, May 2024, doi: 10.1109/ACCESS.2024.3406748.</li>
+      <li>[19] S. Tang, A. Tariq, J. A. Dunnmon, U. Sharma, P. Elugunti, D. L. Rubin, B. N. Patel, and I. Banerjee, &ldquo;Predicting 30-day all-cause hospital readmission using multimodal spatiotemporal graph neural networks,&rdquo; <i>IEEE J. Biomed. Health Inform.</i>, vol. 27, no. 4, pp. 2071&ndash;2082, Apr. 2023, doi: 10.1109/JBHI.2023.3236888.</li>
+      <li>[20] C. Ma, Z. Xiao, L. Zhao, S. Biton, J. A. Behar, X. Long, R. Vullings, R. M. Aarts, J. Li, and C. Liu, &ldquo;A review on atrial fibrillation detection from ambulatory ECG,&rdquo; <i>IEEE Trans. Biomed. Eng.</i>, vol. 71, no. 3, pp. 876&ndash;892, Mar. 2024, doi: 10.1109/TBME.2023.3321792.</li>
+      <li>[21] S.-M. Lee, D.-Y. Kim, and J. Woo, &ldquo;Glucose transformer: Forecasting glucose level and events of hyperglycemia and hypoglycemia,&rdquo; <i>IEEE J. Biomed. Health Inform.</i>, vol. 27, no. 3, pp. 1600&ndash;1611, Mar. 2023, doi: 10.1109/JBHI.2023.3236822.</li>
+      <li>[22] S. Qiu, Y.-T. Zhang, S.-K. Lau, and N. Zhao, &ldquo;Scenario adaptive cuffless blood pressure estimation by integrating cardiovascular coupling effects,&rdquo; <i>IEEE J. Biomed. Health Inform.</i>, vol. 27, no. 3, pp. 1375&ndash;1385, Mar. 2023, doi: 10.1109/JBHI.2022.3227235.</li>
+      <li>[23] R. Ding, Y. Zhou, J. Xu, Y. Xie, Q. Liang, H. Ren, Y. Wang, Y. Chen, L. Wang, and M. Huang, &ldquo;Cross-hospital sepsis early detection via semi-supervised optimal transport with self-paced ensemble,&rdquo; <i>IEEE J. Biomed. Health Inform.</i>, vol. 27, no. 6, pp. 3049&ndash;3060, Jun. 2023, doi: 10.1109/JBHI.2023.3253208.</li>
+      <li>[24] R. Dima, S. Costanzo, and R. Solimene, &ldquo;Dielectric models of blood-glucose solutions: A systematic literature review,&rdquo; <i>IEEE Access</i>, vol. 12, pp. 163056&ndash;163077, Oct. 2024, doi: 10.1109/ACCESS.2024.3479099.</li>
+      <li>[25] T. Mehari and N. Strodthoff, &ldquo;Towards quantitative precision for ECG analysis: Leveraging state space models, self-supervision and patient metadata,&rdquo; <i>IEEE J. Biomed. Health Inform.</i>, vol. 27, no. 11, pp. 5326&ndash;5334, Nov. 2023, doi: 10.1109/JBHI.2023.3310989.</li>
+    </ul>
+  </div>

@@ -18,11 +18,7 @@ export const PACU: React.FC = () => {
   const [hasPONV, setHasPONV] = useState(false);
   const [sedationLevel, setSedationLevel] = useState<'Awake' | 'Somnolent' | 'Deeply Sedated'>('Awake');
 
-  if (!patient) {
-    return <div className="page-container">No patient records available. Create a patient first.</div>;
-  }
-
-  // Calculate Aldrete
+  // Aldrete calculation
   const aldreteScore = activity + respiration + circulation + consciousness + o2Sat;
   const isReady = aldreteScore >= 9 && painScale < 4 && !hasPONV;
 
@@ -51,6 +47,10 @@ export const PACU: React.FC = () => {
       setPredictionError(null);
     }
   }, [aldreteScore, painScale, hasPONV]);
+
+  if (!patient) {
+    return <div className="page-container">No patient records available. Create a patient first.</div>;
+  }
 
   // AI predicted remaining minutes
   const getAIRemainingTime = () => {

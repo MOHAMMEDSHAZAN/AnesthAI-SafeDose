@@ -16,6 +16,7 @@ export const Auth: React.FC<AuthProps> = ({ onLoginSuccess }) => {
   
   // Tab states: 'credentials' | 'biometric' | 'emergency'
   const [authTab, setAuthTab] = useState<'credentials' | 'biometric' | 'emergency'>('credentials');
+  const [demoExpTimestamp] = useState(() => Math.floor(Date.now() / 1000) + 3600);
   
   // Biometric scanning state
   const [scanProgress, setScanProgress] = useState(0);
@@ -581,7 +582,7 @@ export const Auth: React.FC<AuthProps> = ({ onLoginSuccess }) => {
             <br />
             {`  "mfa_verified": ${step === 'otp' || authTab === 'biometric' || authTab === 'emergency' ? 'true' : 'false'},`}
             <br />
-            {`  "exp": ${Math.floor(Date.now() / 1000) + 3600}`}
+            {`  "exp": ${demoExpTimestamp}`}
             <br />
             {"}"}
           </pre>

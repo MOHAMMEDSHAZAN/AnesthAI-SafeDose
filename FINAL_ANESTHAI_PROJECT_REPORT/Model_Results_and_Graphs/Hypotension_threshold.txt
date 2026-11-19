@@ -1,0 +1,19 @@
+Task: Intraoperative Hypotension Prediction (VitalDB)
+Dataset: VitalDB (235 high-fidelity surgical cases, 1-second resolution)
+Model: LightGBM Classifier (hypotension_lgbm.pkl)
+Split Strategy: Train: 165 cases, Val: 35 cases, Test: 35 cases (Patient-grouped by caseid, seed=42)
+Threshold (tau): 0.5000
+Tuning Strategy: Pre-tuned threshold (0.500) applied strictly to held-out test cohort
+Evaluation Results on Held-out Test Set:
+  Total Test Samples: 708755
+  True Negatives (TN): 393622
+  False Positives (FP): 141274
+  False Negatives (FN): 77031
+  True Positives (TP): 96828
+  Sensitivity (Recall): 0.5569
+  Specificity: 0.7359
+  Precision: 0.4067
+  F1 Score: 0.4701
+  Accuracy: 0.6920
+  ROC-AUC: 0.6927
+  PR-AUC: 0.4818

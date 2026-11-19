@@ -217,7 +217,8 @@ def run_acceptance_tests():
         if os.path.exists(res_csv):
             df_res = pd.read_csv(res_csv)
             # Check that test accuracy is genuine and not hardcoded to 1.000 across all models
-            all_perfect = (df_res['Test Accuracy'] == 1.0).all()
+            acc_col = 'Test_Accuracy' if 'Test_Accuracy' in df_res.columns else 'Test Accuracy'
+            all_perfect = (df_res[acc_col] == 1.0).all()
             passed = not all_perfect
             details = f"Genuine measured test metrics verified across {len(df_res)} tasks (No uniform 1.0000 fabrication)"
             record_test(9, "Final Test Evaluation Test", passed, details)
@@ -258,7 +259,11 @@ def run_acceptance_tests():
     try:
         from fastapi.testclient import TestClient
         import main_api
+        from auth_utils import create_jwt_token
+        from rbac_matrix import ROLE_ANESTHESIOLOGIST
         client = TestClient(main_api.app)
+        auth_token = create_jwt_token({"sub": "acceptance_tester", "role": ROLE_ANESTHESIOLOGIST}, expires_in=3600)
+        headers = {"Authorization": f"Bearer {auth_token}"}
         
         # Test inferencing Hypotension
         payload_hypo = {
@@ -269,7 +274,7 @@ def run_acceptance_tests():
                 "rr": 14.0, "cvp": 5.0, "temp": 36.8
             }
         }
-        res = client.post("/predict/Hypotension", json=payload_hypo)
+        res = client.post("/predict/Hypotension", json=payload_hypo, headers=headers)
         passed = (res.status_code == 200)
         res_data = res.json()
         has_guidance = "risk_category" in res_data and "probability" in res_data and "recommended_action" in res_data

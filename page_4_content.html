@@ -1,0 +1,78 @@
+<div class="two-col">
+    <h3 class="subsec-heading" style="margin-top: 0;">D. Operational Machine Learning Architectures</h3>
+    <p class="no-indent">Rather than enforcing a single learning algorithm across heterogeneous clinical modalities, Anesth AI deploys task-specific champion architectures selected via systematic empirical evaluation (Table III) [1], [6], [12]–[14]: <i>HistGradientBoosting:</i> Selected for Hypotension, Hypoxia, and Tachycardia [1], [4] due to its native handling of missing values, rapid inference latency, and robust leaf-wise histogram binning across continuous surgical telemetry vectors comprising backward rolling summary statistics (mean, median, standard deviation, min, max, linear slope over 5-minute windows [t - 300s, t]); <i>LightGBM:</i> Deployed for Arrhythmia Detection and Fluid Recommendation, providing fast leaf-wise tree growth, native categorical support, exact TreeSHAP attribution compatibility, and strong probability calibration across high-dimensional feature spaces; <i>CatBoost:</i> Selected for Emergency Severity Assessment [14] due to its specialized handling of high-cardinality categorical variables (chief complaints, arrival modes, insurance types) using ordered target encoding and symmetric oblivious decision trees that resist overfitting; <i>ClinicalCNN (1D-CNN):</i> Engineered for Bradycardia telemetry classification, employing three 1D convolutional layers (kernel sizes 3 and 5, filter depth 64–128) with batch normalization, ReLU activation, max-pooling, and dropout (0.25) to capture localized morphological waveform shifts; <i>ClinicalLSTM:</i> Deployed for Surgical Blood Loss prediction, utilizing a two-layer bidirectional Long Short-Term Memory network (hidden dimension 64, dropout 0.20) to capture cumulative fluid shift dependencies; and <i>ClinicalGRU:</i> Utilized for ICU Admission and In-Hospital Mortality [12], [14], leveraging a two-layer Gated Recurrent Unit network (hidden dimension 64, dropout 0.20) with masked loss functions for efficient sequential learning over irregularly sampled inpatient laboratory trajectories (seq_len=24). Non-validated demonstration modules (Airway, RiskPrediction, PONV, PACU, DrugSafety, prototype_baseline) are maintained strictly as non-validated prototype software modules and are excluded from scientific benchmark claims.</p>
+
+    <div style="margin: 2.5px 0;">
+      <div class="table-title">Table III: Ten Operational Production Clinical Tasks</div>
+      <table class="ieee-table">
+        <thead>
+          <tr>
+            <th style="width: 8%;">No.</th>
+            <th style="width: 28%;">Clinical Task</th>
+            <th style="width: 28%;">Benchmark Dataset</th>
+            <th style="width: 36%;">Production Model</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="center">1</td><td>Hypotension</td><td>VitalDB</td><td>HistGradientBoosting</td></tr>
+          <tr><td class="center">2</td><td>Hypoxia</td><td>VitalDB</td><td>HistGradientBoosting</td></tr>
+          <tr><td class="center">3</td><td>Bradycardia</td><td>VitalDB</td><td>ClinicalCNN</td></tr>
+          <tr><td class="center">4</td><td>Tachycardia</td><td>VitalDB</td><td>HistGradientBoosting</td></tr>
+          <tr><td class="center">5</td><td>Arrhythmia</td><td>MIT-BIH</td><td>LightGBM</td></tr>
+          <tr><td class="center">6</td><td>Emergency Severity</td><td>MIMIC-IV-ED</td><td>CatBoost</td></tr>
+          <tr><td class="center">7</td><td>Blood Loss</td><td>MIMIC-IV</td><td>ClinicalLSTM</td></tr>
+          <tr><td class="center">8</td><td>Fluid Recommendation</td><td>MIMIC-IV</td><td>LightGBM</td></tr>
+          <tr><td class="center">9</td><td>ICU Admission</td><td>MIMIC-IV</td><td>ClinicalGRU</td></tr>
+          <tr><td class="center">10</td><td>Mortality</td><td>MIMIC-IV</td><td>ClinicalGRU</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsec-heading" style="margin-top: 2.5px;">E. Explainable AI (XAI) Attribution</h3>
+    <p class="no-indent">To prevent black-box opacity in high-stakes clinical decision-making, explainable AI is integrated via TreeSHAP (SHapley Additive exPlanations) for gradient boosted tree models and gradient saliency maps for deep sequence architectures [11]. For each prediction, the system computes exact local Shapley values, quantifying the positive or negative contribution of individual physiological features toward the final risk estimate. The clinical dashboard renders horizontal attribution bars displaying top risk drivers alongside model-estimated probabilities. Attendings review these attributions prior to taking clinical action. The system does not assert unverified feature importance rankings; all explanations are derived dynamically from verified project model artifacts.</p>
+
+    <h2 class="sec-heading" style="margin-top: 3.5px;">V. Clinical Calculation, Safety and XAI</h2>
+    <h3 class="subsec-heading" style="margin-top: 2px;">A. Anesthesia Dose Calculation Decision Support</h3>
+    <p class="no-indent">Pharmacological dose support in Anesth AI provides deterministic, parameter-driven calculation guidance based on patient-specific physiological indicators [3], [5]: Total Body Weight (TBW = measured body weight in kg); Body Mass Index (BMI = Weight / Height&sup2;); and Lean Body Mass (LBM) computed via the authoritative Janmahasatian formulation:</p>
+    <div class="math-block" style="margin: 3px 0; padding: 2px 4px;">
+      LBM<sub>Male</sub> = (9270 &times; W) / (6680 + 216 &times; BMI)<br>
+      LBM<sub>Female</sub> = (9270 &times; W) / (8780 + 244 &times; BMI)
+    </div>
+    <p>Body-size normalization is vital because dosing hydrophilic medications solely on TBW in obese patients can precipitate severe overdosing, whereas dosing lipophilic agents strictly on ideal weight risks inadequate anesthesia depth. The Janmahasatian formulation provides an empirical, fat-free mass reference that preserves target-controlled infusion accuracy across broad demographic cohorts without requiring invasive bioimpedance analysis. The dosing engine incorporates physiological scaling adjustments for age-related clearance reductions in geriatric cohorts (&ge; 65 years) and evaluates organ-function safety flags for severe aortic stenosis, renal impairment, and hepatic insufficiency. The workflow systematically evaluates patient body habitus to determine whether TBW or LBM serves as the clinically indicated dosing scalar: Patient Data &rarr; TBW/BMI &rarr; LBM where applicable &rarr; dosing basis &rarr; configured calculation &rarr; safety checks &rarr; clinician review &rarr; documented recommendation (Fig. 3). Specific drug dosing parameters not provided in verified project references remain under attending clinician determination. The module provides calculation support and requires clinician verification before clinical use.</p>
+
+    <h3 class="subsec-heading" style="margin-top: 2.5px;">B. Deterministic Physiological Fluid Engine</h3>
+    <p class="no-indent">Intraoperative fluid management requires transparent physiological accounting rather than opaque machine learning regression [2], [4]. Anesth AI completely decouples: <i>Statistical ML Fluid Recommendation:</i> A validated LightGBM classifier predicting the empirical probability that similar surgical patients received fluid boluses; and <i>Deterministic Physiological Fluid Engine:</i> An arithmetic service executing authoritative physiological equations:</p>
+    <p><i>Holliday-Segar Maintenance Rate (R in mL/hr):</i> For W &le; 10 kg: R = 4W; for 10 &lt; W &le; 20 kg: R = 40 + 2(W - 10); for W &gt; 20 kg: R = 60 + (W - 20). The Holliday-Segar calculation is used as a basal/reference calculation and is not presented as a universal intraoperative fluid prescription; third-space replacement formulas are deliberately omitted.</p>
+
+    <!-- FIG 3: EXACT SAME UNIFORM FRAME -->
+    <div class="figure-box">
+      <div class="figure-frame">
+        <img src="{fig3}" alt="Anesth AI anesthesia dose-calculation decision-support interface.">
+      </div>
+      <div class="caption"><b>Fig. 3.</b> Anesth AI anesthesia dose-calculation decision-support interface.</div>
+    </div>
+
+    <p><i>Cumulative Fluid Input (F_in):</i> F_in = Crystalloids + Colloids + Blood Products + Other documented IV inputs.</p>
+    <p><i>Cumulative Measured Fluid Losses (F_loss):</i> F_loss = Blood Loss + Urine Output + Drain/Suction Losses + Other measured losses.</p>
+    <p><i>Net Fluid Balance:</i> Net Balance = F_in - F_loss; Normalized Net Balance = Net Balance / Weight (mL/kg).</p>
+    <p><i>Urine Output Rate:</i> UO_rate = Urine Volume / (Weight &times; Duration) in mL/kg/hr.</p>
+    <p><i>Estimated Blood Volume (EBV):</i> EBV = Weight &times; 70 mL/kg (Male), Weight &times; 65 mL/kg (Female).</p>
+    <p><i>Blood Loss Percentage:</i> Blood Loss % = (Measured Blood Loss / EBV) &times; 100, mapped to configured ATLS hemorrhage reference categories (Classes I–IV).</p>
+    <p><i>Configured Fluid Safety Flags:</i> Advisory flags highlight excessive positive fluid balance (&gt;30 mL/kg or &gt;2500 mL), sustained oliguria (&lt;0.5 mL/kg/hr for &gt;1 hr), significant surgical hemorrhage (&gt;15% EBV), and ATLS Class III/IV shock. Alerts operate strictly as decision-support safety flags rather than treatment commands. The system does not autonomously administer or titrate fluids.</p>
+
+    <h3 class="subsec-heading" style="margin-top: 2.5px;">C. Clinician-Confirmed ASA Physical Status Classification</h3>
+    <p>The platform strictly adheres to the standardized terminology: <b>ASA Physical Status Classification</b> (ASA I through ASA VI): ASA I (Normal healthy patient), ASA II (Mild systemic disease), ASA III (Severe systemic disease), ASA IV (Severe systemic disease that is a constant threat to life), ASA V (Moribund patient not expected to survive without the operation), and ASA VI (Declared brain-dead organ donor). Emergency case status is captured via an independent clinical toggle; when affirmed, modifier "E" is appended (e.g., ASA III-E). Automated AI assignment of ASA status is prohibited; the attending clinician selects and confirms the classification with provider credentials, timestamp, and clinical justification.</p>
+
+    <h3 class="subsec-heading" style="margin-top: 2.5px;">D. Intraoperative Safety Monitoring and Checklists</h3>
+    <p>The telemetry module continuously tracks HR, ECG, SBP, DBP, MAP, SpO2, RR, EtCO2, temperature, urine output, blood loss, fluid input, and fluid balance (Fig. 4). When all values reside within normal limits, the interface displays: <i>"Monitoring status: No configured alerts currently triggered."</i> Generic or unqualified declarations of safety (such as "Patient is safe") are strictly prohibited. When an alert triggers, the interface presents the parameter, current value, trend direction, severity level, potential clinical causes, recommended verification checks, and logs clinician acknowledgment or override rationale into the immutable audit trail.</p>
+
+    <p>Configured physiological limits encompass severe hypotension (MAP &lt; 65 mmHg or SBP &lt; 90 mmHg), acute hypoxia (SpO2 &lt; 90%), severe bradycardia (HR &lt; 50 bpm), tachycardia (HR &gt; 100 bpm), hypothermia (core temperature &lt; 35.5&deg;C), hypercarbia (EtCO2 &gt; 50 mmHg), and oliguria (urine output &lt; 0.5 mL/kg/hr). In accordance with WHO surgical guidelines, the system enforces structured verification: Pre-Induction Checklist (21 verified checkpoints covering patient identity, procedure, consent, allergies, ASA status, airway difficulty, aspiration risk, comorbidities, IV access, blood availability, anesthesia plan, monitoring plan, oxygen, airway equipment, suction, medication verification, difficult-airway planning, anticipated blood loss) and Surgical Sign-Out Checklist (12 verified post-op checkpoints).</p>
+
+    <!-- FIG 4: EXACT SAME UNIFORM FRAME -->
+    <div class="figure-box">
+      <div class="figure-frame">
+        <img src="{fig4}" alt="Live operating theatre telemetry and clinical decision-support interface of Anesth AI.">
+      </div>
+      <div class="caption"><b>Fig. 4.</b> Live operating theatre telemetry and clinical decision-support interface of Anesth AI.</div>
+    </div>
+  </div>

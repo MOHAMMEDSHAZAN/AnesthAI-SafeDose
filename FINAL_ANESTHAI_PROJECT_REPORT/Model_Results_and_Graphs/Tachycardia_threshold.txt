@@ -1,0 +1,19 @@
+Task: Intraoperative Tachycardia Prediction (VitalDB)
+Dataset: VitalDB (235 high-fidelity surgical cases, 1-second resolution)
+Model: HistGradientBoosting Classifier (tachycardia_histgb.pkl)
+Split Strategy: Train: 165 cases, Val: 35 cases, Test: 35 cases (Patient-grouped by caseid, seed=42)
+Threshold (tau): 0.2500
+Tuning Strategy: Tuned on validation cohort to optimize clinical recall on early tachycardia events (val_threshold=0.250)
+Evaluation Results on Held-out Test Set:
+  Total Test Samples: 708755
+  True Negatives (TN): 420495
+  False Positives (FP): 192428
+  False Negatives (FN): 36312
+  True Positives (TP): 59520
+  Sensitivity (Recall): 0.6211
+  Specificity: 0.6860
+  Precision: 0.2362
+  F1 Score: 0.3423
+  Accuracy: 0.6773
+  ROC-AUC: 0.6980
+  PR-AUC: 0.2396

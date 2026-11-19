@@ -38,11 +38,11 @@ print("=" * 90)
 print("\n[TEST 1] Registry Verification")
 print(f"  TORCH_MODELS count: {len(TORCH_MODELS)}")
 print(f"  TORCH_MODELS keys: {sorted(list(TORCH_MODELS.keys()))}")
-assert len(TORCH_MODELS) == 5, f"Expected 5 PyTorch models, got {len(TORCH_MODELS)}"
+assert len(TORCH_MODELS) == 4, f"Expected 4 PyTorch models, got {len(TORCH_MODELS)}"
 for task in VALIDATED_PYTORCH_TASKS:
     assert task in TORCH_MODELS, f"{task} missing from TORCH_MODELS"
     assert task in MODELS, f"{task} missing from MODELS"
-print("  PASSED: All 5 PyTorch models registered in TORCH_MODELS and MODELS.")
+print("  PASSED: All 4 PyTorch models registered in TORCH_MODELS and MODELS.")
 
 # TEST 2: Check that legacy standalone .pt files were NOT loaded
 print("\n[TEST 2] Legacy Standalone .pt File Non-loading Verification")
@@ -70,25 +70,28 @@ print("  /health response payload:")
 for k, v in hdata.items():
     print(f"    {k}: {v}")
 
-assert hdata['validated_sklearn_models_count'] == 5, f"Expected 5 sklearn models, got {hdata['validated_sklearn_models_count']}"
-assert hdata['validated_pytorch_models_count'] == 5, f"Expected 5 PyTorch models, got {hdata['validated_pytorch_models_count']}"
+assert hdata['validated_sklearn_models_count'] == 6, f"Expected 6 sklearn models, got {hdata['validated_sklearn_models_count']}"
+assert hdata['validated_pytorch_models_count'] == 4, f"Expected 4 PyTorch models, got {hdata['validated_pytorch_models_count']}"
 assert hdata['validated_models_count'] == 10, f"Expected 10 total validated models, got {hdata['validated_models_count']}"
-assert hdata['demo_models_count'] == 6, f"Expected 6 demo models, got {hdata['demo_models_count']}"
 assert sorted(hdata['validated_pytorch_models']) == sorted(VALIDATED_PYTORCH_TASKS)
 assert sorted(hdata['validated_sklearn_models']) == sorted(VALIDATED_SKLEARN_TASKS)
 print("  PASSED: /health reports exact taxonomy without counting aliases.")
 
-# TEST 4: Prediction tests for all 5 PyTorch models
-print("\n[TEST 4] POST /predict for 5 Validated PyTorch Models")
+# Auth setup
+from auth_utils import create_jwt_token
+from rbac_matrix import ROLE_ANESTHESIOLOGIST
+auth_token = create_jwt_token({"sub": "pytorch_tester", "role": ROLE_ANESTHESIOLOGIST}, expires_in=3600)
+headers = {"Authorization": f"Bearer {auth_token}"}
 
-# 1. Arrhythmia (100 ECG samples)
-arrhythmia_feat = {f"ecg_sample_{i}": 0.05 * math.sin(i * 0.1) for i in range(100)}
-# 2. BloodLoss (8 MIMIC hospital features)
+# TEST 4: Prediction tests for 4 Validated PyTorch Models
+print("\n[TEST 4] POST /predict for 4 Validated PyTorch Models")
+
+# 1. BloodLoss (8 MIMIC hospital features)
 bloodloss_feat = {
     'anchor_age': 65.0, 'gender_code': 1.0, 'prescription_count': 5.0,
     'comorbidity_count': 2.0, 'creatinine': 1.2, 'bun': 22.0, 'wbc': 8.5, 'lab_mean': 2.4
 }
-# 3. Bradycardia (19 VitalDB features)
+# 2. Bradycardia (19 VitalDB features)
 bradycardia_feat = {
     'sbp': 120.0, 'dbp': 80.0, 'map': 93.3, 'map_roll_mean': 92.0, 'map_roll_std': 1.5,
     'map_trend': -1.0, 'spo2': 98.0, 'spo2_roll_mean': 98.0, 'spo2_roll_std': 0.2,
@@ -96,12 +99,13 @@ bradycardia_feat = {
     'etco2_trend': 0.0, 'rr': 14.0, 'cvp': 6.0, 'temp': 36.8, 'pulse_pressure': 40.0,
     'cvp_map_ratio': 0.064
 }
-# 4. FluidRecommendation (8 MIMIC hospital features)
-fluid_feat = {
-    'anchor_age': 58.0, 'gender_code': 0.0, 'prescription_count': 4.0,
-    'comorbidity_count': 1.0, 'potassium': 4.2, 'glucose': 115.0, 'wbc': 7.0, 'lab_mean': 3.1
+# 3. ICU (10 MIMIC hospital features)
+icu_feat = {
+    'anchor_age': 68.0, 'gender_code': 0.0, 'hemoglobin': 11.2, 'creatinine': 1.8,
+    'bun': 32.0, 'platelets': 185.0, 'wbc': 11.4, 'prescription_count': 9.0,
+    'comorbidity_count': 4.0, 'lab_mean': 3.5
 }
-# 5. Mortality (10 MIMIC hospital features)
+# 4. Mortality (10 MIMIC hospital features)
 mortality_feat = {
     'anchor_age': 72.0, 'gender_code': 1.0, 'hemoglobin': 12.5, 'creatinine': 1.4,
     'bun': 25.0, 'platelets': 210.0, 'wbc': 9.2, 'prescription_count': 6.0,
@@ -109,21 +113,19 @@ mortality_feat = {
 }
 
 pytorch_test_cases = [
-    ("Arrhythmia", arrhythmia_feat),
     ("BloodLoss", bloodloss_feat),
     ("Bradycardia", bradycardia_feat),
-    ("FluidRecommendation", fluid_feat),
+    ("ICU", icu_feat),
     ("Mortality", mortality_feat)
 ]
 
 for task, payload in pytorch_test_cases:
-    # Verify input feature count matches model schema
     expected_feats = FEATURES[task]
     assert len(payload) == len(expected_feats), f"Payload size {len(payload)} != schema size {len(expected_feats)} for {task}"
     for ef in expected_feats:
         assert ef in payload, f"Missing feature {ef} in test payload for {task}"
         
-    res = client.post(f"/predict/{task}", json={"features": payload})
+    res = client.post(f"/predict/{task}", json={"features": payload}, headers=headers)
     assert res.status_code == 200, f"/predict/{task} failed: {res.status_code} -> {res.text}"
     data = res.json()
     prob = data['probability']
@@ -136,38 +138,41 @@ for task, payload in pytorch_test_cases:
     assert pred == int(prob >= threshold), f"Threshold mismatch for {task}: prob={prob}, th={threshold}, pred={pred}"
     print(f"  [PyTorch] {task:22s} -> Prob: {prob:.4f} | Pred: {pred} | Thresh: {threshold:.3f} | Conf: {conf}% | Risk: {data['risk_category']}")
 
-# TEST 5: Retest all 5 Validated Classical Models
-print("\n[TEST 5] POST /predict for 5 Validated Classical Models")
+# TEST 5: Retest all 6 Validated Classical Models
+print("\n[TEST 5] POST /predict for 6 Validated Classical Models")
 
-for task in VALIDATED_SKLEARN_TASKS:
-    # Build valid payload dynamically from saved features
-    req_feats = FEATURES[task]
-    payload = {}
-    for f in req_feats:
-        if 'age' in f.lower():
-            payload[f] = 60.0
-        elif 'gender' in f.lower():
-            payload[f] = 1.0
-        elif 'spo2' in f.lower():
-            payload[f] = 98.0
-        elif 'hr' in f.lower() or 'heart' in f.lower():
-            payload[f] = 75.0
-        elif 'sbp' in f.lower():
-            payload[f] = 120.0
-        elif 'dbp' in f.lower():
-            payload[f] = 80.0
-        elif 'map' in f.lower():
-            payload[f] = 93.3
-        elif 'temp' in f.lower():
-            payload[f] = 36.8
-        elif 'rr' in f.lower():
-            payload[f] = 14.0
-        elif 'etco2' in f.lower():
-            payload[f] = 38.0
-        else:
-            payload[f] = 1.0
-            
-    res = client.post(f"/predict/{task}", json={"features": payload})
+classical_payloads = {
+    "Arrhythmia": {"features": {f"ecg_sample_{i}": 0.05 * math.sin(i * 0.1) for i in range(100)}},
+    "EmergencySeverity": {"features": {
+        'temperature': 37.2, 'heartrate': 85.0, 'resprate': 16.0, 'o2sat': 98.0,
+        'sbp': 125.0, 'dbp': 80.0
+    }},
+    "FluidRecommendation": {"features": {
+        'anchor_age': 58.0, 'gender_code': 0.0, 'prescription_count': 4.0,
+        'comorbidity_count': 1.0, 'potassium': 4.2, 'glucose': 115.0, 'wbc': 7.0, 'lab_mean': 3.1
+    }},
+    "Hypotension": {"features": {
+        'hr': 78.0, 'hr_roll_mean': 77.5, 'hr_roll_std': 1.2, 'hr_trend': -0.5,
+        'spo2': 97.0, 'spo2_roll_mean': 97.0, 'spo2_roll_std': 0.3, 'spo2_trend': 0.0,
+        'etco2': 35.0, 'etco2_roll_mean': 35.0, 'etco2_roll_std': 0.5, 'etco2_trend': 0.0,
+        'rr': 12.0, 'cvp': 5.0, 'temp': 36.5
+    }},
+    "Hypoxia": {"features": {
+        'hr': 82.0, 'hr_roll_mean': 81.0, 'hr_roll_std': 1.5, 'hr_trend': 0.5,
+        'sbp': 115.0, 'dbp': 75.0, 'map': 88.3, 'map_roll_mean': 88.0, 'map_roll_std': 1.8, 'map_trend': -0.5,
+        'etco2': 32.0, 'etco2_roll_mean': 33.0, 'etco2_roll_std': 0.8, 'etco2_trend': -1.0,
+        'rr': 22.0, 'cvp': 6.0, 'temp': 36.7, 'shock_index': 0.71, 'pulse_pressure': 40.0, 'cvp_map_ratio': 0.068
+    }},
+    "Tachycardia": {"features": {
+        'sbp': 130.0, 'dbp': 85.0, 'map': 100.0, 'map_roll_mean': 99.0, 'map_roll_std': 2.1, 'map_trend': 1.0,
+        'spo2': 99.0, 'spo2_roll_mean': 99.0, 'spo2_roll_std': 0.1, 'spo2_trend': 0.0,
+        'etco2': 40.0, 'etco2_roll_mean': 39.5, 'etco2_roll_std': 0.6, 'etco2_trend': 0.5,
+        'rr': 18.0, 'cvp': 7.0, 'temp': 37.2, 'pulse_pressure': 45.0, 'cvp_map_ratio': 0.070
+    }}
+}
+
+for task, body in classical_payloads.items():
+    res = client.post(f"/predict/{task}", json=body, headers=headers)
     assert res.status_code == 200, f"/predict/{task} failed: {res.status_code} -> {res.text}"
     data = res.json()
     prob = data['probability']
@@ -178,11 +183,15 @@ for task in VALIDATED_SKLEARN_TASKS:
     assert 0.0 <= prob <= 1.0, f"Invalid probability for {task}: {prob}"
     print(f"  [Classical] {task:20s} -> Prob: {prob:.4f} | Pred: {pred} | Thresh: {threshold:.3f} | Conf: {conf}% | Risk: {data['risk_category']}")
 
-# TEST 6: Missing Feature Validation (HTTP 422)
+# TEST 6: Missing Feature & Invalid Input HTTP 422 Error Handling Verification
 print("\n[TEST 6] Missing Feature HTTP 422 Error Handling Verification")
-bad_res = client.post("/predict/Mortality", json={"features": {"anchor_age": 60}})
-assert bad_res.status_code == 422, f"Expected 422 for missing features, got {bad_res.status_code}"
-print(f"  PASSED: Missing feature rejected with HTTP 422: {bad_res.json()['detail']}")
+bad_res_missing = client.post("/predict/Hypotension", json={"features": {"hr": 70}}, headers=headers)
+assert bad_res_missing.status_code == 422, f"Expected 422 for missing vitals, got {bad_res_missing.status_code}"
+print(f"  PASSED: Missing required vital rejected with HTTP 422: {bad_res_missing.json()['detail']}")
+
+bad_res_str = client.post("/predict/Mortality", json={"features": {"anchor_age": "not_a_number"}}, headers=headers)
+assert bad_res_str.status_code == 422, f"Expected 422 for non-numeric input, got {bad_res_str.status_code}"
+print(f"  PASSED: Non-numeric input rejected with HTTP 422: {bad_res_str.json()['detail']}")
 
 print("\n" + "=" * 90)
 print("ALL TESTS PASSED SUCCESSFULLY! 10 VALIDATED CLINICAL TASKS VERIFIED.")

@@ -521,6 +521,38 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const saveLocalNotifs = (newNotifs: ClinicalNotification[]) => {
     localStorage.setItem('anesthai_notifications', JSON.stringify(newNotifs));
   };
+
+  // Notification Feed with live database sync
+  const addNotification = async (n: Omit<ClinicalNotification, 'id' | 'timestamp' | 'dismissed'>) => {
+    const newNotif: ClinicalNotification = {
+      ...n,
+      id: Math.random().toString(36).substring(2, 9),
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      dismissed: false,
+    };
+
+    setNotifications((prev) => {
+      const next = [newNotif, ...prev];
+      saveLocalNotifs(next);
+      return next;
+    });
+
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from('notifications').insert({
+          id: newNotif.id,
+          type: newNotif.type,
+          title: newNotif.title,
+          message: newNotif.message,
+          timestamp: newNotif.timestamp,
+          patient_id: newNotif.patientId || null,
+          dismissed: newNotif.dismissed
+        });
+      } catch (err) {
+        console.error('Failed to sync notification to Supabase:', err);
+      }
+    }
+  };
   const saveLocalChecklists = (items: SafetyChecklist[]) => {
     localStorage.setItem('anesthai_checklists', JSON.stringify(items));
   };
@@ -985,38 +1017,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         await supabase.from('operating_rooms').update(dbUpdates).eq('id', id);
       } catch (err) {
         console.error('Failed to sync OR status updates to Supabase:', err);
-      }
-    }
-  };
-
-  // Notification Feed with live database sync
-  const addNotification = async (n: Omit<ClinicalNotification, 'id' | 'timestamp' | 'dismissed'>) => {
-    const newNotif: ClinicalNotification = {
-      ...n,
-      id: Math.random().toString(36).substring(2, 9),
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      dismissed: false,
-    };
-
-    setNotifications((prev) => {
-      const next = [newNotif, ...prev];
-      saveLocalNotifs(next);
-      return next;
-    });
-
-    if (isSupabaseConfigured && supabase) {
-      try {
-        await supabase.from('notifications').insert({
-          id: newNotif.id,
-          type: newNotif.type,
-          title: newNotif.title,
-          message: newNotif.message,
-          timestamp: newNotif.timestamp,
-          patient_id: newNotif.patientId || null,
-          dismissed: newNotif.dismissed
-        });
-      } catch (err) {
-        console.error('Failed to sync notification to Supabase:', err);
       }
     }
   };

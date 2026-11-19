@@ -6,7 +6,7 @@ Clinician-Facing Decision-Support Research Prototype Module
 from typing import List, Optional, Dict, Any, Union
 from pydantic import BaseModel, Field, field_validator, model_validator
 from fastapi import APIRouter, HTTPException, Query, Body, Header
-from datetime import datetime
+from datetime import datetime, timezone
 import time
 import os
 import sys
@@ -76,13 +76,13 @@ CURRENT_ASA_RECORD = {
     "display_classification": "ASA II",
     "clinician_confirmed": True,
     "clinician_name": "Attending Anesthesiologist",
-    "confirmation_timestamp": datetime.utcnow().isoformat() + "Z",
+    "confirmation_timestamp": datetime.now(timezone.utc).isoformat(),
     "notes": "Initial pre-anesthesia baseline assessment"
 }
 
 AUDIT_LOGS: List[Dict[str, Any]] = [
     {
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "action": "ASA_CONFIRMATION",
         "event": "ASA Physical Status Confirmed",
         "asa_physical_status": "ASA II",
@@ -495,7 +495,7 @@ def get_asa_status(patient_id: Optional[str] = None):
 @clinical_safety_router.post("/api/asa-physical-status")
 def post_asa_status(req: ASARequest):
     display = f"{req.asa_physical_status}-E" if req.emergency_case else req.asa_physical_status
-    ts = datetime.utcnow().isoformat() + "Z"
+    ts = datetime.now(timezone.utc).isoformat()
     
     CURRENT_ASA_RECORD.update({
         "patient_id": req.patient_id or CURRENT_ASA_RECORD.get("patient_id", "P-DEFAULT"),
@@ -522,6 +522,10 @@ def post_asa_status(req: ASARequest):
     return {
         "status": "success",
         "message": f"ASA Physical Status Classification confirmed by {req.clinician_name}: {display}",
+        "current_status": {
+            **CURRENT_ASA_RECORD,
+            "asa_physical_status_display": display
+        },
         "record": CURRENT_ASA_RECORD
     }
 
@@ -579,7 +583,7 @@ def post_intraop_checklist(payload: Dict[str, Any] = Body(...)):
     clinician = payload.get("clinician_name", payload.get("clinician_id", "Attending Clinician"))
     
     CHECKLIST_STORE[phase] = items
-    ts = datetime.utcnow().isoformat() + "Z"
+    ts = datetime.now(timezone.utc).isoformat()
     
     AUDIT_LOGS.append({
         "timestamp": ts,
@@ -606,7 +610,7 @@ def post_intraop_checklist(payload: Dict[str, Any] = Body(...)):
 def post_alert_acknowledge(payload: Dict[str, Any] = Body(...)):
     alert_id = payload.get("alert_id", "unknown_alert")
     clinician = payload.get("clinician_name", payload.get("clinician_id", "Attending Clinician"))
-    ts = datetime.utcnow().isoformat() + "Z"
+    ts = datetime.now(timezone.utc).isoformat()
     
     AUDIT_LOGS.append({
         "timestamp": ts,
@@ -634,7 +638,7 @@ def post_alert_override(payload: Dict[str, Any] = Body(...)):
     if not reason:
         raise HTTPException(status_code=400, detail="Clinical override requires explicit documented reason.")
         
-    ts = datetime.utcnow().isoformat() + "Z"
+    ts = datetime.now(timezone.utc).isoformat()
     
     AUDIT_LOGS.append({
         "timestamp": ts,

@@ -1,0 +1,82 @@
+<div class="two-col">
+    <p class="no-indent">In electronic health record risk stratification, large-scale deep sequence models have been deployed to anticipate intensive care unit transfer and perioperative mortality. Dai, Hwang, and Tseng [8] engineered deep reinforcement policy systems for critical care early warning (PoEMS), while Shirali, Schubert, and Alaa [9] introduced action space pruning for reliable critical care policies. Wang et al. [12] evaluated stochastic signal analysis for ICU outcome prediction, and Tang et al. [19] formulated multimodal graph networks for hospital readmission. Wu et al. [14] developed alternating deep sequential models for treatment forecasting, and Ramadhan [18] emphasized structured data preprocessing and leakage prevention. However, hospital-level models operate as black boxes, lacking integration with intraoperative surgical checklists, airway difficulty indices, or deterministic fluid equations. Similarly, closed-loop anesthesia delivery platforms investigated by Liu et al. [3] and Nair et al. [4] emphasize automated control but exhibit substantial safety vulnerabilities during rapid hemodynamic volatility. Table I summarizes representative recent studies published between 2023 and 2025.</p>
+
+    <div style="column-span: all; margin: 2.0px 0;">
+      <div class="table-title">Table I: Methodological Comparison of Recent Perioperative AI Literature (2023–2025)</div>
+      <table class="ieee-table">
+        <thead>
+          <tr>
+            <th style="width: 6%;">Year</th>
+            <th style="width: 22%;">Methodological Approach</th>
+            <th style="width: 18%;">Data Source &amp; Cohort</th>
+            <th style="width: 22%;">Clinical Contribution</th>
+            <th style="width: 16%;">Clinical Outcome</th>
+            <th style="width: 16%;">Limitations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="center">2024</td>
+            <td>Frequency-domain deep learning for IOH prediction [1]</td>
+            <td>VitalDB (surgical cohort)</td>
+            <td>Real-time intraoperative hypotension warning 5 min prior to MAP &lt; 65 mmHg</td>
+            <td>AUROC 0.898; identified 1.5–3.0 Hz band for hypotension</td>
+            <td>Random window partitioning; lacks integrated surgical fluid tracking.</td>
+          </tr>
+          <tr>
+            <td class="center">2024</td>
+            <td>Cardiovascular state dynamic estimation from arterial pressure [2]</td>
+            <td>Arterial waveform recordings</td>
+            <td>Dynamic cardiovascular state tracking during surgical procedures</td>
+            <td>Real-time stroke volume and vascular resistance estimation</td>
+            <td>Limited to arterial line cohorts without holistic volume balance.</td>
+          </tr>
+          <tr>
+            <td class="center">2024</td>
+            <td>General anesthesia EEG amplitude modulation analysis [3]</td>
+            <td>Multi-channel clinical EEG</td>
+            <td>Holo-Hilbert spectrum analysis for anesthesia depth monitoring</td>
+            <td>Quantified amplitude modulation across anesthetic transitions</td>
+            <td>Static EEG analysis; lacks integration with hemodynamics and fluid status.</td>
+          </tr>
+          <tr>
+            <td class="center">2025</td>
+            <td>Inotropic infusion optimization with AI digital twins [4]</td>
+            <td>Critical care inotropic records</td>
+            <td>AI decision models and digital twins for infusion titration</td>
+            <td>Outperformed traditional controllers for blood pressure stability</td>
+            <td>High-dimensional optimization; lacks human-in-the-loop override audit trail.</td>
+          </tr>
+          <tr>
+            <td class="center">2024</td>
+            <td>Machine learning prediction of postinduction hypotension [5]</td>
+            <td>VitalDB surgical cohort (320 cases)</td>
+            <td>Pre-induction hypotension risk stratification using dosing features</td>
+            <td>Precision 0.83, Recall 0.84 for post-induction arterial collapse</td>
+            <td>Single-center cohort; lacks real-time intraoperative telemetry integration.</td>
+          </tr>
+          <tr>
+            <td class="center">2024</td>
+            <td>Explainable federated learning for cardiac arrhythmia detection [6]</td>
+            <td>Multi-center ECG records</td>
+            <td>Decentralized privacy-preserving arrhythmia detection with XAI</td>
+            <td>Interpretable feature attribution across clinical client sites</td>
+            <td>Communication overhead; lacks perioperative workflow integration.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="sec-heading">III. System Design and Clinical Workflow</h2>
+    <p class="no-indent">Anesth AI is engineered as an enterprise-grade clinical decision-support prototype operating under strict human-in-the-loop governance [1]–[5]. The platform is intentionally decoupled from autonomous control mechanisms: it does not autonomously infuse pharmacological agents, titrate anesthesia depth, administer intravenous fluids, or alter ventilator settings. Instead, the architecture establishes a multi-tiered decision-support pipeline that ingests complex patient parameters, executes deterministic physiological calculations, delivers well-calibrated machine learning risk estimates, and logs all clinician interactions (Fig. 1).</p>
+
+    <!-- FIG 1: EXACT SAME UNIFORM FRAME -->
+    <div class="figure-box">
+      <div class="figure-frame">
+        <img src="{fig1}" alt="Current system architecture of Anesth AI.">
+      </div>
+      <div class="caption"><b>Fig. 1.</b> Current system architecture of Anesth AI.</div>
+    </div>
+
+    <p>As illustrated in Fig. 1, the logical system architecture is organized into ten tightly coupled functional tiers: <i>Clinical Data Sources:</i> VitalDB, MIT-BIH, MIMIC-IV-ED, and MIMIC-IV; <i>Data Acquisition &amp; Preprocessing Pipeline:</i> Sensor dropout cleaning, train-only median imputation, Pan-Tompkins QRS alignment, zero-leakage grouped partitioning, and target purging; <i>Clinical Feature Processing:</i> Patient habitus (TBW, BMI, Janmahasatian LBM), backward rolling telemetry windows [t-300s, t], and cumulative fluid shifts; <i>ML Prediction Engine:</i> Exactly 10 production clinical prediction tasks; <i>Clinical Decision-Support Layer:</i> Multi-level alert mapping, TreeSHAP attributions, nominal alert semantics, and mandatory clinician review; <i>Clinical Calculation &amp; Safety Modules:</i> Deterministic dose calculation, Janmahasatian LBM, Holliday-Segar fluid engine, ASA confirmation, and WHO safety checklists; <i>FastAPI / Python Backend:</i> Asynchronous routing, Pydantic validation, frozen model inference, and REST APIs; <i>Anesth AI Clinical Interface:</i> React 19, TypeScript, and Vite 8 dashboards; <i>Security &amp; Audit:</i> RBAC, clinician authentication, biometric simulation, Emergency Break-Glass, and immutable audit logs; and <i>Clinician Review / Clinical Decision:</i> Attending anesthesiologist authority enforcing strictly non-autonomous execution.</p>
+  </div>

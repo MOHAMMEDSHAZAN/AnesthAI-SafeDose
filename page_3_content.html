@@ -1,0 +1,73 @@
+<div class="two-col">
+    <h3 class="subsec-heading" style="margin-top: 0;">A. Modular Implementation and Clinical UI Modules</h3>
+    <p class="no-indent">The Anesth AI web application provides a comprehensive suite of dedicated clinical views developed in React 19 and Vite 8: <b>Clinical Dashboard:</b> High-level perioperative case overview and room-by-room status; <b>Patient Management:</b> Demographic entry, clinical history, and laboratory profiling; <b>Preoperative Assessment:</b> Comprehensive anatomical airway assessment, ASA Physical Status assignment, comorbidity mapping, and pre-induction checklist verification; <b>Anesthesia Planner:</b> Case scheduling, technique selection, and equipment readiness; <b>Dose Calculator:</b> Real-time parameter-based pharmacological dose decision support utilizing TBW, BMI, and Janmahasatian lean body mass; <b>Airway Assessment:</b> Structured evaluation of Mallampati score, thyromental distance, cervical spine range of motion, and difficult airway flags; <b>Live OT Telemetry:</b> Real-time multi-parameter intraoperative waveforms, numeric telemetry, alert banners, and acknowledge/override toggles; <b>Anesthesia Record:</b> Formal intraoperative anesthesia charting and chronological event logs; <b>Postoperative PACU:</b> Recovery tracking, vital monitoring, and Modified Aldrete scoring; <b>Postoperative Monitoring:</b> Extended floor-ward transition surveillance; <b>Clinical Models Registry:</b> Inventory of the ten production machine learning models, active versions, and performance metadata; <b>Safety Overview:</b> Aggregated perioperative risk flags and institutional checklist compliance; <b>Intraoperative Safety:</b> Granular hemodynamic limit monitoring and alert configuration; <b>Clinical Analytics:</b> Case duration distributions, alert frequency trends, and complication statistics; <b>Administration &amp; Audit:</b> Role-based user management, access control logs, and clinician override auditing; and <b>Emergency Break-Glass Portal:</b> Rapid elevated access interface with auditable rationale logging and emergency dispatch contacts.</p>
+
+    <h3 class="subsec-heading">B. Three-Phase Perioperative Workflow</h3>
+    <p>Clinical governance follows a structured three-phase sequence mirroring real-world surgical pathways (Fig. 2):</p>
+    <p><i>Preoperative Phase:</i> Begins with patient demographic capture (age, biological sex, height, measured weight), calculation of body mass index (BMI) and lean body mass (LBM), anatomical airway scoring, clinician confirmation of the ASA Physical Status Classification, emergency status determination, laboratory analysis review, parameter-based dose calculation support, blood availability verification, and sign-off of the WHO Pre-Induction Checklist.</p>
+    <p><i>Intraoperative Phase:</i> Upon induction, the system ingests continuous telemetry streams (heart rate, arterial pressures, pulse oximetry, respiratory rate, capnography, core temperature). Telemetry data feeds the frozen machine learning models to forecast impending hemodynamic instability while the deterministic fluid engine computes cumulative input, measured losses, net balance, and urine output rates. All alerts require explicit attending acknowledgment or logged override.</p>
+    <p><i>Postoperative Phase:</i> Following emergence, the patient transitions to the Post-Anesthesia Care Unit (PACU). Monitoring centers on continuous vital sign surveillance, Modified Aldrete recovery scoring (motor activity, respiration, circulation, consciousness, SpO2), ongoing fluid balance tracking, execution of the WHO Surgical Sign-Out Checklist, and structured handover documentation.</p>
+
+    <!-- FIG 2: EXACT SAME UNIFORM FRAME -->
+    <div class="figure-box">
+      <div class="figure-frame">
+        <img src="{fig2}" alt="Three-phase perioperative workflow implemented in Anesth AI.">
+      </div>
+      <div class="caption"><b>Fig. 2.</b> Three-phase perioperative workflow implemented in Anesth AI.</div>
+    </div>
+
+    <h2 class="sec-heading">IV. Datasets and Leakage-Controlled Methodology</h2>
+    <h3 class="subsec-heading">A. Benchmark Clinical Repositories</h3>
+    <p class="no-indent">Model training and evaluation utilized four internationally recognized biomedical repositories (Table II): <b>VitalDB</b>: High-resolution surgical telemetry comprising 6,388 surgical cases (708,755 retrospective 5-minute time windows) with arterial pressures, heart rate, SpO2, capnography, and central venous pressure, powering the Hypotension, Hypoxia, Bradycardia, and Tachycardia models [1], [5]; <b>MIT-BIH Arrhythmia Database</b>: 48 two-channel ambulatory Holter ECG recordings sampled at 360 Hz with expert cardiological annotations (109,494 authentic beats), powering the Arrhythmia model [6], [7], [13], [16], [17], [20], [25]; <b>MIMIC-IV-ED v2.2</b>: Comprehensive emergency department electronic health records comprising 425,087 encounters across 205,504 unique patients, powering the Emergency Severity model [14]; and <b>MIMIC-IV In-Hospital v3.1</b>: Inpatient clinical records comprising 299,712 hospital admissions with laboratory analyses, fluid balance sheets, and clinical outcomes, powering the Blood Loss, Fluid Recommendation, ICU Admission, and Mortality models [8], [9], [12], [14], [19].</p>
+
+    <div style="column-span: all; margin: 2px 0;">
+      <div class="table-title">Table II: Dataset and Preprocessing Specifications</div>
+      <table class="ieee-table">
+        <thead>
+          <tr>
+            <th style="width: 14%;">Dataset</th>
+            <th style="width: 18%;">Modality</th>
+            <th style="width: 20%;">Cohort</th>
+            <th style="width: 22%;">Clinical Tasks</th>
+            <th style="width: 26%;">Preprocessing Protocol</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>VitalDB</b></td>
+            <td>High-frequency perioperative telemetry</td>
+            <td>6,388 cases / 708,755 windows</td>
+            <td>Hypotension, Hypoxia, Bradycardia, Tachycardia</td>
+            <td>Backward rolling windows [t-300s, t]; target-feature purging.</td>
+          </tr>
+          <tr>
+            <td><b>MIT-BIH</b></td>
+            <td>Two-channel ECG, 360 Hz</td>
+            <td>48 records / 109,494 beats</td>
+            <td>Arrhythmia Detection</td>
+            <td>QRS Pan-Tompkins alignment, 360-sample beat windows, record split.</td>
+          </tr>
+          <tr>
+            <td><b>MIMIC-IV-ED</b></td>
+            <td>Emergency EHR records</td>
+            <td>425,087 encounters / 205,504 patients</td>
+            <td>Emergency Severity</td>
+            <td>Target acuity removal, train-only median imputation, target encoding.</td>
+          </tr>
+          <tr>
+            <td><b>MIMIC-IV</b></td>
+            <td>Inpatient EHR/labs/clinical events</td>
+            <td>299,712 hospital admissions</td>
+            <td>Blood Loss, Fluid Recommendation, ICU Admission, Mortality</td>
+            <td>Target variable purging, train-only normalization, sequence padding (seq_len=24).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsec-heading">B. Rigorous Preprocessing and Feature Pipeline</h3>
+    <p class="no-indent">Raw physiological time series and EHR tables undergo a standardized, automated preprocessing pipeline: <i>Data Ingestion and Cleaning:</i> Artifacts, sensor dropouts, and non-physiological outliers (e.g., negative blood pressures, SpO2 &gt; 100%) were filtered; <i>Missing-Value Handling:</i> Median imputation fitted strictly on training data partitions was applied to numeric features, while missing categorical values were mapped to a distinct missing indicator; <i>Temporal Aggregation:</i> For telemetry data, 5-minute rolling windows [t - 300s, t] were aggregated using backward summary statistics (mean, median, standard deviation, minimum, maximum, linear slope); <i>ECG Beat Segmentation:</i> ECG channels were filtered using bandpass filtering (0.5–40 Hz), with R-peaks detected via Pan-Tompkins algorithm, extracting 360-sample windows (-150 to +210 samples around R-peaks); <i>Sequence Construction:</i> Inpatient temporal lab and vital sequences were padded to standardized sequence lengths (seq_len=24) with masking layers for recurrent deep networks; and <i>Target-Definition Review:</i> Ground truth clinical targets were cross-referenced against published clinical consensus definitions (e.g., MAP &lt; 65 mmHg for Hypotension, SpO2 &lt; 90% for Hypoxia, HR &lt; 60 bpm for Bradycardia, HR &gt; 100 bpm for Tachycardia).</p>
+
+    <h3 class="subsec-heading">C. Leakage Prevention Protocol</h3>
+    <p>To eliminate methodological and data leakage, a strict leakage prevention protocol was enforced across all models [18], [25]: <i>Patient/Record Grouped Partitioning:</i> Data was partitioned into 70% Training, 15% Validation, and 15% Frozen Test cohorts strictly grouped by patient or record identifiers (caseid in VitalDB, subject_id in MIMIC-IV and MIMIC-IV-ED, and record_id in MIT-BIH), ensuring zero patient overlap such that P_train &cap; P_val = &empty; and P_train &cap; P_test = &empty;; <i>Target-Defining Feature Purging:</i> Features that mechanically define target outcomes were permanently removed: continuous invasive arterial pressures were purged from Hypotension; continuous SpO2 was purged from Hypoxia; heart rate indicators were purged from Bradycardia and Tachycardia; emergency triage acuity scores were purged from Emergency Severity; and post-admission laboratory measurements and hospital length-of-stay metrics were purged from inpatient models; <i>Train-Only Preprocessing Parameter Fitting:</i> Imputation medians, frequency tables, and StandardScaler parameters were computed exclusively on training partitions and applied without alteration to validation and test partitions; <i>Pre-Outcome Backward Rolling Windows:</i> All telemetry summary statistics were computed backward across [t - 300s, t] without forward-looking temporal leakage; and <i>Single-Touch Frozen Evaluation:</i> The test sets were held completely untouched during feature engineering, model architecture exploration, and hyperparameter tuning; optimal decision thresholds were selected on validation Precision-Recall curves and subsequently evaluated once on the frozen test sets.</p>
+  </div>

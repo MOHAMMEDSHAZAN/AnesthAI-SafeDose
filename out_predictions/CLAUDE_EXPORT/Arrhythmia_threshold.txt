@@ -1,0 +1,19 @@
+Task: Arrhythmia (Binary classification of Ventricular Arrhythmia / Premature Beats on MIT-BIH)
+Dataset: MIT-BIH Arrhythmia Database (PhysioNet)
+Model: LightGBM Classifier
+Split Strategy: Train: 34 records, Val: 7 records, Test: 7 records (Patient-grouped split)
+Threshold (tau): 0.2200
+Tuning Strategy: Tuned on validation records by maximizing F1 score
+Evaluation Results on Held-out Test Set:
+  Total Test Samples: 17026
+  True Negatives (TN): 9202
+  False Positives (FP): 1981
+  False Negatives (FN): 467
+  True Positives (TP): 5376
+  Sensitivity (Recall): 0.9201
+  Specificity: 0.8229
+  Precision: 0.7307
+  F1 Score: 0.8145
+  Accuracy: 0.8562
+  ROC-AUC: 0.9414
+  PR-AUC: 0.9494

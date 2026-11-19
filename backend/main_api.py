@@ -25,6 +25,12 @@ for p in [project_root, training_path, preprocessing_path, backend_path]:
     if p not in sys.path:
         sys.path.append(p)
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv(os.path.join(project_root, '.env'))
+except ImportError:
+    pass
+
 from auth_utils import (
     DEMO_USERS, hash_password, verify_password, create_jwt_token, decode_jwt_token
 )
@@ -52,6 +58,12 @@ else:
     allowed_origins = [
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "http://localhost:5174",
+        "http://127.0.0.1:5174",
+        "http://localhost:5175",
+        "http://127.0.0.1:5175",
+        "http://localhost:4173",
+        "http://127.0.0.1:4173",
         "http://localhost:3000",
         "http://127.0.0.1:3000"
     ]
@@ -1545,7 +1557,8 @@ def verify_drug_safety(request: DrugSafetyCheckRequest):
         "warnings": warnings,
         "contraindications": contraindications,
         "expected_standard_dose": expected_dose if ref else proposed_dose,
-        "unit": unit if ref else "mg"
+        "unit": unit if ref else "mg",
+        "disclaimer": "Decision support provided by Anesth AI safety engine."
     }
 
 # ----------------------------------------------------
@@ -2519,5 +2532,16 @@ def search_patients(query: str = "", authorization: Optional[str] = Header(None)
 if __name__ == "__main__":
     import uvicorn
     host = os.environ.get("HOST", "0.0.0.0")
-    port = int(os.environ.get("PORT", 8000))
+    port_env = os.environ.get("PORT")
+    if port_env:
+        port = int(port_env)
+    else:
+        vite_api_url = os.environ.get("VITE_API_URL", "")
+        if ":8001" in vite_api_url:
+            port = 8001
+        elif ":8000" in vite_api_url:
+            port = 8000
+        else:
+            port = 8000
+    print(f"Starting Anesth AI API Gateway on {host}:{port}...")
     uvicorn.run(app, host=host, port=port)

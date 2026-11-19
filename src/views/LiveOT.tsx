@@ -218,13 +218,16 @@ export const LiveOT: React.FC = () => {
 
   // Sync state refs to prevent stale closures in audio scheduler
   const vitalsRef = useRef(vitals);
-  vitalsRef.current = vitals;
   const isAudioEnabledRef = useRef(isAudioEnabled);
-  isAudioEnabledRef.current = isAudioEnabled;
   const isMutedRef = useRef(isMuted);
-  isMutedRef.current = isMuted;
   const audioVolumeRef = useRef(audioVolume);
-  audioVolumeRef.current = audioVolume;
+
+  useEffect(() => {
+    vitalsRef.current = vitals;
+    isAudioEnabledRef.current = isAudioEnabled;
+    isMutedRef.current = isMuted;
+    audioVolumeRef.current = audioVolume;
+  }, [vitals, isAudioEnabled, isMuted, audioVolume]);
 
   // Initialize or resume AudioContext safely upon explicit user interaction
   const initOrResumeAudio = async (): Promise<boolean> => {
